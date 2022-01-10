@@ -2116,7 +2116,7 @@ namespace Calendario_AriBerg
                     lvwAggiungiClientiMacchine.Items.Add(items);
                 }
 
-                notifica.Show("Macchina aggiunta correttamente!", Notifica.enmType.Success);
+                notifica.Show("Macchina aggiunta correttamente!", Notifica.enmType.Success); //pepepe
                 macchina = null;
                 gBxAggiungiMacchina.Visible = false;
 
