@@ -20,7 +20,8 @@ namespace Calendario_AriBerg
         private int id;
         private DateTime giorno;          //da data selezionata
         private string nomeCliente;
-        private string macchina;
+        private Macchina macchina;
+        private TimeSpan Tempo { get; set; }
         private List<InterventiPoss> interventi = new List<InterventiPoss>();
         private string operazioni;
         private string note;
@@ -29,7 +30,7 @@ namespace Calendario_AriBerg
         {
         }
 
-        public Evento(DateTime giorno, string nomeCliente, string macchina, List<InterventiPoss> interventi, string note = null)
+        public Evento(DateTime giorno, string nomeCliente, Macchina macchina, List<InterventiPoss> interventi, string note = null)
         {
             id = NumEventi;
             Giorno = giorno;
@@ -95,13 +96,13 @@ namespace Calendario_AriBerg
             }
         }
 
-        public string Macchina
+        public Macchina Macchina
         {
             get => macchina;
 
             set
             {
-                if (!string.IsNullOrWhiteSpace(value))
+                if (!string.IsNullOrWhiteSpace(value._Matricola))
                 {
                     macchina = value;
                 }

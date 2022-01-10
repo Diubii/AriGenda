@@ -6,12 +6,13 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Input;
+using MySql.Data.MySqlClient;
 
 namespace Calendario_AriBerg
 {
     //prova
     public partial class FormCalendario : Form
-    {
+    {   
         public static Registro r = new Registro();
 
         private Point p = new Point();
@@ -32,7 +33,6 @@ namespace Calendario_AriBerg
 
         private void FormCalendario_Load(object sender, EventArgs e)
         {
-            
             CheckForIllegalCrossThreadCalls = false;
 
             bool error = false;
@@ -1087,12 +1087,12 @@ namespace Calendario_AriBerg
             //tabella
             p.Y = pnlAggiungiClienteButtonsMacchina.Location.Y + pnlAggiungiClienteButtonsMacchina.Height + buffer;
             p.X = buffer;
-            lvwModificaCliente.Location = p;
-            lvwModificaCliente.Width = gBxClientiAggiungiCliente.Width - buffer * 2;
-            lvwModificaCliente.Columns[0].Width = (int)(lvwAggiungiClientiMacchine.Width / 3.02);
-            lvwModificaCliente.Columns[1].Width = (int)(lvwAggiungiClientiMacchine.Width / 3.02);
-            lvwModificaCliente.Columns[2].Width = (int)(lvwAggiungiClientiMacchine.Width / 3.02);
-            lvwModificaCliente.Height = btnConfermaAggiungiCliente.Location.Y - lvwAggiungiClientiMacchine.Location.Y - buffer;
+            dgvModificaCliente.Location = p;
+            dgvModificaCliente.Width = gBxClientiAggiungiCliente.Width - buffer * 2;
+            dgvModificaCliente.Columns[0].Width = (int)(lvwAggiungiClientiMacchine.Width / 3.02);
+            dgvModificaCliente.Columns[1].Width = (int)(lvwAggiungiClientiMacchine.Width / 3.02);
+            dgvModificaCliente.Columns[2].Width = (int)(lvwAggiungiClientiMacchine.Width / 3.02);
+            dgvModificaCliente.Height = btnConfermaAggiungiCliente.Location.Y - lvwAggiungiClientiMacchine.Location.Y - buffer;
             //
             //dgvvisualizzaclienti
             //
@@ -2110,7 +2110,7 @@ namespace Calendario_AriBerg
 
                 if (gBxClientiModificaClienti.Visible == true)
                 {
-                    lvwModificaCliente.Items.Add(items);
+                    dgvModificaCliente.Items.Add(items);
                 }
                 else
                 {
@@ -2237,7 +2237,7 @@ namespace Calendario_AriBerg
                 btnClientiDeleteCustomer.Enabled = true;
 
                 lvwMostraMacchineAccessori.Items.Clear();
-                lvwModificaCliente.Items.Clear();
+                dgvModificaCliente.Items.Clear();
                 tbxMostraIva.Text = r.DizClienti[e.Cell.Value.ToString()]._PartIVA;
                 tbxMostraPrif.Text = r.DizClienti[e.Cell.Value.ToString()]._Ref;
                 if (listaMacchine != null)
@@ -2261,7 +2261,7 @@ namespace Calendario_AriBerg
                     itemm.Text = macchina._Marca;
                     itemm.SubItems.Add(macchina._Modello);
                     itemm.SubItems.Add(macchina._Matricola);
-                    lvwModificaCliente.Items.Add(itemm);
+                    dgvModificaCliente.Items.Add(itemm);
 
                     listaMacchine.Add(macchina);
                 }
