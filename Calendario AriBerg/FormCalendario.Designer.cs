@@ -176,6 +176,7 @@ namespace Calendario_AriBerg
             this.btnAggiungiClienteChiudi = new System.Windows.Forms.Button();
             this.btnConfermaAggiungiCliente = new System.Windows.Forms.Button();
             this.gBxClientiModificaClienti = new System.Windows.Forms.GroupBox();
+            this.dgvModificaCliente = new System.Windows.Forms.DataGridView();
             this.pnlModificaClienteMacchine = new System.Windows.Forms.Panel();
             this.btnModificaAggiungiMacchina = new System.Windows.Forms.Button();
             this.btnModificaModificaMacchina = new System.Windows.Forms.Button();
@@ -232,7 +233,6 @@ namespace Calendario_AriBerg
             this.cbBxTrovaPerMail = new System.Windows.Forms.ComboBox();
             this.cbBxTrovaPerPRif = new System.Windows.Forms.ComboBox();
             this.cbBxTrovaPerNome = new System.Windows.Forms.ComboBox();
-            this.dgvModificaCliente = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgwEventi)).BeginInit();
             this.gbxLegenda.SuspendLayout();
             this.gbxAggiungi.SuspendLayout();
@@ -250,6 +250,7 @@ namespace Calendario_AriBerg
             this.gBxClientiAggiungiCliente.SuspendLayout();
             this.pnlAggiungiClienteButtonsMacchina.SuspendLayout();
             this.gBxClientiModificaClienti.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvModificaCliente)).BeginInit();
             this.pnlModificaClienteMacchine.SuspendLayout();
             this.gBxVisualizzaCliente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAlloStoricoMacchina)).BeginInit();
@@ -258,7 +259,6 @@ namespace Calendario_AriBerg
             ((System.ComponentModel.ISupportInitialize)(this.mur)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVisualizzaClienti)).BeginInit();
             this.gBxClientiTrova.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvModificaCliente)).BeginInit();
             this.SuspendLayout();
             // 
             // dgwEventi
@@ -936,7 +936,7 @@ namespace Calendario_AriBerg
             this.gbxDettagli.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbxDettagli.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
             this.gbxDettagli.ForeColor = System.Drawing.Color.White;
-            this.gbxDettagli.Location = new System.Drawing.Point(757, 716);
+            this.gbxDettagli.Location = new System.Drawing.Point(736, 700);
             this.gbxDettagli.Name = "gbxDettagli";
             this.gbxDettagli.Size = new System.Drawing.Size(538, 254);
             this.gbxDettagli.TabIndex = 10;
@@ -1081,7 +1081,7 @@ namespace Calendario_AriBerg
             this.gBxDettagliCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gBxDettagliCliente.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
             this.gBxDettagliCliente.ForeColor = System.Drawing.Color.White;
-            this.gBxDettagliCliente.Location = new System.Drawing.Point(1181, 655);
+            this.gBxDettagliCliente.Location = new System.Drawing.Point(1262, 663);
             this.gBxDettagliCliente.Name = "gBxDettagliCliente";
             this.gBxDettagliCliente.Size = new System.Drawing.Size(538, 254);
             this.gBxDettagliCliente.TabIndex = 14;
@@ -1201,7 +1201,7 @@ namespace Calendario_AriBerg
             this.gBxDettagliMacchinaAccessorio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gBxDettagliMacchinaAccessorio.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
             this.gBxDettagliMacchinaAccessorio.ForeColor = System.Drawing.Color.White;
-            this.gBxDettagliMacchinaAccessorio.Location = new System.Drawing.Point(810, 666);
+            this.gBxDettagliMacchinaAccessorio.Location = new System.Drawing.Point(940, 686);
             this.gBxDettagliMacchinaAccessorio.Name = "gBxDettagliMacchinaAccessorio";
             this.gBxDettagliMacchinaAccessorio.Size = new System.Drawing.Size(538, 254);
             this.gBxDettagliMacchinaAccessorio.TabIndex = 13;
@@ -1286,7 +1286,6 @@ namespace Calendario_AriBerg
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.tabPage2.Controls.Add(this.gBxAggiungiMacchina);
             this.tabPage2.Controls.Add(this.gBxModificaMacchina);
             this.tabPage2.Controls.Add(this.gBxClientiAggiungiCliente);
             this.tabPage2.Controls.Add(this.gBxClientiModificaClienti);
@@ -1323,7 +1322,7 @@ namespace Calendario_AriBerg
             this.gBxAggiungiMacchina.Controls.Add(this.btnConfermaAggiungiMacchina);
             this.gBxAggiungiMacchina.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gBxAggiungiMacchina.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gBxAggiungiMacchina.Location = new System.Drawing.Point(263, 43);
+            this.gBxAggiungiMacchina.Location = new System.Drawing.Point(23, 42);
             this.gBxAggiungiMacchina.Name = "gBxAggiungiMacchina";
             this.gBxAggiungiMacchina.Size = new System.Drawing.Size(485, 645);
             this.gBxAggiungiMacchina.TabIndex = 43;
@@ -1538,6 +1537,7 @@ namespace Calendario_AriBerg
             // 
             // gBxModificaMacchina
             // 
+            this.gBxModificaMacchina.Controls.Add(this.gBxAggiungiMacchina);
             this.gBxModificaMacchina.Controls.Add(this.cBxModificaMacchinaTipo);
             this.gBxModificaMacchina.Controls.Add(this.lblModificaMacchinaMarca);
             this.gBxModificaMacchina.Controls.Add(this.tbxModificaMacchinaMarca);
@@ -2088,6 +2088,14 @@ namespace Calendario_AriBerg
             this.gBxClientiModificaClienti.TabStop = false;
             this.gBxClientiModificaClienti.Text = "Modifica cliente:";
             this.gBxClientiModificaClienti.Visible = false;
+            // 
+            // dgvModificaCliente
+            // 
+            this.dgvModificaCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvModificaCliente.Location = new System.Drawing.Point(23, 389);
+            this.dgvModificaCliente.Name = "dgvModificaCliente";
+            this.dgvModificaCliente.Size = new System.Drawing.Size(421, 185);
+            this.dgvModificaCliente.TabIndex = 58;
             // 
             // pnlModificaClienteMacchine
             // 
@@ -2784,14 +2792,6 @@ namespace Calendario_AriBerg
             this.cbBxTrovaPerNome.Size = new System.Drawing.Size(284, 28);
             this.cbBxTrovaPerNome.TabIndex = 20;
             // 
-            // dgvModificaCliente
-            // 
-            this.dgvModificaCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvModificaCliente.Location = new System.Drawing.Point(23, 389);
-            this.dgvModificaCliente.Name = "dgvModificaCliente";
-            this.dgvModificaCliente.Size = new System.Drawing.Size(421, 185);
-            this.dgvModificaCliente.TabIndex = 58;
-            // 
             // FormCalendario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2837,6 +2837,7 @@ namespace Calendario_AriBerg
             this.pnlAggiungiClienteButtonsMacchina.ResumeLayout(false);
             this.gBxClientiModificaClienti.ResumeLayout(false);
             this.gBxClientiModificaClienti.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvModificaCliente)).EndInit();
             this.pnlModificaClienteMacchine.ResumeLayout(false);
             this.gBxVisualizzaCliente.ResumeLayout(false);
             this.gBxVisualizzaCliente.PerformLayout();
@@ -2847,7 +2848,6 @@ namespace Calendario_AriBerg
             ((System.ComponentModel.ISupportInitialize)(this.dgvVisualizzaClienti)).EndInit();
             this.gBxClientiTrova.ResumeLayout(false);
             this.gBxClientiTrova.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvModificaCliente)).EndInit();
             this.ResumeLayout(false);
 
         }

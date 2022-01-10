@@ -3057,5 +3057,6 @@ namespace Calendario_AriBerg
                 lvwModificaComponentiMacchina.Items.Add(item);
             }
         }
+
     }
 }
