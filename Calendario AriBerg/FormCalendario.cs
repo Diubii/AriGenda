@@ -29,6 +29,8 @@ namespace Calendario_AriBerg
 
         private void FormCalendario_Load(object sender, EventArgs e)
         {
+          
+
             CheckForIllegalCrossThreadCalls = false;
 
             bool error = false;
@@ -36,12 +38,12 @@ namespace Calendario_AriBerg
             //Configurazione data
             SelectedDate = DateTime.Now.Date;
 
-            //Connessione database query test
+            /*//Connessione database query test
             Connection = Metodi.ConnectToDatabase();
             string query = "Update clienti set indirizzo_cliente = 'prova' where id_cliente='1'";
             MySqlCommand command = new MySqlCommand(query,Connection);
             command.ExecuteNonQuery();
-            Connection.Close();
+            Connection.Close();*/
 
             //configurazione registro
             if (r.DizClienti == null)
@@ -112,7 +114,7 @@ namespace Calendario_AriBerg
             rdBtnTrovaPerNome.Checked = true;
             AggiornaComboBox();
 
-            ResizeHandle();
+            //ResizeHandle();
 
         }
 
@@ -353,6 +355,8 @@ namespace Calendario_AriBerg
             lvwDettagliComponenti.Columns[1].Width = (int)(lvwDettagliComponenti.Width / 2.03);
             lvwDettagliComponenti.Height = rtbNoteMacchinaAccessorio.Height;
         }
+       
+        /*
         private void ResizeHandle()
         {
             //reimposta bordo per bug demaximise
@@ -1331,7 +1335,7 @@ namespace Calendario_AriBerg
             btnConfermaModificaMacchina.Font = btnConfermaAggiungiCliente.Font;
 
         }
-
+        */
         private void dgwEventi_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
 
@@ -1459,6 +1463,7 @@ namespace Calendario_AriBerg
             }
 
         }
+      
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
@@ -1482,16 +1487,17 @@ namespace Calendario_AriBerg
 
         private void FormCalendario_Resize(object sender, EventArgs e)
         {
-            if (WindowState == FormWindowState.Maximized)
+
+           /* if (WindowState == FormWindowState.Maximized)
             {
                 // Maximized!
-                ResizeHandle();
+               ResizeHandle();
             }
             if (WindowState == FormWindowState.Normal)
             {
                 // Restored!
                 ResizeHandle();
-            }
+            }*/
         }
 
         private void btnAggiungiAddintervento_Click(object sender, EventArgs e)
@@ -2309,7 +2315,7 @@ namespace Calendario_AriBerg
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ResizeHandle();
+            //ResizeHandle();
         }
 
         private void btnClientiEditCustomer_Click(object sender, EventArgs e)
@@ -3023,6 +3029,11 @@ namespace Calendario_AriBerg
                 item.SubItems.Add(txBxModificaMacchinaCodice.Text);
                 lvwModificaComponentiMacchina.Items.Add(item);
             }
+        }
+
+        private void FormCalendario_ResizeEnd(object sender, EventArgs e)
+        {
+
         }
     }
 }

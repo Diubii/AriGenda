@@ -315,17 +315,17 @@ namespace Calendario_AriBerg
             // 
             // dgwEventi
             // 
-            this.dgwEventi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dgwEventi.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgwEventi.BackgroundColor = System.Drawing.Color.DimGray;
             this.dgwEventi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgwEventi.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgwEventi.GridColor = System.Drawing.Color.Black;
-            this.dgwEventi.Location = new System.Drawing.Point(890, 142);
+            this.dgwEventi.Location = new System.Drawing.Point(622, 82);
             this.dgwEventi.Name = "dgwEventi";
             this.dgwEventi.ReadOnly = true;
             this.dgwEventi.RowHeadersWidth = 51;
             this.dgwEventi.RowTemplate.Height = 24;
-            this.dgwEventi.Size = new System.Drawing.Size(553, 459);
+            this.dgwEventi.Size = new System.Drawing.Size(810, 719);
             this.dgwEventi.TabIndex = 4;
             this.dgwEventi.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwEventi_CellMouseEnter);
             this.dgwEventi.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwEventi_CellMouseLeave);
@@ -336,16 +336,17 @@ namespace Calendario_AriBerg
             // 
             // lblEventi
             // 
-            this.lblEventi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblEventi.AutoSize = true;
+            this.lblEventi.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblEventi.Font = new System.Drawing.Font("Calibri", 22.2F);
             this.lblEventi.ForeColor = System.Drawing.Color.White;
             this.lblEventi.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblEventi.Location = new System.Drawing.Point(882, 86);
+            this.lblEventi.Location = new System.Drawing.Point(3, 3);
             this.lblEventi.Name = "lblEventi";
-            this.lblEventi.Size = new System.Drawing.Size(161, 37);
+            this.lblEventi.Padding = new System.Windows.Forms.Padding(600, 0, 0, 0);
+            this.lblEventi.Size = new System.Drawing.Size(1429, 79);
             this.lblEventi.TabIndex = 5;
             this.lblEventi.Text = "Eventi (day)";
+            this.lblEventi.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnLegenda
             // 
@@ -354,7 +355,7 @@ namespace Calendario_AriBerg
             this.btnLegenda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLegenda.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnLegenda.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnLegenda.Location = new System.Drawing.Point(1537, 75);
+            this.btnLegenda.Location = new System.Drawing.Point(1316, 3);
             this.btnLegenda.Name = "btnLegenda";
             this.btnLegenda.Size = new System.Drawing.Size(116, 46);
             this.btnLegenda.TabIndex = 6;
@@ -380,9 +381,9 @@ namespace Calendario_AriBerg
             this.gbxLegenda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbxLegenda.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
             this.gbxLegenda.ForeColor = System.Drawing.Color.White;
-            this.gbxLegenda.Location = new System.Drawing.Point(1241, 75);
+            this.gbxLegenda.Location = new System.Drawing.Point(1194, 0);
             this.gbxLegenda.Name = "gbxLegenda";
-            this.gbxLegenda.Size = new System.Drawing.Size(202, 230);
+            this.gbxLegenda.Size = new System.Drawing.Size(241, 177);
             this.gbxLegenda.TabIndex = 7;
             this.gbxLegenda.TabStop = false;
             this.gbxLegenda.Text = "Legenda";
@@ -392,7 +393,7 @@ namespace Calendario_AriBerg
             // 
             this.lblInterventoManut_completa.AutoSize = true;
             this.lblInterventoManut_completa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblInterventoManut_completa.Location = new System.Drawing.Point(6, 37);
+            this.lblInterventoManut_completa.Location = new System.Drawing.Point(6, 29);
             this.lblInterventoManut_completa.Name = "lblInterventoManut_completa";
             this.lblInterventoManut_completa.Size = new System.Drawing.Size(158, 17);
             this.lblInterventoManut_completa.TabIndex = 1;
@@ -404,7 +405,7 @@ namespace Calendario_AriBerg
             this.lblSimboloManut_parziale.AutoSize = true;
             this.lblSimboloManut_parziale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblSimboloManut_parziale.ForeColor = System.Drawing.Color.Orange;
-            this.lblSimboloManut_parziale.Location = new System.Drawing.Point(157, 62);
+            this.lblSimboloManut_parziale.Location = new System.Drawing.Point(196, 55);
             this.lblSimboloManut_parziale.Name = "lblSimboloManut_parziale";
             this.lblSimboloManut_parziale.Size = new System.Drawing.Size(18, 17);
             this.lblSimboloManut_parziale.TabIndex = 7;
@@ -416,7 +417,7 @@ namespace Calendario_AriBerg
             this.lblSimboloFgas.AutoSize = true;
             this.lblSimboloFgas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblSimboloFgas.ForeColor = System.Drawing.Color.Green;
-            this.lblSimboloFgas.Location = new System.Drawing.Point(157, 145);
+            this.lblSimboloFgas.Location = new System.Drawing.Point(196, 138);
             this.lblSimboloFgas.Name = "lblSimboloFgas";
             this.lblSimboloFgas.Size = new System.Drawing.Size(18, 17);
             this.lblSimboloFgas.TabIndex = 10;
@@ -427,7 +428,7 @@ namespace Calendario_AriBerg
             this.lblSimboloSostFiltri.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSimboloSostFiltri.AutoSize = true;
             this.lblSimboloSostFiltri.ForeColor = System.Drawing.Color.Blue;
-            this.lblSimboloSostFiltri.Location = new System.Drawing.Point(157, 113);
+            this.lblSimboloSostFiltri.Location = new System.Drawing.Point(196, 109);
             this.lblSimboloSostFiltri.Name = "lblSimboloSostFiltri";
             this.lblSimboloSostFiltri.Size = new System.Drawing.Size(18, 17);
             this.lblSimboloSostFiltri.TabIndex = 9;
@@ -439,7 +440,7 @@ namespace Calendario_AriBerg
             this.lblSimboloControllo_generale.AutoSize = true;
             this.lblSimboloControllo_generale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblSimboloControllo_generale.ForeColor = System.Drawing.Color.Yellow;
-            this.lblSimboloControllo_generale.Location = new System.Drawing.Point(157, 92);
+            this.lblSimboloControllo_generale.Location = new System.Drawing.Point(196, 82);
             this.lblSimboloControllo_generale.Name = "lblSimboloControllo_generale";
             this.lblSimboloControllo_generale.Size = new System.Drawing.Size(18, 17);
             this.lblSimboloControllo_generale.TabIndex = 8;
@@ -448,7 +449,7 @@ namespace Calendario_AriBerg
             // lblInterventoFgas
             // 
             this.lblInterventoFgas.AutoSize = true;
-            this.lblInterventoFgas.Location = new System.Drawing.Point(6, 145);
+            this.lblInterventoFgas.Location = new System.Drawing.Point(6, 138);
             this.lblInterventoFgas.Name = "lblInterventoFgas";
             this.lblInterventoFgas.Size = new System.Drawing.Size(96, 17);
             this.lblInterventoFgas.TabIndex = 5;
@@ -457,7 +458,7 @@ namespace Calendario_AriBerg
             // lblInterventoSostfiltri
             // 
             this.lblInterventoSostfiltri.AutoSize = true;
-            this.lblInterventoSostfiltri.Location = new System.Drawing.Point(6, 113);
+            this.lblInterventoSostfiltri.Location = new System.Drawing.Point(6, 109);
             this.lblInterventoSostfiltri.Name = "lblInterventoSostfiltri";
             this.lblInterventoSostfiltri.Size = new System.Drawing.Size(125, 17);
             this.lblInterventoSostfiltri.TabIndex = 4;
@@ -466,7 +467,7 @@ namespace Calendario_AriBerg
             // lblInterventoControllo_Generale
             // 
             this.lblInterventoControllo_Generale.AutoSize = true;
-            this.lblInterventoControllo_Generale.Location = new System.Drawing.Point(6, 83);
+            this.lblInterventoControllo_Generale.Location = new System.Drawing.Point(6, 82);
             this.lblInterventoControllo_Generale.Name = "lblInterventoControllo_Generale";
             this.lblInterventoControllo_Generale.Size = new System.Drawing.Size(123, 17);
             this.lblInterventoControllo_Generale.TabIndex = 3;
@@ -480,7 +481,7 @@ namespace Calendario_AriBerg
             this.btnExitLegend.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Bold);
             this.btnExitLegend.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnExitLegend.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnExitLegend.Location = new System.Drawing.Point(177, 9);
+            this.btnExitLegend.Location = new System.Drawing.Point(216, 0);
             this.btnExitLegend.Name = "btnExitLegend";
             this.btnExitLegend.Size = new System.Drawing.Size(25, 25);
             this.btnExitLegend.TabIndex = 0;
@@ -492,7 +493,7 @@ namespace Calendario_AriBerg
             // 
             this.lblInterventoManut_parziale.AutoSize = true;
             this.lblInterventoManut_parziale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblInterventoManut_parziale.Location = new System.Drawing.Point(6, 58);
+            this.lblInterventoManut_parziale.Location = new System.Drawing.Point(6, 55);
             this.lblInterventoManut_parziale.Name = "lblInterventoManut_parziale";
             this.lblInterventoManut_parziale.Size = new System.Drawing.Size(147, 17);
             this.lblInterventoManut_parziale.TabIndex = 2;
@@ -504,7 +505,7 @@ namespace Calendario_AriBerg
             this.lblSimboloManut_completa.AutoSize = true;
             this.lblSimboloManut_completa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblSimboloManut_completa.ForeColor = System.Drawing.Color.Red;
-            this.lblSimboloManut_completa.Location = new System.Drawing.Point(157, 41);
+            this.lblSimboloManut_completa.Location = new System.Drawing.Point(196, 33);
             this.lblSimboloManut_completa.Name = "lblSimboloManut_completa";
             this.lblSimboloManut_completa.Size = new System.Drawing.Size(18, 17);
             this.lblSimboloManut_completa.TabIndex = 6;
@@ -518,7 +519,7 @@ namespace Calendario_AriBerg
             this.btnExitAggiungi.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Bold);
             this.btnExitAggiungi.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnExitAggiungi.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnExitAggiungi.Location = new System.Drawing.Point(596, 0);
+            this.btnExitAggiungi.Location = new System.Drawing.Point(594, 0);
             this.btnExitAggiungi.Name = "btnExitAggiungi";
             this.btnExitAggiungi.Size = new System.Drawing.Size(25, 25);
             this.btnExitAggiungi.TabIndex = 0;
@@ -548,9 +549,9 @@ namespace Calendario_AriBerg
             this.gbxAggiungi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbxAggiungi.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
             this.gbxAggiungi.ForeColor = System.Drawing.Color.White;
-            this.gbxAggiungi.Location = new System.Drawing.Point(56, 86);
+            this.gbxAggiungi.Location = new System.Drawing.Point(3, 81);
             this.gbxAggiungi.Name = "gbxAggiungi";
-            this.gbxAggiungi.Size = new System.Drawing.Size(621, 574);
+            this.gbxAggiungi.Size = new System.Drawing.Size(619, 580);
             this.gbxAggiungi.TabIndex = 8;
             this.gbxAggiungi.TabStop = false;
             this.gbxAggiungi.Text = "Aggiungi Evento";
@@ -733,7 +734,7 @@ namespace Calendario_AriBerg
             this.gbxModifica.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbxModifica.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
             this.gbxModifica.ForeColor = System.Drawing.Color.White;
-            this.gbxModifica.Location = new System.Drawing.Point(756, 231);
+            this.gbxModifica.Location = new System.Drawing.Point(315, 729);
             this.gbxModifica.Name = "gbxModifica";
             this.gbxModifica.Size = new System.Drawing.Size(681, 574);
             this.gbxModifica.TabIndex = 9;
@@ -916,9 +917,9 @@ namespace Calendario_AriBerg
             this.pnlCommands1.Controls.Add(this.btnAdd);
             this.pnlCommands1.Controls.Add(this.btnModify);
             this.pnlCommands1.Controls.Add(this.btnRemove);
-            this.pnlCommands1.Location = new System.Drawing.Point(0, 3);
+            this.pnlCommands1.Location = new System.Drawing.Point(3, 3);
             this.pnlCommands1.Name = "pnlCommands1";
-            this.pnlCommands1.Size = new System.Drawing.Size(302, 72);
+            this.pnlCommands1.Size = new System.Drawing.Size(232, 72);
             this.pnlCommands1.TabIndex = 11;
             // 
             // btnAdd
@@ -933,7 +934,7 @@ namespace Calendario_AriBerg
             this.btnAdd.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnAdd.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnAdd.Location = new System.Drawing.Point(83, 8);
+            this.btnAdd.Location = new System.Drawing.Point(9, 7);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(64, 51);
             this.btnAdd.TabIndex = 1;
@@ -953,7 +954,7 @@ namespace Calendario_AriBerg
             this.btnModify.Font = new System.Drawing.Font("Calibri", 12F);
             this.btnModify.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnModify.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnModify.Location = new System.Drawing.Point(153, 8);
+            this.btnModify.Location = new System.Drawing.Point(79, 7);
             this.btnModify.Name = "btnModify";
             this.btnModify.Size = new System.Drawing.Size(68, 51);
             this.btnModify.TabIndex = 2;
@@ -973,7 +974,7 @@ namespace Calendario_AriBerg
             this.btnRemove.Font = new System.Drawing.Font("Calibri", 12F);
             this.btnRemove.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnRemove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnRemove.Location = new System.Drawing.Point(227, 8);
+            this.btnRemove.Location = new System.Drawing.Point(153, 8);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(61, 50);
             this.btnRemove.TabIndex = 3;
@@ -988,7 +989,7 @@ namespace Calendario_AriBerg
             this.gbxDettagli.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbxDettagli.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
             this.gbxDettagli.ForeColor = System.Drawing.Color.White;
-            this.gbxDettagli.Location = new System.Drawing.Point(736, 700);
+            this.gbxDettagli.Location = new System.Drawing.Point(684, 694);
             this.gbxDettagli.Name = "gbxDettagli";
             this.gbxDettagli.Size = new System.Drawing.Size(538, 254);
             this.gbxDettagli.TabIndex = 10;
@@ -1011,34 +1012,36 @@ namespace Calendario_AriBerg
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.HotTrack = true;
-            this.tabControl1.Location = new System.Drawing.Point(2, 3);
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1492, 757);
+            this.tabControl1.Size = new System.Drawing.Size(1443, 835);
             this.tabControl1.TabIndex = 12;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.tabPage1.Controls.Add(this.gbxLegenda);
             this.tabPage1.Controls.Add(this.gbxModifica);
             this.tabPage1.Controls.Add(this.gbxAggiungi);
-            this.tabPage1.Controls.Add(this.pnlCercaEvento);
             this.tabPage1.Controls.Add(this.gBxDettagliCliente);
             this.tabPage1.Controls.Add(this.gBxDettagliMacchinaAccessorio);
-            this.tabPage1.Controls.Add(this.ariCalendario);
             this.tabPage1.Controls.Add(this.gbxDettagli);
-            this.tabPage1.Controls.Add(this.pnlCommands1);
+            this.tabPage1.Controls.Add(this.gbxLegenda);
             this.tabPage1.Controls.Add(this.btnLegenda);
-            this.tabPage1.Controls.Add(this.lblEventi);
+            this.tabPage1.Controls.Add(this.pnlCercaEvento);
+            this.tabPage1.Controls.Add(this.pnlCommands1);
             this.tabPage1.Controls.Add(this.dgwEventi);
+            this.tabPage1.Controls.Add(this.ariCalendario);
+            this.tabPage1.Controls.Add(this.lblEventi);
             this.tabPage1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1484, 731);
+            this.tabPage1.Size = new System.Drawing.Size(1435, 804);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Eventi";
             // 
@@ -1050,9 +1053,9 @@ namespace Calendario_AriBerg
             this.pnlCercaEvento.Controls.Add(this.rdBtnSearchEventoCliente);
             this.pnlCercaEvento.Controls.Add(this.cbBxSearchEventoMatricola);
             this.pnlCercaEvento.Controls.Add(this.cbBxSearchEventoCliente);
-            this.pnlCercaEvento.Location = new System.Drawing.Point(309, 0);
+            this.pnlCercaEvento.Location = new System.Drawing.Point(238, 3);
             this.pnlCercaEvento.Name = "pnlCercaEvento";
-            this.pnlCercaEvento.Size = new System.Drawing.Size(312, 75);
+            this.pnlCercaEvento.Size = new System.Drawing.Size(384, 72);
             this.pnlCercaEvento.TabIndex = 15;
             // 
             // btnSearchEvento
@@ -1063,7 +1066,7 @@ namespace Calendario_AriBerg
             this.btnSearchEvento.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.btnSearchEvento.FlatAppearance.BorderSize = 15;
             this.btnSearchEvento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearchEvento.Location = new System.Drawing.Point(243, 12);
+            this.btnSearchEvento.Location = new System.Drawing.Point(315, 9);
             this.btnSearchEvento.Name = "btnSearchEvento";
             this.btnSearchEvento.Size = new System.Drawing.Size(66, 58);
             this.btnSearchEvento.TabIndex = 25;
@@ -1074,7 +1077,7 @@ namespace Calendario_AriBerg
             // 
             this.rdBtnSearchEventoMatricola.AutoSize = true;
             this.rdBtnSearchEventoMatricola.ForeColor = System.Drawing.Color.White;
-            this.rdBtnSearchEventoMatricola.Location = new System.Drawing.Point(15, 44);
+            this.rdBtnSearchEventoMatricola.Location = new System.Drawing.Point(18, 41);
             this.rdBtnSearchEventoMatricola.Name = "rdBtnSearchEventoMatricola";
             this.rdBtnSearchEventoMatricola.Size = new System.Drawing.Size(84, 22);
             this.rdBtnSearchEventoMatricola.TabIndex = 3;
@@ -1087,7 +1090,7 @@ namespace Calendario_AriBerg
             this.rdBtnSearchEventoCliente.AutoSize = true;
             this.rdBtnSearchEventoCliente.Checked = true;
             this.rdBtnSearchEventoCliente.ForeColor = System.Drawing.Color.White;
-            this.rdBtnSearchEventoCliente.Location = new System.Drawing.Point(15, 12);
+            this.rdBtnSearchEventoCliente.Location = new System.Drawing.Point(18, 12);
             this.rdBtnSearchEventoCliente.Name = "rdBtnSearchEventoCliente";
             this.rdBtnSearchEventoCliente.Size = new System.Drawing.Size(71, 22);
             this.rdBtnSearchEventoCliente.TabIndex = 2;
@@ -1102,9 +1105,9 @@ namespace Calendario_AriBerg
             this.cbBxSearchEventoMatricola.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbBxSearchEventoMatricola.Enabled = false;
             this.cbBxSearchEventoMatricola.FormattingEnabled = true;
-            this.cbBxSearchEventoMatricola.Location = new System.Drawing.Point(116, 43);
+            this.cbBxSearchEventoMatricola.Location = new System.Drawing.Point(116, 40);
             this.cbBxSearchEventoMatricola.Name = "cbBxSearchEventoMatricola";
-            this.cbBxSearchEventoMatricola.Size = new System.Drawing.Size(121, 26);
+            this.cbBxSearchEventoMatricola.Size = new System.Drawing.Size(193, 26);
             this.cbBxSearchEventoMatricola.TabIndex = 1;
             // 
             // cbBxSearchEventoCliente
@@ -1112,9 +1115,9 @@ namespace Calendario_AriBerg
             this.cbBxSearchEventoCliente.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbBxSearchEventoCliente.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbBxSearchEventoCliente.FormattingEnabled = true;
-            this.cbBxSearchEventoCliente.Location = new System.Drawing.Point(116, 11);
+            this.cbBxSearchEventoCliente.Location = new System.Drawing.Point(116, 8);
             this.cbBxSearchEventoCliente.Name = "cbBxSearchEventoCliente";
-            this.cbBxSearchEventoCliente.Size = new System.Drawing.Size(121, 26);
+            this.cbBxSearchEventoCliente.Size = new System.Drawing.Size(193, 26);
             this.cbBxSearchEventoCliente.TabIndex = 0;
             // 
             // gBxDettagliCliente
@@ -1134,7 +1137,7 @@ namespace Calendario_AriBerg
             this.gBxDettagliCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gBxDettagliCliente.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
             this.gBxDettagliCliente.ForeColor = System.Drawing.Color.White;
-            this.gBxDettagliCliente.Location = new System.Drawing.Point(1262, 663);
+            this.gBxDettagliCliente.Location = new System.Drawing.Point(1387, 679);
             this.gBxDettagliCliente.Name = "gBxDettagliCliente";
             this.gBxDettagliCliente.Size = new System.Drawing.Size(538, 254);
             this.gBxDettagliCliente.TabIndex = 14;
@@ -1254,7 +1257,7 @@ namespace Calendario_AriBerg
             this.gBxDettagliMacchinaAccessorio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gBxDettagliMacchinaAccessorio.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
             this.gBxDettagliMacchinaAccessorio.ForeColor = System.Drawing.Color.White;
-            this.gBxDettagliMacchinaAccessorio.Location = new System.Drawing.Point(940, 686);
+            this.gBxDettagliMacchinaAccessorio.Location = new System.Drawing.Point(1002, 661);
             this.gBxDettagliMacchinaAccessorio.Name = "gBxDettagliMacchinaAccessorio";
             this.gBxDettagliMacchinaAccessorio.Size = new System.Drawing.Size(538, 254);
             this.gBxDettagliMacchinaAccessorio.TabIndex = 13;
@@ -1323,10 +1326,11 @@ namespace Calendario_AriBerg
             // ariCalendario
             // 
             this.ariCalendario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.ariCalendario.Dock = System.Windows.Forms.DockStyle.Left;
             this.ariCalendario.Font = new System.Drawing.Font("Segoe UI Light", 32.25F);
             this.ariCalendario.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.ariCalendario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ariCalendario.Location = new System.Drawing.Point(2, 75);
+            this.ariCalendario.Location = new System.Drawing.Point(3, 82);
             this.ariCalendario.Margin = new System.Windows.Forms.Padding(20);
             this.ariCalendario.MaxDate = new System.DateTime(2059, 12, 31, 0, 0, 0, 0);
             this.ariCalendario.MaxSelectionCount = 1;
@@ -1347,10 +1351,10 @@ namespace Calendario_AriBerg
             this.tabPage2.Controls.Add(this.pnlCommands2);
             this.tabPage2.Controls.Add(this.dgvVisualizzaClienti);
             this.tabPage2.Controls.Add(this.gBxClientiTrova);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1484, 731);
+            this.tabPage2.Size = new System.Drawing.Size(1435, 804);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Clienti";
             // 
@@ -2409,7 +2413,7 @@ namespace Calendario_AriBerg
             this.lblClienti.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblClienti.Location = new System.Drawing.Point(608, 17);
             this.lblClienti.Name = "lblClienti";
-            this.lblClienti.Size = new System.Drawing.Size(37, 13);
+            this.lblClienti.Size = new System.Drawing.Size(46, 18);
             this.lblClienti.TabIndex = 49;
             this.lblClienti.Text = "label1";
             // 
@@ -2885,10 +2889,10 @@ namespace Calendario_AriBerg
             this.tabPage3.Controls.Add(this.dgvComponenti);
             this.tabPage3.Controls.Add(this.panel1);
             this.tabPage3.Controls.Add(this.tbCtrlMagazzini);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 27);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1484, 731);
+            this.tabPage3.Size = new System.Drawing.Size(1435, 804);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Magazzino";
             // 
@@ -2896,7 +2900,7 @@ namespace Calendario_AriBerg
             // 
             this.nudNumeroComponenti.Location = new System.Drawing.Point(613, 307);
             this.nudNumeroComponenti.Name = "nudNumeroComponenti";
-            this.nudNumeroComponenti.Size = new System.Drawing.Size(64, 21);
+            this.nudNumeroComponenti.Size = new System.Drawing.Size(64, 26);
             this.nudNumeroComponenti.TabIndex = 51;
             // 
             // btnImmagazzinaComponente
@@ -2963,7 +2967,7 @@ namespace Calendario_AriBerg
             this.checkBox5.AutoSize = true;
             this.checkBox5.Location = new System.Drawing.Point(544, 39);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(120, 17);
+            this.checkBox5.Size = new System.Drawing.Size(151, 22);
             this.checkBox5.TabIndex = 34;
             this.checkBox5.Text = "Applica a magazzino";
             this.checkBox5.UseVisualStyleBackColor = true;
@@ -2973,7 +2977,7 @@ namespace Calendario_AriBerg
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(533, 6);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(112, 17);
+            this.checkBox1.Size = new System.Drawing.Size(138, 22);
             this.checkBox1.TabIndex = 33;
             this.checkBox1.Text = "Applica a catalogo";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -2983,7 +2987,7 @@ namespace Calendario_AriBerg
             this.checkBox3.AutoSize = true;
             this.checkBox3.Location = new System.Drawing.Point(223, 11);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(58, 17);
+            this.checkBox3.Size = new System.Drawing.Size(69, 22);
             this.checkBox3.TabIndex = 32;
             this.checkBox3.Text = "Codice";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -2993,7 +2997,7 @@ namespace Calendario_AriBerg
             this.checkBox2.AutoSize = true;
             this.checkBox2.Location = new System.Drawing.Point(13, 40);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(56, 17);
+            this.checkBox2.Size = new System.Drawing.Size(64, 22);
             this.checkBox2.TabIndex = 28;
             this.checkBox2.Text = "Marca";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -3003,7 +3007,7 @@ namespace Calendario_AriBerg
             this.chBxFiltroMagazzinoTipo.AutoSize = true;
             this.chBxFiltroMagazzinoTipo.Location = new System.Drawing.Point(13, 15);
             this.chBxFiltroMagazzinoTipo.Name = "chBxFiltroMagazzinoTipo";
-            this.chBxFiltroMagazzinoTipo.Size = new System.Drawing.Size(46, 17);
+            this.chBxFiltroMagazzinoTipo.Size = new System.Drawing.Size(54, 22);
             this.chBxFiltroMagazzinoTipo.TabIndex = 27;
             this.chBxFiltroMagazzinoTipo.Text = "Tipo";
             this.chBxFiltroMagazzinoTipo.UseVisualStyleBackColor = true;
@@ -3013,7 +3017,7 @@ namespace Calendario_AriBerg
             this.checkBox4.AutoSize = true;
             this.checkBox4.Location = new System.Drawing.Point(708, 39);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(80, 17);
+            this.checkBox4.Size = new System.Drawing.Size(100, 22);
             this.checkBox4.TabIndex = 31;
             this.checkBox4.Text = "Sotto Soglia";
             this.checkBox4.UseVisualStyleBackColor = true;
@@ -3043,7 +3047,7 @@ namespace Calendario_AriBerg
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(95, 37);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(81, 21);
+            this.comboBox1.Size = new System.Drawing.Size(81, 26);
             this.comboBox1.TabIndex = 1;
             // 
             // comboBox4
@@ -3056,7 +3060,7 @@ namespace Calendario_AriBerg
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Location = new System.Drawing.Point(296, 8);
             this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(99, 21);
+            this.comboBox4.Size = new System.Drawing.Size(99, 26);
             this.comboBox4.TabIndex = 30;
             // 
             // comboBox3
@@ -3068,7 +3072,7 @@ namespace Calendario_AriBerg
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Location = new System.Drawing.Point(95, 11);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(81, 21);
+            this.comboBox3.Size = new System.Drawing.Size(81, 26);
             this.comboBox3.TabIndex = 0;
             // 
             // gBxAggiungiComponente
@@ -3323,7 +3327,7 @@ namespace Calendario_AriBerg
             this.tbCtrlMagazzini.Controls.Add(this.tabPage4);
             this.tbCtrlMagazzini.Controls.Add(this.tabPage5);
             this.tbCtrlMagazzini.Controls.Add(this.tabPage6);
-            this.tbCtrlMagazzini.Location = new System.Drawing.Point(686, 123);
+            this.tbCtrlMagazzini.Location = new System.Drawing.Point(683, 124);
             this.tbCtrlMagazzini.Name = "tbCtrlMagazzini";
             this.tbCtrlMagazzini.SelectedIndex = 0;
             this.tbCtrlMagazzini.Size = new System.Drawing.Size(798, 612);
@@ -3332,10 +3336,10 @@ namespace Calendario_AriBerg
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.dataGridView1);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Location = new System.Drawing.Point(4, 27);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(790, 586);
+            this.tabPage4.Size = new System.Drawing.Size(790, 581);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Totale";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -3346,24 +3350,24 @@ namespace Calendario_AriBerg
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(784, 580);
+            this.dataGridView1.Size = new System.Drawing.Size(784, 575);
             this.dataGridView1.TabIndex = 0;
             // 
             // tabPage5
             // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Location = new System.Drawing.Point(4, 27);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(790, 586);
+            this.tabPage5.Size = new System.Drawing.Size(790, 581);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "Centrale";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // tabPage6
             // 
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Location = new System.Drawing.Point(4, 27);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(790, 586);
+            this.tabPage6.Size = new System.Drawing.Size(790, 581);
             this.tabPage6.TabIndex = 2;
             this.tabPage6.Text = "Altri";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -3373,7 +3377,7 @@ namespace Calendario_AriBerg
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1489, 835);
+            this.ClientSize = new System.Drawing.Size(1443, 835);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Calibri", 8.25F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -3383,6 +3387,7 @@ namespace Calendario_AriBerg
             this.Text = "AriGenda";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCalendario_FormClosing);
             this.Load += new System.EventHandler(this.FormCalendario_Load);
+            this.ResizeEnd += new System.EventHandler(this.FormCalendario_ResizeEnd);
             this.Resize += new System.EventHandler(this.FormCalendario_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dgwEventi)).EndInit();
             this.gbxLegenda.ResumeLayout(false);
@@ -3395,7 +3400,6 @@ namespace Calendario_AriBerg
             this.gbxDettagli.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.pnlCercaEvento.ResumeLayout(false);
             this.pnlCercaEvento.PerformLayout();
             this.gBxDettagliCliente.ResumeLayout(false);
