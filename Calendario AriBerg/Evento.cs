@@ -23,6 +23,7 @@ namespace Calendario_AriBerg
         private Macchina macchina;
         private TimeSpan Tempo { get; set; }
         private List<InterventiPoss> interventi = new List<InterventiPoss>();
+        private List<Componenti> componenti = new List<Componenti>();  //metti i componenti anche pianificati ma solo quando la data è passata aggiorna il magazzino
         private string operazioni;
         private string note;
 

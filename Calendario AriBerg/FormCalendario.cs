@@ -1087,12 +1087,12 @@ namespace Calendario_AriBerg
             //tabella
             p.Y = pnlAggiungiClienteButtonsMacchina.Location.Y + pnlAggiungiClienteButtonsMacchina.Height + buffer;
             p.X = buffer;
-            dgvModificaCliente.Location = p;
-            dgvModificaCliente.Width = gBxClientiAggiungiCliente.Width - buffer * 2;
-            dgvModificaCliente.Columns[0].Width = (int)(lvwAggiungiClientiMacchine.Width / 3.02);
-            dgvModificaCliente.Columns[1].Width = (int)(lvwAggiungiClientiMacchine.Width / 3.02);
-            dgvModificaCliente.Columns[2].Width = (int)(lvwAggiungiClientiMacchine.Width / 3.02);
-            dgvModificaCliente.Height = btnConfermaAggiungiCliente.Location.Y - lvwAggiungiClientiMacchine.Location.Y - buffer;
+            lvwModificaCliente.Location = p;
+            lvwModificaCliente.Width = gBxClientiAggiungiCliente.Width - buffer * 2;
+            lvwModificaCliente.Columns[0].Width = (int)(lvwAggiungiClientiMacchine.Width / 3.02);
+            lvwModificaCliente.Columns[1].Width = (int)(lvwAggiungiClientiMacchine.Width / 3.02);
+            lvwModificaCliente.Columns[2].Width = (int)(lvwAggiungiClientiMacchine.Width / 3.02);
+            lvwModificaCliente.Height = btnConfermaAggiungiCliente.Location.Y - lvwAggiungiClientiMacchine.Location.Y - buffer;
             //
             //dgvvisualizzaclienti
             //
@@ -1591,8 +1591,9 @@ namespace Calendario_AriBerg
                 {
                     throw new Exception("Data passata.");
                 }
-                Evento app = new Evento(SelectedDate, cBxAggiungiEventoCliente.Text, cBxAggiungiEventoMacchine.Text, interventis, rtbAggiungiNote.Text);
-                r.AddEvento(app);
+                //Errore
+                //Evento app = new Evento(SelectedDate, cBxAggiungiEventoCliente.Text, cBxAggiungiEventoMacchine.Text, interventis, rtbAggiungiNote.Text);
+                //r.AddEvento(app);
 
                 dgwEventi.DataSource = null;
                 dgwEventi.DataSource = r.DizGiorni[SelectedDate];
@@ -1835,7 +1836,8 @@ namespace Calendario_AriBerg
                     {
                         cBxModificaEventoCliente.Text = r.DizGiorni[SelectedDate][e.Cell.RowIndex].NomeCliente;
                         rtbModificaNote.Text = r.DizGiorni[SelectedDate][e.Cell.RowIndex].Note;
-                        cBxModificaEventoMacchine.Text = r.DizGiorni[SelectedDate][e.Cell.RowIndex].Macchina;
+                        //errore
+                       // cBxModificaEventoMacchine.Text = r.DizGiorni[SelectedDate][e.Cell.RowIndex].Macchina;
 
                         listViewModificaOperazioni.Clear();
 
@@ -1943,8 +1945,9 @@ namespace Calendario_AriBerg
                             throw new Exception("Intervento non valido");
                     }
                 }
-
-                Evento ev = new Evento(SelectedDate, cBxModificaEventoCliente.Text, cBxModificaEventoMacchine.Text, interventis, rtbModificaNote.Text);
+                //errore
+               // Evento ev = new Evento(SelectedDate, cBxModificaEventoCliente.Text, cBxModificaEventoMacchine.Text, interventis, rtbModificaNote.Text);
+               /*
                 Evento.numEventi--;
                 List<Evento> momentlist = (List<Evento>)dgwEventi.DataSource;
                 if (r.DizGiorni.ContainsKey(SelectedDate) && dgwEventi.DataSource == r.DizGiorni[SelectedDate])
@@ -1961,6 +1964,7 @@ namespace Calendario_AriBerg
                 //Salvataggio
                 r.salvaEventi();
                 r.inviaSalvataggi();
+               
 
                 dgwEventi.DataSource = null;
                 if (r.DizGiorni.ContainsKey(SelectedDate) && dgwEventi.DataSource == r.DizGiorni[SelectedDate])
@@ -1973,7 +1977,7 @@ namespace Calendario_AriBerg
                     dgwEventi.DataSource = momentlist;
                     HideColumnsEventi();
                 }
-
+               */
                 notifica.Show("Evento modificato correttamente!", Notifica.enmType.Success);
             }
             catch (Exception exc)
@@ -2094,8 +2098,10 @@ namespace Calendario_AriBerg
 
                 foreach (ListViewItem item in lvAggiungiMacchinaFiltri.Items)
                 {
-                    Componenti componente = new Componenti(item.Text, item.SubItems[1].Text);
-                    componenti.Add(componente);
+                    //errore
+                   // Componenti componente = new Componenti(item.Text, item.SubItems[1].Text);
+                    
+                    //componenti.Add(componente);
                 }
 
                 macchina = new Macchina(txBxAggiungiMacchinaMarca.Text, txBxAggiungiMacchinaModello.Text,
@@ -2110,7 +2116,7 @@ namespace Calendario_AriBerg
 
                 if (gBxClientiModificaClienti.Visible == true)
                 {
-                    dgvModificaCliente.Items.Add(items);
+                    lvwModificaCliente.Items.Add(items);
                 }
                 else
                 {
@@ -2237,7 +2243,7 @@ namespace Calendario_AriBerg
                 btnClientiDeleteCustomer.Enabled = true;
 
                 lvwMostraMacchineAccessori.Items.Clear();
-                dgvModificaCliente.Items.Clear();
+                lvwModificaCliente.Items.Clear();
                 tbxMostraIva.Text = r.DizClienti[e.Cell.Value.ToString()]._PartIVA;
                 tbxMostraPrif.Text = r.DizClienti[e.Cell.Value.ToString()]._Ref;
                 if (listaMacchine != null)
@@ -2261,7 +2267,7 @@ namespace Calendario_AriBerg
                     itemm.Text = macchina._Marca;
                     itemm.SubItems.Add(macchina._Modello);
                     itemm.SubItems.Add(macchina._Matricola);
-                    dgvModificaCliente.Items.Add(itemm);
+                    lvwModificaCliente.Items.Add(itemm);
 
                     listaMacchine.Add(macchina);
                 }
@@ -2788,7 +2794,8 @@ namespace Calendario_AriBerg
                     {
                         foreach (Evento eventoLista in kv.Value)
                         {
-                            if (eventoLista.Macchina == s)
+                            // magari errore
+                            if (eventoLista.Macchina._Matricola == s)
                             {                               
                                 eventiTrovati.Add(eventoLista);
                             }
@@ -2951,8 +2958,9 @@ namespace Calendario_AriBerg
 
                 foreach (ListViewItem item in lvwModificaComponentiMacchina.Items)
                 {
-                    Componenti componente = new Componenti(item.Text, item.SubItems[1].Text);
-                    componenti.Add(componente);
+                    //errore
+                    //Componenti componente = new Componenti(item.Text, item.SubItems[1].Text);
+                    //componenti.Add(componente);
                 }
 
                 macchina = new Macchina(tbxModificaMacchinaMarca.Text, tbxModificaMacchinaModello.Text,
