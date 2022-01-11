@@ -237,8 +237,8 @@ namespace Calendario_AriBerg
             this.cbBxTrovaPerPRif = new System.Windows.Forms.ComboBox();
             this.cbBxTrovaPerNome = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.button2 = new System.Windows.Forms.Button();
+            this.nudNumeroComponenti = new System.Windows.Forms.NumericUpDown();
+            this.btnImmagazzinaComponente = new System.Windows.Forms.Button();
             this.lblMagazziniComponenti = new System.Windows.Forms.Label();
             this.lblCatalogoComponenti = new System.Windows.Forms.Label();
             this.pnlFiltriMagazzino = new System.Windows.Forms.Panel();
@@ -301,7 +301,7 @@ namespace Calendario_AriBerg
             ((System.ComponentModel.ISupportInitialize)(this.dgvVisualizzaClienti)).BeginInit();
             this.gBxClientiTrova.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNumeroComponenti)).BeginInit();
             this.pnlFiltriMagazzino.SuspendLayout();
             this.gBxAggiungiComponente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAggiungiComponenteSoglia)).BeginInit();
@@ -548,7 +548,7 @@ namespace Calendario_AriBerg
             this.gbxAggiungi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbxAggiungi.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
             this.gbxAggiungi.ForeColor = System.Drawing.Color.White;
-            this.gbxAggiungi.Location = new System.Drawing.Point(31, 75);
+            this.gbxAggiungi.Location = new System.Drawing.Point(56, 86);
             this.gbxAggiungi.Name = "gbxAggiungi";
             this.gbxAggiungi.Size = new System.Drawing.Size(621, 574);
             this.gbxAggiungi.TabIndex = 8;
@@ -733,7 +733,7 @@ namespace Calendario_AriBerg
             this.gbxModifica.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbxModifica.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
             this.gbxModifica.ForeColor = System.Drawing.Color.White;
-            this.gbxModifica.Location = new System.Drawing.Point(807, 75);
+            this.gbxModifica.Location = new System.Drawing.Point(756, 231);
             this.gbxModifica.Name = "gbxModifica";
             this.gbxModifica.Size = new System.Drawing.Size(681, 574);
             this.gbxModifica.TabIndex = 9;
@@ -2876,8 +2876,8 @@ namespace Calendario_AriBerg
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.tabPage3.Controls.Add(this.numericUpDown1);
-            this.tabPage3.Controls.Add(this.button2);
+            this.tabPage3.Controls.Add(this.nudNumeroComponenti);
+            this.tabPage3.Controls.Add(this.btnImmagazzinaComponente);
             this.tabPage3.Controls.Add(this.lblMagazziniComponenti);
             this.tabPage3.Controls.Add(this.lblCatalogoComponenti);
             this.tabPage3.Controls.Add(this.pnlFiltriMagazzino);
@@ -2892,30 +2892,30 @@ namespace Calendario_AriBerg
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Magazzino";
             // 
-            // numericUpDown1
+            // nudNumeroComponenti
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(613, 307);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(64, 21);
-            this.numericUpDown1.TabIndex = 51;
+            this.nudNumeroComponenti.Location = new System.Drawing.Point(613, 307);
+            this.nudNumeroComponenti.Name = "nudNumeroComponenti";
+            this.nudNumeroComponenti.Size = new System.Drawing.Size(64, 21);
+            this.nudNumeroComponenti.TabIndex = 51;
             // 
-            // button2
+            // btnImmagazzinaComponente
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.button2.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.componenti_transfer;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.DeepSkyBlue;
-            this.button2.FlatAppearance.BorderSize = 3;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button2.Location = new System.Drawing.Point(613, 334);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(64, 73);
-            this.button2.TabIndex = 1;
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnImmagazzinaComponente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnImmagazzinaComponente.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnImmagazzinaComponente.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.componenti_transfer;
+            this.btnImmagazzinaComponente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnImmagazzinaComponente.FlatAppearance.BorderColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnImmagazzinaComponente.FlatAppearance.BorderSize = 3;
+            this.btnImmagazzinaComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImmagazzinaComponente.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImmagazzinaComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnImmagazzinaComponente.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnImmagazzinaComponente.Location = new System.Drawing.Point(613, 334);
+            this.btnImmagazzinaComponente.Name = "btnImmagazzinaComponente";
+            this.btnImmagazzinaComponente.Size = new System.Drawing.Size(64, 73);
+            this.btnImmagazzinaComponente.TabIndex = 1;
+            this.btnImmagazzinaComponente.UseVisualStyleBackColor = false;
             // 
             // lblMagazziniComponenti
             // 
@@ -3089,7 +3089,7 @@ namespace Calendario_AriBerg
             this.gBxAggiungiComponente.Controls.Add(this.button3);
             this.gBxAggiungiComponente.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gBxAggiungiComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gBxAggiungiComponente.Location = new System.Drawing.Point(41, 82);
+            this.gBxAggiungiComponente.Location = new System.Drawing.Point(6, 85);
             this.gBxAggiungiComponente.Name = "gBxAggiungiComponente";
             this.gBxAggiungiComponente.Size = new System.Drawing.Size(309, 646);
             this.gBxAggiungiComponente.TabIndex = 44;
@@ -3425,7 +3425,7 @@ namespace Calendario_AriBerg
             this.gBxClientiTrova.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNumeroComponenti)).EndInit();
             this.pnlFiltriMagazzino.ResumeLayout(false);
             this.pnlFiltriMagazzino.PerformLayout();
             this.gBxAggiungiComponente.ResumeLayout(false);
@@ -3685,8 +3685,8 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.ComboBox cbxAggiungiComponenteMarca;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Button btnImmagazzinaComponente;
+        private System.Windows.Forms.NumericUpDown nudNumeroComponenti;
     }
 }
 

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace Calendario_AriBerg
 {
@@ -11,6 +12,7 @@ namespace Calendario_AriBerg
     public partial class FormCalendario : Form
     {
         public static Registro r = new Registro();
+        private MySqlConnection Connection;
 
         private Point p = new Point();
         private DateTime SelectedDate;
@@ -33,36 +35,13 @@ namespace Calendario_AriBerg
 
             //Configurazione data
             SelectedDate = DateTime.Now.Date;
-            try
-            {
-                if (File.Exists(@"\\DESKTOP-B2K8OHJ\Users\AriBerg Files\eventi.bababooey") && File.Exists(@"\\DESKTOP-B2K8OHJ\Users\AriBerg Files\clienti.bababooey"))
-                {
-                    //Interazione DB
-                    //r.riceviSalvataggiClienti();
-                    //r.riceviSalvataggiEventi();
-                }
-                else
-                {
-                    throw new Exception("Salvataggio condiviso non trovato");
-                }
-            }
-            catch (Exception exc)
-            {
-                Notifica notificaErr = new Notifica();
-                notificaErr.Show(exc.Message, Notifica.enmType.Error);
-            }
-            try
-            {
-                //Interazione DB
-                //r.caricaClienti();
-                //r.caricaEventi();
-            }
-            catch (Exception exc)
-            {
-                error = true;
-                Notifica notificaErr = new Notifica();
-                notificaErr.Show(exc.Message, Notifica.enmType.Error);
-            }
+
+            //Connessione database query test
+            Connection = Metodi.ConnectToDatabase();
+            string query = "Update clienti set indirizzo_cliente = 'prova' where id_cliente='1'";
+            MySqlCommand command = new MySqlCommand(query,Connection);
+            command.ExecuteNonQuery();
+            Connection.Close();
 
             //configurazione registro
             if (r.DizClienti == null)

@@ -7,9 +7,9 @@ using MySql.Data.MySqlClient;
 
 namespace Calendario_AriBerg
 {
-    internal class Metodi
+    static internal class Metodi
     {
-        private MySqlConnection ConnectToDatabase(string hostname, string dbname, string username, string password)
+        static internal MySqlConnection ConnectToDatabase(string hostname, string dbname, string username, string password)
         {
             string remoteConnectionString = $"Server={hostname}; Database={dbname}; Uid={username}; Pwd={password};";
             MySqlConnection conn = new MySqlConnection(remoteConnectionString);
@@ -17,9 +17,9 @@ namespace Calendario_AriBerg
             return conn;
         }
 
-        private MySqlConnection ConnectToDatabase()
+        static internal MySqlConnection ConnectToDatabase()
         {
-            string remoteConnectionString = $"Server=/; Database=/; Uid=/; Pwd=/;";
+            string remoteConnectionString = $"Server=192.168.2.252; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
             MySqlConnection conn = new MySqlConnection(remoteConnectionString);
             conn.Open();
             return conn;
