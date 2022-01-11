@@ -133,6 +133,18 @@
   <data name="aircompressor_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\aircompressor_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="componente_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\componente_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="componente_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\componente_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="componente_remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\componente_remove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="componenti_transfer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\componenti_transfer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="delete_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\delete_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

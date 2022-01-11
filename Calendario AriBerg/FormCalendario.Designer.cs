@@ -237,39 +237,44 @@ namespace Calendario_AriBerg
             this.cbBxTrovaPerPRif = new System.Windows.Forms.ComboBox();
             this.cbBxTrovaPerNome = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.button2 = new System.Windows.Forms.Button();
+            this.lblMagazziniComponenti = new System.Windows.Forms.Label();
+            this.lblCatalogoComponenti = new System.Windows.Forms.Label();
+            this.pnlFiltriMagazzino = new System.Windows.Forms.Panel();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.chBxFiltroMagazzinoTipo = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.gBxAggiungiComponente = new System.Windows.Forms.GroupBox();
+            this.cbxAggiungiComponenteMarca = new System.Windows.Forms.ComboBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.lblAggiungiComponenteSoglia = new System.Windows.Forms.Label();
+            this.nudAggiungiComponenteSoglia = new System.Windows.Forms.NumericUpDown();
+            this.lblAggiungiComponenteMarca = new System.Windows.Forms.Label();
+            this.lblAggiungiComponenteNOrdine = new System.Windows.Forms.Label();
+            this.lblAggiungiComponenteCodice = new System.Windows.Forms.Label();
+            this.nudAggiungiComponenteNOrdine = new System.Windows.Forms.NumericUpDown();
+            this.cbxAggiungiComponenteTipo = new System.Windows.Forms.ComboBox();
+            this.tbxAggiungiComponenteCodice = new System.Windows.Forms.TextBox();
+            this.lblAggiungiComponenteTipo = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.dgvComponenti = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.gBxAggiungiComponente = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.tbCtrlMagazzini = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgwEventi)).BeginInit();
             this.gbxLegenda.SuspendLayout();
             this.gbxAggiungi.SuspendLayout();
@@ -296,15 +301,16 @@ namespace Calendario_AriBerg
             ((System.ComponentModel.ISupportInitialize)(this.dgvVisualizzaClienti)).BeginInit();
             this.gBxClientiTrova.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.pnlFiltriMagazzino.SuspendLayout();
+            this.gBxAggiungiComponente.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAggiungiComponenteSoglia)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAggiungiComponenteNOrdine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComponenti)).BeginInit();
             this.panel1.SuspendLayout();
-            this.gBxAggiungiComponente.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tbCtrlMagazzini.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgwEventi
@@ -2870,7 +2876,11 @@ namespace Calendario_AriBerg
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.tabPage3.Controls.Add(this.panel2);
+            this.tabPage3.Controls.Add(this.numericUpDown1);
+            this.tabPage3.Controls.Add(this.button2);
+            this.tabPage3.Controls.Add(this.lblMagazziniComponenti);
+            this.tabPage3.Controls.Add(this.lblCatalogoComponenti);
+            this.tabPage3.Controls.Add(this.pnlFiltriMagazzino);
             this.tabPage3.Controls.Add(this.gBxAggiungiComponente);
             this.tabPage3.Controls.Add(this.dgvComponenti);
             this.tabPage3.Controls.Add(this.panel1);
@@ -2882,12 +2892,363 @@ namespace Calendario_AriBerg
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Magazzino";
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(613, 307);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(64, 21);
+            this.numericUpDown1.TabIndex = 51;
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.button2.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.componenti_transfer;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.DeepSkyBlue;
+            this.button2.FlatAppearance.BorderSize = 3;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button2.Location = new System.Drawing.Point(613, 334);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(64, 73);
+            this.button2.TabIndex = 1;
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // lblMagazziniComponenti
+            // 
+            this.lblMagazziniComponenti.AutoSize = true;
+            this.lblMagazziniComponenti.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMagazziniComponenti.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblMagazziniComponenti.Location = new System.Drawing.Point(709, 82);
+            this.lblMagazziniComponenti.Name = "lblMagazziniComponenti";
+            this.lblMagazziniComponenti.Size = new System.Drawing.Size(145, 39);
+            this.lblMagazziniComponenti.TabIndex = 50;
+            this.lblMagazziniComponenti.Text = "Magazzini";
+            // 
+            // lblCatalogoComponenti
+            // 
+            this.lblCatalogoComponenti.AutoSize = true;
+            this.lblCatalogoComponenti.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCatalogoComponenti.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblCatalogoComponenti.Location = new System.Drawing.Point(109, 82);
+            this.lblCatalogoComponenti.Name = "lblCatalogoComponenti";
+            this.lblCatalogoComponenti.Size = new System.Drawing.Size(131, 39);
+            this.lblCatalogoComponenti.TabIndex = 49;
+            this.lblCatalogoComponenti.Text = "Catalogo";
+            // 
+            // pnlFiltriMagazzino
+            // 
+            this.pnlFiltriMagazzino.BackColor = System.Drawing.Color.DimGray;
+            this.pnlFiltriMagazzino.Controls.Add(this.checkBox5);
+            this.pnlFiltriMagazzino.Controls.Add(this.checkBox1);
+            this.pnlFiltriMagazzino.Controls.Add(this.checkBox3);
+            this.pnlFiltriMagazzino.Controls.Add(this.checkBox2);
+            this.pnlFiltriMagazzino.Controls.Add(this.chBxFiltroMagazzinoTipo);
+            this.pnlFiltriMagazzino.Controls.Add(this.checkBox4);
+            this.pnlFiltriMagazzino.Controls.Add(this.button1);
+            this.pnlFiltriMagazzino.Controls.Add(this.comboBox1);
+            this.pnlFiltriMagazzino.Controls.Add(this.comboBox4);
+            this.pnlFiltriMagazzino.Controls.Add(this.comboBox3);
+            this.pnlFiltriMagazzino.ForeColor = System.Drawing.Color.White;
+            this.pnlFiltriMagazzino.Location = new System.Drawing.Point(500, 9);
+            this.pnlFiltriMagazzino.Name = "pnlFiltriMagazzino";
+            this.pnlFiltriMagazzino.Size = new System.Drawing.Size(924, 72);
+            this.pnlFiltriMagazzino.TabIndex = 48;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(544, 39);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(120, 17);
+            this.checkBox5.TabIndex = 34;
+            this.checkBox5.Text = "Applica a magazzino";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(533, 6);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(112, 17);
+            this.checkBox1.TabIndex = 33;
+            this.checkBox1.Text = "Applica a catalogo";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(223, 11);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(58, 17);
+            this.checkBox3.TabIndex = 32;
+            this.checkBox3.Text = "Codice";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(13, 40);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(56, 17);
+            this.checkBox2.TabIndex = 28;
+            this.checkBox2.Text = "Marca";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // chBxFiltroMagazzinoTipo
+            // 
+            this.chBxFiltroMagazzinoTipo.AutoSize = true;
+            this.chBxFiltroMagazzinoTipo.Location = new System.Drawing.Point(13, 15);
+            this.chBxFiltroMagazzinoTipo.Name = "chBxFiltroMagazzinoTipo";
+            this.chBxFiltroMagazzinoTipo.Size = new System.Drawing.Size(46, 17);
+            this.chBxFiltroMagazzinoTipo.TabIndex = 27;
+            this.chBxFiltroMagazzinoTipo.Text = "Tipo";
+            this.chBxFiltroMagazzinoTipo.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(708, 39);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(80, 17);
+            this.checkBox4.TabIndex = 31;
+            this.checkBox4.Text = "Sotto Soglia";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.button1.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.search_icon;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.button1.FlatAppearance.BorderSize = 15;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(855, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(66, 58);
+            this.button1.TabIndex = 25;
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox1.Enabled = false;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(95, 37);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(81, 21);
+            this.comboBox1.TabIndex = 1;
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox4.Enabled = false;
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(296, 8);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(99, 21);
+            this.comboBox4.TabIndex = 30;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(95, 11);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(81, 21);
+            this.comboBox3.TabIndex = 0;
+            // 
+            // gBxAggiungiComponente
+            // 
+            this.gBxAggiungiComponente.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.gBxAggiungiComponente.Controls.Add(this.cbxAggiungiComponenteMarca);
+            this.gBxAggiungiComponente.Controls.Add(this.button4);
+            this.gBxAggiungiComponente.Controls.Add(this.lblAggiungiComponenteSoglia);
+            this.gBxAggiungiComponente.Controls.Add(this.nudAggiungiComponenteSoglia);
+            this.gBxAggiungiComponente.Controls.Add(this.lblAggiungiComponenteMarca);
+            this.gBxAggiungiComponente.Controls.Add(this.lblAggiungiComponenteNOrdine);
+            this.gBxAggiungiComponente.Controls.Add(this.lblAggiungiComponenteCodice);
+            this.gBxAggiungiComponente.Controls.Add(this.nudAggiungiComponenteNOrdine);
+            this.gBxAggiungiComponente.Controls.Add(this.cbxAggiungiComponenteTipo);
+            this.gBxAggiungiComponente.Controls.Add(this.tbxAggiungiComponenteCodice);
+            this.gBxAggiungiComponente.Controls.Add(this.lblAggiungiComponenteTipo);
+            this.gBxAggiungiComponente.Controls.Add(this.button3);
+            this.gBxAggiungiComponente.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gBxAggiungiComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.gBxAggiungiComponente.Location = new System.Drawing.Point(41, 82);
+            this.gBxAggiungiComponente.Name = "gBxAggiungiComponente";
+            this.gBxAggiungiComponente.Size = new System.Drawing.Size(309, 646);
+            this.gBxAggiungiComponente.TabIndex = 44;
+            this.gBxAggiungiComponente.TabStop = false;
+            this.gBxAggiungiComponente.Text = "Aggiungi componente";
+            this.gBxAggiungiComponente.Visible = false;
+            // 
+            // cbxAggiungiComponenteMarca
+            // 
+            this.cbxAggiungiComponenteMarca.FormattingEnabled = true;
+            this.cbxAggiungiComponenteMarca.Location = new System.Drawing.Point(23, 232);
+            this.cbxAggiungiComponenteMarca.Name = "cbxAggiungiComponenteMarca";
+            this.cbxAggiungiComponenteMarca.Size = new System.Drawing.Size(245, 33);
+            this.cbxAggiungiComponenteMarca.TabIndex = 56;
+            // 
+            // button4
+            // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button4.BackColor = System.Drawing.Color.LimeGreen;
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(0, 589);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(309, 56);
+            this.button4.TabIndex = 12;
+            this.button4.Text = "Aggiungi";
+            this.button4.UseVisualStyleBackColor = false;
+            // 
+            // lblAggiungiComponenteSoglia
+            // 
+            this.lblAggiungiComponenteSoglia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAggiungiComponenteSoglia.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAggiungiComponenteSoglia.ForeColor = System.Drawing.Color.White;
+            this.lblAggiungiComponenteSoglia.Location = new System.Drawing.Point(23, 360);
+            this.lblAggiungiComponenteSoglia.Name = "lblAggiungiComponenteSoglia";
+            this.lblAggiungiComponenteSoglia.Size = new System.Drawing.Size(245, 25);
+            this.lblAggiungiComponenteSoglia.TabIndex = 55;
+            this.lblAggiungiComponenteSoglia.Text = "Soglia";
+            this.lblAggiungiComponenteSoglia.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nudAggiungiComponenteSoglia
+            // 
+            this.nudAggiungiComponenteSoglia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudAggiungiComponenteSoglia.Location = new System.Drawing.Point(23, 388);
+            this.nudAggiungiComponenteSoglia.Name = "nudAggiungiComponenteSoglia";
+            this.nudAggiungiComponenteSoglia.Size = new System.Drawing.Size(245, 31);
+            this.nudAggiungiComponenteSoglia.TabIndex = 54;
+            // 
+            // lblAggiungiComponenteMarca
+            // 
+            this.lblAggiungiComponenteMarca.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAggiungiComponenteMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAggiungiComponenteMarca.ForeColor = System.Drawing.Color.White;
+            this.lblAggiungiComponenteMarca.Location = new System.Drawing.Point(23, 193);
+            this.lblAggiungiComponenteMarca.Name = "lblAggiungiComponenteMarca";
+            this.lblAggiungiComponenteMarca.Size = new System.Drawing.Size(245, 25);
+            this.lblAggiungiComponenteMarca.TabIndex = 53;
+            this.lblAggiungiComponenteMarca.Text = "Marca";
+            this.lblAggiungiComponenteMarca.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblAggiungiComponenteNOrdine
+            // 
+            this.lblAggiungiComponenteNOrdine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAggiungiComponenteNOrdine.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAggiungiComponenteNOrdine.ForeColor = System.Drawing.Color.White;
+            this.lblAggiungiComponenteNOrdine.Location = new System.Drawing.Point(23, 278);
+            this.lblAggiungiComponenteNOrdine.Name = "lblAggiungiComponenteNOrdine";
+            this.lblAggiungiComponenteNOrdine.Size = new System.Drawing.Size(245, 25);
+            this.lblAggiungiComponenteNOrdine.TabIndex = 52;
+            this.lblAggiungiComponenteNOrdine.Text = "Quantità da ordinare";
+            this.lblAggiungiComponenteNOrdine.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblAggiungiComponenteCodice
+            // 
+            this.lblAggiungiComponenteCodice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAggiungiComponenteCodice.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAggiungiComponenteCodice.ForeColor = System.Drawing.Color.White;
+            this.lblAggiungiComponenteCodice.Location = new System.Drawing.Point(23, 41);
+            this.lblAggiungiComponenteCodice.Name = "lblAggiungiComponenteCodice";
+            this.lblAggiungiComponenteCodice.Size = new System.Drawing.Size(245, 25);
+            this.lblAggiungiComponenteCodice.TabIndex = 51;
+            this.lblAggiungiComponenteCodice.Text = "Codice";
+            this.lblAggiungiComponenteCodice.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nudAggiungiComponenteNOrdine
+            // 
+            this.nudAggiungiComponenteNOrdine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudAggiungiComponenteNOrdine.Location = new System.Drawing.Point(23, 306);
+            this.nudAggiungiComponenteNOrdine.Name = "nudAggiungiComponenteNOrdine";
+            this.nudAggiungiComponenteNOrdine.Size = new System.Drawing.Size(245, 31);
+            this.nudAggiungiComponenteNOrdine.TabIndex = 49;
+            // 
+            // cbxAggiungiComponenteTipo
+            // 
+            this.cbxAggiungiComponenteTipo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxAggiungiComponenteTipo.FormattingEnabled = true;
+            this.cbxAggiungiComponenteTipo.Items.AddRange(new object[] {
+            "Fa",
+            "Fo",
+            "Fi",
+            "GA"});
+            this.cbxAggiungiComponenteTipo.Location = new System.Drawing.Point(23, 140);
+            this.cbxAggiungiComponenteTipo.Name = "cbxAggiungiComponenteTipo";
+            this.cbxAggiungiComponenteTipo.Size = new System.Drawing.Size(245, 33);
+            this.cbxAggiungiComponenteTipo.TabIndex = 48;
+            // 
+            // tbxAggiungiComponenteCodice
+            // 
+            this.tbxAggiungiComponenteCodice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbxAggiungiComponenteCodice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxAggiungiComponenteCodice.Location = new System.Drawing.Point(23, 69);
+            this.tbxAggiungiComponenteCodice.Name = "tbxAggiungiComponenteCodice";
+            this.tbxAggiungiComponenteCodice.Size = new System.Drawing.Size(245, 26);
+            this.tbxAggiungiComponenteCodice.TabIndex = 34;
+            // 
+            // lblAggiungiComponenteTipo
+            // 
+            this.lblAggiungiComponenteTipo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAggiungiComponenteTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAggiungiComponenteTipo.ForeColor = System.Drawing.Color.White;
+            this.lblAggiungiComponenteTipo.Location = new System.Drawing.Point(23, 112);
+            this.lblAggiungiComponenteTipo.Name = "lblAggiungiComponenteTipo";
+            this.lblAggiungiComponenteTipo.Size = new System.Drawing.Size(245, 25);
+            this.lblAggiungiComponenteTipo.TabIndex = 28;
+            this.lblAggiungiComponenteTipo.Text = "Tipo";
+            this.lblAggiungiComponenteTipo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button3
+            // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button3.BackColor = System.Drawing.Color.Red;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Bold);
+            this.button3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button3.Location = new System.Drawing.Point(284, 14);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(25, 25);
+            this.button3.TabIndex = 24;
+            this.button3.Text = "X";
+            this.button3.UseVisualStyleBackColor = false;
+            // 
             // dgvComponenti
             // 
             this.dgvComponenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvComponenti.Location = new System.Drawing.Point(6, 79);
+            this.dgvComponenti.Location = new System.Drawing.Point(6, 123);
             this.dgvComponenti.Name = "dgvComponenti";
-            this.dgvComponenti.Size = new System.Drawing.Size(296, 646);
+            this.dgvComponenti.Size = new System.Drawing.Size(592, 602);
             this.dgvComponenti.TabIndex = 47;
             // 
             // panel1
@@ -2905,7 +3266,7 @@ namespace Calendario_AriBerg
             // 
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button5.BackColor = System.Drawing.Color.LimeGreen;
-            this.button5.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.add_icon;
+            this.button5.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.componente_add;
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button5.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
             this.button5.FlatAppearance.BorderSize = 3;
@@ -2923,7 +3284,7 @@ namespace Calendario_AriBerg
             // 
             this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button6.BackColor = System.Drawing.Color.Goldenrod;
-            this.button6.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.modify_icon;
+            this.button6.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.componente_edit;
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button6.Enabled = false;
             this.button6.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
@@ -2942,7 +3303,7 @@ namespace Calendario_AriBerg
             // 
             this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button7.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.remove_icon;
+            this.button7.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.componente_remove;
             this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button7.Enabled = false;
             this.button7.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -2957,141 +3318,15 @@ namespace Calendario_AriBerg
             this.button7.TabIndex = 3;
             this.button7.UseVisualStyleBackColor = false;
             // 
-            // gBxAggiungiComponente
-            // 
-            this.gBxAggiungiComponente.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.gBxAggiungiComponente.Controls.Add(this.button4);
-            this.gBxAggiungiComponente.Controls.Add(this.label4);
-            this.gBxAggiungiComponente.Controls.Add(this.numericUpDown2);
-            this.gBxAggiungiComponente.Controls.Add(this.label1);
-            this.gBxAggiungiComponente.Controls.Add(this.label2);
-            this.gBxAggiungiComponente.Controls.Add(this.label3);
-            this.gBxAggiungiComponente.Controls.Add(this.numericUpDown1);
-            this.gBxAggiungiComponente.Controls.Add(this.comboBox2);
-            this.gBxAggiungiComponente.Controls.Add(this.textBox1);
-            this.gBxAggiungiComponente.Controls.Add(this.textBox3);
-            this.gBxAggiungiComponente.Controls.Add(this.label5);
-            this.gBxAggiungiComponente.Controls.Add(this.button3);
-            this.gBxAggiungiComponente.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gBxAggiungiComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gBxAggiungiComponente.Location = new System.Drawing.Point(0, 79);
-            this.gBxAggiungiComponente.Name = "gBxAggiungiComponente";
-            this.gBxAggiungiComponente.Size = new System.Drawing.Size(302, 646);
-            this.gBxAggiungiComponente.TabIndex = 44;
-            this.gBxAggiungiComponente.TabStop = false;
-            this.gBxAggiungiComponente.Text = "Aggiungi componente";
-            this.gBxAggiungiComponente.Visible = false;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(23, 199);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(238, 25);
-            this.label3.TabIndex = 51;
-            this.label3.Text = "Codice";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown1.Location = new System.Drawing.Point(23, 306);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(238, 31);
-            this.numericUpDown1.TabIndex = 49;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "Fa",
-            "Fo",
-            "Fi",
-            "GA"});
-            this.comboBox2.Location = new System.Drawing.Point(23, 140);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(238, 33);
-            this.comboBox2.TabIndex = 48;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(23, 69);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(238, 26);
-            this.textBox1.TabIndex = 45;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(23, 227);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(238, 26);
-            this.textBox3.TabIndex = 34;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(23, 112);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(238, 25);
-            this.label5.TabIndex = 28;
-            this.label5.Text = "Tipo";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // button3
-            // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.BackColor = System.Drawing.Color.Red;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Bold);
-            this.button3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button3.Location = new System.Drawing.Point(277, 14);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(25, 25);
-            this.button3.TabIndex = 24;
-            this.button3.Text = "X";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // button4
-            // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.BackColor = System.Drawing.Color.LimeGreen;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(0, 589);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(302, 56);
-            this.button4.TabIndex = 12;
-            this.button4.Text = "Aggiungi";
-            this.button4.UseVisualStyleBackColor = false;
-            // 
             // tbCtrlMagazzini
             // 
             this.tbCtrlMagazzini.Controls.Add(this.tabPage4);
             this.tbCtrlMagazzini.Controls.Add(this.tabPage5);
             this.tbCtrlMagazzini.Controls.Add(this.tabPage6);
-            this.tbCtrlMagazzini.Location = new System.Drawing.Point(884, 0);
+            this.tbCtrlMagazzini.Location = new System.Drawing.Point(686, 123);
             this.tbCtrlMagazzini.Name = "tbCtrlMagazzini";
             this.tbCtrlMagazzini.SelectedIndex = 0;
-            this.tbCtrlMagazzini.Size = new System.Drawing.Size(600, 735);
+            this.tbCtrlMagazzini.Size = new System.Drawing.Size(798, 612);
             this.tbCtrlMagazzini.TabIndex = 45;
             // 
             // tabPage4
@@ -3100,17 +3335,26 @@ namespace Calendario_AriBerg
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(592, 709);
+            this.tabPage4.Size = new System.Drawing.Size(790, 586);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Totale";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(784, 580);
+            this.dataGridView1.TabIndex = 0;
             // 
             // tabPage5
             // 
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(592, 709);
+            this.tabPage5.Size = new System.Drawing.Size(790, 586);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "Centrale";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -3119,190 +3363,10 @@ namespace Calendario_AriBerg
             // 
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(592, 709);
+            this.tabPage6.Size = new System.Drawing.Size(790, 586);
             this.tabPage6.TabIndex = 2;
             this.tabPage6.Text = "Altri";
             this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(23, 278);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(238, 25);
-            this.label2.TabIndex = 52;
-            this.label2.Text = "Quantità da ordinare";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(23, 41);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(238, 25);
-            this.label1.TabIndex = 53;
-            this.label1.Text = "Marca";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(23, 360);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(238, 25);
-            this.label4.TabIndex = 55;
-            this.label4.Text = "Soglia";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown2.Location = new System.Drawing.Point(23, 388);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(238, 31);
-            this.numericUpDown2.TabIndex = 54;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(586, 703);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.DimGray;
-            this.panel2.Controls.Add(this.checkBox3);
-            this.panel2.Controls.Add(this.checkBox2);
-            this.panel2.Controls.Add(this.checkBox1);
-            this.panel2.Controls.Add(this.checkBox4);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.comboBox1);
-            this.panel2.Controls.Add(this.comboBox4);
-            this.panel2.Controls.Add(this.comboBox5);
-            this.panel2.Controls.Add(this.comboBox3);
-            this.panel2.ForeColor = System.Drawing.Color.White;
-            this.panel2.Location = new System.Drawing.Point(308, 1);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(570, 72);
-            this.panel2.TabIndex = 48;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.button1.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.search_icon;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.button1.FlatAppearance.BorderSize = 15;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(501, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(66, 58);
-            this.button1.TabIndex = 25;
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox1.Enabled = false;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(95, 38);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(137, 21);
-            this.comboBox1.TabIndex = 1;
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(95, 11);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(137, 21);
-            this.comboBox3.TabIndex = 0;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(13, 15);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(56, 17);
-            this.checkBox1.TabIndex = 27;
-            this.checkBox1.Text = "Marca";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(13, 40);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(76, 17);
-            this.checkBox2.TabIndex = 28;
-            this.checkBox2.Text = "checkBox2";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(246, 40);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(76, 17);
-            this.checkBox3.TabIndex = 32;
-            this.checkBox3.Text = "checkBox3";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(266, 17);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(56, 17);
-            this.checkBox4.TabIndex = 31;
-            this.checkBox4.Text = "Marca";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // comboBox4
-            // 
-            this.comboBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox4.Enabled = false;
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(328, 40);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(167, 21);
-            this.comboBox4.TabIndex = 30;
-            // 
-            // comboBox5
-            // 
-            this.comboBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox5.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox5.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(328, 13);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(167, 21);
-            this.comboBox5.TabIndex = 29;
             // 
             // FormCalendario
             // 
@@ -3360,17 +3424,19 @@ namespace Calendario_AriBerg
             this.gBxClientiTrova.ResumeLayout(false);
             this.gBxClientiTrova.PerformLayout();
             this.tabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvComponenti)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.pnlFiltriMagazzino.ResumeLayout(false);
+            this.pnlFiltriMagazzino.PerformLayout();
             this.gBxAggiungiComponente.ResumeLayout(false);
             this.gBxAggiungiComponente.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAggiungiComponenteSoglia)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAggiungiComponenteNOrdine)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvComponenti)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.tbCtrlMagazzini.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3584,9 +3650,8 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.ColumnHeader columnHeader19;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.GroupBox gBxAggiungiComponente;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox tbxAggiungiComponenteCodice;
+        private System.Windows.Forms.Label lblAggiungiComponenteTipo;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Panel panel1;
@@ -3598,24 +3663,30 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.DataGridView dgvComponenti;
         private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.Label lblAggiungiComponenteCodice;
+        private System.Windows.Forms.NumericUpDown nudAggiungiComponenteNOrdine;
+        private System.Windows.Forms.ComboBox cbxAggiungiComponenteTipo;
+        private System.Windows.Forms.Label lblAggiungiComponenteMarca;
+        private System.Windows.Forms.Label lblAggiungiComponenteNOrdine;
+        private System.Windows.Forms.Label lblAggiungiComponenteSoglia;
+        private System.Windows.Forms.NumericUpDown nudAggiungiComponenteSoglia;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel pnlFiltriMagazzino;
         private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chBxFiltroMagazzinoTipo;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.Label lblMagazziniComponenti;
+        private System.Windows.Forms.Label lblCatalogoComponenti;
+        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.ComboBox cbxAggiungiComponenteMarca;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 

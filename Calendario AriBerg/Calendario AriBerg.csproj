@@ -237,6 +237,16 @@
     <None Include="Resources\info_notification.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\componente_add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\componente_edit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\componente_remove.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\componenti_transfer.png" />
     <Content Include="Resources\Logo AriGenda.ico" />
     <None Include="Resources\Logo_AriGenda.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
