@@ -19,9 +19,6 @@ namespace Calendario_AriBerg
         private DateTime SelectedDate;
 
         //Inizializzazione del Thread che riceve i files
-        private Thread threadRicevi = null;
-
-        public bool going = true;
 
         private Macchina macchina;
         private List<Macchina> listaMacchine;
@@ -61,8 +58,6 @@ namespace Calendario_AriBerg
                 
                 r.caricaClienti();
                 r.caricaEventi();
-                threadRicevi = new Thread(AGGIORNATUTTO);
-                threadRicevi.Name = "Invia files";
             }
             catch (Exception exc)
             {
@@ -141,7 +136,7 @@ namespace Calendario_AriBerg
             AggiornaComboBox();
 
             ResizeHandle();
-            threadRicevi.Start();
+
         }
 
         private void AggiornaComboBox() //Da mettere in modifica ed elimina cliente
@@ -2192,14 +2187,14 @@ namespace Calendario_AriBerg
 
                     gBxClientiAggiungiCliente.Visible = false;
 
-                    threadRicevi.Suspend();
+                    //threadRicevi.Suspend();
                     dgvVisualizzaClienti.DataSource = null;
                     dgvVisualizzaClienti.DataSource = r.DizClienti.Values.ToList();
                     HideColumnsClienti();
                     r.salvaClienti();
                     r.inviaSalvataggi();
                     AggiornaComboBox();
-                    threadRicevi.Resume();
+                    //threadRicevi.Resume();
 
                     foreach (Control c in gBxClientiAggiungiCliente.Controls)
                     {
@@ -2339,50 +2334,11 @@ namespace Calendario_AriBerg
 
         public void AGGIORNATUTTO()
         {
-            while (going == true)
-            {
-                Thread.Sleep(100);
-
-                if (r.riceviSalvataggiClienti())
-                {
-                    if (r.DizClienti.Count > 0)
-                    {
-                        dgvVisualizzaClienti.DataSource = null;
-                        dgvVisualizzaClienti.DataSource = r.DizClienti.Values.ToList();
-                        dgvVisualizzaClienti.Refresh();
-
-                        if (dgvVisualizzaClienti.Columns.Count > 0)
-                        {
-                            HideColumnsClienti();
-                        }
-                    }
-                    else
-                    {
-                        dgvVisualizzaClienti.DataSource = null;
-                    }
-                }
-
-                if (r.riceviSalvataggiEventi())
-                {
-                    if (r.DizGiorni.ContainsKey(SelectedDate))
-                    {
-                        dgwEventi.DataSource = null;
-                        dgwEventi.DataSource = r.DizGiorni[SelectedDate];
-                        dgwEventi.Refresh();
-                        HideColumnsEventi();
-                    }
-                    else
-                    {
-                        dgwEventi.DataSource = null;
-                    }
-                }
-            }
+            
         }
 
         private void FormCalendario_FormClosing(object sender, FormClosingEventArgs e)
         {
-            going = false;
-            threadRicevi.Abort();
             Application.Exit();
         }
 
