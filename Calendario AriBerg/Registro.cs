@@ -10,16 +10,10 @@ namespace Calendario_AriBerg
 {
     public class Registro
     {
-        private Dictionary<DateTime, List<Evento>> dizGiorni = new Dictionary<DateTime, List<Evento>>();
-        private Dictionary<string, Cliente> dizClienti = new Dictionary<string, Cliente>();
-        private Dictionary<string, Componenti> dizComponenti = new Dictionary<string, Componenti>();
-        private Dictionary<string, Magazzino> dizMagazzini = new Dictionary<string, Magazzino>();
-
-
-        public Dictionary<string, Componenti> DizComponenti { get => dizComponenti; set => dizComponenti = value; }
-        public Dictionary<DateTime, List<Evento>> DizGiorni { get => dizGiorni; set => dizGiorni = value; }
-        public Dictionary<string, Cliente> DizClienti { get => dizClienti; set => dizClienti = value; }
-        public Dictionary<string, Magazzino> DizMagazzini { get => dizMagazzini; set => dizMagazzini = value; }
+        internal Dictionary<DateTime, List<Evento>> DizGiorni { get; set; } = new Dictionary<DateTime, List<Evento>>();
+        internal Dictionary<string, Cliente> DizClienti { get; set; } = new Dictionary<string, Cliente>();
+        internal Dictionary<string, Componenti> DizComponenti { get; set; } = new Dictionary<string, Componenti>();
+        internal Dictionary<string, Magazzino> DizMagazzini { get; set; } = new Dictionary<string, Magazzino>();
 
         public void AddEvento(Evento e)
         {

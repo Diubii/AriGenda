@@ -8,12 +8,12 @@ namespace Calendario_AriBerg
 {
     public class Componenti
     {
-        private string tipo;
-        private string marca;
-        private int soglia;
-        private int n_ordine;
-        private string codice;
-        private int quantita;
+        internal string Tipo { get; set; }
+        internal string Marca { get; set; }
+        internal int Soglia { get; set; }
+        internal int N_ordine { get; set; }
+        internal string Codice { get; set; }
+        internal int Quantita { get; set; }
 
         public Componenti()
         {
@@ -29,12 +29,5 @@ namespace Calendario_AriBerg
             this.Codice = codice;
             this.Quantita = quantita;
         }
-
-        public string Tipo { get => tipo; set => tipo = value; }
-        public string Marca { get => marca; set => marca = value; }
-        public int Soglia { get => soglia; set => soglia = value; }
-        public int N_ordine { get => n_ordine; set => n_ordine = value; }
-        public string Codice { get => codice; set => codice = value; }
-        public int Quantita { get => quantita; set => quantita = value; }
     }
 }

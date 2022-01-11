@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
-using System.Windows.Input;
-using MySql.Data.MySqlClient;
 
 namespace Calendario_AriBerg
 {
     //prova
     public partial class FormCalendario : Form
-    {   
+    {
         public static Registro r = new Registro();
 
         private Point p = new Point();
@@ -40,24 +37,25 @@ namespace Calendario_AriBerg
             {
                 if (File.Exists(@"\\DESKTOP-B2K8OHJ\Users\AriBerg Files\eventi.bababooey") && File.Exists(@"\\DESKTOP-B2K8OHJ\Users\AriBerg Files\clienti.bababooey"))
                 {
-                    r.riceviSalvataggiClienti();
-                    r.riceviSalvataggiEventi();
+                    //Interazione DB
+                    //r.riceviSalvataggiClienti();
+                    //r.riceviSalvataggiEventi();
                 }
                 else
                 {
                     throw new Exception("Salvataggio condiviso non trovato");
                 }
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 Notifica notificaErr = new Notifica();
                 notificaErr.Show(exc.Message, Notifica.enmType.Error);
             }
             try
             {
-                
-                r.caricaClienti();
-                r.caricaEventi();
+                //Interazione DB
+                //r.caricaClienti();
+                //r.caricaEventi();
             }
             catch (Exception exc)
             {
@@ -67,7 +65,7 @@ namespace Calendario_AriBerg
             }
 
             //configurazione registro
-            if (r.DizClienti == null) 
+            if (r.DizClienti == null)
             {
                 r.DizClienti = new Dictionary<string, Cliente>();
             }
@@ -75,8 +73,8 @@ namespace Calendario_AriBerg
             {
                 r.DizGiorni = new Dictionary<DateTime, List<Evento>>();
             }
-                       
-            
+
+
             ariCalendario.Refresh();
             lblEventi.Text = "Eventi del: " + DateTime.Now.Day + "/" + DateTime.Now.Month + "/" + DateTime.Now.Year;
             lblClienti.Text = "Tutti i clienti";
@@ -108,7 +106,7 @@ namespace Calendario_AriBerg
             }
 
             //configdgwEventi
-            if (r.DizGiorni!=null&& r.DizGiorni.ContainsKey(SelectedDate))
+            if (r.DizGiorni != null && r.DizGiorni.ContainsKey(SelectedDate))
             {
                 dgwEventi.DataSource = r.DizGiorni[SelectedDate];
                 HideColumnsEventi();
@@ -124,7 +122,7 @@ namespace Calendario_AriBerg
             }
 
             //configdgwEventi
-            if (r.DizClienti != null )
+            if (r.DizClienti != null)
             {
                 dgvVisualizzaClienti.DataSource = r.DizClienti.Values.ToList();
                 HideColumnsClienti();
@@ -167,7 +165,7 @@ namespace Calendario_AriBerg
                         cbBxTrovaPerMatricola.Items.Add(macchina._Marca + "/" + macchina._Modello + "/" + macchina._Matricola);
                         cBxAggiungiEventoMacchine.Items.Add(macchina._Marca + "/" + macchina._Modello + "/" + macchina._Matricola);
                         cBxModificaEventoMacchine.Items.Add(macchina._Marca + "/" + macchina._Modello + "/" + macchina._Matricola);
-                        cbBxSearchEventoMatricola.Items.Add(macchina._Marca + "/" + macchina._Modello + "/" + macchina._Matricola);                  
+                        cbBxSearchEventoMatricola.Items.Add(macchina._Marca + "/" + macchina._Modello + "/" + macchina._Matricola);
                     }
 
                     cBxAggiungiEventoCliente.Items.Add(kv.Key);
@@ -218,7 +216,7 @@ namespace Calendario_AriBerg
             SelectedDate = ariCalendario.SelectionStart;
             btnAdd.Enabled = true;
 
-            if (r.DizGiorni!=null&& r.DizGiorni.ContainsKey(SelectedDate))
+            if (r.DizGiorni != null && r.DizGiorni.ContainsKey(SelectedDate))
             {
                 dgwEventi.DataSource = r.DizGiorni[SelectedDate];
                 HideColumnsEventi();
@@ -266,8 +264,8 @@ namespace Calendario_AriBerg
             }
             dgwEventi.CurrentCell = dgwEventi[3, i];
             Rectangle re = dgwEventi.GetCellDisplayRectangle(3, i, false);
-            p.Y = dgwEventi.Location.Y + this.Location.Y + (this.Width / 30) + re.Y + re.Height;
-            p.X = dgwEventi.Location.X + this.Location.X + dgwEventi.RowHeadersWidth + 30;
+            p.Y = dgwEventi.Location.Y + Location.Y + (Width / 30) + re.Y + re.Height;
+            p.X = dgwEventi.Location.X + Location.X + dgwEventi.RowHeadersWidth + 30;
             Cursor.Position = p;
         }
 
@@ -285,10 +283,10 @@ namespace Calendario_AriBerg
 
         private void ResizeDetilsCose()
         {
-            int dimCharcolumn = this.Width / 85;
+            int dimCharcolumn = Width / 85;
             Font ColumnFont = new Font("Calibri", dimCharcolumn);
             int buffer = 8;
-            gbxDettagli.Height = (int)(this.Height / 3.5);
+            gbxDettagli.Height = (int)(Height / 3.5);
             gbxDettagli.Width = dgwEventi.Columns["NomeCliente"].Width * 2;
             p.X = dgwEventi.Location.X + dgwEventi.Columns["NomeCliente"].Width + dgwEventi.RowHeadersWidth;
             p.Y = dgwEventi.Location.Y;
@@ -296,12 +294,12 @@ namespace Calendario_AriBerg
             gbxDettagli.Font = ColumnFont;
             rtbAggiungiNote.Font = ColumnFont;
 
-            gBxDettagliCliente.Height = (int)(this.Height / 3.1);
+            gBxDettagliCliente.Height = (int)(Height / 3.1);
             gBxDettagliCliente.Width = gbxDettagli.Width;
             gBxDettagliCliente.Location = gbxDettagli.Location;
             gBxDettagliCliente.Font = ColumnFont;
 
-            gBxDettagliMacchinaAccessorio.Height = (int)(this.Height / 3.5);
+            gBxDettagliMacchinaAccessorio.Height = (int)(Height / 3.5);
             gBxDettagliMacchinaAccessorio.Width = gbxDettagli.Width;
             gBxDettagliMacchinaAccessorio.Location = gbxDettagli.Location;
             gBxDettagliMacchinaAccessorio.Font = ColumnFont;
@@ -379,18 +377,18 @@ namespace Calendario_AriBerg
         private void ResizeHandle()
         {
             //reimposta bordo per bug demaximise
-            this.FormBorderStyle = FormBorderStyle.Sizable;
+            FormBorderStyle = FormBorderStyle.Sizable;
 
             int buffer = 8;
-            int dim = this.Width / 55;
+            int dim = Width / 55;
             Font lblEventiFont = new Font("Calibri", dim);
-            int dimCharcolumn = this.Width / 85;
+            int dimCharcolumn = Width / 85;
             Font ColumnFont = new Font("Calibri", dimCharcolumn);
 
 
             //tabControl
-            tabControl1.Height = this.Height;
-            tabControl1.Width = this.Width;
+            tabControl1.Height = Height;
+            tabControl1.Width = Width;
 
             //configurationPanel
             p.X = buffer;
@@ -410,14 +408,14 @@ namespace Calendario_AriBerg
 
             //PanelEvennti
             //test cambio dimensioni calendario
-            this.Height = (this.Width / 16) * 9;
-            int carattere = this.Width / (60 - this.Width / 185);
+            Height = (Width / 16) * 9;
+            int carattere = Width / (60 - Width / 185);
             p.Y = buffer * 2 + lblEventiFont.Height;
             p.X = pnlCommands1.Location.X;
             ariCalendario.Location = p;
             for (int i = 0; i < 15; i++)
             {
-                if (ariCalendario.Height < (int)(this.Height / 1.6))
+                if (ariCalendario.Height < (int)(Height / 1.6))
                 {
                     carattere++;
                 }
@@ -435,7 +433,7 @@ namespace Calendario_AriBerg
             pnlCercaEvento.Width = ariCalendario.Width - pnlCercaEvento.Location.X + buffer;
             pnlCercaEvento.Height = pnlCommands1.Height;
             //radiobuttons
-            int dimCharpanelsearch = this.Height / 110;
+            int dimCharpanelsearch = Height / 110;
             Font Panelsearchfont = new Font("Calibri", dimCharpanelsearch); ;
             for (int i = 0; i < 10; i++)
             {
@@ -479,10 +477,10 @@ namespace Calendario_AriBerg
             lblEventi.Location = p;
             lblEventi.Font = lblEventiFont;
             //btnLegenda
-            int dimChar = this.Width / 70;
+            int dimChar = Width / 70;
             Font EverithingFont = new Font("Calibri", dimChar);
             btnLegenda.Font = EverithingFont;
-            btnLegenda.Width = this.Width / 8;
+            btnLegenda.Width = Width / 8;
             btnLegenda.Height = lblEventi.Height;
             p.X = tabPage1.Width - (buffer * 3) - btnLegenda.Width;
             p.Y = buffer;
@@ -496,7 +494,7 @@ namespace Calendario_AriBerg
             //btnexitLegenda
             gbxLegenda.Font = ColumnFont;
             gbxLegenda.Font = ColumnFont;
-            int dimCharcLegenda = this.Width / 55;
+            int dimCharcLegenda = Width / 55;
             Font LegendaFont = new Font("Calibri", dimCharcLegenda);
             lblInterventoFgas.Font = ColumnFont;
             lblInterventoControllo_Generale.Font = ColumnFont;
@@ -596,7 +594,7 @@ namespace Calendario_AriBerg
 
 
             //gbxDettagli
-            if (r.DizGiorni!=null&& r.DizGiorni.ContainsKey(SelectedDate))
+            if (r.DizGiorni != null && r.DizGiorni.ContainsKey(SelectedDate))
             {
                 ResizeDetilsCose();
             }
@@ -668,7 +666,7 @@ namespace Calendario_AriBerg
             p.X = comboBoxAggiungi.Location.X;
             listViewAggiungiIntervento.Location = p;
             listViewAggiungiIntervento.Width = comboBoxAggiungi.Width;
-            listViewAggiungiIntervento.Height = (int)(gbxAggiungi.Height / 5);
+            listViewAggiungiIntervento.Height = gbxAggiungi.Height / 5;
             //lblnote
             p.X = buffer * 2;
             p.Y = listViewAggiungiIntervento.Location.Y + listViewAggiungiIntervento.Height + gbxAggiungi.Height / 50;
@@ -745,7 +743,7 @@ namespace Calendario_AriBerg
             p.X = comboBoxAggiungi.Location.X;
             listViewModificaOperazioni.Location = p;
             listViewModificaOperazioni.Width = comboBoxAggiungi.Width;
-            listViewModificaOperazioni.Height = (int)(gbxAggiungi.Height / 5);
+            listViewModificaOperazioni.Height = gbxAggiungi.Height / 5;
             //lblnote
             p.X = buffer * 2;
             p.Y = listViewAggiungiIntervento.Location.Y + listViewAggiungiIntervento.Height + gbxAggiungi.Height / 50;
@@ -788,7 +786,7 @@ namespace Calendario_AriBerg
             cbBxTrovaPerMatricola.Location = p;
             //btneliminafiltri
             btnEliminaFiltridgvVisualizzaClienti.Width = gBxClientiTrova.Width;
-            btnEliminaFiltridgvVisualizzaClienti.Height = (int)(gBxClientiTrova.Height / 12);
+            btnEliminaFiltridgvVisualizzaClienti.Height = gBxClientiTrova.Height / 12;
             p.X = 0;
             p.Y = gBxClientiTrova.Height - btnEliminaFiltridgvVisualizzaClienti.Height;
             btnEliminaFiltridgvVisualizzaClienti.Location = p;
@@ -914,7 +912,7 @@ namespace Calendario_AriBerg
             gBxVisualizzaCliente.Height = gBxClientiTrova.Height;
             gBxVisualizzaCliente.Font = ColumnFont;
             //picture per clienti
-            pbxAlloStoricoCliente.Width = (int)(gBxVisualizzaCliente.Width / 8);
+            pbxAlloStoricoCliente.Width = gBxVisualizzaCliente.Width / 8;
             pbxAlloStoricoCliente.Height = pbxAlloStoricoCliente.Width;
             p.Y = 0;
             p.X = gBxVisualizzaCliente.Width - pbxAlloStoricoCliente.Width;
@@ -1107,7 +1105,7 @@ namespace Calendario_AriBerg
             gBxVisualizzaCliente.Height = gBxClientiTrova.Height;
             gBxVisualizzaCliente.Font = ColumnFont;
             //picture per clienti
-            pbxAlloStoricoCliente.Width = (int)(gBxVisualizzaCliente.Width / 8);
+            pbxAlloStoricoCliente.Width = gBxVisualizzaCliente.Width / 8;
             pbxAlloStoricoCliente.Height = pbxAlloStoricoCliente.Width;
             p.Y = 0;
             p.X = gBxVisualizzaCliente.Width - pbxAlloStoricoCliente.Width;
@@ -1357,130 +1355,130 @@ namespace Calendario_AriBerg
 
         private void dgwEventi_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-          
-                if (r.DizGiorni.ContainsKey(SelectedDate) && dgwEventi.DataSource == r.DizGiorni[SelectedDate]) 
+
+            if (r.DizGiorni.ContainsKey(SelectedDate) && dgwEventi.DataSource == r.DizGiorni[SelectedDate])
+            {
+                if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 6)
                 {
-                    if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 6)
+                    if (!e.Handled)
                     {
-                        if (!e.Handled)
-                        {
-                            e.Handled = true;
-                            e.PaintBackground(e.CellBounds, dgwEventi.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected);
-                        }
-                        if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != DataGridViewPaintParts.None)
-                        {
-                            string text = e.Value.ToString();
-                            Size fullsize = TextRenderer.MeasureText(text, e.CellStyle.Font);
-                            Rectangle rect1 = new Rectangle(e.CellBounds.Location, e.CellBounds.Size);
-                            Size size;
-                            Color appcolore;
+                        e.Handled = true;
+                        e.PaintBackground(e.CellBounds, dgwEventi.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected);
+                    }
+                    if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != DataGridViewPaintParts.None)
+                    {
+                        string text = e.Value.ToString();
+                        Size fullsize = TextRenderer.MeasureText(text, e.CellStyle.Font);
+                        Rectangle rect1 = new Rectangle(e.CellBounds.Location, e.CellBounds.Size);
+                        Size size;
+                        Color appcolore;
 
-                            for (int i = 0; i < text.Length; i++)
+                        for (int i = 0; i < text.Length; i++)
+                        {
+                            string textPart = text.Substring(i, 1);
+                            size = TextRenderer.MeasureText(textPart, e.CellStyle.Font);
+
+                            switch (r.DizGiorni[SelectedDate][e.RowIndex].Interventi[i])
                             {
-                                string textPart = text.Substring(i, 1);
-                                size = TextRenderer.MeasureText(textPart, e.CellStyle.Font);
+                                case InterventiPoss.Manut_Completa:
+                                    appcolore = Color.Red;
+                                    break;
 
-                                switch (r.DizGiorni[SelectedDate][e.RowIndex].Interventi[i])
-                                {
-                                    case InterventiPoss.Manut_Completa:
-                                        appcolore = Color.Red;
-                                        break;
+                                case InterventiPoss.Manut_Parziale:
+                                    appcolore = Color.Orange;
+                                    break;
 
-                                    case InterventiPoss.Manut_Parziale:
-                                        appcolore = Color.Orange;
-                                        break;
+                                case InterventiPoss.Controllo_Generale:
+                                    appcolore = Color.Yellow;
+                                    break;
 
-                                    case InterventiPoss.Controllo_Generale:
-                                        appcolore = Color.Yellow;
-                                        break;
+                                case InterventiPoss.Sost_Elementi_Filtrantiecc:
+                                    appcolore = Color.Blue;
+                                    break;
 
-                                    case InterventiPoss.Sost_Elementi_Filtrantiecc:
-                                        appcolore = Color.Blue;
-                                        break;
+                                case InterventiPoss.Controllo_Fgas:
+                                    appcolore = Color.Green;
+                                    break;
 
-                                    case InterventiPoss.Controllo_Fgas:
-                                        appcolore = Color.Green;
-                                        break;
-
-                                    default:
-                                        appcolore = Color.Black;
-                                        break;
-                                }
-                                using (Brush cellForeBrush = new SolidBrush(appcolore))
-                                {
-                                    e.Graphics.DrawString(textPart, e.CellStyle.Font, cellForeBrush, rect1);
-                                }
-                                Size previousSize = size;
-                                rect1.X += size.Width / 2;
-                                rect1.Width = size.Width;
+                                default:
+                                    appcolore = Color.Black;
+                                    break;
                             }
+                            using (Brush cellForeBrush = new SolidBrush(appcolore))
+                            {
+                                e.Graphics.DrawString(textPart, e.CellStyle.Font, cellForeBrush, rect1);
+                            }
+                            Size previousSize = size;
+                            rect1.X += size.Width / 2;
+                            rect1.Width = size.Width;
                         }
                     }
                 }
-                else
+            }
+            else
+            {
+                if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 6)
                 {
-                    if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 6)
+                    if (!e.Handled)
                     {
-                        if (!e.Handled)
-                        {
-                            e.Handled = true;
-                            e.PaintBackground(e.CellBounds, dgwEventi.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected);
-                        }
-                        if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != DataGridViewPaintParts.None)
-                        {
-                            string text = e.Value.ToString();
-                            Size fullsize = TextRenderer.MeasureText(text, e.CellStyle.Font);
-                            Rectangle rect1 = new Rectangle(e.CellBounds.Location, e.CellBounds.Size);
-                            Size size;
-                            Color appcolore;
+                        e.Handled = true;
+                        e.PaintBackground(e.CellBounds, dgwEventi.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected);
+                    }
+                    if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != DataGridViewPaintParts.None)
+                    {
+                        string text = e.Value.ToString();
+                        Size fullsize = TextRenderer.MeasureText(text, e.CellStyle.Font);
+                        Rectangle rect1 = new Rectangle(e.CellBounds.Location, e.CellBounds.Size);
+                        Size size;
+                        Color appcolore;
 
-                            for (int i = 0; i < text.Length; i++)
+                        for (int i = 0; i < text.Length; i++)
+                        {
+                            string textPart = text.Substring(i, 1);
+                            size = TextRenderer.MeasureText(textPart, e.CellStyle.Font);
+
+
+                            List<Evento> momentlist = (List<Evento>)dgwEventi.DataSource;
+
+                            switch (momentlist[e.RowIndex].Interventi[i])
                             {
-                                string textPart = text.Substring(i, 1);
-                                size = TextRenderer.MeasureText(textPart, e.CellStyle.Font);
+                                case InterventiPoss.Manut_Completa:
+                                    appcolore = Color.Red;
+                                    break;
 
-                             
-                                    List<Evento> momentlist = (List<Evento>)dgwEventi.DataSource;
-                                    
-                                        switch (momentlist[e.RowIndex].Interventi[i])
-                                        {
-                                            case InterventiPoss.Manut_Completa:
-                                                appcolore = Color.Red;
-                                                break;
+                                case InterventiPoss.Manut_Parziale:
+                                    appcolore = Color.Orange;
+                                    break;
 
-                                            case InterventiPoss.Manut_Parziale:
-                                                appcolore = Color.Orange;
-                                                break;
+                                case InterventiPoss.Controllo_Generale:
+                                    appcolore = Color.Yellow;
+                                    break;
 
-                                            case InterventiPoss.Controllo_Generale:
-                                                appcolore = Color.Yellow;
-                                                break;
+                                case InterventiPoss.Sost_Elementi_Filtrantiecc:
+                                    appcolore = Color.Blue;
+                                    break;
 
-                                            case InterventiPoss.Sost_Elementi_Filtrantiecc:
-                                                appcolore = Color.Blue;
-                                                break;
+                                case InterventiPoss.Controllo_Fgas:
+                                    appcolore = Color.Green;
+                                    break;
 
-                                            case InterventiPoss.Controllo_Fgas:
-                                                appcolore = Color.Green;
-                                                break;
-
-                                            default:
-                                                appcolore = Color.Black;
-                                                break;
-                                        }
-                                
-                                using (Brush cellForeBrush = new SolidBrush(appcolore))
-                                {
-                                    e.Graphics.DrawString(textPart, e.CellStyle.Font, cellForeBrush, rect1);
-                                }
-                                Size previousSize = size;
-                                rect1.X += size.Width / 2;
-                                rect1.Width = size.Width;
+                                default:
+                                    appcolore = Color.Black;
+                                    break;
                             }
+
+                            using (Brush cellForeBrush = new SolidBrush(appcolore))
+                            {
+                                e.Graphics.DrawString(textPart, e.CellStyle.Font, cellForeBrush, rect1);
+                            }
+                            Size previousSize = size;
+                            rect1.X += size.Width / 2;
+                            rect1.Width = size.Width;
                         }
                     }
                 }
-            
+            }
+
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -1537,19 +1535,19 @@ namespace Calendario_AriBerg
         {
             try
             {
-                if(!r.DizClienti.ContainsKey(cBxAggiungiEventoCliente.Text))
+                if (!r.DizClienti.ContainsKey(cBxAggiungiEventoCliente.Text))
                 {
                     throw new Exception("Inserire Cliente Valido");
                 }
                 bool checkmacchina = false;
-                foreach( Macchina m in r.DizClienti[cBxAggiungiEventoCliente.Text]._Mach)
+                foreach (Macchina m in r.DizClienti[cBxAggiungiEventoCliente.Text]._Mach)
                 {
                     if (m._Marca + "/" + m._Modello + "/" + m._Matricola == cBxAggiungiEventoMacchine.Text)
                     {
                         checkmacchina = true;
                     }
                 }
-                if (checkmacchina==false)
+                if (checkmacchina == false)
                 {
                     throw new Exception("Inserire macchina valida");
                 }
@@ -1595,8 +1593,9 @@ namespace Calendario_AriBerg
                 HideColumnsEventi();
                 dgwEventi.Refresh();
 
-                r.salvaEventi();
-                r.inviaSalvataggi();
+                //Interazione DB
+                //r.salvaEventi();
+                //r.inviaSalvataggi();
 
                 Notifica notifica = new Notifica();
                 notifica.Show("Evento aggiunto correttamente!", Notifica.enmType.Success);
@@ -1617,7 +1616,7 @@ namespace Calendario_AriBerg
 
         private void dgwEventi_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if ( e.RowIndex >= 0 && r.DizClienti.ContainsKey(dgwEventi[3, e.RowIndex].Value.ToString()))
+            if (e.RowIndex >= 0 && r.DizClienti.ContainsKey(dgwEventi[3, e.RowIndex].Value.ToString()))
             {
                 if (e.ColumnIndex == 3)
                 {
@@ -1642,7 +1641,7 @@ namespace Calendario_AriBerg
                     txBxDettagliClientePrif.Text = r.DizClienti[dgwEventi[3, e.RowIndex].Value.ToString()]._Ref;
 
                 }
-                else if (e.ColumnIndex == 4 )
+                else if (e.ColumnIndex == 4)
                 {
                     gBxDettagliMacchinaAccessorio.Visible = true;
                     gBxDettagliMacchinaAccessorio.Enabled = true;
@@ -1667,8 +1666,10 @@ namespace Calendario_AriBerg
                             rtbNoteMacchinaAccessorio.Text = m._Note;
                             foreach (Componenti c in m._Componenti)
                             {
-                                ListViewItem item = new ListViewItem();
-                                item.Text = c.Tipo;
+                                ListViewItem item = new ListViewItem
+                                {
+                                    Text = c.Tipo
+                                };
                                 item.SubItems.Add(c.Codice);
                                 lvwDettagliComponenti.Items.Add(item);
                             }
@@ -1705,7 +1706,7 @@ namespace Calendario_AriBerg
                     }
                 }
             }
-            else if(e.RowIndex>=0)
+            else if (e.RowIndex >= 0)
             {
                 if (e.ColumnIndex == 3)
                 {
@@ -1757,8 +1758,8 @@ namespace Calendario_AriBerg
                     }
                 }
             }
- 
-            
+
+
         }
 
         private void dgwEventi_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
@@ -1767,7 +1768,7 @@ namespace Calendario_AriBerg
             {
                 gBxDettagliCliente.Visible = false;
                 gBxDettagliCliente.Enabled = false;
-            }     
+            }
             else if (e.ColumnIndex == 4)
             {
 
@@ -1783,16 +1784,16 @@ namespace Calendario_AriBerg
                         gBxDettagliMacchinaAccessorio.Enabled = false;
                     }
                 }
-            }             
+            }
             else if (e.ColumnIndex == 6)
             {
                 gbxDettagli.Visible = false;
                 gbxDettagli.Enabled = false;
             }
         }
-        
 
-       
+
+
 
         private void dgwEventi_MouseEnter(object sender, EventArgs e)
         {
@@ -1832,7 +1833,7 @@ namespace Calendario_AriBerg
                         cBxModificaEventoCliente.Text = r.DizGiorni[SelectedDate][e.Cell.RowIndex].NomeCliente;
                         rtbModificaNote.Text = r.DizGiorni[SelectedDate][e.Cell.RowIndex].Note;
                         //errore
-                       // cBxModificaEventoMacchine.Text = r.DizGiorni[SelectedDate][e.Cell.RowIndex].Macchina;
+                        // cBxModificaEventoMacchine.Text = r.DizGiorni[SelectedDate][e.Cell.RowIndex].Macchina;
 
                         listViewModificaOperazioni.Clear();
 
@@ -1889,7 +1890,7 @@ namespace Calendario_AriBerg
 
             try
             {
-                
+
                 if (dgwEventi.CurrentCell == null)
                 {
                     throw new Exception("Selezionare un evento \n per modificarlo");
@@ -1941,38 +1942,38 @@ namespace Calendario_AriBerg
                     }
                 }
                 //errore
-               // Evento ev = new Evento(SelectedDate, cBxModificaEventoCliente.Text, cBxModificaEventoMacchine.Text, interventis, rtbModificaNote.Text);
-               /*
-                Evento.numEventi--;
-                List<Evento> momentlist = (List<Evento>)dgwEventi.DataSource;
-                if (r.DizGiorni.ContainsKey(SelectedDate) && dgwEventi.DataSource == r.DizGiorni[SelectedDate])
-                {
-                    r.ModifyEvento(ev, r.DizGiorni[SelectedDate][dgwEventi.CurrentCell.RowIndex]);
-                }
-                else
-                {                    
-                    
-                    r.ModifyEvento(ev, momentlist[dgwEventi.CurrentCell.RowIndex]);
-                    momentlist.RemoveAt(dgwEventi.CurrentCell.RowIndex);
-                    momentlist.Add(ev);
-                }
-                //Salvataggio
-                r.salvaEventi();
-                r.inviaSalvataggi();
-               
+                // Evento ev = new Evento(SelectedDate, cBxModificaEventoCliente.Text, cBxModificaEventoMacchine.Text, interventis, rtbModificaNote.Text);
+                /*
+                 Evento.numEventi--;
+                 List<Evento> momentlist = (List<Evento>)dgwEventi.DataSource;
+                 if (r.DizGiorni.ContainsKey(SelectedDate) && dgwEventi.DataSource == r.DizGiorni[SelectedDate])
+                 {
+                     r.ModifyEvento(ev, r.DizGiorni[SelectedDate][dgwEventi.CurrentCell.RowIndex]);
+                 }
+                 else
+                 {                    
 
-                dgwEventi.DataSource = null;
-                if (r.DizGiorni.ContainsKey(SelectedDate) && dgwEventi.DataSource == r.DizGiorni[SelectedDate])
-                {
-                    dgwEventi.DataSource = r.DizGiorni[SelectedDate];
-                    HideColumnsEventi();
-                }
-                else
-                {
-                    dgwEventi.DataSource = momentlist;
-                    HideColumnsEventi();
-                }
-               */
+                     r.ModifyEvento(ev, momentlist[dgwEventi.CurrentCell.RowIndex]);
+                     momentlist.RemoveAt(dgwEventi.CurrentCell.RowIndex);
+                     momentlist.Add(ev);
+                 }
+                 //Salvataggio
+                 r.salvaEventi();
+                 r.inviaSalvataggi();
+
+
+                 dgwEventi.DataSource = null;
+                 if (r.DizGiorni.ContainsKey(SelectedDate) && dgwEventi.DataSource == r.DizGiorni[SelectedDate])
+                 {
+                     dgwEventi.DataSource = r.DizGiorni[SelectedDate];
+                     HideColumnsEventi();
+                 }
+                 else
+                 {
+                     dgwEventi.DataSource = momentlist;
+                     HideColumnsEventi();
+                 }
+                */
                 notifica.Show("Evento modificato correttamente!", Notifica.enmType.Success);
             }
             catch (Exception exc)
@@ -2012,7 +2013,7 @@ namespace Calendario_AriBerg
                 int app = dgwEventi.CurrentCell.RowIndex;
                 List<Evento> momentList = (List<Evento>)dgwEventi.DataSource;
                 bool filtrato = false;
-                
+
                 if (r.DizGiorni.ContainsKey(SelectedDate) && dgwEventi.DataSource == r.DizGiorni[SelectedDate])
                 {
                     dgwEventi.DataSource = null;
@@ -2020,9 +2021,9 @@ namespace Calendario_AriBerg
                 }
                 else
                 {
-                    
+
                     filtrato = true;
-                    foreach(Evento ev in r.DizGiorni[(DateTime)dgwEventi["Giorno",app].Value])
+                    foreach (Evento ev in r.DizGiorni[(DateTime)dgwEventi["Giorno", app].Value])
                     {
                         if (ev.ID == momentList[app].ID)
                         {
@@ -2032,15 +2033,16 @@ namespace Calendario_AriBerg
                             break;
                         }
                     }
-                    
-                    
+
+
                 }
 
                 //Salvataggio
-                r.salvaEventi();
-                r.inviaSalvataggi();
+                //Interazione DB
+                //r.salvaEventi();
+                //r.inviaSalvataggi();
 
-                if (r.DizGiorni.ContainsKey(SelectedDate)&&filtrato==false)
+                if (r.DizGiorni.ContainsKey(SelectedDate) && filtrato == false)
                 {
                     dgwEventi.DataSource = r.DizGiorni[SelectedDate];
                     HideColumnsEventi();
@@ -2053,7 +2055,7 @@ namespace Calendario_AriBerg
                     HideColumnsEventi();
                     dgwEventi.Columns["Giorno"].Visible = true;
                 }
-                
+
                 notifica.Show("Evento eliminato correttamente!", Notifica.enmType.Success);
             }
             catch (Exception exc)
@@ -2080,7 +2082,7 @@ namespace Calendario_AriBerg
             gBxClientiAggiungiCliente.Visible = false;
         }
 
-        
+
 
         private void btnConfermaAggiungiMacchina_Click(object sender, EventArgs e)
         {
@@ -2094,18 +2096,20 @@ namespace Calendario_AriBerg
                 foreach (ListViewItem item in lvAggiungiMacchinaFiltri.Items)
                 {
                     //errore
-                   // Componenti componente = new Componenti(item.Text, item.SubItems[1].Text);
-                    
+                    // Componenti componente = new Componenti(item.Text, item.SubItems[1].Text);
+
                     //componenti.Add(componente);
                 }
 
                 macchina = new Macchina(txBxAggiungiMacchinaMarca.Text, txBxAggiungiMacchinaModello.Text,
                     txBxAggiungiMacchinaMatricola.Text, componenti, chBxAggiungiMacchinaNoleggio.Checked, rtbAggiungiMacchinaNote.Text);
-               
+
                 listaMacchine.Add(macchina);
 
-                ListViewItem items = new ListViewItem();
-                items.Text = macchina._Marca;
+                ListViewItem items = new ListViewItem
+                {
+                    Text = macchina._Marca
+                };
                 items.SubItems.Add(macchina._Modello);
                 items.SubItems.Add(macchina._Matricola);
 
@@ -2150,8 +2154,10 @@ namespace Calendario_AriBerg
             }
             else
             {
-                ListViewItem item = new ListViewItem();
-                item.Text = cbBxAggiungiMacchinaTipoFiltro.Text;
+                ListViewItem item = new ListViewItem
+                {
+                    Text = cbBxAggiungiMacchinaTipoFiltro.Text
+                };
                 item.SubItems.Add(txBxAggiungiMacchinaCodiceFiltro.Text);
                 lvAggiungiMacchinaFiltri.Items.Add(item);
             }
@@ -2191,8 +2197,11 @@ namespace Calendario_AriBerg
                     dgvVisualizzaClienti.DataSource = null;
                     dgvVisualizzaClienti.DataSource = r.DizClienti.Values.ToList();
                     HideColumnsClienti();
-                    r.salvaClienti();
-                    r.inviaSalvataggi();
+
+                    //Interazione DB
+                    //r.salvaClienti();
+                    //r.inviaSalvataggi();
+
                     AggiornaComboBox();
                     //threadRicevi.Resume();
 
@@ -2242,8 +2251,8 @@ namespace Calendario_AriBerg
                 tbxMostraIva.Text = r.DizClienti[e.Cell.Value.ToString()]._PartIVA;
                 tbxMostraPrif.Text = r.DizClienti[e.Cell.Value.ToString()]._Ref;
                 if (listaMacchine != null)
-                { 
-                     listaMacchine.Clear();
+                {
+                    listaMacchine.Clear();
                 }
                 else
                 {
@@ -2251,15 +2260,19 @@ namespace Calendario_AriBerg
                 }
                 foreach (Macchina macchina in r.DizClienti[e.Cell.Value.ToString()]._Mach)
                 {
-                    ListViewItem item = new ListViewItem();
-                    item.Text = macchina._Marca;
+                    ListViewItem item = new ListViewItem
+                    {
+                        Text = macchina._Marca
+                    };
                     item.SubItems.Add(macchina._Modello);
                     item.SubItems.Add(macchina._Matricola);
 
                     lvwMostraMacchineAccessori.Items.Add(item);
 
-                    ListViewItem itemm = new ListViewItem();
-                    itemm.Text = macchina._Marca;
+                    ListViewItem itemm = new ListViewItem
+                    {
+                        Text = macchina._Marca
+                    };
                     itemm.SubItems.Add(macchina._Modello);
                     itemm.SubItems.Add(macchina._Matricola);
                     lvwModificaCliente.Items.Add(itemm);
@@ -2271,8 +2284,8 @@ namespace Calendario_AriBerg
                 txBxModificaClienteTel.Text = r.DizClienti[e.Cell.Value.ToString()]._Telefono;
                 txBxModificaClienteMail.Text = r.DizClienti[e.Cell.Value.ToString()]._Email;
                 txBxModificaClienteInd.Text = r.DizClienti[e.Cell.Value.ToString()]._Indirizzo;
-                txBxModificaClienteIva.Text= r.DizClienti[e.Cell.Value.ToString()]._PartIVA;
-                txBxModificaClientePrif.Text= r.DizClienti[e.Cell.Value.ToString()]._Ref;
+                txBxModificaClienteIva.Text = r.DizClienti[e.Cell.Value.ToString()]._PartIVA;
+                txBxModificaClientePrif.Text = r.DizClienti[e.Cell.Value.ToString()]._Ref;
 
             }
             else
@@ -2295,8 +2308,10 @@ namespace Calendario_AriBerg
 
                     foreach (Componenti componente in r.DizClienti[dgvVisualizzaClienti.CurrentCell.Value.ToString()]._Mach[item.Index]._Componenti)
                     {
-                        ListViewItem listViewItem = new ListViewItem();
-                        listViewItem.Text = componente.Tipo;
+                        ListViewItem listViewItem = new ListViewItem
+                        {
+                            Text = componente.Tipo
+                        };
                         listViewItem.SubItems.Add(componente.Codice);
 
                         lvwMostraComponenti.Items.Add(listViewItem);
@@ -2328,13 +2343,13 @@ namespace Calendario_AriBerg
             {
                 gBxClientiModificaClienti.Visible = true;
                 gBxClientiAggiungiCliente.Visible = false;
-                
+
             }
         }
 
         public void AGGIORNATUTTO()
         {
-            
+
         }
 
         private void FormCalendario_FormClosing(object sender, FormClosingEventArgs e)
@@ -2580,7 +2595,7 @@ namespace Calendario_AriBerg
                     {
                         foreach (Macchina macchina in kv.Value._Mach)
                         {
-                            if (macchina._Marca + "/"+macchina._Modello+"/"+macchina._Matricola == cbBxTrovaPerMatricola.Text)
+                            if (macchina._Marca + "/" + macchina._Modello + "/" + macchina._Matricola == cbBxTrovaPerMatricola.Text)
                             {
                                 matricolaMacchina.Add(r.DizClienti[kv.Key]);
                             }
@@ -2678,8 +2693,9 @@ namespace Calendario_AriBerg
                 HideColumnsClienti();
                 AggiornaComboBox();
 
-                r.salvaClienti();
-                r.inviaSalvataggi();
+                //Interazione DB
+                //r.salvaClienti();
+                //r.inviaSalvataggi();
 
                 notifica.Show("Cliente eliminato correttamente!", Notifica.enmType.Success);
             }
@@ -2708,7 +2724,7 @@ namespace Calendario_AriBerg
 
             if (r.DizGiorni != null)
             {
-                
+
                 List<Evento> eventiTrovati = new List<Evento>();
                 string s = null;
 
@@ -2721,7 +2737,7 @@ namespace Calendario_AriBerg
                         foreach (Evento eventoLista in kv.Value)
                         {
                             if (eventoLista.NomeCliente == s)
-                            {                               
+                            {
                                 eventiTrovati.Add(eventoLista);
                             }
                         }
@@ -2729,8 +2745,8 @@ namespace Calendario_AriBerg
 
                     if (eventiTrovati.Count > 0)
                     {
-                      
-                        lblEventi.Text = "Eventi di: " + eventiTrovati[0].NomeCliente;                   
+
+                        lblEventi.Text = "Eventi di: " + eventiTrovati[0].NomeCliente;
                         dgwEventi.DataSource = eventiTrovati;
                         //ariCalendario.SelectionStart = SelectedDate;
                         HideColumnsEventi();
@@ -2752,7 +2768,7 @@ namespace Calendario_AriBerg
                         {
                             // magari errore
                             if (eventoLista.Macchina._Matricola == s)
-                            {                               
+                            {
                                 eventiTrovati.Add(eventoLista);
                             }
                         }
@@ -2760,7 +2776,7 @@ namespace Calendario_AriBerg
 
                     if (eventiTrovati.Count > 0)
                     {
-                     
+
                         lblEventi.Text = "Eventi su: " + eventiTrovati[0].Macchina;
                         dgwEventi.DataSource = eventiTrovati;
                         HideColumnsEventi();
@@ -2792,7 +2808,7 @@ namespace Calendario_AriBerg
 
         private void gBxDettagliMacchinaAccessorio_MouseLeave(object sender, EventArgs e)
         {
-            var b = gBxDettagliMacchinaAccessorio.ClientRectangle.Contains(gBxDettagliMacchinaAccessorio.PointToClient(Cursor.Position));
+            bool b = gBxDettagliMacchinaAccessorio.ClientRectangle.Contains(gBxDettagliMacchinaAccessorio.PointToClient(Cursor.Position));
             if (b)
             {
 
@@ -2881,8 +2897,10 @@ namespace Calendario_AriBerg
             lvwModificaComponentiMacchina.Items.Clear();
             foreach (Componenti c in listaMacchine[lvwModificaCliente.SelectedItems[0].Index]._Componenti)
             {
-                ListViewItem item = new ListViewItem();
-                item.Text = c.Tipo;
+                ListViewItem item = new ListViewItem
+                {
+                    Text = c.Tipo
+                };
                 item.SubItems.Add(c.Codice);
                 lvwModificaComponentiMacchina.Items.Add(item);
             }
@@ -2923,8 +2941,10 @@ namespace Calendario_AriBerg
                     tbxModificaMacchinaMatricola.Text, componenti, chBxModificaMacchinaNoleggio.Checked, rtbModificaMacchinaNote.Text);
                 listaMacchine.Add(macchina);
 
-                ListViewItem items = new ListViewItem();
-                items.Text = macchina._Marca;
+                ListViewItem items = new ListViewItem
+                {
+                    Text = macchina._Marca
+                };
                 items.SubItems.Add(macchina._Modello);
                 items.SubItems.Add(macchina._Matricola);
 
@@ -2977,10 +2997,12 @@ namespace Calendario_AriBerg
             rtbModificaMacchinaNote.Text = listaMacchine[lvwAggiungiClientiMacchine.SelectedItems[0].Index]._Note;
 
             lvwModificaComponentiMacchina.Items.Clear();
-            foreach(Componenti c in listaMacchine[lvwAggiungiClientiMacchine.SelectedItems[0].Index]._Componenti)
+            foreach (Componenti c in listaMacchine[lvwAggiungiClientiMacchine.SelectedItems[0].Index]._Componenti)
             {
-                ListViewItem item = new ListViewItem();
-                item.Text = c.Tipo;
+                ListViewItem item = new ListViewItem
+                {
+                    Text = c.Tipo
+                };
                 item.SubItems.Add(c.Codice);
                 lvwModificaComponentiMacchina.Items.Add(item);
             }
@@ -3015,12 +3037,13 @@ namespace Calendario_AriBerg
             }
             else
             {
-                ListViewItem item = new ListViewItem();
-                item.Text = cBxModificaMacchinaTipo.Text;
+                ListViewItem item = new ListViewItem
+                {
+                    Text = cBxModificaMacchinaTipo.Text
+                };
                 item.SubItems.Add(txBxModificaMacchinaCodice.Text);
                 lvwModificaComponentiMacchina.Items.Add(item);
             }
         }
-
     }
 }
