@@ -28,9 +28,7 @@ namespace Calendario_AriBerg
         }
 
         private void FormCalendario_Load(object sender, EventArgs e)
-        {
-          
-
+        {          
             CheckForIllegalCrossThreadCalls = false;
 
             bool error = false;

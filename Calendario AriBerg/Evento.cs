@@ -14,7 +14,7 @@ namespace Calendario_AriBerg
 
     }
 
-    public class Evento
+    public class Evento: IComparable<Evento>
     {
         static public int numEventi;
         private int id;
@@ -134,5 +134,17 @@ namespace Calendario_AriBerg
         }
 
         public string Operazioni { get => operazioni; set => operazioni = value; }
+
+        public int CompareTo(Evento other)
+        {
+            if(this == other)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 }

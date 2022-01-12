@@ -99,7 +99,7 @@
     <Compile Include="AriCalendario.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ChiaveCompoesta.cs" />
+    <Compile Include="ChiaveComposta.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Componenti.cs" />
     <Compile Include="Evento.cs" />
