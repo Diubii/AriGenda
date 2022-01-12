@@ -2924,7 +2924,7 @@ namespace Calendario_AriBerg
             // cbxAggiungiMarcaComponente
             // 
             this.cbxAggiungiMarcaComponente.FormattingEnabled = true;
-            this.cbxAggiungiMarcaComponente.Location = new System.Drawing.Point(32, 235);
+            this.cbxAggiungiMarcaComponente.Location = new System.Drawing.Point(23, 233);
             this.cbxAggiungiMarcaComponente.Name = "cbxAggiungiMarcaComponente";
             this.cbxAggiungiMarcaComponente.Size = new System.Drawing.Size(492, 33);
             this.cbxAggiungiMarcaComponente.TabIndex = 57;
@@ -2943,6 +2943,7 @@ namespace Calendario_AriBerg
             this.btnAggiungiComponente.TabIndex = 12;
             this.btnAggiungiComponente.Text = "Aggiungi";
             this.btnAggiungiComponente.UseVisualStyleBackColor = false;
+            this.btnAggiungiComponente.Click += new System.EventHandler(this.btnAggiungiComponente_Click);
             // 
             // lblAggiungiComponenteSoglia
             // 
@@ -3732,8 +3733,8 @@ namespace Calendario_AriBerg
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.tabPage7.Controls.Add(this.dgvMarcheComponenti);
             this.tabPage7.Controls.Add(this.dgvTipiComponenti);
+            this.tabPage7.Controls.Add(this.dgvMarcheComponenti);
             this.tabPage7.Controls.Add(this.topPanelAltro);
             this.tabPage7.Location = new System.Drawing.Point(4, 27);
             this.tabPage7.Name = "tabPage7";
@@ -3746,22 +3747,22 @@ namespace Calendario_AriBerg
             // 
             this.dgvTipiComponenti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvTipiComponenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTipiComponenti.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dgvTipiComponenti.Location = new System.Drawing.Point(3, 102);
+            this.dgvTipiComponenti.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvTipiComponenti.Location = new System.Drawing.Point(707, 102);
             this.dgvTipiComponenti.MultiSelect = false;
             this.dgvTipiComponenti.Name = "dgvTipiComponenti";
-            this.dgvTipiComponenti.Size = new System.Drawing.Size(704, 699);
+            this.dgvTipiComponenti.Size = new System.Drawing.Size(725, 699);
             this.dgvTipiComponenti.TabIndex = 51;
             // 
             // dgvMarcheComponenti
             // 
             this.dgvMarcheComponenti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvMarcheComponenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMarcheComponenti.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvMarcheComponenti.Location = new System.Drawing.Point(707, 102);
+            this.dgvMarcheComponenti.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dgvMarcheComponenti.Location = new System.Drawing.Point(3, 102);
             this.dgvMarcheComponenti.MultiSelect = false;
             this.dgvMarcheComponenti.Name = "dgvMarcheComponenti";
-            this.dgvMarcheComponenti.Size = new System.Drawing.Size(725, 699);
+            this.dgvMarcheComponenti.Size = new System.Drawing.Size(704, 699);
             this.dgvMarcheComponenti.TabIndex = 52;
             // 
             // topPanelAltro

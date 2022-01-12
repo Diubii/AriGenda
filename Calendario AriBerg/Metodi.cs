@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
 namespace Calendario_AriBerg
@@ -23,6 +24,31 @@ namespace Calendario_AriBerg
             MySqlConnection conn = new MySqlConnection(remoteConnectionString);
             conn.Open();
             return conn;
+        }
+
+        static internal bool AreThereAnyEmptyTextBoxes(List<TextBox> list)
+        {
+            foreach(TextBox tb in list)
+            {
+                if (string.IsNullOrWhiteSpace(tb.Text))
+                {
+                    return true;
+                }
+            }
+
+            return true;
+        }
+
+        static internal bool AreThereAnyEmptyTextBoxes(TextBox tb)
+        {
+            if (string.IsNullOrWhiteSpace(tb.Text))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

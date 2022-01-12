@@ -3329,5 +3329,21 @@ namespace Calendario_AriBerg
                 cbBxFiltroMagazzinoCodice.Enabled = false;
             }
         }
+
+        private void btnAggiungiComponente_Click(object sender, EventArgs e)
+        {
+            MySqlConnection conn = null;
+            try
+            {
+                conn = Metodi.ConnectToDatabase();
+                string selectedType = dgvMarcheComponenti.SelectedCells[0].Value.ToString();
+                //string query = $"INSERT INTO componente VALUES({txBx})";
+            }
+            catch (Exception ex)
+            {
+                Notifica n = new Notifica();
+                n.Show(ex.Message, Notifica.enmType.Warning);
+            }
+        }
     }
 }
