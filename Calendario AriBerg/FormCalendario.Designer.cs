@@ -30,7 +30,7 @@ namespace Calendario_AriBerg
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCalendario));
-            this.dgwEventi = new System.Windows.Forms.DataGridView();
+            this.dgvEventi = new System.Windows.Forms.DataGridView();
             this.lblEventi = new System.Windows.Forms.Label();
             this.btnLegenda = new System.Windows.Forms.Button();
             this.gbxLegenda = new System.Windows.Forms.GroupBox();
@@ -107,7 +107,6 @@ namespace Calendario_AriBerg
             this.rdBtnSearchEventoCliente = new System.Windows.Forms.RadioButton();
             this.cbBxSearchEventoMatricola = new System.Windows.Forms.ComboBox();
             this.cbBxSearchEventoCliente = new System.Windows.Forms.ComboBox();
-            this.ariCalendario = new Calendario_AriBerg.AriCalendario();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pnlCommands2 = new System.Windows.Forms.Panel();
             this.btnClientiAddCustomer = new System.Windows.Forms.Button();
@@ -279,14 +278,14 @@ namespace Calendario_AriBerg
             this.pnlFiltriMagazzino = new System.Windows.Forms.Panel();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.chBxFiltroMagazzinoCodice = new System.Windows.Forms.CheckBox();
+            this.chBxFiltroMagazzinoMarca = new System.Windows.Forms.CheckBox();
             this.chBxFiltroMagazzinoTipo = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.cbBxFiltroMagazzinoMarca = new System.Windows.Forms.ComboBox();
+            this.cbBxFiltroMagazzinoCodice = new System.Windows.Forms.ComboBox();
+            this.cbBxFiltroMagazzinoTipo = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnAddComponente = new System.Windows.Forms.Button();
             this.btnModifyComponente = new System.Windows.Forms.Button();
@@ -299,24 +298,25 @@ namespace Calendario_AriBerg
             this.btnAggiungiMagazzino = new System.Windows.Forms.Button();
             this.btnModificaMagazzino = new System.Windows.Forms.Button();
             this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dgvTipiComponenti = new System.Windows.Forms.DataGridView();
+            this.dgvMarcheComponenti = new System.Windows.Forms.DataGridView();
             this.topPanelAltro = new System.Windows.Forms.Panel();
             this.pnlTipi = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.txBxTipoComponente = new System.Windows.Forms.TextBox();
+            this.btnDelComponente = new System.Windows.Forms.Button();
+            this.btnAddTipoComponente = new System.Windows.Forms.Button();
+            this.btnEditComponente = new System.Windows.Forms.Button();
             this.pnlMarche = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwEventi)).BeginInit();
+            this.txBxMarcaComponente = new System.Windows.Forms.TextBox();
+            this.btnDelMarca = new System.Windows.Forms.Button();
+            this.btnAddMarca = new System.Windows.Forms.Button();
+            this.btnEditMarca = new System.Windows.Forms.Button();
+            this.ariCalendario = new Calendario_AriBerg.AriCalendario();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEventi)).BeginInit();
             this.gbxLegenda.SuspendLayout();
             this.gbxAggiungi.SuspendLayout();
             this.gBxDettagliMacchinaAccessorio.SuspendLayout();
@@ -370,33 +370,33 @@ namespace Calendario_AriBerg
             this.TopMagPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabPage7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTipiComponenti)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMarcheComponenti)).BeginInit();
             this.topPanelAltro.SuspendLayout();
             this.pnlTipi.SuspendLayout();
             this.pnlMarche.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dgwEventi
+            // dgvEventi
             // 
-            this.dgwEventi.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgwEventi.BackgroundColor = System.Drawing.Color.DimGray;
-            this.dgwEventi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwEventi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgwEventi.GridColor = System.Drawing.Color.Black;
-            this.dgwEventi.Location = new System.Drawing.Point(622, 82);
-            this.dgwEventi.Name = "dgwEventi";
-            this.dgwEventi.ReadOnly = true;
-            this.dgwEventi.RowHeadersWidth = 51;
-            this.dgwEventi.RowTemplate.Height = 24;
-            this.dgwEventi.Size = new System.Drawing.Size(810, 719);
-            this.dgwEventi.TabIndex = 4;
-            this.dgwEventi.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwEventi_CellMouseEnter);
-            this.dgwEventi.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwEventi_CellMouseLeave);
-            this.dgwEventi.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgwEventi_CellPainting);
-            this.dgwEventi.CellStateChanged += new System.Windows.Forms.DataGridViewCellStateChangedEventHandler(this.dgwEventi_CellStateChanged);
-            this.dgwEventi.MouseEnter += new System.EventHandler(this.dgwEventi_MouseEnter);
-            this.dgwEventi.MouseLeave += new System.EventHandler(this.dgwEventi_MouseLeave);
+            this.dgvEventi.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvEventi.BackgroundColor = System.Drawing.Color.DimGray;
+            this.dgvEventi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEventi.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvEventi.GridColor = System.Drawing.Color.Black;
+            this.dgvEventi.Location = new System.Drawing.Point(622, 82);
+            this.dgvEventi.Name = "dgvEventi";
+            this.dgvEventi.ReadOnly = true;
+            this.dgvEventi.RowHeadersWidth = 51;
+            this.dgvEventi.RowTemplate.Height = 24;
+            this.dgvEventi.Size = new System.Drawing.Size(810, 719);
+            this.dgvEventi.TabIndex = 4;
+            this.dgvEventi.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwEventi_CellMouseEnter);
+            this.dgvEventi.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwEventi_CellMouseLeave);
+            this.dgvEventi.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgwEventi_CellPainting);
+            this.dgvEventi.CellStateChanged += new System.Windows.Forms.DataGridViewCellStateChangedEventHandler(this.dgwEventi_CellStateChanged);
+            this.dgvEventi.MouseEnter += new System.EventHandler(this.dgwEventi_MouseEnter);
+            this.dgvEventi.MouseLeave += new System.EventHandler(this.dgwEventi_MouseLeave);
             // 
             // lblEventi
             // 
@@ -1154,7 +1154,7 @@ namespace Calendario_AriBerg
             this.tabPage1.Controls.Add(this.btnLegenda);
             this.tabPage1.Controls.Add(this.pnlCercaEvento);
             this.tabPage1.Controls.Add(this.pnlCommands1);
-            this.tabPage1.Controls.Add(this.dgwEventi);
+            this.tabPage1.Controls.Add(this.dgvEventi);
             this.tabPage1.Controls.Add(this.ariCalendario);
             this.tabPage1.Controls.Add(this.lblEventi);
             this.tabPage1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1365,23 +1365,6 @@ namespace Calendario_AriBerg
             this.cbBxSearchEventoCliente.Name = "cbBxSearchEventoCliente";
             this.cbBxSearchEventoCliente.Size = new System.Drawing.Size(206, 26);
             this.cbBxSearchEventoCliente.TabIndex = 0;
-            // 
-            // ariCalendario
-            // 
-            this.ariCalendario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.ariCalendario.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ariCalendario.Font = new System.Drawing.Font("Segoe UI Light", 32.25F);
-            this.ariCalendario.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.ariCalendario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ariCalendario.Location = new System.Drawing.Point(3, 82);
-            this.ariCalendario.Margin = new System.Windows.Forms.Padding(20);
-            this.ariCalendario.MaxDate = new System.DateTime(2059, 12, 31, 0, 0, 0, 0);
-            this.ariCalendario.MaxSelectionCount = 1;
-            this.ariCalendario.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
-            this.ariCalendario.Name = "ariCalendario";
-            this.ariCalendario.TabIndex = 12;
-            this.ariCalendario.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.ariCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AriCalendario_DateChanged);
             // 
             // tabPage2
             // 
@@ -3456,14 +3439,14 @@ namespace Calendario_AriBerg
             this.pnlFiltriMagazzino.BackColor = System.Drawing.Color.DimGray;
             this.pnlFiltriMagazzino.Controls.Add(this.checkBox5);
             this.pnlFiltriMagazzino.Controls.Add(this.checkBox1);
-            this.pnlFiltriMagazzino.Controls.Add(this.checkBox3);
-            this.pnlFiltriMagazzino.Controls.Add(this.checkBox2);
+            this.pnlFiltriMagazzino.Controls.Add(this.chBxFiltroMagazzinoCodice);
+            this.pnlFiltriMagazzino.Controls.Add(this.chBxFiltroMagazzinoMarca);
             this.pnlFiltriMagazzino.Controls.Add(this.chBxFiltroMagazzinoTipo);
             this.pnlFiltriMagazzino.Controls.Add(this.checkBox4);
             this.pnlFiltriMagazzino.Controls.Add(this.button1);
-            this.pnlFiltriMagazzino.Controls.Add(this.comboBox1);
-            this.pnlFiltriMagazzino.Controls.Add(this.comboBox4);
-            this.pnlFiltriMagazzino.Controls.Add(this.comboBox3);
+            this.pnlFiltriMagazzino.Controls.Add(this.cbBxFiltroMagazzinoMarca);
+            this.pnlFiltriMagazzino.Controls.Add(this.cbBxFiltroMagazzinoCodice);
+            this.pnlFiltriMagazzino.Controls.Add(this.cbBxFiltroMagazzinoTipo);
             this.pnlFiltriMagazzino.ForeColor = System.Drawing.Color.White;
             this.pnlFiltriMagazzino.Location = new System.Drawing.Point(219, 7);
             this.pnlFiltriMagazzino.Name = "pnlFiltriMagazzino";
@@ -3490,25 +3473,27 @@ namespace Calendario_AriBerg
             this.checkBox1.Text = "Applica a catalogo";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // chBxFiltroMagazzinoCodice
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(223, 11);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(69, 22);
-            this.checkBox3.TabIndex = 32;
-            this.checkBox3.Text = "Codice";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.chBxFiltroMagazzinoCodice.AutoSize = true;
+            this.chBxFiltroMagazzinoCodice.Location = new System.Drawing.Point(223, 11);
+            this.chBxFiltroMagazzinoCodice.Name = "chBxFiltroMagazzinoCodice";
+            this.chBxFiltroMagazzinoCodice.Size = new System.Drawing.Size(69, 22);
+            this.chBxFiltroMagazzinoCodice.TabIndex = 32;
+            this.chBxFiltroMagazzinoCodice.Text = "Codice";
+            this.chBxFiltroMagazzinoCodice.UseVisualStyleBackColor = true;
+            this.chBxFiltroMagazzinoCodice.CheckedChanged += new System.EventHandler(this.chBxFiltroMagazzinoCodice_CheckedChanged);
             // 
-            // checkBox2
+            // chBxFiltroMagazzinoMarca
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(13, 40);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(64, 22);
-            this.checkBox2.TabIndex = 28;
-            this.checkBox2.Text = "Marca";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.chBxFiltroMagazzinoMarca.AutoSize = true;
+            this.chBxFiltroMagazzinoMarca.Location = new System.Drawing.Point(13, 40);
+            this.chBxFiltroMagazzinoMarca.Name = "chBxFiltroMagazzinoMarca";
+            this.chBxFiltroMagazzinoMarca.Size = new System.Drawing.Size(64, 22);
+            this.chBxFiltroMagazzinoMarca.TabIndex = 28;
+            this.chBxFiltroMagazzinoMarca.Text = "Marca";
+            this.chBxFiltroMagazzinoMarca.UseVisualStyleBackColor = true;
+            this.chBxFiltroMagazzinoMarca.CheckedChanged += new System.EventHandler(this.chBxFiltroMagazzinoMarca_CheckedChanged);
             // 
             // chBxFiltroMagazzinoTipo
             // 
@@ -3519,6 +3504,7 @@ namespace Calendario_AriBerg
             this.chBxFiltroMagazzinoTipo.TabIndex = 27;
             this.chBxFiltroMagazzinoTipo.Text = "Tipo";
             this.chBxFiltroMagazzinoTipo.UseVisualStyleBackColor = true;
+            this.chBxFiltroMagazzinoTipo.CheckedChanged += new System.EventHandler(this.chBxFiltroMagazzinoTipo_CheckedChanged);
             // 
             // checkBox4
             // 
@@ -3545,43 +3531,44 @@ namespace Calendario_AriBerg
             this.button1.TabIndex = 25;
             this.button1.UseVisualStyleBackColor = false;
             // 
-            // comboBox1
+            // cbBxFiltroMagazzinoMarca
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.cbBxFiltroMagazzinoMarca.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox1.Enabled = false;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(95, 37);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(112, 26);
-            this.comboBox1.TabIndex = 1;
+            this.cbBxFiltroMagazzinoMarca.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbBxFiltroMagazzinoMarca.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbBxFiltroMagazzinoMarca.Enabled = false;
+            this.cbBxFiltroMagazzinoMarca.FormattingEnabled = true;
+            this.cbBxFiltroMagazzinoMarca.Location = new System.Drawing.Point(95, 37);
+            this.cbBxFiltroMagazzinoMarca.Name = "cbBxFiltroMagazzinoMarca";
+            this.cbBxFiltroMagazzinoMarca.Size = new System.Drawing.Size(112, 26);
+            this.cbBxFiltroMagazzinoMarca.TabIndex = 1;
             // 
-            // comboBox4
+            // cbBxFiltroMagazzinoCodice
             // 
-            this.comboBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.cbBxFiltroMagazzinoCodice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox4.Enabled = false;
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(296, 8);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(66, 26);
-            this.comboBox4.TabIndex = 30;
+            this.cbBxFiltroMagazzinoCodice.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbBxFiltroMagazzinoCodice.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbBxFiltroMagazzinoCodice.Enabled = false;
+            this.cbBxFiltroMagazzinoCodice.FormattingEnabled = true;
+            this.cbBxFiltroMagazzinoCodice.Location = new System.Drawing.Point(296, 8);
+            this.cbBxFiltroMagazzinoCodice.Name = "cbBxFiltroMagazzinoCodice";
+            this.cbBxFiltroMagazzinoCodice.Size = new System.Drawing.Size(124, 26);
+            this.cbBxFiltroMagazzinoCodice.TabIndex = 30;
             // 
-            // comboBox3
+            // cbBxFiltroMagazzinoTipo
             // 
-            this.comboBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.cbBxFiltroMagazzinoTipo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(95, 11);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(54, 26);
-            this.comboBox3.TabIndex = 0;
+            this.cbBxFiltroMagazzinoTipo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbBxFiltroMagazzinoTipo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbBxFiltroMagazzinoTipo.Enabled = false;
+            this.cbBxFiltroMagazzinoTipo.FormattingEnabled = true;
+            this.cbBxFiltroMagazzinoTipo.Location = new System.Drawing.Point(95, 11);
+            this.cbBxFiltroMagazzinoTipo.Name = "cbBxFiltroMagazzinoTipo";
+            this.cbBxFiltroMagazzinoTipo.Size = new System.Drawing.Size(112, 26);
+            this.cbBxFiltroMagazzinoTipo.TabIndex = 0;
             // 
             // panel1
             // 
@@ -3745,8 +3732,8 @@ namespace Calendario_AriBerg
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.tabPage7.Controls.Add(this.dataGridView1);
-            this.tabPage7.Controls.Add(this.dataGridView2);
+            this.tabPage7.Controls.Add(this.dgvTipiComponenti);
+            this.tabPage7.Controls.Add(this.dgvMarcheComponenti);
             this.tabPage7.Controls.Add(this.topPanelAltro);
             this.tabPage7.Location = new System.Drawing.Point(4, 27);
             this.tabPage7.Name = "tabPage7";
@@ -3755,23 +3742,27 @@ namespace Calendario_AriBerg
             this.tabPage7.TabIndex = 3;
             this.tabPage7.Text = "Altro";
             // 
-            // dataGridView1
+            // dgvTipiComponenti
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(853, 102);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(579, 699);
-            this.dataGridView1.TabIndex = 51;
+            this.dgvTipiComponenti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvTipiComponenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTipiComponenti.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvTipiComponenti.Location = new System.Drawing.Point(853, 102);
+            this.dgvTipiComponenti.MultiSelect = false;
+            this.dgvTipiComponenti.Name = "dgvTipiComponenti";
+            this.dgvTipiComponenti.Size = new System.Drawing.Size(579, 699);
+            this.dgvTipiComponenti.TabIndex = 51;
             // 
-            // dataGridView2
+            // dgvMarcheComponenti
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 102);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(850, 699);
-            this.dataGridView2.TabIndex = 52;
+            this.dgvMarcheComponenti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvMarcheComponenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMarcheComponenti.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dgvMarcheComponenti.Location = new System.Drawing.Point(3, 102);
+            this.dgvMarcheComponenti.MultiSelect = false;
+            this.dgvMarcheComponenti.Name = "dgvMarcheComponenti";
+            this.dgvMarcheComponenti.Size = new System.Drawing.Size(850, 699);
+            this.dgvMarcheComponenti.TabIndex = 52;
             // 
             // topPanelAltro
             // 
@@ -3788,10 +3779,10 @@ namespace Calendario_AriBerg
             this.pnlTipi.BackColor = System.Drawing.Color.DimGray;
             this.pnlTipi.Controls.Add(this.label9);
             this.pnlTipi.Controls.Add(this.button2);
-            this.pnlTipi.Controls.Add(this.textBox1);
-            this.pnlTipi.Controls.Add(this.button3);
-            this.pnlTipi.Controls.Add(this.button4);
-            this.pnlTipi.Controls.Add(this.button5);
+            this.pnlTipi.Controls.Add(this.txBxTipoComponente);
+            this.pnlTipi.Controls.Add(this.btnDelComponente);
+            this.pnlTipi.Controls.Add(this.btnAddTipoComponente);
+            this.pnlTipi.Controls.Add(this.btnEditComponente);
             this.pnlTipi.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTipi.ForeColor = System.Drawing.Color.White;
             this.pnlTipi.Location = new System.Drawing.Point(850, 0);
@@ -3824,64 +3815,67 @@ namespace Calendario_AriBerg
             this.button2.Text = "Cancella";
             this.button2.UseVisualStyleBackColor = false;
             // 
-            // textBox1
+            // txBxTipoComponente
             // 
-            this.textBox1.Location = new System.Drawing.Point(235, 10);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(243, 26);
-            this.textBox1.TabIndex = 28;
+            this.txBxTipoComponente.Location = new System.Drawing.Point(235, 10);
+            this.txBxTipoComponente.Name = "txBxTipoComponente";
+            this.txBxTipoComponente.Size = new System.Drawing.Size(243, 26);
+            this.txBxTipoComponente.TabIndex = 28;
             // 
-            // button3
+            // btnDelComponente
             // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button3.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.components_remove;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button3.FlatAppearance.BorderSize = 3;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(163, 38);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(66, 58);
-            this.button3.TabIndex = 27;
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnDelComponente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnDelComponente.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.components_remove;
+            this.btnDelComponente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDelComponente.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnDelComponente.FlatAppearance.BorderSize = 3;
+            this.btnDelComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelComponente.Location = new System.Drawing.Point(159, 38);
+            this.btnDelComponente.Name = "btnDelComponente";
+            this.btnDelComponente.Size = new System.Drawing.Size(66, 58);
+            this.btnDelComponente.TabIndex = 27;
+            this.btnDelComponente.UseVisualStyleBackColor = false;
+            this.btnDelComponente.Click += new System.EventHandler(this.btnDelComponente_Click);
             // 
-            // button4
+            // btnAddTipoComponente
             // 
-            this.button4.BackColor = System.Drawing.Color.LimeGreen;
-            this.button4.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.components_add;
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
-            this.button4.FlatAppearance.BorderSize = 3;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(15, 38);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(66, 58);
-            this.button4.TabIndex = 26;
-            this.button4.UseVisualStyleBackColor = false;
+            this.btnAddTipoComponente.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnAddTipoComponente.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.components_add;
+            this.btnAddTipoComponente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddTipoComponente.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
+            this.btnAddTipoComponente.FlatAppearance.BorderSize = 3;
+            this.btnAddTipoComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddTipoComponente.Location = new System.Drawing.Point(15, 38);
+            this.btnAddTipoComponente.Name = "btnAddTipoComponente";
+            this.btnAddTipoComponente.Size = new System.Drawing.Size(66, 58);
+            this.btnAddTipoComponente.TabIndex = 26;
+            this.btnAddTipoComponente.UseVisualStyleBackColor = false;
+            this.btnAddTipoComponente.Click += new System.EventHandler(this.btnAddTipoComponente_Click);
             // 
-            // button5
+            // btnEditComponente
             // 
-            this.button5.BackColor = System.Drawing.Color.Goldenrod;
-            this.button5.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.components_edit;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
-            this.button5.FlatAppearance.BorderSize = 3;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(91, 38);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(66, 58);
-            this.button5.TabIndex = 25;
-            this.button5.UseVisualStyleBackColor = false;
+            this.btnEditComponente.BackColor = System.Drawing.Color.Goldenrod;
+            this.btnEditComponente.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.components_edit;
+            this.btnEditComponente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnEditComponente.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
+            this.btnEditComponente.FlatAppearance.BorderSize = 3;
+            this.btnEditComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditComponente.Location = new System.Drawing.Point(87, 38);
+            this.btnEditComponente.Name = "btnEditComponente";
+            this.btnEditComponente.Size = new System.Drawing.Size(66, 58);
+            this.btnEditComponente.TabIndex = 25;
+            this.btnEditComponente.UseVisualStyleBackColor = false;
+            this.btnEditComponente.Click += new System.EventHandler(this.btnEditComponente_Click);
             // 
             // pnlMarche
             // 
             this.pnlMarche.BackColor = System.Drawing.Color.DimGray;
             this.pnlMarche.Controls.Add(this.label8);
             this.pnlMarche.Controls.Add(this.button6);
-            this.pnlMarche.Controls.Add(this.textBox2);
-            this.pnlMarche.Controls.Add(this.button7);
-            this.pnlMarche.Controls.Add(this.button8);
-            this.pnlMarche.Controls.Add(this.button9);
+            this.pnlMarche.Controls.Add(this.txBxMarcaComponente);
+            this.pnlMarche.Controls.Add(this.btnDelMarca);
+            this.pnlMarche.Controls.Add(this.btnAddMarca);
+            this.pnlMarche.Controls.Add(this.btnEditMarca);
             this.pnlMarche.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlMarche.ForeColor = System.Drawing.Color.White;
             this.pnlMarche.Location = new System.Drawing.Point(0, 0);
@@ -3914,54 +3908,74 @@ namespace Calendario_AriBerg
             this.button6.Text = "Cancella";
             this.button6.UseVisualStyleBackColor = false;
             // 
-            // textBox2
+            // txBxMarcaComponente
             // 
-            this.textBox2.Location = new System.Drawing.Point(82, 9);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(306, 26);
-            this.textBox2.TabIndex = 28;
+            this.txBxMarcaComponente.Location = new System.Drawing.Point(82, 9);
+            this.txBxMarcaComponente.Name = "txBxMarcaComponente";
+            this.txBxMarcaComponente.Size = new System.Drawing.Size(306, 26);
+            this.txBxMarcaComponente.TabIndex = 28;
             // 
-            // button7
+            // btnDelMarca
             // 
-            this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button7.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.industrial_remove;
-            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button7.FlatAppearance.BorderSize = 3;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(154, 38);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(66, 58);
-            this.button7.TabIndex = 27;
-            this.button7.UseVisualStyleBackColor = false;
+            this.btnDelMarca.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnDelMarca.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.industrial_remove;
+            this.btnDelMarca.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDelMarca.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnDelMarca.FlatAppearance.BorderSize = 3;
+            this.btnDelMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelMarca.Location = new System.Drawing.Point(154, 38);
+            this.btnDelMarca.Name = "btnDelMarca";
+            this.btnDelMarca.Size = new System.Drawing.Size(66, 58);
+            this.btnDelMarca.TabIndex = 27;
+            this.btnDelMarca.UseVisualStyleBackColor = false;
+            this.btnDelMarca.Click += new System.EventHandler(this.btnDelMarca_Click);
             // 
-            // button8
+            // btnAddMarca
             // 
-            this.button8.BackColor = System.Drawing.Color.LimeGreen;
-            this.button8.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.industrial_add;
-            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
-            this.button8.FlatAppearance.BorderSize = 3;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(10, 38);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(66, 58);
-            this.button8.TabIndex = 26;
-            this.button8.UseVisualStyleBackColor = false;
+            this.btnAddMarca.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnAddMarca.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.industrial_add;
+            this.btnAddMarca.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddMarca.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
+            this.btnAddMarca.FlatAppearance.BorderSize = 3;
+            this.btnAddMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddMarca.Location = new System.Drawing.Point(10, 38);
+            this.btnAddMarca.Name = "btnAddMarca";
+            this.btnAddMarca.Size = new System.Drawing.Size(66, 58);
+            this.btnAddMarca.TabIndex = 26;
+            this.btnAddMarca.UseVisualStyleBackColor = false;
+            this.btnAddMarca.Click += new System.EventHandler(this.btnAddMarca_Click);
             // 
-            // button9
+            // btnEditMarca
             // 
-            this.button9.BackColor = System.Drawing.Color.Goldenrod;
-            this.button9.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.industrial_edit;
-            this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button9.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
-            this.button9.FlatAppearance.BorderSize = 3;
-            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Location = new System.Drawing.Point(82, 38);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(66, 58);
-            this.button9.TabIndex = 25;
-            this.button9.UseVisualStyleBackColor = false;
+            this.btnEditMarca.BackColor = System.Drawing.Color.Goldenrod;
+            this.btnEditMarca.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.industrial_edit;
+            this.btnEditMarca.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnEditMarca.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
+            this.btnEditMarca.FlatAppearance.BorderSize = 3;
+            this.btnEditMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditMarca.Location = new System.Drawing.Point(82, 38);
+            this.btnEditMarca.Name = "btnEditMarca";
+            this.btnEditMarca.Size = new System.Drawing.Size(66, 58);
+            this.btnEditMarca.TabIndex = 25;
+            this.btnEditMarca.UseVisualStyleBackColor = false;
+            this.btnEditMarca.Click += new System.EventHandler(this.btnEditMarca_Click);
+            // 
+            // ariCalendario
+            // 
+            this.ariCalendario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.ariCalendario.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ariCalendario.Font = new System.Drawing.Font("Segoe UI Light", 32.25F);
+            this.ariCalendario.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.ariCalendario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.ariCalendario.Location = new System.Drawing.Point(3, 82);
+            this.ariCalendario.Margin = new System.Windows.Forms.Padding(20);
+            this.ariCalendario.MaxDate = new System.DateTime(2059, 12, 31, 0, 0, 0, 0);
+            this.ariCalendario.MaxSelectionCount = 1;
+            this.ariCalendario.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
+            this.ariCalendario.Name = "ariCalendario";
+            this.ariCalendario.TabIndex = 12;
+            this.ariCalendario.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.ariCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AriCalendario_DateChanged);
             // 
             // FormCalendario
             // 
@@ -3979,7 +3993,7 @@ namespace Calendario_AriBerg
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCalendario_FormClosing);
             this.Load += new System.EventHandler(this.FormCalendario_Load);
             this.Resize += new System.EventHandler(this.FormCalendario_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.dgwEventi)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEventi)).EndInit();
             this.gbxLegenda.ResumeLayout(false);
             this.gbxLegenda.PerformLayout();
             this.gbxAggiungi.ResumeLayout(false);
@@ -4051,8 +4065,8 @@ namespace Calendario_AriBerg
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.tabPage7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTipiComponenti)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMarcheComponenti)).EndInit();
             this.topPanelAltro.ResumeLayout(false);
             this.pnlTipi.ResumeLayout(false);
             this.pnlTipi.PerformLayout();
@@ -4066,7 +4080,7 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnModify;
         private System.Windows.Forms.Button btnRemove;
-        private System.Windows.Forms.DataGridView dgwEventi;
+        private System.Windows.Forms.DataGridView dgvEventi;
         private System.Windows.Forms.Label lblEventi;
         private System.Windows.Forms.Button btnLegenda;
         private System.Windows.Forms.GroupBox gbxLegenda;
@@ -4275,17 +4289,17 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.Label lblAggiungiComponenteSoglia;
         private System.Windows.Forms.NumericUpDown nudAggiungiComponenteSoglia;
         private System.Windows.Forms.Panel pnlFiltriMagazzino;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox chBxFiltroMagazzinoMarca;
         private System.Windows.Forms.CheckBox chBxFiltroMagazzinoTipo;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.ComboBox cbBxFiltroMagazzinoMarca;
+        private System.Windows.Forms.ComboBox cbBxFiltroMagazzinoTipo;
+        private System.Windows.Forms.CheckBox chBxFiltroMagazzinoCodice;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Label lblMagazziniComponenti;
         private System.Windows.Forms.Label lblCatalogoComponenti;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox cbBxFiltroMagazzinoCodice;
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.Button btnImmagazzinaComponente;
         private System.Windows.Forms.NumericUpDown nudNumeroComponenti;
@@ -4327,21 +4341,20 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.Button btnAggiungiMagazzino;
         private System.Windows.Forms.Button btnModificaMagazzino;
         private System.Windows.Forms.TabPage tabPage7;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dgvTipiComponenti;
+        private System.Windows.Forms.DataGridView dgvMarcheComponenti;
         private System.Windows.Forms.Panel topPanelAltro;
         private System.Windows.Forms.Panel pnlTipi;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TextBox txBxTipoComponente;
+        private System.Windows.Forms.Button btnDelComponente;
+        private System.Windows.Forms.Button btnAddTipoComponente;
+        private System.Windows.Forms.Button btnEditComponente;
         private System.Windows.Forms.Panel pnlMarche;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.TextBox txBxMarcaComponente;
+        private System.Windows.Forms.Button btnDelMarca;
+        private System.Windows.Forms.Button btnAddMarca;
         private System.Windows.Forms.DataGridView dgvDettagliComponenti;
         private System.Windows.Forms.DataGridView dgvModificaCliente;
         private System.Windows.Forms.Label label9;
@@ -4349,6 +4362,7 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.DataGridView dgvAggiungiClientiMacchine;
         private System.Windows.Forms.DataGridView dataGridView4;
         private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.Button btnEditMarca;
     }
 }
 
