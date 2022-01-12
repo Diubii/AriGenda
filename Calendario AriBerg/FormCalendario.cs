@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
@@ -13,7 +14,6 @@ namespace Calendario_AriBerg
         public Timer t = new Timer();
 
         public static Registro r = new Registro();
-        private MySqlConnection Connection;
 
         private Point p = new Point();
         private DateTime SelectedDate;
@@ -119,18 +119,55 @@ namespace Calendario_AriBerg
             t.Start();
         }
 
-        private void TimerTick(object sender, EventArgs e)
+        private async void TimerTick(object sender, EventArgs e)
         {
-            RefreshActualTab();
+            await RefreshActualTab();
         }
 
-        private void RefreshActualTab()
+        private async Task RefreshActualTab()
         {
-            if (tabControl1.SelectedIndex == 3)
+            switch (tabControl1.SelectedIndex)
             {
-                RefreshComponentBrandsDataGridView();
-                RefreshComponentTypesDataGridView();
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    await UpdateComboboxTabc2();
+                    break;
+                case 3:
+                    await RefreshComponentBrandsDataGridView();
+                    await RefreshComponentTypesDataGridView();
+                    break;
+            }           
+        }
+
+        private async Task UpdateComboboxTabc2()
+        {
+            List<string> brands = new List<string>();
+            List<string> types = new List<string>();
+            string query = "SELECT * FROM marca_componente";
+
+            MySqlCommand FetchTypes = new MySqlCommand(query, Metodi.ConnectToDatabase());
+            MySqlDataReader res = (MySqlDataReader) await FetchTypes.ExecuteReaderAsync();
+
+            while (res.Read())
+            {
+                brands.Add(res.GetString(0));
             }
+
+            query = "SELECT * FROM tipo_componente";
+
+            FetchTypes = new MySqlCommand(query, Metodi.ConnectToDatabase());
+            res = (MySqlDataReader)await FetchTypes.ExecuteReaderAsync();
+
+            while (res.Read())
+            {
+                types.Add(res.GetString(0));
+            }
+
+            cbxAggiungiComponenteTipo.DataSource = types;
+
         }
         private void AggiornaComboBox() //Da mettere in modifica ed elimina cliente
         {
@@ -2327,9 +2364,9 @@ namespace Calendario_AriBerg
             //}
         }
 
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        private async void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            RefreshActualTab();                  
+             await RefreshActualTab();                  
         }
 
         private void btnClientiEditCustomer_Click(object sender, EventArgs e)
@@ -3165,13 +3202,13 @@ namespace Calendario_AriBerg
             }
         }
 
-        private void RefreshComponentTypesDataGridView()
+        private async Task RefreshComponentTypesDataGridView()
         {
             List<string> types = new List<string>();
             string query = "SELECT * FROM tipo_componente";
 
             MySqlCommand FetchTypes = new MySqlCommand(query, Metodi.ConnectToDatabase());
-            MySqlDataReader res = FetchTypes.ExecuteReader();
+            MySqlDataReader res = (MySqlDataReader)await FetchTypes.ExecuteReaderAsync();
 
             while (res.Read())
             {
@@ -3282,13 +3319,13 @@ namespace Calendario_AriBerg
             }
         }
 
-        private void RefreshComponentBrandsDataGridView()
+        private async Task RefreshComponentBrandsDataGridView()
         {
             List<string> brands = new List<string>();
             string query = "SELECT * FROM marca_componente";
 
             MySqlCommand FetchTypes = new MySqlCommand(query, Metodi.ConnectToDatabase());
-            MySqlDataReader res = FetchTypes.ExecuteReader();
+            MySqlDataReader res = (MySqlDataReader)await FetchTypes.ExecuteReaderAsync();
 
             while (res.Read())
             {
