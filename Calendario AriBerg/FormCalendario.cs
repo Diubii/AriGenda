@@ -3225,7 +3225,7 @@ namespace Calendario_AriBerg
                 else
                 {
                     Notifica n = new Notifica();
-                    n.Show("La marca del componente non è stata aggiunta correttamente, riprovare.", Notifica.enmType.Warning);
+                    n.Show("La marca del componente non è stata aggiornata correttamente, riprovare.", Notifica.enmType.Warning);
                 }
             }
             catch (Exception ex)
@@ -3253,6 +3253,11 @@ namespace Calendario_AriBerg
                 if (row > 0)
                 {
                     RefreshComponentBrandsDataGridView();
+                }
+                else
+                {
+                    Notifica n = new Notifica();
+                    n.Show("La marca del componente non è stata cancellata correttamente, riprovare.", Notifica.enmType.Warning);
                 }
             }
             catch (Exception ex)
