@@ -199,7 +199,7 @@ namespace Calendario_AriBerg
             {
                 dgwEventi.DataSource = r.DizGiorni[SelectedDate];
                 HideColumnsEventi();
-                ResizeDetilsCose();
+                //ResizeDetilsCose();
             }
             else
             {
@@ -260,99 +260,99 @@ namespace Calendario_AriBerg
             gbxLegenda.Visible = true;
         }
 
-        private void ResizeDetilsCose()
-        {
-            int dimCharcolumn = Width / 85;
-            Font ColumnFont = new Font("Calibri", dimCharcolumn);
-            int buffer = 8;
-            gbxDettagli.Height = (int)(Height / 3.5);
-            gbxDettagli.Width = dgwEventi.Columns["NomeCliente"].Width * 2;
-            p.X = dgwEventi.Location.X + dgwEventi.Columns["NomeCliente"].Width + dgwEventi.RowHeadersWidth;
-            p.Y = dgwEventi.Location.Y;
-            gbxDettagli.Location = p;
-            gbxDettagli.Font = ColumnFont;
-            rtbAggiungiNote.Font = ColumnFont;
+        //private void ResizeDetilsCose()
+        //{
+        //    int dimCharcolumn = Width / 85;
+        //    Font ColumnFont = new Font("Calibri", dimCharcolumn);
+        //    int buffer = 8;
+        //    gbxDettagli.Height = (int)(Height / 3.5);
+        //    gbxDettagli.Width = dgwEventi.Columns["NomeCliente"].Width * 2;
+        //    p.X = dgwEventi.Location.X + dgwEventi.Columns["NomeCliente"].Width + dgwEventi.RowHeadersWidth;
+        //    p.Y = dgwEventi.Location.Y;
+        //    gbxDettagli.Location = p;
+        //    gbxDettagli.Font = ColumnFont;
+        //    rtbAggiungiNote.Font = ColumnFont;
 
-            gBxDettagliCliente.Height = (int)(Height / 3.1);
-            gBxDettagliCliente.Width = gbxDettagli.Width;
-            gBxDettagliCliente.Location = gbxDettagli.Location;
-            gBxDettagliCliente.Font = ColumnFont;
+        //    gBxDettagliCliente.Height = (int)(Height / 3.1);
+        //    gBxDettagliCliente.Width = gbxDettagli.Width;
+        //    gBxDettagliCliente.Location = gbxDettagli.Location;
+        //    gBxDettagliCliente.Font = ColumnFont;
 
-            gBxDettagliMacchinaAccessorio.Height = (int)(Height / 3.5);
-            gBxDettagliMacchinaAccessorio.Width = gbxDettagli.Width;
-            gBxDettagliMacchinaAccessorio.Location = gbxDettagli.Location;
-            gBxDettagliMacchinaAccessorio.Font = ColumnFont;
-            //1strow
-            p.X = buffer;
-            p.Y = ColumnFont.Height + buffer;
-            lblDettagliClienteTel.Location = p;
-            lblDettagliClienteTel.Font = ColumnFont;
-            p.X = lblDettagliClienteTel.Location.X + lblDettagliClienteTel.Width + buffer * 4;
-            txBxDettagliClienteTel.Location = p;
-            txBxDettagliClienteTel.Width = gBxDettagliCliente.Width - txBxDettagliClienteTel.Location.X - buffer;
-            txBxDettagliClienteTel.Height = lblDettagliClienteTel.Height;
-            txBxDettagliClienteTel.Font = ColumnFont;
-            //2ndrow
-            p.X = buffer;
-            p.Y = lblDettagliClienteTel.Location.Y + lblDettagliClienteTel.Height + buffer;
-            lblDettagliClienteMail.Location = p;
-            lblDettagliClienteMail.Font = ColumnFont;
-            p.X = lblDettagliClienteTel.Location.X + lblDettagliClienteTel.Width + buffer * 4;
-            txBxDettagliClienteMail.Location = p;
-            txBxDettagliClienteMail.Width = gBxDettagliCliente.Width - txBxDettagliClienteTel.Location.X - buffer;
-            txBxDettagliClienteMail.Height = lblDettagliClienteTel.Height;
-            txBxDettagliClienteMail.Font = ColumnFont;
-            //3rdrow
-            p.X = buffer;
-            p.Y = lblDettagliClienteMail.Location.Y + lblDettagliClienteMail.Height + buffer;
-            lblDettagliClienteIndirizzo.Location = p;
-            lblDettagliClienteIndirizzo.Font = ColumnFont;
-            p.X = lblDettagliClienteTel.Location.X + lblDettagliClienteTel.Width + buffer * 4;
-            txBxDettagliClienteIndirizzo.Location = p;
-            txBxDettagliClienteIndirizzo.Width = gBxDettagliCliente.Width - txBxDettagliClienteTel.Location.X - buffer;
-            txBxDettagliClienteIndirizzo.Height = lblDettagliClienteTel.Height;
-            txBxDettagliClienteIndirizzo.Font = ColumnFont;
-            //4throw
-            p.X = buffer;
-            p.Y = lblDettagliClienteIndirizzo.Location.Y + lblDettagliClienteIndirizzo.Height + buffer;
-            lblDettagliClienteIva.Location = p;
-            lblDettagliClienteIva.Font = ColumnFont;
-            p.X = lblDettagliClienteTel.Location.X + lblDettagliClienteTel.Width + buffer * 4;
-            txBxDettagliClienteIva.Location = p;
-            txBxDettagliClienteIva.Width = gBxDettagliCliente.Width - txBxDettagliClienteTel.Location.X - buffer;
-            txBxDettagliClienteIva.Height = lblDettagliClienteTel.Height;
-            txBxDettagliClienteIva.Font = ColumnFont;
-            //5throw
-            p.X = buffer;
-            p.Y = lblDettagliClienteIva.Location.Y + lblDettagliClienteIva.Height + buffer;
-            lblDettagliClientePrif.Location = p;
-            lblDettagliClientePrif.Font = ColumnFont;
-            p.X = lblDettagliClienteTel.Location.X + lblDettagliClienteTel.Width + buffer * 4;
-            txBxDettagliClientePrif.Location = p;
-            txBxDettagliClientePrif.Width = gBxDettagliCliente.Width - txBxDettagliClienteTel.Location.X - buffer;
-            txBxDettagliClientePrif.Height = lblDettagliClienteTel.Height;
-            txBxDettagliClientePrif.Font = ColumnFont;
+        //    gBxDettagliMacchinaAccessorio.Height = (int)(Height / 3.5);
+        //    gBxDettagliMacchinaAccessorio.Width = gbxDettagli.Width;
+        //    gBxDettagliMacchinaAccessorio.Location = gbxDettagli.Location;
+        //    gBxDettagliMacchinaAccessorio.Font = ColumnFont;
+        //    //1strow
+        //    p.X = buffer;
+        //    p.Y = ColumnFont.Height + buffer;
+        //    lblDettagliClienteTel.Location = p;
+        //    lblDettagliClienteTel.Font = ColumnFont;
+        //    p.X = lblDettagliClienteTel.Location.X + lblDettagliClienteTel.Width + buffer * 4;
+        //    txBxDettagliClienteTel.Location = p;
+        //    txBxDettagliClienteTel.Width = gBxDettagliCliente.Width - txBxDettagliClienteTel.Location.X - buffer;
+        //    txBxDettagliClienteTel.Height = lblDettagliClienteTel.Height;
+        //    txBxDettagliClienteTel.Font = ColumnFont;
+        //    //2ndrow
+        //    p.X = buffer;
+        //    p.Y = lblDettagliClienteTel.Location.Y + lblDettagliClienteTel.Height + buffer;
+        //    lblDettagliClienteMail.Location = p;
+        //    lblDettagliClienteMail.Font = ColumnFont;
+        //    p.X = lblDettagliClienteTel.Location.X + lblDettagliClienteTel.Width + buffer * 4;
+        //    txBxDettagliClienteMail.Location = p;
+        //    txBxDettagliClienteMail.Width = gBxDettagliCliente.Width - txBxDettagliClienteTel.Location.X - buffer;
+        //    txBxDettagliClienteMail.Height = lblDettagliClienteTel.Height;
+        //    txBxDettagliClienteMail.Font = ColumnFont;
+        //    //3rdrow
+        //    p.X = buffer;
+        //    p.Y = lblDettagliClienteMail.Location.Y + lblDettagliClienteMail.Height + buffer;
+        //    lblDettagliClienteIndirizzo.Location = p;
+        //    lblDettagliClienteIndirizzo.Font = ColumnFont;
+        //    p.X = lblDettagliClienteTel.Location.X + lblDettagliClienteTel.Width + buffer * 4;
+        //    txBxDettagliClienteIndirizzo.Location = p;
+        //    txBxDettagliClienteIndirizzo.Width = gBxDettagliCliente.Width - txBxDettagliClienteTel.Location.X - buffer;
+        //    txBxDettagliClienteIndirizzo.Height = lblDettagliClienteTel.Height;
+        //    txBxDettagliClienteIndirizzo.Font = ColumnFont;
+        //    //4throw
+        //    p.X = buffer;
+        //    p.Y = lblDettagliClienteIndirizzo.Location.Y + lblDettagliClienteIndirizzo.Height + buffer;
+        //    lblDettagliClienteIva.Location = p;
+        //    lblDettagliClienteIva.Font = ColumnFont;
+        //    p.X = lblDettagliClienteTel.Location.X + lblDettagliClienteTel.Width + buffer * 4;
+        //    txBxDettagliClienteIva.Location = p;
+        //    txBxDettagliClienteIva.Width = gBxDettagliCliente.Width - txBxDettagliClienteTel.Location.X - buffer;
+        //    txBxDettagliClienteIva.Height = lblDettagliClienteTel.Height;
+        //    txBxDettagliClienteIva.Font = ColumnFont;
+        //    //5throw
+        //    p.X = buffer;
+        //    p.Y = lblDettagliClienteIva.Location.Y + lblDettagliClienteIva.Height + buffer;
+        //    lblDettagliClientePrif.Location = p;
+        //    lblDettagliClientePrif.Font = ColumnFont;
+        //    p.X = lblDettagliClienteTel.Location.X + lblDettagliClienteTel.Width + buffer * 4;
+        //    txBxDettagliClientePrif.Location = p;
+        //    txBxDettagliClientePrif.Width = gBxDettagliCliente.Width - txBxDettagliClienteTel.Location.X - buffer;
+        //    txBxDettagliClientePrif.Height = lblDettagliClienteTel.Height;
+        //    txBxDettagliClientePrif.Font = ColumnFont;
 
-            //interni dettagli macchina
-            p.X = 8;
-            p.Y = ColumnFont.Height + 8;
-            lblNoteMacchinaAccessorio.Font = ColumnFont;
-            lblNoteMacchinaAccessorio.Location = p;
-            p.Y = lblNoteMacchinaAccessorio.Location.Y + ColumnFont.Height + 8;
-            rtbNoteMacchinaAccessorio.Location = p;
-            rtbNoteMacchinaAccessorio.Width = (gBxDettagliMacchinaAccessorio.Width - 24) / 2;
-            rtbNoteMacchinaAccessorio.Height = gBxDettagliMacchinaAccessorio.Height - rtbNoteMacchinaAccessorio.Location.Y - buffer;
-            p.Y = ColumnFont.Height + 8;
-            p.X = rtbNoteMacchinaAccessorio.Width + rtbNoteMacchinaAccessorio.Location.X + 8;
-            lblDettagliComponenti.Location = p;
-            lblDettagliComponenti.Font = ColumnFont;
-            p.Y = lblNoteMacchinaAccessorio.Location.Y + ColumnFont.Height + 8;
-            lvwDettagliComponenti.Location = p;
-            lvwDettagliComponenti.Width = (gBxDettagliMacchinaAccessorio.Width - 24) / 2;
-            lvwDettagliComponenti.Columns[0].Width = (int)(lvwDettagliComponenti.Width / 2.03);
-            lvwDettagliComponenti.Columns[1].Width = (int)(lvwDettagliComponenti.Width / 2.03);
-            lvwDettagliComponenti.Height = rtbNoteMacchinaAccessorio.Height;
-        }
+        //    //interni dettagli macchina
+        //    p.X = 8;
+        //    p.Y = ColumnFont.Height + 8;
+        //    lblNoteMacchinaAccessorio.Font = ColumnFont;
+        //    lblNoteMacchinaAccessorio.Location = p;
+        //    p.Y = lblNoteMacchinaAccessorio.Location.Y + ColumnFont.Height + 8;
+        //    rtbNoteMacchinaAccessorio.Location = p;
+        //    rtbNoteMacchinaAccessorio.Width = (gBxDettagliMacchinaAccessorio.Width - 24) / 2;
+        //    rtbNoteMacchinaAccessorio.Height = gBxDettagliMacchinaAccessorio.Height - rtbNoteMacchinaAccessorio.Location.Y - buffer;
+        //    p.Y = ColumnFont.Height + 8;
+        //    p.X = rtbNoteMacchinaAccessorio.Width + rtbNoteMacchinaAccessorio.Location.X + 8;
+        //    lblDettagliComponenti.Location = p;
+        //    lblDettagliComponenti.Font = ColumnFont;
+        //    p.Y = lblNoteMacchinaAccessorio.Location.Y + ColumnFont.Height + 8;
+        //    lvwDettagliComponenti.Location = p;
+        //    lvwDettagliComponenti.Width = (gBxDettagliMacchinaAccessorio.Width - 24) / 2;
+        //    lvwDettagliComponenti.Columns[0].Width = (int)(lvwDettagliComponenti.Width / 2.03);
+        //    lvwDettagliComponenti.Columns[1].Width = (int)(lvwDettagliComponenti.Width / 2.03);
+        //    lvwDettagliComponenti.Height = rtbNoteMacchinaAccessorio.Height;
+        //}
        
         /*
         private void ResizeHandle()
@@ -2772,7 +2772,7 @@ namespace Calendario_AriBerg
                 }
                 if (dgwEventi.DataSource != null)
                 {
-                    ResizeDetilsCose();
+                    //ResizeDetilsCose();
                 }
             }
         }

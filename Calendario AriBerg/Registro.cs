@@ -230,7 +230,7 @@ namespace Calendario_AriBerg
             {
                 foreach(Evento e in kv.Value)
                 {
-                    if()
+                    
                     if(e != appDizGiorni.Values.First(x => x.First(y => y.ID == e.ID).ID == e.ID).First(x => x.ID == e.ID))
                     {
                         eventiToUpdate.Add(e.ID, e);
@@ -238,7 +238,7 @@ namespace Calendario_AriBerg
                 }
             }
 
-            string query = "Update eventi"
+            string query = "Update eventi";
 
         }
     }
