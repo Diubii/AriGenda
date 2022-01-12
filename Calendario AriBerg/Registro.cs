@@ -15,6 +15,8 @@ namespace Calendario_AriBerg
         internal Dictionary<string, Componenti> DizComponenti { get; set; } = new Dictionary<string, Componenti>();
         internal Dictionary<string, Magazzino> DizMagazzini { get; set; } = new Dictionary<string, Magazzino>();
 
+
+        //Gestione eventi
         public void AddEvento(Evento e)
         {
             if (DizGiorni.ContainsKey(e.Giorno))
@@ -60,13 +62,77 @@ namespace Calendario_AriBerg
             }
         }
 
+        //Gestione Clienti
+        public void AddCliente()
+        {
+
+        }
         public void ModifyCliente(Cliente old,Cliente update)
         {
             DizClienti.Remove(old._Nome);
             DizClienti.Add(update._Nome, update);
 
         }
+        public void RemoveCliente()
+        {
 
+        }
+    
+        
+        //Gestione Componenti
+        public void AddComponenti()
+        {
+
+        }
+
+        public void ModifyComponenti()
+        {
+
+        }
+
+        public void RemoveComponenti()
+        {
+
+        }
+
+        //Gestione Magazzini
+        public void AddMagazzino(Magazzino m)
+        {
+            if (DizMagazzini.ContainsKey(m.Nome) == false)
+            {
+                DizMagazzini.Add(m.Nome, m);
+            }
+            else
+            {
+                throw new Exception("Nomw magazzino già in uso");
+            }
+        }
+
+        public void ModifyMagazzino()
+        {
+
+        }
+
+        public void DeleteMagazzino()
+        {
+
+        }
+
+        //Gestione Immagazzinamento
+        public void ImmagazzinaComponente(string nomeMagazzino,)
+        {
+
+        }
+
+        public void ModificaQuantitàComponente()
+        {
+
+        }
+
+        public void RemoveComponenteMagazzino()
+        {
+
+        }
         //////////////////////////////////////////
         //Gestione scambio dati con database
        ////////////////////////////////////////////////////

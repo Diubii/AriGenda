@@ -16,6 +16,10 @@ namespace Calendario_AriBerg
             this.Nome = nome;
             this.Listacomponenti = listacomponenti;
         }
+        public Magazzino(string nome)
+        {
+            this.Nome = nome;
+        }
 
         public string Nome { get => nome; set => nome = value; }
         public Dictionary<string, Componenti> Listacomponenti { get => listacomponenti; set => listacomponenti = value; }

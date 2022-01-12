@@ -3031,9 +3031,38 @@ namespace Calendario_AriBerg
             }
         }
 
-        private void FormCalendario_ResizeEnd(object sender, EventArgs e)
+        private void btnAddComponente_Click(object sender, EventArgs e)
+        {
+            gBxAggiungiComponente.Visible = true;
+        }
+
+        private void btnExitAggiungiComponente_Click(object sender, EventArgs e)
+        {
+            gBxAggiungiComponente.Visible = false;
+        }
+
+        private void btnRemoveComponente_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnModifyComponente_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAggiungiMagazzino_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Magazzino m = new Magazzino(tbxNomeMagazzino.Text);
+                r.AddMagazzino(m);
+            }
+            catch(Exception a)
+            {
+                Notifica n = new Notifica();
+                n.Show(a.Message, Notifica.enmType.Warning);
+            }
         }
     }
 }
