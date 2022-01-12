@@ -107,6 +107,7 @@ namespace Calendario_AriBerg
             this.rdBtnSearchEventoCliente = new System.Windows.Forms.RadioButton();
             this.cbBxSearchEventoMatricola = new System.Windows.Forms.ComboBox();
             this.cbBxSearchEventoCliente = new System.Windows.Forms.ComboBox();
+            this.ariCalendario = new Calendario_AriBerg.AriCalendario();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pnlCommands2 = new System.Windows.Forms.Panel();
             this.btnClientiAddCustomer = new System.Windows.Forms.Button();
@@ -298,8 +299,8 @@ namespace Calendario_AriBerg
             this.btnAggiungiMagazzino = new System.Windows.Forms.Button();
             this.btnModificaMagazzino = new System.Windows.Forms.Button();
             this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.dgvTipiComponenti = new System.Windows.Forms.DataGridView();
             this.dgvMarcheComponenti = new System.Windows.Forms.DataGridView();
+            this.dgvTipiComponenti = new System.Windows.Forms.DataGridView();
             this.topPanelAltro = new System.Windows.Forms.Panel();
             this.pnlTipi = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
@@ -315,7 +316,6 @@ namespace Calendario_AriBerg
             this.btnDelMarca = new System.Windows.Forms.Button();
             this.btnAddMarca = new System.Windows.Forms.Button();
             this.btnEditMarca = new System.Windows.Forms.Button();
-            this.ariCalendario = new Calendario_AriBerg.AriCalendario();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventi)).BeginInit();
             this.gbxLegenda.SuspendLayout();
             this.gbxAggiungi.SuspendLayout();
@@ -370,8 +370,8 @@ namespace Calendario_AriBerg
             this.TopMagPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabPage7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTipiComponenti)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMarcheComponenti)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTipiComponenti)).BeginInit();
             this.topPanelAltro.SuspendLayout();
             this.pnlTipi.SuspendLayout();
             this.pnlMarche.SuspendLayout();
@@ -1365,6 +1365,23 @@ namespace Calendario_AriBerg
             this.cbBxSearchEventoCliente.Name = "cbBxSearchEventoCliente";
             this.cbBxSearchEventoCliente.Size = new System.Drawing.Size(206, 26);
             this.cbBxSearchEventoCliente.TabIndex = 0;
+            // 
+            // ariCalendario
+            // 
+            this.ariCalendario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.ariCalendario.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ariCalendario.Font = new System.Drawing.Font("Segoe UI Light", 32.25F);
+            this.ariCalendario.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.ariCalendario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.ariCalendario.Location = new System.Drawing.Point(3, 82);
+            this.ariCalendario.Margin = new System.Windows.Forms.Padding(20);
+            this.ariCalendario.MaxDate = new System.DateTime(2059, 12, 31, 0, 0, 0, 0);
+            this.ariCalendario.MaxSelectionCount = 1;
+            this.ariCalendario.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
+            this.ariCalendario.Name = "ariCalendario";
+            this.ariCalendario.TabIndex = 12;
+            this.ariCalendario.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.ariCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AriCalendario_DateChanged);
             // 
             // tabPage2
             // 
@@ -3742,17 +3759,6 @@ namespace Calendario_AriBerg
             this.tabPage7.TabIndex = 3;
             this.tabPage7.Text = "Altro";
             // 
-            // dgvTipiComponenti
-            // 
-            this.dgvTipiComponenti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvTipiComponenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTipiComponenti.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dgvTipiComponenti.Location = new System.Drawing.Point(3, 102);
-            this.dgvTipiComponenti.MultiSelect = false;
-            this.dgvTipiComponenti.Name = "dgvTipiComponenti";
-            this.dgvTipiComponenti.Size = new System.Drawing.Size(704, 699);
-            this.dgvTipiComponenti.TabIndex = 51;
-            // 
             // dgvMarcheComponenti
             // 
             this.dgvMarcheComponenti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -3763,6 +3769,17 @@ namespace Calendario_AriBerg
             this.dgvMarcheComponenti.Name = "dgvMarcheComponenti";
             this.dgvMarcheComponenti.Size = new System.Drawing.Size(725, 699);
             this.dgvMarcheComponenti.TabIndex = 52;
+            // 
+            // dgvTipiComponenti
+            // 
+            this.dgvTipiComponenti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvTipiComponenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTipiComponenti.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dgvTipiComponenti.Location = new System.Drawing.Point(3, 102);
+            this.dgvTipiComponenti.MultiSelect = false;
+            this.dgvTipiComponenti.Name = "dgvTipiComponenti";
+            this.dgvTipiComponenti.Size = new System.Drawing.Size(704, 699);
+            this.dgvTipiComponenti.TabIndex = 51;
             // 
             // topPanelAltro
             // 
@@ -3960,23 +3977,6 @@ namespace Calendario_AriBerg
             this.btnEditMarca.UseVisualStyleBackColor = false;
             this.btnEditMarca.Click += new System.EventHandler(this.btnEditMarca_Click);
             // 
-            // ariCalendario
-            // 
-            this.ariCalendario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.ariCalendario.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ariCalendario.Font = new System.Drawing.Font("Segoe UI Light", 32.25F);
-            this.ariCalendario.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.ariCalendario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ariCalendario.Location = new System.Drawing.Point(3, 82);
-            this.ariCalendario.Margin = new System.Windows.Forms.Padding(20);
-            this.ariCalendario.MaxDate = new System.DateTime(2059, 12, 31, 0, 0, 0, 0);
-            this.ariCalendario.MaxSelectionCount = 1;
-            this.ariCalendario.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
-            this.ariCalendario.Name = "ariCalendario";
-            this.ariCalendario.TabIndex = 12;
-            this.ariCalendario.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.ariCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AriCalendario_DateChanged);
-            // 
             // FormCalendario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4065,8 +4065,8 @@ namespace Calendario_AriBerg
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.tabPage7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTipiComponenti)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMarcheComponenti)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTipiComponenti)).EndInit();
             this.topPanelAltro.ResumeLayout(false);
             this.pnlTipi.ResumeLayout(false);
             this.pnlTipi.PerformLayout();

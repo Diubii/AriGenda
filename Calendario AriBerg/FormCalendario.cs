@@ -8,9 +8,10 @@ using MySql.Data.MySqlClient;
 
 namespace Calendario_AriBerg
 {
-    //prova
     public partial class FormCalendario : Form
     {
+        public Timer t = new Timer();
+
         public static Registro r = new Registro();
         private MySqlConnection Connection;
 
@@ -112,10 +113,25 @@ namespace Calendario_AriBerg
             rdBtnTrovaPerNome.Checked = true;
             AggiornaComboBox();
 
-            //ResizeHandle();
-
+            //timerUpdatePagina con database
+            t.Interval = 20000;
+            t.Tick += TimerTick;
+            t.Start();
         }
 
+        private void TimerTick(object sender, EventArgs e)
+        {
+            RefreshActualTab();
+        }
+
+        private void RefreshActualTab()
+        {
+            if (tabControl1.SelectedIndex == 3)
+            {
+                RefreshComponentBrandsDataGridView();
+                RefreshComponentTypesDataGridView();
+            }
+        }
         private void AggiornaComboBox() //Da mettere in modifica ed elimina cliente
         {
             if (r.DizClienti != null)
@@ -2313,12 +2329,7 @@ namespace Calendario_AriBerg
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //ResizeHandle();
-            if(tabControl1.SelectedIndex == 3)
-            {
-                RefreshComponentBrandsDataGridView();
-                RefreshComponentTypesDataGridView();
-            }          
+            RefreshActualTab();                  
         }
 
         private void btnClientiEditCustomer_Click(object sender, EventArgs e)
