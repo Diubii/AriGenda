@@ -3732,8 +3732,8 @@ namespace Calendario_AriBerg
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.tabPage7.Controls.Add(this.dgvTipiComponenti);
             this.tabPage7.Controls.Add(this.dgvMarcheComponenti);
+            this.tabPage7.Controls.Add(this.dgvTipiComponenti);
             this.tabPage7.Controls.Add(this.topPanelAltro);
             this.tabPage7.Location = new System.Drawing.Point(4, 27);
             this.tabPage7.Name = "tabPage7";
@@ -3746,22 +3746,22 @@ namespace Calendario_AriBerg
             // 
             this.dgvTipiComponenti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvTipiComponenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTipiComponenti.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvTipiComponenti.Location = new System.Drawing.Point(853, 102);
+            this.dgvTipiComponenti.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dgvTipiComponenti.Location = new System.Drawing.Point(3, 102);
             this.dgvTipiComponenti.MultiSelect = false;
             this.dgvTipiComponenti.Name = "dgvTipiComponenti";
-            this.dgvTipiComponenti.Size = new System.Drawing.Size(579, 699);
+            this.dgvTipiComponenti.Size = new System.Drawing.Size(704, 699);
             this.dgvTipiComponenti.TabIndex = 51;
             // 
             // dgvMarcheComponenti
             // 
             this.dgvMarcheComponenti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvMarcheComponenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMarcheComponenti.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dgvMarcheComponenti.Location = new System.Drawing.Point(3, 102);
+            this.dgvMarcheComponenti.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvMarcheComponenti.Location = new System.Drawing.Point(707, 102);
             this.dgvMarcheComponenti.MultiSelect = false;
             this.dgvMarcheComponenti.Name = "dgvMarcheComponenti";
-            this.dgvMarcheComponenti.Size = new System.Drawing.Size(850, 699);
+            this.dgvMarcheComponenti.Size = new System.Drawing.Size(725, 699);
             this.dgvMarcheComponenti.TabIndex = 52;
             // 
             // topPanelAltro
@@ -3785,9 +3785,9 @@ namespace Calendario_AriBerg
             this.pnlTipi.Controls.Add(this.btnEditComponente);
             this.pnlTipi.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTipi.ForeColor = System.Drawing.Color.White;
-            this.pnlTipi.Location = new System.Drawing.Point(850, 0);
+            this.pnlTipi.Location = new System.Drawing.Point(704, 0);
             this.pnlTipi.Name = "pnlTipi";
-            this.pnlTipi.Size = new System.Drawing.Size(579, 99);
+            this.pnlTipi.Size = new System.Drawing.Size(725, 99);
             this.pnlTipi.TabIndex = 50;
             // 
             // label9
@@ -3880,7 +3880,7 @@ namespace Calendario_AriBerg
             this.pnlMarche.ForeColor = System.Drawing.Color.White;
             this.pnlMarche.Location = new System.Drawing.Point(0, 0);
             this.pnlMarche.Name = "pnlMarche";
-            this.pnlMarche.Size = new System.Drawing.Size(850, 99);
+            this.pnlMarche.Size = new System.Drawing.Size(704, 99);
             this.pnlMarche.TabIndex = 50;
             // 
             // label8

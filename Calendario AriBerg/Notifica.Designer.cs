@@ -46,12 +46,13 @@ namespace Calendario_AriBerg
             // 
             // lblTestoNotifica
             // 
-            this.lblTestoNotifica.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblTestoNotifica.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTestoNotifica.Font = new System.Drawing.Font("Malgun Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTestoNotifica.Location = new System.Drawing.Point(90, 9);
+            this.lblTestoNotifica.Location = new System.Drawing.Point(91, 10);
             this.lblTestoNotifica.Name = "lblTestoNotifica";
-            this.lblTestoNotifica.Size = new System.Drawing.Size(1738, 84);
+            this.lblTestoNotifica.Size = new System.Drawing.Size(593, 163);
             this.lblTestoNotifica.TabIndex = 1;
             this.lblTestoNotifica.Text = "Testo";
             this.lblTestoNotifica.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -64,10 +65,10 @@ namespace Calendario_AriBerg
             // 
             this.pxBxChiudiNotifica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pxBxChiudiNotifica.Image = global::Calendario_AriBerg.Properties.Resources.delete_icon;
-            this.pxBxChiudiNotifica.Location = new System.Drawing.Point(1841, 3);
-            this.pxBxChiudiNotifica.Margin = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.pxBxChiudiNotifica.Location = new System.Drawing.Point(697, 3);
+            this.pxBxChiudiNotifica.Margin = new System.Windows.Forms.Padding(10);
             this.pxBxChiudiNotifica.Name = "pxBxChiudiNotifica";
-            this.pxBxChiudiNotifica.Padding = new System.Windows.Forms.Padding(100, 100, 100, 100);
+            this.pxBxChiudiNotifica.Padding = new System.Windows.Forms.Padding(100);
             this.pxBxChiudiNotifica.Size = new System.Drawing.Size(38, 32);
             this.pxBxChiudiNotifica.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pxBxChiudiNotifica.TabIndex = 2;
@@ -76,24 +77,27 @@ namespace Calendario_AriBerg
             // 
             // pxBxIconaNotifica
             // 
+            this.pxBxIconaNotifica.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.pxBxIconaNotifica.Image = global::Calendario_AriBerg.Properties.Resources.exclamation_icon;
-            this.pxBxIconaNotifica.Location = new System.Drawing.Point(10, 11);
+            this.pxBxIconaNotifica.Location = new System.Drawing.Point(11, 53);
             this.pxBxIconaNotifica.Name = "pxBxIconaNotifica";
-            this.pxBxIconaNotifica.Size = new System.Drawing.Size(75, 81);
+            this.pxBxIconaNotifica.Size = new System.Drawing.Size(75, 83);
             this.pxBxIconaNotifica.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pxBxIconaNotifica.TabIndex = 0;
             this.pxBxIconaNotifica.TabStop = false;
             // 
             // btnDiLink
             // 
+            this.btnDiLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDiLink.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.time_runnningout_icon;
-            this.btnDiLink.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnDiLink.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnDiLink.Enabled = false;
             this.btnDiLink.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDiLink.Location = new System.Drawing.Point(10, 10);
-            this.btnDiLink.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDiLink.Location = new System.Drawing.Point(11, 53);
+            this.btnDiLink.Margin = new System.Windows.Forms.Padding(2);
             this.btnDiLink.Name = "btnDiLink";
-            this.btnDiLink.Size = new System.Drawing.Size(75, 82);
+            this.btnDiLink.Size = new System.Drawing.Size(75, 84);
             this.btnDiLink.TabIndex = 3;
             this.btnDiLink.UseVisualStyleBackColor = true;
             this.btnDiLink.Visible = false;
@@ -106,9 +110,9 @@ namespace Calendario_AriBerg
             this.pictureBox1.BackColor = System.Drawing.Color.Aqua;
             this.pictureBox1.Enabled = false;
             this.pictureBox1.Location = new System.Drawing.Point(90, -3);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1739, 47);
+            this.pictureBox1.Size = new System.Drawing.Size(595, 47);
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Visible = false;
@@ -118,7 +122,7 @@ namespace Calendario_AriBerg
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(204)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(1885, 102);
+            this.ClientSize = new System.Drawing.Size(741, 182);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnDiLink);
             this.Controls.Add(this.pxBxChiudiNotifica);
