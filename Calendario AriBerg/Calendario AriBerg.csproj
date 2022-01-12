@@ -99,6 +99,7 @@
     <Compile Include="AriCalendario.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ChiaveCompoesta.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Componenti.cs" />
     <Compile Include="Evento.cs" />
@@ -186,6 +187,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\magazzino_delete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\magazzino_add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\magazzino_edit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\warning_notification.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
