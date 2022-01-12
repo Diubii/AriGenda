@@ -38,7 +38,7 @@ namespace Calendario_AriBerg
 
             //Connessione database query test
             Connection = Metodi.ConnectToDatabase();
-            string query = "Update clienti set indirizzo_cliente = 'prova' where id_cliente='1'";
+            string query = "Update cliente set indirizzo_cliente = 'prova' where id_cliente='1'";
             MySqlCommand command = new MySqlCommand(query,Connection);
             command.ExecuteNonQuery();
             Connection.Close();

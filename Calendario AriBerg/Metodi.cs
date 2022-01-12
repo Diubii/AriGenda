@@ -19,7 +19,7 @@ namespace Calendario_AriBerg
 
         static internal MySqlConnection ConnectToDatabase()
         {
-            string remoteConnectionString = $"Server=192.168.2.252; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
+            string remoteConnectionString = $"Server=192.168.1.4; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
             MySqlConnection conn = new MySqlConnection(remoteConnectionString);
             conn.Open();
             return conn;
