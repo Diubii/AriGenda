@@ -133,21 +133,7 @@ namespace Calendario_AriBerg
 
         }
 
-        //Gestione Immagazzinamento
-        public void ImmagazzinaComponente(string nomeMagazzino)
-        {
-
-        }
-
-        public void ModificaQuantitàComponente()
-        {
-
-        }
-
-        public void RemoveComponenteMagazzino()
-        {
-
-        }
+     
         //////////////////////////////////////////
         //Gestione scambio dati con database
        ////////////////////////////////////////////////////

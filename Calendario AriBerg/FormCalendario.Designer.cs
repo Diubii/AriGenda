@@ -226,24 +226,25 @@ namespace Calendario_AriBerg
             this.lblClienti = new System.Windows.Forms.Label();
             this.mur = new System.Windows.Forms.PictureBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.gbxModificaComponente = new System.Windows.Forms.GroupBox();
+            this.cbxModificaMarcaComponente = new System.Windows.Forms.ComboBox();
+            this.btnModificaComponente = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.nudModificaSoglia = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.nudModificaNOrdine = new System.Windows.Forms.NumericUpDown();
+            this.cbxModificaTipoComponente = new System.Windows.Forms.ComboBox();
+            this.tbxModificaCodiceComponente = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnExitEditComponente = new System.Windows.Forms.Button();
             this.tbCtrlMagazzini = new System.Windows.Forms.TabControl();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.Totale = new System.Windows.Forms.TabPage();
             this.dgvMagazziniTotale = new System.Windows.Forms.DataGridView();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.Centrale = new System.Windows.Forms.TabPage();
+            this.dgvMagazzinoCentrale = new System.Windows.Forms.DataGridView();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.gBxAggiungiComponente = new System.Windows.Forms.GroupBox();
-            this.cbxAggiungiMarcaComponente = new System.Windows.Forms.ComboBox();
-            this.btnAggiungiComponente = new System.Windows.Forms.Button();
-            this.lblAggiungiComponenteSoglia = new System.Windows.Forms.Label();
-            this.nudAggiungiComponenteSoglia = new System.Windows.Forms.NumericUpDown();
-            this.lblAggiungiComponenteMarca = new System.Windows.Forms.Label();
-            this.lblAggiungiComponenteNOrdine = new System.Windows.Forms.Label();
-            this.lblAggiungiComponenteCodice = new System.Windows.Forms.Label();
-            this.nudAggiungiComponenteNOrdine = new System.Windows.Forms.NumericUpDown();
-            this.cbxAggiungiComponenteTipo = new System.Windows.Forms.ComboBox();
-            this.tbxAggiungiComponenteCodice = new System.Windows.Forms.TextBox();
-            this.lblAggiungiComponenteTipo = new System.Windows.Forms.Label();
-            this.btnExitAggiungiComponente = new System.Windows.Forms.Button();
             this.lblMagazziniComponenti = new System.Windows.Forms.Label();
             this.MidMagPanel = new System.Windows.Forms.Panel();
             this.gbxEditComponenti = new System.Windows.Forms.GroupBox();
@@ -260,20 +261,20 @@ namespace Calendario_AriBerg
             this.btnImmagazzinaComponente = new System.Windows.Forms.Button();
             this.LeftMagPanel = new System.Windows.Forms.Panel();
             this.PnlCatalogo = new System.Windows.Forms.Panel();
+            this.gBxAggiungiComponente = new System.Windows.Forms.GroupBox();
+            this.cbxAggiungiMarcaComponente = new System.Windows.Forms.ComboBox();
+            this.btnAggiungiComponente = new System.Windows.Forms.Button();
+            this.lblAggiungiComponenteSoglia = new System.Windows.Forms.Label();
+            this.nudAggiungiComponenteSoglia = new System.Windows.Forms.NumericUpDown();
+            this.lblAggiungiComponenteMarca = new System.Windows.Forms.Label();
+            this.lblAggiungiComponenteNOrdine = new System.Windows.Forms.Label();
+            this.lblAggiungiComponenteCodice = new System.Windows.Forms.Label();
+            this.nudAggiungiComponenteNOrdine = new System.Windows.Forms.NumericUpDown();
+            this.cbxAggiungiComponenteTipo = new System.Windows.Forms.ComboBox();
+            this.tbxAggiungiComponenteCodice = new System.Windows.Forms.TextBox();
+            this.lblAggiungiComponenteTipo = new System.Windows.Forms.Label();
+            this.btnExitAggiungiComponente = new System.Windows.Forms.Button();
             this.dgvComponenti = new System.Windows.Forms.DataGridView();
-            this.gbxModificaComponente = new System.Windows.Forms.GroupBox();
-            this.cbxModificaMarcaComponente = new System.Windows.Forms.ComboBox();
-            this.btnModificaComponente = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.nudModificaSoglia = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.nudModificaNOrdine = new System.Windows.Forms.NumericUpDown();
-            this.cbxModificaTipoComponente = new System.Windows.Forms.ComboBox();
-            this.tbxModificaCodiceComponente = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btnExitEditComponente = new System.Windows.Forms.Button();
             this.lblCatalogoComponenti = new System.Windows.Forms.Label();
             this.pnlFiltriMagazzino = new System.Windows.Forms.Panel();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
@@ -303,14 +304,14 @@ namespace Calendario_AriBerg
             this.topPanelAltro = new System.Windows.Forms.Panel();
             this.pnlTipi = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.bntDeleteTextTipologie = new System.Windows.Forms.Button();
             this.txBxTipoComponente = new System.Windows.Forms.TextBox();
             this.btnDelComponente = new System.Windows.Forms.Button();
             this.btnAddTipoComponente = new System.Windows.Forms.Button();
             this.btnEditComponente = new System.Windows.Forms.Button();
             this.pnlMarche = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
+            this.bntDeleteTextMarche = new System.Windows.Forms.Button();
             this.txBxMarcaComponente = new System.Windows.Forms.TextBox();
             this.btnDelMarca = new System.Windows.Forms.Button();
             this.btnAddMarca = new System.Windows.Forms.Button();
@@ -349,22 +350,24 @@ namespace Calendario_AriBerg
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mur)).BeginInit();
             this.tabPage3.SuspendLayout();
+            this.gbxModificaComponente.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudModificaSoglia)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudModificaNOrdine)).BeginInit();
             this.tbCtrlMagazzini.SuspendLayout();
-            this.tabPage4.SuspendLayout();
+            this.Totale.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMagazziniTotale)).BeginInit();
-            this.gBxAggiungiComponente.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAggiungiComponenteSoglia)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAggiungiComponenteNOrdine)).BeginInit();
+            this.Centrale.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMagazzinoCentrale)).BeginInit();
             this.MidMagPanel.SuspendLayout();
             this.gbxEditComponenti.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudEditNcomponenti)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudNumeroComponenti)).BeginInit();
             this.LeftMagPanel.SuspendLayout();
             this.PnlCatalogo.SuspendLayout();
+            this.gBxAggiungiComponente.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAggiungiComponenteSoglia)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAggiungiComponenteNOrdine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComponenti)).BeginInit();
-            this.gbxModificaComponente.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudModificaSoglia)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudModificaNOrdine)).BeginInit();
             this.pnlFiltriMagazzino.SuspendLayout();
             this.panel1.SuspendLayout();
             this.TopMagPanel.SuspendLayout();
@@ -2841,10 +2844,177 @@ namespace Calendario_AriBerg
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Componenti e Magazzini";
             // 
+            // gbxModificaComponente
+            // 
+            this.gbxModificaComponente.Controls.Add(this.cbxModificaMarcaComponente);
+            this.gbxModificaComponente.Controls.Add(this.btnModificaComponente);
+            this.gbxModificaComponente.Controls.Add(this.label1);
+            this.gbxModificaComponente.Controls.Add(this.nudModificaSoglia);
+            this.gbxModificaComponente.Controls.Add(this.label2);
+            this.gbxModificaComponente.Controls.Add(this.label3);
+            this.gbxModificaComponente.Controls.Add(this.label4);
+            this.gbxModificaComponente.Controls.Add(this.nudModificaNOrdine);
+            this.gbxModificaComponente.Controls.Add(this.cbxModificaTipoComponente);
+            this.gbxModificaComponente.Controls.Add(this.tbxModificaCodiceComponente);
+            this.gbxModificaComponente.Controls.Add(this.label5);
+            this.gbxModificaComponente.Controls.Add(this.btnExitEditComponente);
+            this.gbxModificaComponente.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbxModificaComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.gbxModificaComponente.Location = new System.Drawing.Point(3, 85);
+            this.gbxModificaComponente.Name = "gbxModificaComponente";
+            this.gbxModificaComponente.Size = new System.Drawing.Size(556, 502);
+            this.gbxModificaComponente.TabIndex = 57;
+            this.gbxModificaComponente.TabStop = false;
+            this.gbxModificaComponente.Text = "Modifica componente";
+            this.gbxModificaComponente.Visible = false;
+            // 
+            // cbxModificaMarcaComponente
+            // 
+            this.cbxModificaMarcaComponente.FormattingEnabled = true;
+            this.cbxModificaMarcaComponente.Location = new System.Drawing.Point(23, 232);
+            this.cbxModificaMarcaComponente.Name = "cbxModificaMarcaComponente";
+            this.cbxModificaMarcaComponente.Size = new System.Drawing.Size(492, 33);
+            this.cbxModificaMarcaComponente.TabIndex = 56;
+            // 
+            // btnModificaComponente
+            // 
+            this.btnModificaComponente.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnModificaComponente.BackColor = System.Drawing.Color.Goldenrod;
+            this.btnModificaComponente.FlatAppearance.BorderSize = 0;
+            this.btnModificaComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificaComponente.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificaComponente.Location = new System.Drawing.Point(0, 445);
+            this.btnModificaComponente.Name = "btnModificaComponente";
+            this.btnModificaComponente.Size = new System.Drawing.Size(556, 56);
+            this.btnModificaComponente.TabIndex = 12;
+            this.btnModificaComponente.Text = "Modifica";
+            this.btnModificaComponente.UseVisualStyleBackColor = false;
+            this.btnModificaComponente.Click += new System.EventHandler(this.btnModificaComponente_Click);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(23, 360);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(492, 25);
+            this.label1.TabIndex = 55;
+            this.label1.Text = "Soglia";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nudModificaSoglia
+            // 
+            this.nudModificaSoglia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudModificaSoglia.Location = new System.Drawing.Point(23, 388);
+            this.nudModificaSoglia.Name = "nudModificaSoglia";
+            this.nudModificaSoglia.Size = new System.Drawing.Size(492, 31);
+            this.nudModificaSoglia.TabIndex = 54;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(23, 193);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(492, 25);
+            this.label2.TabIndex = 53;
+            this.label2.Text = "Marca";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(23, 278);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(492, 25);
+            this.label3.TabIndex = 52;
+            this.label3.Text = "Quantità da ordinare";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(23, 41);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(492, 25);
+            this.label4.TabIndex = 51;
+            this.label4.Text = "Codice";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nudModificaNOrdine
+            // 
+            this.nudModificaNOrdine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudModificaNOrdine.Location = new System.Drawing.Point(23, 306);
+            this.nudModificaNOrdine.Name = "nudModificaNOrdine";
+            this.nudModificaNOrdine.Size = new System.Drawing.Size(492, 31);
+            this.nudModificaNOrdine.TabIndex = 49;
+            // 
+            // cbxModificaTipoComponente
+            // 
+            this.cbxModificaTipoComponente.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxModificaTipoComponente.FormattingEnabled = true;
+            this.cbxModificaTipoComponente.Location = new System.Drawing.Point(23, 140);
+            this.cbxModificaTipoComponente.Name = "cbxModificaTipoComponente";
+            this.cbxModificaTipoComponente.Size = new System.Drawing.Size(492, 33);
+            this.cbxModificaTipoComponente.TabIndex = 48;
+            // 
+            // tbxModificaCodiceComponente
+            // 
+            this.tbxModificaCodiceComponente.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbxModificaCodiceComponente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxModificaCodiceComponente.Location = new System.Drawing.Point(23, 69);
+            this.tbxModificaCodiceComponente.Name = "tbxModificaCodiceComponente";
+            this.tbxModificaCodiceComponente.Size = new System.Drawing.Size(492, 26);
+            this.tbxModificaCodiceComponente.TabIndex = 34;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(23, 112);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(492, 25);
+            this.label5.TabIndex = 28;
+            this.label5.Text = "Tipo";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnExitEditComponente
+            // 
+            this.btnExitEditComponente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExitEditComponente.BackColor = System.Drawing.Color.Red;
+            this.btnExitEditComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExitEditComponente.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btnExitEditComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnExitEditComponente.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnExitEditComponente.Location = new System.Drawing.Point(531, 14);
+            this.btnExitEditComponente.Name = "btnExitEditComponente";
+            this.btnExitEditComponente.Size = new System.Drawing.Size(25, 25);
+            this.btnExitEditComponente.TabIndex = 24;
+            this.btnExitEditComponente.Text = "X";
+            this.btnExitEditComponente.UseVisualStyleBackColor = false;
+            this.btnExitEditComponente.Click += new System.EventHandler(this.btnExitEditComponente_Click);
+            // 
             // tbCtrlMagazzini
             // 
-            this.tbCtrlMagazzini.Controls.Add(this.tabPage4);
-            this.tbCtrlMagazzini.Controls.Add(this.tabPage5);
+            this.tbCtrlMagazzini.Controls.Add(this.Totale);
+            this.tbCtrlMagazzini.Controls.Add(this.Centrale);
             this.tbCtrlMagazzini.Controls.Add(this.tabPage6);
             this.tbCtrlMagazzini.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbCtrlMagazzini.Location = new System.Drawing.Point(890, 133);
@@ -2852,17 +3022,18 @@ namespace Calendario_AriBerg
             this.tbCtrlMagazzini.SelectedIndex = 0;
             this.tbCtrlMagazzini.Size = new System.Drawing.Size(542, 668);
             this.tbCtrlMagazzini.TabIndex = 45;
+            this.tbCtrlMagazzini.SelectedIndexChanged += new System.EventHandler(this.tbCtrlMagazzini_SelectedIndexChanged);
             // 
-            // tabPage4
+            // Totale
             // 
-            this.tabPage4.Controls.Add(this.dgvMagazziniTotale);
-            this.tabPage4.Location = new System.Drawing.Point(4, 27);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(534, 637);
-            this.tabPage4.TabIndex = 0;
-            this.tabPage4.Text = "Totale";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.Totale.Controls.Add(this.dgvMagazziniTotale);
+            this.Totale.Location = new System.Drawing.Point(4, 27);
+            this.Totale.Name = "Totale";
+            this.Totale.Padding = new System.Windows.Forms.Padding(3);
+            this.Totale.Size = new System.Drawing.Size(534, 637);
+            this.Totale.TabIndex = 0;
+            this.Totale.Text = "Totale";
+            this.Totale.UseVisualStyleBackColor = true;
             // 
             // dgvMagazziniTotale
             // 
@@ -2876,15 +3047,28 @@ namespace Calendario_AriBerg
             this.dgvMagazziniTotale.Size = new System.Drawing.Size(528, 631);
             this.dgvMagazziniTotale.TabIndex = 0;
             // 
-            // tabPage5
+            // Centrale
             // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 27);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(534, 637);
-            this.tabPage5.TabIndex = 1;
-            this.tabPage5.Text = "Centrale";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            this.Centrale.Controls.Add(this.dgvMagazzinoCentrale);
+            this.Centrale.Location = new System.Drawing.Point(4, 27);
+            this.Centrale.Name = "Centrale";
+            this.Centrale.Padding = new System.Windows.Forms.Padding(3);
+            this.Centrale.Size = new System.Drawing.Size(534, 637);
+            this.Centrale.TabIndex = 1;
+            this.Centrale.Text = "Centrale";
+            this.Centrale.UseVisualStyleBackColor = true;
+            // 
+            // dgvMagazzinoCentrale
+            // 
+            this.dgvMagazzinoCentrale.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvMagazzinoCentrale.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMagazzinoCentrale.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvMagazzinoCentrale.Location = new System.Drawing.Point(3, 3);
+            this.dgvMagazzinoCentrale.MultiSelect = false;
+            this.dgvMagazzinoCentrale.Name = "dgvMagazzinoCentrale";
+            this.dgvMagazzinoCentrale.ReadOnly = true;
+            this.dgvMagazzinoCentrale.Size = new System.Drawing.Size(528, 636);
+            this.dgvMagazzinoCentrale.TabIndex = 1;
             // 
             // tabPage6
             // 
@@ -2894,175 +3078,6 @@ namespace Calendario_AriBerg
             this.tabPage6.TabIndex = 2;
             this.tabPage6.Text = "Altri";
             this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // gBxAggiungiComponente
-            // 
-            this.gBxAggiungiComponente.Controls.Add(this.cbxAggiungiMarcaComponente);
-            this.gBxAggiungiComponente.Controls.Add(this.btnAggiungiComponente);
-            this.gBxAggiungiComponente.Controls.Add(this.lblAggiungiComponenteSoglia);
-            this.gBxAggiungiComponente.Controls.Add(this.nudAggiungiComponenteSoglia);
-            this.gBxAggiungiComponente.Controls.Add(this.lblAggiungiComponenteMarca);
-            this.gBxAggiungiComponente.Controls.Add(this.lblAggiungiComponenteNOrdine);
-            this.gBxAggiungiComponente.Controls.Add(this.lblAggiungiComponenteCodice);
-            this.gBxAggiungiComponente.Controls.Add(this.nudAggiungiComponenteNOrdine);
-            this.gBxAggiungiComponente.Controls.Add(this.cbxAggiungiComponenteTipo);
-            this.gBxAggiungiComponente.Controls.Add(this.tbxAggiungiComponenteCodice);
-            this.gBxAggiungiComponente.Controls.Add(this.lblAggiungiComponenteTipo);
-            this.gBxAggiungiComponente.Controls.Add(this.btnExitAggiungiComponente);
-            this.gBxAggiungiComponente.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gBxAggiungiComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gBxAggiungiComponente.Location = new System.Drawing.Point(0, 3);
-            this.gBxAggiungiComponente.Name = "gBxAggiungiComponente";
-            this.gBxAggiungiComponente.Size = new System.Drawing.Size(556, 502);
-            this.gBxAggiungiComponente.TabIndex = 44;
-            this.gBxAggiungiComponente.TabStop = false;
-            this.gBxAggiungiComponente.Text = "Aggiungi componente";
-            this.gBxAggiungiComponente.Visible = false;
-            // 
-            // cbxAggiungiMarcaComponente
-            // 
-            this.cbxAggiungiMarcaComponente.FormattingEnabled = true;
-            this.cbxAggiungiMarcaComponente.Location = new System.Drawing.Point(23, 233);
-            this.cbxAggiungiMarcaComponente.Name = "cbxAggiungiMarcaComponente";
-            this.cbxAggiungiMarcaComponente.Size = new System.Drawing.Size(492, 33);
-            this.cbxAggiungiMarcaComponente.TabIndex = 57;
-            // 
-            // btnAggiungiComponente
-            // 
-            this.btnAggiungiComponente.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAggiungiComponente.BackColor = System.Drawing.Color.LimeGreen;
-            this.btnAggiungiComponente.FlatAppearance.BorderSize = 0;
-            this.btnAggiungiComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAggiungiComponente.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAggiungiComponente.Location = new System.Drawing.Point(0, 445);
-            this.btnAggiungiComponente.Name = "btnAggiungiComponente";
-            this.btnAggiungiComponente.Size = new System.Drawing.Size(556, 56);
-            this.btnAggiungiComponente.TabIndex = 12;
-            this.btnAggiungiComponente.Text = "Aggiungi";
-            this.btnAggiungiComponente.UseVisualStyleBackColor = false;
-            this.btnAggiungiComponente.Click += new System.EventHandler(this.btnAggiungiComponente_Click);
-            // 
-            // lblAggiungiComponenteSoglia
-            // 
-            this.lblAggiungiComponenteSoglia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAggiungiComponenteSoglia.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAggiungiComponenteSoglia.ForeColor = System.Drawing.Color.White;
-            this.lblAggiungiComponenteSoglia.Location = new System.Drawing.Point(23, 360);
-            this.lblAggiungiComponenteSoglia.Name = "lblAggiungiComponenteSoglia";
-            this.lblAggiungiComponenteSoglia.Size = new System.Drawing.Size(492, 25);
-            this.lblAggiungiComponenteSoglia.TabIndex = 55;
-            this.lblAggiungiComponenteSoglia.Text = "Soglia";
-            this.lblAggiungiComponenteSoglia.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // nudAggiungiComponenteSoglia
-            // 
-            this.nudAggiungiComponenteSoglia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudAggiungiComponenteSoglia.Location = new System.Drawing.Point(23, 388);
-            this.nudAggiungiComponenteSoglia.Name = "nudAggiungiComponenteSoglia";
-            this.nudAggiungiComponenteSoglia.Size = new System.Drawing.Size(492, 31);
-            this.nudAggiungiComponenteSoglia.TabIndex = 54;
-            // 
-            // lblAggiungiComponenteMarca
-            // 
-            this.lblAggiungiComponenteMarca.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAggiungiComponenteMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAggiungiComponenteMarca.ForeColor = System.Drawing.Color.White;
-            this.lblAggiungiComponenteMarca.Location = new System.Drawing.Point(23, 193);
-            this.lblAggiungiComponenteMarca.Name = "lblAggiungiComponenteMarca";
-            this.lblAggiungiComponenteMarca.Size = new System.Drawing.Size(492, 25);
-            this.lblAggiungiComponenteMarca.TabIndex = 53;
-            this.lblAggiungiComponenteMarca.Text = "Marca";
-            this.lblAggiungiComponenteMarca.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblAggiungiComponenteNOrdine
-            // 
-            this.lblAggiungiComponenteNOrdine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAggiungiComponenteNOrdine.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAggiungiComponenteNOrdine.ForeColor = System.Drawing.Color.White;
-            this.lblAggiungiComponenteNOrdine.Location = new System.Drawing.Point(23, 278);
-            this.lblAggiungiComponenteNOrdine.Name = "lblAggiungiComponenteNOrdine";
-            this.lblAggiungiComponenteNOrdine.Size = new System.Drawing.Size(492, 25);
-            this.lblAggiungiComponenteNOrdine.TabIndex = 52;
-            this.lblAggiungiComponenteNOrdine.Text = "Quantità da ordinare";
-            this.lblAggiungiComponenteNOrdine.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblAggiungiComponenteCodice
-            // 
-            this.lblAggiungiComponenteCodice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAggiungiComponenteCodice.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAggiungiComponenteCodice.ForeColor = System.Drawing.Color.White;
-            this.lblAggiungiComponenteCodice.Location = new System.Drawing.Point(23, 41);
-            this.lblAggiungiComponenteCodice.Name = "lblAggiungiComponenteCodice";
-            this.lblAggiungiComponenteCodice.Size = new System.Drawing.Size(492, 25);
-            this.lblAggiungiComponenteCodice.TabIndex = 51;
-            this.lblAggiungiComponenteCodice.Text = "Codice";
-            this.lblAggiungiComponenteCodice.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // nudAggiungiComponenteNOrdine
-            // 
-            this.nudAggiungiComponenteNOrdine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudAggiungiComponenteNOrdine.Location = new System.Drawing.Point(23, 306);
-            this.nudAggiungiComponenteNOrdine.Name = "nudAggiungiComponenteNOrdine";
-            this.nudAggiungiComponenteNOrdine.Size = new System.Drawing.Size(492, 31);
-            this.nudAggiungiComponenteNOrdine.TabIndex = 49;
-            // 
-            // cbxAggiungiComponenteTipo
-            // 
-            this.cbxAggiungiComponenteTipo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbxAggiungiComponenteTipo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbxAggiungiComponenteTipo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbxAggiungiComponenteTipo.FormattingEnabled = true;
-            this.cbxAggiungiComponenteTipo.Location = new System.Drawing.Point(23, 140);
-            this.cbxAggiungiComponenteTipo.Name = "cbxAggiungiComponenteTipo";
-            this.cbxAggiungiComponenteTipo.Size = new System.Drawing.Size(492, 33);
-            this.cbxAggiungiComponenteTipo.TabIndex = 48;
-            // 
-            // tbxAggiungiComponenteCodice
-            // 
-            this.tbxAggiungiComponenteCodice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbxAggiungiComponenteCodice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxAggiungiComponenteCodice.Location = new System.Drawing.Point(23, 69);
-            this.tbxAggiungiComponenteCodice.Name = "tbxAggiungiComponenteCodice";
-            this.tbxAggiungiComponenteCodice.Size = new System.Drawing.Size(492, 26);
-            this.tbxAggiungiComponenteCodice.TabIndex = 34;
-            // 
-            // lblAggiungiComponenteTipo
-            // 
-            this.lblAggiungiComponenteTipo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAggiungiComponenteTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAggiungiComponenteTipo.ForeColor = System.Drawing.Color.White;
-            this.lblAggiungiComponenteTipo.Location = new System.Drawing.Point(23, 112);
-            this.lblAggiungiComponenteTipo.Name = "lblAggiungiComponenteTipo";
-            this.lblAggiungiComponenteTipo.Size = new System.Drawing.Size(492, 25);
-            this.lblAggiungiComponenteTipo.TabIndex = 28;
-            this.lblAggiungiComponenteTipo.Text = "Tipo";
-            this.lblAggiungiComponenteTipo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnExitAggiungiComponente
-            // 
-            this.btnExitAggiungiComponente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExitAggiungiComponente.BackColor = System.Drawing.Color.Red;
-            this.btnExitAggiungiComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExitAggiungiComponente.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Bold);
-            this.btnExitAggiungiComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnExitAggiungiComponente.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnExitAggiungiComponente.Location = new System.Drawing.Point(531, 14);
-            this.btnExitAggiungiComponente.Name = "btnExitAggiungiComponente";
-            this.btnExitAggiungiComponente.Size = new System.Drawing.Size(25, 25);
-            this.btnExitAggiungiComponente.TabIndex = 24;
-            this.btnExitAggiungiComponente.Text = "X";
-            this.btnExitAggiungiComponente.UseVisualStyleBackColor = false;
-            this.btnExitAggiungiComponente.Click += new System.EventHandler(this.btnExitAggiungiComponente_Click);
             // 
             // lblMagazziniComponenti
             // 
@@ -3239,6 +3254,175 @@ namespace Calendario_AriBerg
             this.PnlCatalogo.Size = new System.Drawing.Size(770, 722);
             this.PnlCatalogo.TabIndex = 52;
             // 
+            // gBxAggiungiComponente
+            // 
+            this.gBxAggiungiComponente.Controls.Add(this.cbxAggiungiMarcaComponente);
+            this.gBxAggiungiComponente.Controls.Add(this.btnAggiungiComponente);
+            this.gBxAggiungiComponente.Controls.Add(this.lblAggiungiComponenteSoglia);
+            this.gBxAggiungiComponente.Controls.Add(this.nudAggiungiComponenteSoglia);
+            this.gBxAggiungiComponente.Controls.Add(this.lblAggiungiComponenteMarca);
+            this.gBxAggiungiComponente.Controls.Add(this.lblAggiungiComponenteNOrdine);
+            this.gBxAggiungiComponente.Controls.Add(this.lblAggiungiComponenteCodice);
+            this.gBxAggiungiComponente.Controls.Add(this.nudAggiungiComponenteNOrdine);
+            this.gBxAggiungiComponente.Controls.Add(this.cbxAggiungiComponenteTipo);
+            this.gBxAggiungiComponente.Controls.Add(this.tbxAggiungiComponenteCodice);
+            this.gBxAggiungiComponente.Controls.Add(this.lblAggiungiComponenteTipo);
+            this.gBxAggiungiComponente.Controls.Add(this.btnExitAggiungiComponente);
+            this.gBxAggiungiComponente.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gBxAggiungiComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.gBxAggiungiComponente.Location = new System.Drawing.Point(0, 3);
+            this.gBxAggiungiComponente.Name = "gBxAggiungiComponente";
+            this.gBxAggiungiComponente.Size = new System.Drawing.Size(556, 502);
+            this.gBxAggiungiComponente.TabIndex = 44;
+            this.gBxAggiungiComponente.TabStop = false;
+            this.gBxAggiungiComponente.Text = "Aggiungi componente";
+            this.gBxAggiungiComponente.Visible = false;
+            // 
+            // cbxAggiungiMarcaComponente
+            // 
+            this.cbxAggiungiMarcaComponente.FormattingEnabled = true;
+            this.cbxAggiungiMarcaComponente.Location = new System.Drawing.Point(23, 233);
+            this.cbxAggiungiMarcaComponente.Name = "cbxAggiungiMarcaComponente";
+            this.cbxAggiungiMarcaComponente.Size = new System.Drawing.Size(492, 33);
+            this.cbxAggiungiMarcaComponente.TabIndex = 57;
+            // 
+            // btnAggiungiComponente
+            // 
+            this.btnAggiungiComponente.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAggiungiComponente.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnAggiungiComponente.FlatAppearance.BorderSize = 0;
+            this.btnAggiungiComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAggiungiComponente.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAggiungiComponente.Location = new System.Drawing.Point(0, 445);
+            this.btnAggiungiComponente.Name = "btnAggiungiComponente";
+            this.btnAggiungiComponente.Size = new System.Drawing.Size(556, 56);
+            this.btnAggiungiComponente.TabIndex = 12;
+            this.btnAggiungiComponente.Text = "Aggiungi";
+            this.btnAggiungiComponente.UseVisualStyleBackColor = false;
+            this.btnAggiungiComponente.Click += new System.EventHandler(this.btnAggiungiComponente_Click);
+            // 
+            // lblAggiungiComponenteSoglia
+            // 
+            this.lblAggiungiComponenteSoglia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAggiungiComponenteSoglia.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAggiungiComponenteSoglia.ForeColor = System.Drawing.Color.White;
+            this.lblAggiungiComponenteSoglia.Location = new System.Drawing.Point(23, 360);
+            this.lblAggiungiComponenteSoglia.Name = "lblAggiungiComponenteSoglia";
+            this.lblAggiungiComponenteSoglia.Size = new System.Drawing.Size(492, 25);
+            this.lblAggiungiComponenteSoglia.TabIndex = 55;
+            this.lblAggiungiComponenteSoglia.Text = "Soglia";
+            this.lblAggiungiComponenteSoglia.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nudAggiungiComponenteSoglia
+            // 
+            this.nudAggiungiComponenteSoglia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudAggiungiComponenteSoglia.Location = new System.Drawing.Point(23, 388);
+            this.nudAggiungiComponenteSoglia.Name = "nudAggiungiComponenteSoglia";
+            this.nudAggiungiComponenteSoglia.Size = new System.Drawing.Size(492, 31);
+            this.nudAggiungiComponenteSoglia.TabIndex = 54;
+            // 
+            // lblAggiungiComponenteMarca
+            // 
+            this.lblAggiungiComponenteMarca.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAggiungiComponenteMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAggiungiComponenteMarca.ForeColor = System.Drawing.Color.White;
+            this.lblAggiungiComponenteMarca.Location = new System.Drawing.Point(23, 193);
+            this.lblAggiungiComponenteMarca.Name = "lblAggiungiComponenteMarca";
+            this.lblAggiungiComponenteMarca.Size = new System.Drawing.Size(492, 25);
+            this.lblAggiungiComponenteMarca.TabIndex = 53;
+            this.lblAggiungiComponenteMarca.Text = "Marca";
+            this.lblAggiungiComponenteMarca.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblAggiungiComponenteNOrdine
+            // 
+            this.lblAggiungiComponenteNOrdine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAggiungiComponenteNOrdine.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAggiungiComponenteNOrdine.ForeColor = System.Drawing.Color.White;
+            this.lblAggiungiComponenteNOrdine.Location = new System.Drawing.Point(23, 278);
+            this.lblAggiungiComponenteNOrdine.Name = "lblAggiungiComponenteNOrdine";
+            this.lblAggiungiComponenteNOrdine.Size = new System.Drawing.Size(492, 25);
+            this.lblAggiungiComponenteNOrdine.TabIndex = 52;
+            this.lblAggiungiComponenteNOrdine.Text = "Quantità da ordinare";
+            this.lblAggiungiComponenteNOrdine.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblAggiungiComponenteCodice
+            // 
+            this.lblAggiungiComponenteCodice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAggiungiComponenteCodice.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAggiungiComponenteCodice.ForeColor = System.Drawing.Color.White;
+            this.lblAggiungiComponenteCodice.Location = new System.Drawing.Point(23, 41);
+            this.lblAggiungiComponenteCodice.Name = "lblAggiungiComponenteCodice";
+            this.lblAggiungiComponenteCodice.Size = new System.Drawing.Size(492, 25);
+            this.lblAggiungiComponenteCodice.TabIndex = 51;
+            this.lblAggiungiComponenteCodice.Text = "Codice";
+            this.lblAggiungiComponenteCodice.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nudAggiungiComponenteNOrdine
+            // 
+            this.nudAggiungiComponenteNOrdine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudAggiungiComponenteNOrdine.Location = new System.Drawing.Point(23, 306);
+            this.nudAggiungiComponenteNOrdine.Name = "nudAggiungiComponenteNOrdine";
+            this.nudAggiungiComponenteNOrdine.Size = new System.Drawing.Size(492, 31);
+            this.nudAggiungiComponenteNOrdine.TabIndex = 49;
+            // 
+            // cbxAggiungiComponenteTipo
+            // 
+            this.cbxAggiungiComponenteTipo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxAggiungiComponenteTipo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbxAggiungiComponenteTipo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbxAggiungiComponenteTipo.FormattingEnabled = true;
+            this.cbxAggiungiComponenteTipo.Location = new System.Drawing.Point(23, 140);
+            this.cbxAggiungiComponenteTipo.Name = "cbxAggiungiComponenteTipo";
+            this.cbxAggiungiComponenteTipo.Size = new System.Drawing.Size(492, 33);
+            this.cbxAggiungiComponenteTipo.TabIndex = 48;
+            // 
+            // tbxAggiungiComponenteCodice
+            // 
+            this.tbxAggiungiComponenteCodice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbxAggiungiComponenteCodice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxAggiungiComponenteCodice.Location = new System.Drawing.Point(23, 69);
+            this.tbxAggiungiComponenteCodice.Name = "tbxAggiungiComponenteCodice";
+            this.tbxAggiungiComponenteCodice.Size = new System.Drawing.Size(492, 26);
+            this.tbxAggiungiComponenteCodice.TabIndex = 34;
+            // 
+            // lblAggiungiComponenteTipo
+            // 
+            this.lblAggiungiComponenteTipo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAggiungiComponenteTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAggiungiComponenteTipo.ForeColor = System.Drawing.Color.White;
+            this.lblAggiungiComponenteTipo.Location = new System.Drawing.Point(23, 112);
+            this.lblAggiungiComponenteTipo.Name = "lblAggiungiComponenteTipo";
+            this.lblAggiungiComponenteTipo.Size = new System.Drawing.Size(492, 25);
+            this.lblAggiungiComponenteTipo.TabIndex = 28;
+            this.lblAggiungiComponenteTipo.Text = "Tipo";
+            this.lblAggiungiComponenteTipo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnExitAggiungiComponente
+            // 
+            this.btnExitAggiungiComponente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExitAggiungiComponente.BackColor = System.Drawing.Color.Red;
+            this.btnExitAggiungiComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExitAggiungiComponente.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btnExitAggiungiComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnExitAggiungiComponente.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnExitAggiungiComponente.Location = new System.Drawing.Point(531, 14);
+            this.btnExitAggiungiComponente.Name = "btnExitAggiungiComponente";
+            this.btnExitAggiungiComponente.Size = new System.Drawing.Size(25, 25);
+            this.btnExitAggiungiComponente.TabIndex = 24;
+            this.btnExitAggiungiComponente.Text = "X";
+            this.btnExitAggiungiComponente.UseVisualStyleBackColor = false;
+            this.btnExitAggiungiComponente.Click += new System.EventHandler(this.btnExitAggiungiComponente_Click);
+            // 
             // dgvComponenti
             // 
             this.dgvComponenti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -3250,173 +3434,6 @@ namespace Calendario_AriBerg
             this.dgvComponenti.ReadOnly = true;
             this.dgvComponenti.Size = new System.Drawing.Size(770, 683);
             this.dgvComponenti.TabIndex = 47;
-            // 
-            // gbxModificaComponente
-            // 
-            this.gbxModificaComponente.Controls.Add(this.cbxModificaMarcaComponente);
-            this.gbxModificaComponente.Controls.Add(this.btnModificaComponente);
-            this.gbxModificaComponente.Controls.Add(this.label1);
-            this.gbxModificaComponente.Controls.Add(this.nudModificaSoglia);
-            this.gbxModificaComponente.Controls.Add(this.label2);
-            this.gbxModificaComponente.Controls.Add(this.label3);
-            this.gbxModificaComponente.Controls.Add(this.label4);
-            this.gbxModificaComponente.Controls.Add(this.nudModificaNOrdine);
-            this.gbxModificaComponente.Controls.Add(this.cbxModificaTipoComponente);
-            this.gbxModificaComponente.Controls.Add(this.tbxModificaCodiceComponente);
-            this.gbxModificaComponente.Controls.Add(this.label5);
-            this.gbxModificaComponente.Controls.Add(this.btnExitEditComponente);
-            this.gbxModificaComponente.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbxModificaComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gbxModificaComponente.Location = new System.Drawing.Point(3, 85);
-            this.gbxModificaComponente.Name = "gbxModificaComponente";
-            this.gbxModificaComponente.Size = new System.Drawing.Size(556, 502);
-            this.gbxModificaComponente.TabIndex = 57;
-            this.gbxModificaComponente.TabStop = false;
-            this.gbxModificaComponente.Text = "Modifica componente";
-            this.gbxModificaComponente.Visible = false;
-            // 
-            // cbxModificaMarcaComponente
-            // 
-            this.cbxModificaMarcaComponente.FormattingEnabled = true;
-            this.cbxModificaMarcaComponente.Location = new System.Drawing.Point(23, 232);
-            this.cbxModificaMarcaComponente.Name = "cbxModificaMarcaComponente";
-            this.cbxModificaMarcaComponente.Size = new System.Drawing.Size(492, 33);
-            this.cbxModificaMarcaComponente.TabIndex = 56;
-            // 
-            // btnModificaComponente
-            // 
-            this.btnModificaComponente.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnModificaComponente.BackColor = System.Drawing.Color.Goldenrod;
-            this.btnModificaComponente.FlatAppearance.BorderSize = 0;
-            this.btnModificaComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModificaComponente.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModificaComponente.Location = new System.Drawing.Point(0, 445);
-            this.btnModificaComponente.Name = "btnModificaComponente";
-            this.btnModificaComponente.Size = new System.Drawing.Size(556, 56);
-            this.btnModificaComponente.TabIndex = 12;
-            this.btnModificaComponente.Text = "Modifica";
-            this.btnModificaComponente.UseVisualStyleBackColor = false;
-            this.btnModificaComponente.Click += new System.EventHandler(this.btnModificaComponente_Click);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(23, 360);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(492, 25);
-            this.label1.TabIndex = 55;
-            this.label1.Text = "Soglia";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // nudModificaSoglia
-            // 
-            this.nudModificaSoglia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudModificaSoglia.Location = new System.Drawing.Point(23, 388);
-            this.nudModificaSoglia.Name = "nudModificaSoglia";
-            this.nudModificaSoglia.Size = new System.Drawing.Size(492, 31);
-            this.nudModificaSoglia.TabIndex = 54;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(23, 193);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(492, 25);
-            this.label2.TabIndex = 53;
-            this.label2.Text = "Marca";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(23, 278);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(492, 25);
-            this.label3.TabIndex = 52;
-            this.label3.Text = "Quantità da ordinare";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(23, 41);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(492, 25);
-            this.label4.TabIndex = 51;
-            this.label4.Text = "Codice";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // nudModificaNOrdine
-            // 
-            this.nudModificaNOrdine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudModificaNOrdine.Location = new System.Drawing.Point(23, 306);
-            this.nudModificaNOrdine.Name = "nudModificaNOrdine";
-            this.nudModificaNOrdine.Size = new System.Drawing.Size(492, 31);
-            this.nudModificaNOrdine.TabIndex = 49;
-            // 
-            // cbxModificaTipoComponente
-            // 
-            this.cbxModificaTipoComponente.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbxModificaTipoComponente.FormattingEnabled = true;
-            this.cbxModificaTipoComponente.Location = new System.Drawing.Point(23, 140);
-            this.cbxModificaTipoComponente.Name = "cbxModificaTipoComponente";
-            this.cbxModificaTipoComponente.Size = new System.Drawing.Size(492, 33);
-            this.cbxModificaTipoComponente.TabIndex = 48;
-            // 
-            // tbxModificaCodiceComponente
-            // 
-            this.tbxModificaCodiceComponente.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbxModificaCodiceComponente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxModificaCodiceComponente.Location = new System.Drawing.Point(23, 69);
-            this.tbxModificaCodiceComponente.Name = "tbxModificaCodiceComponente";
-            this.tbxModificaCodiceComponente.Size = new System.Drawing.Size(492, 26);
-            this.tbxModificaCodiceComponente.TabIndex = 34;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(23, 112);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(492, 25);
-            this.label5.TabIndex = 28;
-            this.label5.Text = "Tipo";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnExitEditComponente
-            // 
-            this.btnExitEditComponente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExitEditComponente.BackColor = System.Drawing.Color.Red;
-            this.btnExitEditComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExitEditComponente.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Bold);
-            this.btnExitEditComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnExitEditComponente.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnExitEditComponente.Location = new System.Drawing.Point(531, 14);
-            this.btnExitEditComponente.Name = "btnExitEditComponente";
-            this.btnExitEditComponente.Size = new System.Drawing.Size(25, 25);
-            this.btnExitEditComponente.TabIndex = 24;
-            this.btnExitEditComponente.Text = "X";
-            this.btnExitEditComponente.UseVisualStyleBackColor = false;
-            this.btnExitEditComponente.Click += new System.EventHandler(this.btnExitEditComponente_Click);
             // 
             // lblCatalogoComponenti
             // 
@@ -3669,6 +3686,7 @@ namespace Calendario_AriBerg
             this.btnCancellaNomeMagazzino.TabIndex = 29;
             this.btnCancellaNomeMagazzino.Text = "Cancella";
             this.btnCancellaNomeMagazzino.UseVisualStyleBackColor = false;
+            this.btnCancellaNomeMagazzino.Click += new System.EventHandler(this.btnCancellaNomeMagazzino_Click);
             // 
             // tbxNomeMagazzino
             // 
@@ -3691,6 +3709,7 @@ namespace Calendario_AriBerg
             this.btnEliminaMagazzino.Size = new System.Drawing.Size(66, 58);
             this.btnEliminaMagazzino.TabIndex = 27;
             this.btnEliminaMagazzino.UseVisualStyleBackColor = false;
+            this.btnEliminaMagazzino.Click += new System.EventHandler(this.btnEliminaMagazzino_Click);
             // 
             // btnAggiungiMagazzino
             // 
@@ -3722,6 +3741,7 @@ namespace Calendario_AriBerg
             this.btnModificaMagazzino.Size = new System.Drawing.Size(66, 58);
             this.btnModificaMagazzino.TabIndex = 25;
             this.btnModificaMagazzino.UseVisualStyleBackColor = false;
+            this.btnModificaMagazzino.Click += new System.EventHandler(this.btnModificaMagazzino_Click);
             // 
             // tabPage7
             // 
@@ -3747,6 +3767,7 @@ namespace Calendario_AriBerg
             this.dgvTipiComponenti.ReadOnly = true;
             this.dgvTipiComponenti.Size = new System.Drawing.Size(725, 699);
             this.dgvTipiComponenti.TabIndex = 51;
+            this.dgvTipiComponenti.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvTipiComponenti_CellMouseClick);
             // 
             // dgvMarcheComponenti
             // 
@@ -3759,6 +3780,7 @@ namespace Calendario_AriBerg
             this.dgvMarcheComponenti.ReadOnly = true;
             this.dgvMarcheComponenti.Size = new System.Drawing.Size(704, 699);
             this.dgvMarcheComponenti.TabIndex = 52;
+            this.dgvMarcheComponenti.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvMarcheComponenti_CellMouseClick);
             // 
             // topPanelAltro
             // 
@@ -3774,7 +3796,7 @@ namespace Calendario_AriBerg
             // 
             this.pnlTipi.BackColor = System.Drawing.Color.DimGray;
             this.pnlTipi.Controls.Add(this.label9);
-            this.pnlTipi.Controls.Add(this.button2);
+            this.pnlTipi.Controls.Add(this.bntDeleteTextTipologie);
             this.pnlTipi.Controls.Add(this.txBxTipoComponente);
             this.pnlTipi.Controls.Add(this.btnDelComponente);
             this.pnlTipi.Controls.Add(this.btnAddTipoComponente);
@@ -3796,20 +3818,21 @@ namespace Calendario_AriBerg
             this.label9.TabIndex = 31;
             this.label9.Text = "Tipologie di componenti";
             // 
-            // button2
+            // bntDeleteTextTipologie
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Location = new System.Drawing.Point(235, 38);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(243, 58);
-            this.button2.TabIndex = 29;
-            this.button2.Text = "Cancella";
-            this.button2.UseVisualStyleBackColor = false;
+            this.bntDeleteTextTipologie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.bntDeleteTextTipologie.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bntDeleteTextTipologie.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.bntDeleteTextTipologie.FlatAppearance.BorderSize = 0;
+            this.bntDeleteTextTipologie.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bntDeleteTextTipologie.ForeColor = System.Drawing.Color.Black;
+            this.bntDeleteTextTipologie.Location = new System.Drawing.Point(235, 38);
+            this.bntDeleteTextTipologie.Name = "bntDeleteTextTipologie";
+            this.bntDeleteTextTipologie.Size = new System.Drawing.Size(243, 58);
+            this.bntDeleteTextTipologie.TabIndex = 29;
+            this.bntDeleteTextTipologie.Text = "Cancella";
+            this.bntDeleteTextTipologie.UseVisualStyleBackColor = false;
+            this.bntDeleteTextTipologie.Click += new System.EventHandler(this.bntDeleteTextTipologie_Click);
             // 
             // txBxTipoComponente
             // 
@@ -3867,7 +3890,7 @@ namespace Calendario_AriBerg
             // 
             this.pnlMarche.BackColor = System.Drawing.Color.DimGray;
             this.pnlMarche.Controls.Add(this.label8);
-            this.pnlMarche.Controls.Add(this.button6);
+            this.pnlMarche.Controls.Add(this.bntDeleteTextMarche);
             this.pnlMarche.Controls.Add(this.txBxMarcaComponente);
             this.pnlMarche.Controls.Add(this.btnDelMarca);
             this.pnlMarche.Controls.Add(this.btnAddMarca);
@@ -3889,20 +3912,21 @@ namespace Calendario_AriBerg
             this.label8.TabIndex = 30;
             this.label8.Text = "Marche";
             // 
-            // button6
+            // bntDeleteTextMarche
             // 
-            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.ForeColor = System.Drawing.Color.Black;
-            this.button6.Location = new System.Drawing.Point(226, 38);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(162, 58);
-            this.button6.TabIndex = 29;
-            this.button6.Text = "Cancella";
-            this.button6.UseVisualStyleBackColor = false;
+            this.bntDeleteTextMarche.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.bntDeleteTextMarche.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bntDeleteTextMarche.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.bntDeleteTextMarche.FlatAppearance.BorderSize = 0;
+            this.bntDeleteTextMarche.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bntDeleteTextMarche.ForeColor = System.Drawing.Color.Black;
+            this.bntDeleteTextMarche.Location = new System.Drawing.Point(226, 38);
+            this.bntDeleteTextMarche.Name = "bntDeleteTextMarche";
+            this.bntDeleteTextMarche.Size = new System.Drawing.Size(162, 58);
+            this.bntDeleteTextMarche.TabIndex = 29;
+            this.bntDeleteTextMarche.Text = "Cancella";
+            this.bntDeleteTextMarche.UseVisualStyleBackColor = false;
+            this.bntDeleteTextMarche.Click += new System.EventHandler(this.bntDeleteTextMarche_Click);
             // 
             // txBxMarcaComponente
             // 
@@ -4034,13 +4058,15 @@ namespace Calendario_AriBerg
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mur)).EndInit();
             this.tabPage3.ResumeLayout(false);
+            this.gbxModificaComponente.ResumeLayout(false);
+            this.gbxModificaComponente.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudModificaSoglia)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudModificaNOrdine)).EndInit();
             this.tbCtrlMagazzini.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
+            this.Totale.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMagazziniTotale)).EndInit();
-            this.gBxAggiungiComponente.ResumeLayout(false);
-            this.gBxAggiungiComponente.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAggiungiComponenteSoglia)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAggiungiComponenteNOrdine)).EndInit();
+            this.Centrale.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMagazzinoCentrale)).EndInit();
             this.MidMagPanel.ResumeLayout(false);
             this.MidMagPanel.PerformLayout();
             this.gbxEditComponenti.ResumeLayout(false);
@@ -4049,11 +4075,11 @@ namespace Calendario_AriBerg
             ((System.ComponentModel.ISupportInitialize)(this.nudNumeroComponenti)).EndInit();
             this.LeftMagPanel.ResumeLayout(false);
             this.PnlCatalogo.ResumeLayout(false);
+            this.gBxAggiungiComponente.ResumeLayout(false);
+            this.gBxAggiungiComponente.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAggiungiComponenteSoglia)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAggiungiComponenteNOrdine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComponenti)).EndInit();
-            this.gbxModificaComponente.ResumeLayout(false);
-            this.gbxModificaComponente.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudModificaSoglia)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudModificaNOrdine)).EndInit();
             this.pnlFiltriMagazzino.ResumeLayout(false);
             this.pnlFiltriMagazzino.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -4273,8 +4299,8 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.Button btnModifyComponente;
         private System.Windows.Forms.Button btnRemoveComponente;
         private System.Windows.Forms.TabControl tbCtrlMagazzini;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage Totale;
+        private System.Windows.Forms.TabPage Centrale;
         private System.Windows.Forms.DataGridView dgvComponenti;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.Label lblAggiungiComponenteCodice;
@@ -4341,13 +4367,13 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.DataGridView dgvMarcheComponenti;
         private System.Windows.Forms.Panel topPanelAltro;
         private System.Windows.Forms.Panel pnlTipi;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button bntDeleteTextTipologie;
         private System.Windows.Forms.TextBox txBxTipoComponente;
         private System.Windows.Forms.Button btnDelComponente;
         private System.Windows.Forms.Button btnAddTipoComponente;
         private System.Windows.Forms.Button btnEditComponente;
         private System.Windows.Forms.Panel pnlMarche;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button bntDeleteTextMarche;
         private System.Windows.Forms.TextBox txBxMarcaComponente;
         private System.Windows.Forms.Button btnDelMarca;
         private System.Windows.Forms.Button btnAddMarca;
@@ -4359,6 +4385,7 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.DataGridView dataGridView4;
         private System.Windows.Forms.DataGridView dataGridView3;
         private System.Windows.Forms.Button btnEditMarca;
+        private System.Windows.Forms.DataGridView dgvMagazzinoCentrale;
     }
 }
 
