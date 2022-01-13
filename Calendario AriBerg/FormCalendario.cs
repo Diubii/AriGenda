@@ -30,7 +30,7 @@ namespace Calendario_AriBerg
         }
 
         private void FormCalendario_Load(object sender, EventArgs e)
-        {          
+        {
 
             bool error = false;
 
@@ -142,7 +142,7 @@ namespace Calendario_AriBerg
                     RefreshComponentBrandsDataGridView();
                     RefreshComponentTypesDataGridView();
                     break;
-            }           
+            }
         }
 
         private void RefreshComponentsCatalogoAndCBX()
@@ -154,7 +154,7 @@ namespace Calendario_AriBerg
             MySqlConnection conn = Metodi.ConnectToDatabase();
             string query = $"SELECT * From componente";
             MySqlCommand command = new MySqlCommand(query, conn);
-     
+
             reader = command.ExecuteReader();
 
             while (reader.Read())
@@ -165,14 +165,17 @@ namespace Calendario_AriBerg
 
             BindingSource bs = new BindingSource();
             bs.DataSource = l;
-            Invoke(new Action(() => {
+            Invoke(new Action(() =>
+            {
                 dgvComponenti.DataSource = bs;
 
                 int app = cbBxFiltroMagazzinoCodice.SelectedIndex;
-                cbBxFiltroMagazzinoCodice.DataSource = l.Select(x => x.Codice ).ToList();
+                cbBxFiltroMagazzinoCodice.DataSource = l.Select(x => x.Codice).ToList();
                 if (cbBxFiltroMagazzinoCodice.Items.Count > app) cbBxFiltroMagazzinoCodice.SelectedIndex = app;
+
+                dgvComponenti.Columns["Quantita"].Visible = false;
             }));
-            
+
         }
         private void UpdateComboboxTabc2MarcType()
         {
@@ -198,11 +201,12 @@ namespace Calendario_AriBerg
                 types.Add(res.GetString(0));
             }
 
-            int app=0;
-            Invoke(new Action(() => {
+            int app = 0;
+            Invoke(new Action(() =>
+            {
                 app = cbxAggiungiComponenteTipo.SelectedIndex;
                 cbxAggiungiComponenteTipo.DataSource = types;
-                if(cbxAggiungiComponenteTipo.Items.Count>app) cbxAggiungiComponenteTipo.SelectedIndex = app;
+                if (cbxAggiungiComponenteTipo.Items.Count > app) cbxAggiungiComponenteTipo.SelectedIndex = app;
 
                 app = cbxAggiungiMarcaComponente.SelectedIndex;
                 cbxAggiungiMarcaComponente.DataSource = brands;
@@ -463,7 +467,7 @@ namespace Calendario_AriBerg
         //    lvwDettagliComponenti.Columns[1].Width = (int)(lvwDettagliComponenti.Width / 2.03);
         //    lvwDettagliComponenti.Height = rtbNoteMacchinaAccessorio.Height;
         //}
-       
+
         /*
         private void ResizeHandle()
         {
@@ -1571,7 +1575,7 @@ namespace Calendario_AriBerg
             }
 
         }
-      
+
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
@@ -1596,16 +1600,16 @@ namespace Calendario_AriBerg
         private void FormCalendario_Resize(object sender, EventArgs e)
         {
 
-           /* if (WindowState == FormWindowState.Maximized)
-            {
-                // Maximized!
-               ResizeHandle();
-            }
-            if (WindowState == FormWindowState.Normal)
-            {
-                // Restored!
+            /* if (WindowState == FormWindowState.Maximized)
+             {
+                 // Maximized!
                 ResizeHandle();
-            }*/
+             }
+             if (WindowState == FormWindowState.Normal)
+             {
+                 // Restored!
+                 ResizeHandle();
+             }*/
         }
 
         private void btnAggiungiAddintervento_Click(object sender, EventArgs e)
@@ -3151,12 +3155,40 @@ namespace Calendario_AriBerg
 
         private void btnRemoveComponente_Click(object sender, EventArgs e)
         {
+            MySqlConnection conn = null;
+            try
+            {
+                Componenti componente = (Componenti)dgvComponenti.CurrentRow.DataBoundItem;
+                conn = Metodi.ConnectToDatabase();
+                string query = $"DELETE FROM componente WHERE codice_componente = '{componente.Codice}'";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                int row = cmd.ExecuteNonQuery();
+                RefreshComponentsCatalogoAndCBX();
 
+                if (row == 0) throw new Exception("Nessuna riga modificata.");
+            }
+            catch (Exception ex)
+            {
+                Notifica n = new Notifica();
+                n.Show(ex.Message, Notifica.enmType.Warning);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         private void btnModifyComponente_Click(object sender, EventArgs e)
         {
+            Componenti componente = (Componenti)dgvComponenti.CurrentRow.DataBoundItem;
+            tbxModificaCodiceComponente.Text = componente.Codice;
+            cbxModificaMarcaComponente.SelectedItem = componente.Marca;
+            cbxModificaTipoComponente.SelectedItem = componente.Tipo;
+            nudModificaNOrdine.Value = componente.N_ordine;
+            nudModificaSoglia.Value = componente.Soglia;
 
+            dgvComponenti.Enabled = false;
+            gbxModificaComponente.Visible = true;
         }
 
         private void btnAggiungiMagazzino_Click(object sender, EventArgs e)
@@ -3166,7 +3198,7 @@ namespace Calendario_AriBerg
                 Magazzino m = new Magazzino(tbxNomeMagazzino.Text);
                 r.AddMagazzino(m);
             }
-            catch(Exception a)
+            catch (Exception a)
             {
                 Notifica n = new Notifica();
                 n.Show(a.Message, Notifica.enmType.Warning);
@@ -3194,7 +3226,7 @@ namespace Calendario_AriBerg
                     n.Show("Il tipo del componente non è stato aggiunto correttamente, riprovare.", Notifica.enmType.Warning);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Notifica n = new Notifica();
                 n.Show(ex.Message, Notifica.enmType.Warning);
@@ -3202,7 +3234,7 @@ namespace Calendario_AriBerg
             finally
             {
                 conn.Close();
-            }                       
+            }
         }
 
         private void btnEditComponente_Click(object sender, EventArgs e)
@@ -3216,12 +3248,12 @@ namespace Calendario_AriBerg
                 MySqlCommand UpdateComponentType = new MySqlCommand(query, conn);
                 int row = UpdateComponentType.ExecuteNonQuery();
 
-                if(row > 0)
+                if (row > 0)
                 {
                     RefreshComponentTypesDataGridView();
-                }                
+                }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Notifica n = new Notifica();
                 n.Show(ex.Message, Notifica.enmType.Warning);
@@ -3275,10 +3307,12 @@ namespace Calendario_AriBerg
             BindingSource bs = new BindingSource();
             bs.DataSource = types.Select(x => new { Value = x }).ToList();
 
-            
-            Invoke(new Action(() => {
+
+            Invoke(new Action(() =>
+            {
                 dgvTipiComponenti.DataSource = bs;
-                dgvTipiComponenti.Columns["Value"].HeaderText = "Tipi dei componenti"; }));
+                dgvTipiComponenti.Columns["Value"].HeaderText = "Tipi dei componenti";
+            }));
         }
 
         private void btnAddMarca_Click(object sender, EventArgs e)
@@ -3394,11 +3428,11 @@ namespace Calendario_AriBerg
             BindingSource bs = new BindingSource();
             bs.DataSource = brands.Select(x => new { Value = x }).ToList();
 
-            
-            
-            Invoke(new Action(() => {
+            Invoke(new Action(() =>
+            {
                 dgvMarcheComponenti.DataSource = bs;
-                dgvMarcheComponenti.Columns["Value"].HeaderText = "Marche dei componenti"; }));
+                dgvMarcheComponenti.Columns["Value"].HeaderText = "Marche dei componenti";
+            }));
         }
 
         private void chBxFiltroMagazzinoTipo_CheckedChanged(object sender, EventArgs e)
@@ -3452,28 +3486,85 @@ namespace Calendario_AriBerg
             MySqlConnection conn = null;
             try
             {
-                conn = Metodi.ConnectToDatabase();               
+                conn = Metodi.ConnectToDatabase();
                 string query = $"INSERT INTO componente VALUES('{tbxAggiungiComponenteCodice.Text}','{cbxAggiungiMarcaComponente.Text}','{cbxAggiungiComponenteTipo.Text}','{(int)nudAggiungiComponenteSoglia.Value}','{(int)nudAggiungiComponenteNOrdine.Value}')";
                 MySqlCommand command = new MySqlCommand(query, conn);
                 command.ExecuteNonQuery();
 
                 MySqlDataReader reader;
-                List<Componenti> l= new List<Componenti>();
+                List<Componenti> l = new List<Componenti>();
                 Componenti c = new Componenti();
 
                 query = $"SELECT * From componente";
                 command = new MySqlCommand(query, conn);
-                reader= command.ExecuteReader();
+                reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    c = new Componenti(reader.GetString(2), reader.GetString(1), reader.GetInt32(3), reader.GetInt32(4),reader.GetString(0),0);
+                    c = new Componenti(reader.GetString(2), reader.GetString(1), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(0), 0);
                     l.Add(c);
                 }
 
                 BindingSource bs = new BindingSource();
                 bs.DataSource = l;
                 dgvComponenti.DataSource = bs;
+                dgvComponenti.Columns["Quantita"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                Notifica n = new Notifica();
+                n.Show(ex.Message, Notifica.enmType.Warning);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void btnExitEditComponente_Click(object sender, EventArgs e)
+        {
+            gbxModificaComponente.Visible = false;
+            dgvComponenti.Enabled = true;
+        }
+
+        private void btnModificaComponente_Click(object sender, EventArgs e)
+        {
+            ///INDICI TABELLA COMPONENTI
+            ///0: codice_componente
+            ///1: marca_componente
+            ///2: tipo_componente
+            ///3: soglia_componente
+            ///4: n_ordine_componente
+            ///
+            MySqlConnection conn = null;
+
+            try
+            {
+                Componenti comp = (Componenti)dgvComponenti.CurrentRow.DataBoundItem;
+
+                List<TextBox> tx = new List<TextBox>();
+
+                foreach(Control c in gbxModificaComponente.Controls)
+                {
+                    if(c is TextBox) tx.Add((TextBox)c);
+                }
+
+                if (Metodi.AreThereAnyEmptyTextBoxes(tx)) throw new ArgumentNullException();
+            
+                conn = Metodi.ConnectToDatabase();
+                string query = $"UPDATE componente SET codice_componente = '{tbxModificaCodiceComponente.Text}', " +
+                    $"marca_componente = '{cbxModificaMarcaComponente.Text}', " +
+                    $"tipo_componente = '{cbxModificaTipoComponente.Text}', " +
+                    $"soglia_componente = '{nudModificaSoglia.Value}', " +
+                    $"n_ordine_componente = '{nudModificaNOrdine.Value}' " +
+                    $"WHERE codice_componente = '{comp.Codice}'";
+                    
+                MySqlCommand command = new MySqlCommand(query, conn);
+                command.ExecuteNonQuery();
+
+                RefreshComponentsCatalogoAndCBX();
+                gbxModificaComponente.Visible = false;
+                dgvComponenti.Enabled = true;
             }
             catch (Exception ex)
             {

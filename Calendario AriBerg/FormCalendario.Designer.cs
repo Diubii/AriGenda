@@ -260,6 +260,7 @@ namespace Calendario_AriBerg
             this.btnImmagazzinaComponente = new System.Windows.Forms.Button();
             this.LeftMagPanel = new System.Windows.Forms.Panel();
             this.PnlCatalogo = new System.Windows.Forms.Panel();
+            this.dgvComponenti = new System.Windows.Forms.DataGridView();
             this.gbxModificaComponente = new System.Windows.Forms.GroupBox();
             this.cbxModificaMarcaComponente = new System.Windows.Forms.ComboBox();
             this.btnModificaComponente = new System.Windows.Forms.Button();
@@ -274,7 +275,6 @@ namespace Calendario_AriBerg
             this.label5 = new System.Windows.Forms.Label();
             this.btnExitEditComponente = new System.Windows.Forms.Button();
             this.lblCatalogoComponenti = new System.Windows.Forms.Label();
-            this.dgvComponenti = new System.Windows.Forms.DataGridView();
             this.pnlFiltriMagazzino = new System.Windows.Forms.Panel();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -361,10 +361,10 @@ namespace Calendario_AriBerg
             ((System.ComponentModel.ISupportInitialize)(this.nudNumeroComponenti)).BeginInit();
             this.LeftMagPanel.SuspendLayout();
             this.PnlCatalogo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvComponenti)).BeginInit();
             this.gbxModificaComponente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudModificaSoglia)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudModificaNOrdine)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvComponenti)).BeginInit();
             this.pnlFiltriMagazzino.SuspendLayout();
             this.panel1.SuspendLayout();
             this.TopMagPanel.SuspendLayout();
@@ -2826,8 +2826,8 @@ namespace Calendario_AriBerg
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tabPage3.Controls.Add(this.gbxModificaComponente);
             this.tabPage3.Controls.Add(this.tbCtrlMagazzini);
-            this.tabPage3.Controls.Add(this.gBxAggiungiComponente);
             this.tabPage3.Controls.Add(this.lblMagazziniComponenti);
             this.tabPage3.Controls.Add(this.MidMagPanel);
             this.tabPage3.Controls.Add(this.LeftMagPanel);
@@ -2870,7 +2870,9 @@ namespace Calendario_AriBerg
             this.dgvMagazziniTotale.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMagazziniTotale.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMagazziniTotale.Location = new System.Drawing.Point(3, 3);
+            this.dgvMagazziniTotale.MultiSelect = false;
             this.dgvMagazziniTotale.Name = "dgvMagazziniTotale";
+            this.dgvMagazziniTotale.ReadOnly = true;
             this.dgvMagazziniTotale.Size = new System.Drawing.Size(528, 631);
             this.dgvMagazziniTotale.TabIndex = 0;
             // 
@@ -2909,7 +2911,7 @@ namespace Calendario_AriBerg
             this.gBxAggiungiComponente.Controls.Add(this.btnExitAggiungiComponente);
             this.gBxAggiungiComponente.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gBxAggiungiComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gBxAggiungiComponente.Location = new System.Drawing.Point(3, 87);
+            this.gBxAggiungiComponente.Location = new System.Drawing.Point(0, 3);
             this.gBxAggiungiComponente.Name = "gBxAggiungiComponente";
             this.gBxAggiungiComponente.Size = new System.Drawing.Size(556, 502);
             this.gBxAggiungiComponente.TabIndex = 44;
@@ -3228,14 +3230,26 @@ namespace Calendario_AriBerg
             // 
             // PnlCatalogo
             // 
+            this.PnlCatalogo.Controls.Add(this.gBxAggiungiComponente);
             this.PnlCatalogo.Controls.Add(this.dgvComponenti);
-            this.PnlCatalogo.Controls.Add(this.gbxModificaComponente);
             this.PnlCatalogo.Controls.Add(this.lblCatalogoComponenti);
             this.PnlCatalogo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PnlCatalogo.Location = new System.Drawing.Point(0, 0);
             this.PnlCatalogo.Name = "PnlCatalogo";
             this.PnlCatalogo.Size = new System.Drawing.Size(770, 722);
             this.PnlCatalogo.TabIndex = 52;
+            // 
+            // dgvComponenti
+            // 
+            this.dgvComponenti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvComponenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvComponenti.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvComponenti.Location = new System.Drawing.Point(0, 39);
+            this.dgvComponenti.MultiSelect = false;
+            this.dgvComponenti.Name = "dgvComponenti";
+            this.dgvComponenti.ReadOnly = true;
+            this.dgvComponenti.Size = new System.Drawing.Size(770, 683);
+            this.dgvComponenti.TabIndex = 47;
             // 
             // gbxModificaComponente
             // 
@@ -3253,7 +3267,7 @@ namespace Calendario_AriBerg
             this.gbxModificaComponente.Controls.Add(this.btnExitEditComponente);
             this.gbxModificaComponente.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxModificaComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gbxModificaComponente.Location = new System.Drawing.Point(0, 14);
+            this.gbxModificaComponente.Location = new System.Drawing.Point(3, 85);
             this.gbxModificaComponente.Name = "gbxModificaComponente";
             this.gbxModificaComponente.Size = new System.Drawing.Size(556, 502);
             this.gbxModificaComponente.TabIndex = 57;
@@ -3283,6 +3297,7 @@ namespace Calendario_AriBerg
             this.btnModificaComponente.TabIndex = 12;
             this.btnModificaComponente.Text = "Modifica";
             this.btnModificaComponente.UseVisualStyleBackColor = false;
+            this.btnModificaComponente.Click += new System.EventHandler(this.btnModificaComponente_Click);
             // 
             // label1
             // 
@@ -3401,6 +3416,7 @@ namespace Calendario_AriBerg
             this.btnExitEditComponente.TabIndex = 24;
             this.btnExitEditComponente.Text = "X";
             this.btnExitEditComponente.UseVisualStyleBackColor = false;
+            this.btnExitEditComponente.Click += new System.EventHandler(this.btnExitEditComponente_Click);
             // 
             // lblCatalogoComponenti
             // 
@@ -3413,16 +3429,6 @@ namespace Calendario_AriBerg
             this.lblCatalogoComponenti.TabIndex = 49;
             this.lblCatalogoComponenti.Text = "Catalogo";
             this.lblCatalogoComponenti.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // dgvComponenti
-            // 
-            this.dgvComponenti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvComponenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvComponenti.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvComponenti.Location = new System.Drawing.Point(0, 39);
-            this.dgvComponenti.Name = "dgvComponenti";
-            this.dgvComponenti.Size = new System.Drawing.Size(770, 683);
-            this.dgvComponenti.TabIndex = 47;
             // 
             // pnlFiltriMagazzino
             // 
@@ -3594,14 +3600,13 @@ namespace Calendario_AriBerg
             this.btnModifyComponente.BackColor = System.Drawing.Color.Goldenrod;
             this.btnModifyComponente.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.componente_edit;
             this.btnModifyComponente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnModifyComponente.Enabled = false;
             this.btnModifyComponente.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
             this.btnModifyComponente.FlatAppearance.BorderSize = 3;
             this.btnModifyComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModifyComponente.Font = new System.Drawing.Font("Calibri", 12F);
             this.btnModifyComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnModifyComponente.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnModifyComponente.Location = new System.Drawing.Point(72, 5);
+            this.btnModifyComponente.Location = new System.Drawing.Point(72, 6);
             this.btnModifyComponente.Name = "btnModifyComponente";
             this.btnModifyComponente.Size = new System.Drawing.Size(60, 60);
             this.btnModifyComponente.TabIndex = 2;
@@ -3613,14 +3618,13 @@ namespace Calendario_AriBerg
             this.btnRemoveComponente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnRemoveComponente.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.componente_remove;
             this.btnRemoveComponente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnRemoveComponente.Enabled = false;
             this.btnRemoveComponente.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnRemoveComponente.FlatAppearance.BorderSize = 3;
             this.btnRemoveComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRemoveComponente.Font = new System.Drawing.Font("Calibri", 12F);
             this.btnRemoveComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnRemoveComponente.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnRemoveComponente.Location = new System.Drawing.Point(138, 5);
+            this.btnRemoveComponente.Location = new System.Drawing.Point(138, 6);
             this.btnRemoveComponente.Name = "btnRemoveComponente";
             this.btnRemoveComponente.Size = new System.Drawing.Size(60, 60);
             this.btnRemoveComponente.TabIndex = 3;
@@ -3740,6 +3744,7 @@ namespace Calendario_AriBerg
             this.dgvTipiComponenti.Location = new System.Drawing.Point(707, 102);
             this.dgvTipiComponenti.MultiSelect = false;
             this.dgvTipiComponenti.Name = "dgvTipiComponenti";
+            this.dgvTipiComponenti.ReadOnly = true;
             this.dgvTipiComponenti.Size = new System.Drawing.Size(725, 699);
             this.dgvTipiComponenti.TabIndex = 51;
             // 
@@ -3751,6 +3756,7 @@ namespace Calendario_AriBerg
             this.dgvMarcheComponenti.Location = new System.Drawing.Point(3, 102);
             this.dgvMarcheComponenti.MultiSelect = false;
             this.dgvMarcheComponenti.Name = "dgvMarcheComponenti";
+            this.dgvMarcheComponenti.ReadOnly = true;
             this.dgvMarcheComponenti.Size = new System.Drawing.Size(704, 699);
             this.dgvMarcheComponenti.TabIndex = 52;
             // 
@@ -4043,11 +4049,11 @@ namespace Calendario_AriBerg
             ((System.ComponentModel.ISupportInitialize)(this.nudNumeroComponenti)).EndInit();
             this.LeftMagPanel.ResumeLayout(false);
             this.PnlCatalogo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvComponenti)).EndInit();
             this.gbxModificaComponente.ResumeLayout(false);
             this.gbxModificaComponente.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudModificaSoglia)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudModificaNOrdine)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvComponenti)).EndInit();
             this.pnlFiltriMagazzino.ResumeLayout(false);
             this.pnlFiltriMagazzino.PerformLayout();
             this.panel1.ResumeLayout(false);
