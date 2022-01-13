@@ -107,6 +107,7 @@ namespace Calendario_AriBerg
             this.rdBtnSearchEventoCliente = new System.Windows.Forms.RadioButton();
             this.cbBxSearchEventoMatricola = new System.Windows.Forms.ComboBox();
             this.cbBxSearchEventoCliente = new System.Windows.Forms.ComboBox();
+            this.ariCalendario = new Calendario_AriBerg.AriCalendario();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pnlCommands2 = new System.Windows.Forms.Panel();
             this.btnClientiAddCustomer = new System.Windows.Forms.Button();
@@ -316,7 +317,6 @@ namespace Calendario_AriBerg
             this.btnDelMarca = new System.Windows.Forms.Button();
             this.btnAddMarca = new System.Windows.Forms.Button();
             this.btnEditMarca = new System.Windows.Forms.Button();
-            this.ariCalendario = new Calendario_AriBerg.AriCalendario();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventi)).BeginInit();
             this.gbxLegenda.SuspendLayout();
             this.gbxAggiungi.SuspendLayout();
@@ -1369,6 +1369,23 @@ namespace Calendario_AriBerg
             this.cbBxSearchEventoCliente.Size = new System.Drawing.Size(206, 26);
             this.cbBxSearchEventoCliente.TabIndex = 0;
             // 
+            // ariCalendario
+            // 
+            this.ariCalendario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.ariCalendario.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ariCalendario.Font = new System.Drawing.Font("Segoe UI Light", 32.25F);
+            this.ariCalendario.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.ariCalendario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.ariCalendario.Location = new System.Drawing.Point(3, 82);
+            this.ariCalendario.Margin = new System.Windows.Forms.Padding(20);
+            this.ariCalendario.MaxDate = new System.DateTime(2059, 12, 31, 0, 0, 0, 0);
+            this.ariCalendario.MaxSelectionCount = 1;
+            this.ariCalendario.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
+            this.ariCalendario.Name = "ariCalendario";
+            this.ariCalendario.TabIndex = 12;
+            this.ariCalendario.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.ariCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AriCalendario_DateChanged);
+            // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -1400,7 +1417,7 @@ namespace Calendario_AriBerg
             // 
             this.btnClientiAddCustomer.BackColor = System.Drawing.Color.LimeGreen;
             this.btnClientiAddCustomer.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.pipottoadd_icon;
-            this.btnClientiAddCustomer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClientiAddCustomer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnClientiAddCustomer.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
             this.btnClientiAddCustomer.FlatAppearance.BorderSize = 3;
             this.btnClientiAddCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1418,7 +1435,7 @@ namespace Calendario_AriBerg
             // 
             this.btnClientiEditCustomer.BackColor = System.Drawing.Color.Goldenrod;
             this.btnClientiEditCustomer.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.pipottoedit_icon;
-            this.btnClientiEditCustomer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClientiEditCustomer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnClientiEditCustomer.Enabled = false;
             this.btnClientiEditCustomer.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
             this.btnClientiEditCustomer.FlatAppearance.BorderSize = 3;
@@ -1437,7 +1454,7 @@ namespace Calendario_AriBerg
             // 
             this.btnClientiDeleteCustomer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnClientiDeleteCustomer.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.pipottodelete_icon;
-            this.btnClientiDeleteCustomer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnClientiDeleteCustomer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnClientiDeleteCustomer.Enabled = false;
             this.btnClientiDeleteCustomer.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnClientiDeleteCustomer.FlatAppearance.BorderSize = 3;
@@ -1534,7 +1551,7 @@ namespace Calendario_AriBerg
             this.btnModificaAggiungiMacchina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnModificaAggiungiMacchina.BackColor = System.Drawing.Color.LimeGreen;
             this.btnModificaAggiungiMacchina.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.aircompressoradd_icon;
-            this.btnModificaAggiungiMacchina.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnModificaAggiungiMacchina.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnModificaAggiungiMacchina.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
             this.btnModificaAggiungiMacchina.FlatAppearance.BorderSize = 3;
             this.btnModificaAggiungiMacchina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1553,7 +1570,7 @@ namespace Calendario_AriBerg
             this.btnModificaModificaMacchina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnModificaModificaMacchina.BackColor = System.Drawing.Color.Goldenrod;
             this.btnModificaModificaMacchina.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.aircompressoredit_icon;
-            this.btnModificaModificaMacchina.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnModificaModificaMacchina.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnModificaModificaMacchina.Enabled = false;
             this.btnModificaModificaMacchina.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
             this.btnModificaModificaMacchina.FlatAppearance.BorderSize = 3;
@@ -1573,7 +1590,7 @@ namespace Calendario_AriBerg
             this.btnModificaEliminaMacchina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnModificaEliminaMacchina.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnModificaEliminaMacchina.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.aircompressordelete_icon;
-            this.btnModificaEliminaMacchina.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnModificaEliminaMacchina.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnModificaEliminaMacchina.Enabled = false;
             this.btnModificaEliminaMacchina.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnModificaEliminaMacchina.FlatAppearance.BorderSize = 3;
@@ -3067,7 +3084,7 @@ namespace Calendario_AriBerg
             this.dgvMagazzinoCentrale.MultiSelect = false;
             this.dgvMagazzinoCentrale.Name = "dgvMagazzinoCentrale";
             this.dgvMagazzinoCentrale.ReadOnly = true;
-            this.dgvMagazzinoCentrale.Size = new System.Drawing.Size(528, 636);
+            this.dgvMagazzinoCentrale.Size = new System.Drawing.Size(528, 631);
             this.dgvMagazzinoCentrale.TabIndex = 1;
             // 
             // tabPage6
@@ -3124,11 +3141,12 @@ namespace Calendario_AriBerg
             // 
             // lblAggiornaComponentiMagazzino
             // 
-            this.lblAggiornaComponentiMagazzino.Location = new System.Drawing.Point(16, 14);
+            this.lblAggiornaComponentiMagazzino.Location = new System.Drawing.Point(6, 14);
             this.lblAggiornaComponentiMagazzino.Name = "lblAggiornaComponentiMagazzino";
-            this.lblAggiornaComponentiMagazzino.Size = new System.Drawing.Size(92, 67);
+            this.lblAggiornaComponentiMagazzino.Size = new System.Drawing.Size(105, 67);
             this.lblAggiornaComponentiMagazzino.TabIndex = 6;
             this.lblAggiornaComponentiMagazzino.Text = "Aggiorna componente selezionato";
+            this.lblAggiornaComponentiMagazzino.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblModificaComponentiMagazzino
             // 
@@ -3598,7 +3616,7 @@ namespace Calendario_AriBerg
             // 
             this.btnAddComponente.BackColor = System.Drawing.Color.LimeGreen;
             this.btnAddComponente.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.componente_add;
-            this.btnAddComponente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddComponente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAddComponente.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
             this.btnAddComponente.FlatAppearance.BorderSize = 3;
             this.btnAddComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -3616,7 +3634,7 @@ namespace Calendario_AriBerg
             // 
             this.btnModifyComponente.BackColor = System.Drawing.Color.Goldenrod;
             this.btnModifyComponente.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.componente_edit;
-            this.btnModifyComponente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnModifyComponente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnModifyComponente.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
             this.btnModifyComponente.FlatAppearance.BorderSize = 3;
             this.btnModifyComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -3634,7 +3652,7 @@ namespace Calendario_AriBerg
             // 
             this.btnRemoveComponente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnRemoveComponente.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.componente_remove;
-            this.btnRemoveComponente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnRemoveComponente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRemoveComponente.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnRemoveComponente.FlatAppearance.BorderSize = 3;
             this.btnRemoveComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -3716,7 +3734,7 @@ namespace Calendario_AriBerg
             this.btnAggiungiMagazzino.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAggiungiMagazzino.BackColor = System.Drawing.Color.LimeGreen;
             this.btnAggiungiMagazzino.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAggiungiMagazzino.BackgroundImage")));
-            this.btnAggiungiMagazzino.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAggiungiMagazzino.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAggiungiMagazzino.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
             this.btnAggiungiMagazzino.FlatAppearance.BorderSize = 3;
             this.btnAggiungiMagazzino.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -3860,7 +3878,7 @@ namespace Calendario_AriBerg
             // 
             this.btnAddTipoComponente.BackColor = System.Drawing.Color.LimeGreen;
             this.btnAddTipoComponente.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.components_add;
-            this.btnAddTipoComponente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddTipoComponente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAddTipoComponente.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
             this.btnAddTipoComponente.FlatAppearance.BorderSize = 3;
             this.btnAddTipoComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -3954,7 +3972,7 @@ namespace Calendario_AriBerg
             // 
             this.btnAddMarca.BackColor = System.Drawing.Color.LimeGreen;
             this.btnAddMarca.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.industrial_add;
-            this.btnAddMarca.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddMarca.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAddMarca.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
             this.btnAddMarca.FlatAppearance.BorderSize = 3;
             this.btnAddMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -3979,23 +3997,6 @@ namespace Calendario_AriBerg
             this.btnEditMarca.TabIndex = 25;
             this.btnEditMarca.UseVisualStyleBackColor = false;
             this.btnEditMarca.Click += new System.EventHandler(this.btnEditMarca_Click);
-            // 
-            // ariCalendario
-            // 
-            this.ariCalendario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.ariCalendario.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ariCalendario.Font = new System.Drawing.Font("Segoe UI Light", 32.25F);
-            this.ariCalendario.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.ariCalendario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ariCalendario.Location = new System.Drawing.Point(3, 82);
-            this.ariCalendario.Margin = new System.Windows.Forms.Padding(20);
-            this.ariCalendario.MaxDate = new System.DateTime(2059, 12, 31, 0, 0, 0, 0);
-            this.ariCalendario.MaxSelectionCount = 1;
-            this.ariCalendario.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
-            this.ariCalendario.Name = "ariCalendario";
-            this.ariCalendario.TabIndex = 12;
-            this.ariCalendario.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.ariCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AriCalendario_DateChanged);
             // 
             // FormCalendario
             // 

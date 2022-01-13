@@ -14,8 +14,6 @@ namespace Calendario_AriBerg
     {
         public System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
 
-        public static Registro r = new Registro();
-
         private Point p = new Point();
         private DateTime SelectedDate;
 
@@ -45,13 +43,13 @@ namespace Calendario_AriBerg
             Connection.Close();*/
 
             //configurazione registro
-            if (r.DizClienti == null)
+            if (Registro.DizClienti == null)
             {
-                r.DizClienti = new Dictionary<string, Cliente>();
+                Registro.DizClienti = new Dictionary<string, Cliente>();
             }
-            if (r.DizGiorni == null)
+            if (Registro.DizGiorni == null)
             {
-                r.DizGiorni = new Dictionary<DateTime, List<Evento>>();
+                Registro.DizGiorni = new Dictionary<DateTime, List<Evento>>();
             }
 
 
@@ -86,9 +84,9 @@ namespace Calendario_AriBerg
             }
 
             //configdgwEventi
-            if (r.DizGiorni != null && r.DizGiorni.ContainsKey(SelectedDate))
+            if (Registro.DizGiorni != null && Registro.DizGiorni.ContainsKey(SelectedDate))
             {
-                dgvEventi.DataSource = r.DizGiorni[SelectedDate];
+                dgvEventi.DataSource = Registro.DizGiorni[SelectedDate];
                 HideColumnsEventi();
             }
 
@@ -102,9 +100,9 @@ namespace Calendario_AriBerg
             }
 
             //configdgwEventi
-            if (r.DizClienti != null)
+            if (Registro.DizClienti != null)
             {
-                dgvVisualizzaClienti.DataSource = r.DizClienti.Values.ToList();
+                dgvVisualizzaClienti.DataSource = Registro.DizClienti.Values.ToList();
                 HideColumnsClienti();
                 dgvVisualizzaClienti.AutoGenerateColumns = true;
             }
@@ -114,20 +112,24 @@ namespace Calendario_AriBerg
             AggiornaComboBox();
 
             //timerUpdatePagina con database
-            t.Interval = 20000;
-            t.Tick += TimerTick;
-            t.Start();
+            //t.Interval = 20000;
+            //t.Tick += TimerTick;
+            //t.Start();
         }
 
         private async void TimerTick(object sender, EventArgs e)
         {
-            await Task.Run(new Action(() => { RefreshActualTab(); }));
+            await Task.Run(new Action(() => { RefreshCurrentTab(); }));
         }
 
-        private void RefreshActualTab()
+        private void RefreshCurrentTab()
         {
             int a = 0;
-            Invoke(new Action(() => { a = tabControl1.SelectedIndex; }));
+            Invoke(new Action(() => {
+                Cursor = Cursors.AppStarting;
+                Enabled = false;
+                a = tabControl1.SelectedIndex; 
+            }));
             switch (a)
             {
                 case 0:
@@ -144,6 +146,10 @@ namespace Calendario_AriBerg
                     RefreshComponentTypesDataGridView();
                     break;
             }
+            Invoke(new Action(() => {
+                Enabled = true;
+                Cursor = Cursors.Default;
+            }));
         }
 
         private void RefreshConetnutiMagazzini()
@@ -206,6 +212,11 @@ namespace Calendario_AriBerg
 
         private void RefreshComponentsCatalogoAndCBX()
         {
+            Invoke(new Action(() => {               
+                Cursor = Cursors.AppStarting;
+                Enabled = false;
+            }));
+
             MySqlDataReader reader;
             List<Componenti> l = new List<Componenti>();
             Componenti c = new Componenti();
@@ -222,6 +233,19 @@ namespace Calendario_AriBerg
                 l.Add(c);
             }
 
+            List<Componenti> currentComponents = new List<Componenti>();
+
+            foreach (DataGridViewRow row in this.dgvComponenti.Rows)
+            {
+                Componenti comp = row.DataBoundItem as Componenti;
+            }
+
+            if (l.All(currentComponents.Contains) && l.Count == currentComponents.Count)
+            {
+                Notifica n = new Notifica();
+                n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
+            }
+
             BindingSource bs = new BindingSource();
             bs.DataSource = l;
             Invoke(new Action(() =>
@@ -234,8 +258,14 @@ namespace Calendario_AriBerg
 
                 dgvComponenti.Columns["Quantita"].Visible = false;
             }));
+            Registro.ComponentiAttuali = l;
 
+            Invoke(new Action(() => {
+                Enabled = true;
+                Cursor = Cursors.Default;
+            }));
         }
+
         private void UpdateComboboxTabc2MarcType()
         {
             List<string> brands = new List<string>();
@@ -291,7 +321,7 @@ namespace Calendario_AriBerg
         }
         private void AggiornaComboBox() //Da mettere in modifica ed elimina cliente
         {
-            if (r.DizClienti != null)
+            if (Registro.DizClienti != null)
             {
                 cbBxTrovaPerNome.Items.Clear();
                 cbBxTrovaPerMail.Items.Clear();
@@ -306,7 +336,7 @@ namespace Calendario_AriBerg
                 cbBxSearchEventoCliente.Items.Clear();
                 cbBxSearchEventoMatricola.Items.Clear();
 
-                foreach (KeyValuePair<string, Cliente> kv in r.DizClienti)
+                foreach (KeyValuePair<string, Cliente> kv in Registro.DizClienti)
                 {
                     cbBxTrovaPerNome.Items.Add(kv.Key);
                     cbBxTrovaPerPRif.Items.Add(kv.Value._Ref);
@@ -368,9 +398,9 @@ namespace Calendario_AriBerg
             SelectedDate = ariCalendario.SelectionStart;
             btnAdd.Enabled = true;
 
-            if (r.DizGiorni != null && r.DizGiorni.ContainsKey(SelectedDate))
+            if (Registro.DizGiorni != null && Registro.DizGiorni.ContainsKey(SelectedDate))
             {
-                dgvEventi.DataSource = r.DizGiorni[SelectedDate];
+                dgvEventi.DataSource = Registro.DizGiorni[SelectedDate];
                 HideColumnsEventi();
                 //ResizeDetilsCose();
             }
@@ -387,9 +417,9 @@ namespace Calendario_AriBerg
 
             try
             {
-                if (r.DizGiorni.ContainsKey(DateTime.Now.Date.AddDays(1)))
+                if (Registro.DizGiorni.ContainsKey(DateTime.Now.Date.AddDays(1)))
                 {
-                    foreach (Evento ev in r.DizGiorni[DateTime.Now.Date.AddDays(1)])
+                    foreach (Evento ev in Registro.DizGiorni[DateTime.Now.Date.AddDays(1)])
                     {
                         Notifica n = new Notifica(ev, this);
                         n.Show("Cliente:" + ev.NomeCliente + "\nMacchina:" + ev.Macchina, Notifica.enmType.Scadenza);
@@ -406,7 +436,7 @@ namespace Calendario_AriBerg
         {
             ariCalendario.SelectionStart = ev.Giorno;
             int i = 0;
-            foreach (Evento evnt in r.DizGiorni[ev.Giorno])
+            foreach (Evento evnt in Registro.DizGiorni[ev.Giorno])
             {
                 if (evnt.ID == ev.ID)
                 {
@@ -1510,7 +1540,7 @@ namespace Calendario_AriBerg
         private void dgwEventi_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
 
-            if (r.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == r.DizGiorni[SelectedDate])
+            if (Registro.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == Registro.DizGiorni[SelectedDate])
             {
                 if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 6)
                 {
@@ -1532,7 +1562,7 @@ namespace Calendario_AriBerg
                             string textPart = text.Substring(i, 1);
                             size = TextRenderer.MeasureText(textPart, e.CellStyle.Font);
 
-                            switch (r.DizGiorni[SelectedDate][e.RowIndex].Interventi[i])
+                            switch (Registro.DizGiorni[SelectedDate][e.RowIndex].Interventi[i])
                             {
                                 case InterventiPoss.Manut_Completa:
                                     appcolore = Color.Red;
@@ -1691,12 +1721,12 @@ namespace Calendario_AriBerg
         {
             try
             {
-                if (!r.DizClienti.ContainsKey(cBxAggiungiEventoCliente.Text))
+                if (!Registro.DizClienti.ContainsKey(cBxAggiungiEventoCliente.Text))
                 {
                     throw new Exception("Inserire Cliente Valido");
                 }
                 bool checkmacchina = false;
-                foreach (Macchina m in r.DizClienti[cBxAggiungiEventoCliente.Text]._Mach)
+                foreach (Macchina m in Registro.DizClienti[cBxAggiungiEventoCliente.Text]._Mach)
                 {
                     if (m._Marca + "/" + m._Modello + "/" + m._Matricola == cBxAggiungiEventoMacchine.Text)
                     {
@@ -1745,7 +1775,7 @@ namespace Calendario_AriBerg
                 //r.AddEvento(app);
 
                 dgvEventi.DataSource = null;
-                dgvEventi.DataSource = r.DizGiorni[SelectedDate];
+                dgvEventi.DataSource = Registro.DizGiorni[SelectedDate];
                 HideColumnsEventi();
                 dgvEventi.Refresh();
 
@@ -1772,7 +1802,7 @@ namespace Calendario_AriBerg
 
         private void dgwEventi_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && r.DizClienti.ContainsKey(dgvEventi[3, e.RowIndex].Value.ToString()))
+            if (e.RowIndex >= 0 && Registro.DizClienti.ContainsKey(dgvEventi[3, e.RowIndex].Value.ToString()))
             {
                 if (e.ColumnIndex == 3)
                 {
@@ -1790,11 +1820,11 @@ namespace Calendario_AriBerg
                     p.X = gbxDettagli.Location.X;
                     gBxDettagliCliente.Location = p;
 
-                    txBxDettagliClienteTel.Text = r.DizClienti[dgvEventi[3, e.RowIndex].Value.ToString()]._Telefono;
-                    txBxDettagliClienteMail.Text = r.DizClienti[dgvEventi[3, e.RowIndex].Value.ToString()]._Email;
-                    txBxDettagliClienteIndirizzo.Text = r.DizClienti[dgvEventi[3, e.RowIndex].Value.ToString()]._Indirizzo;
-                    txBxDettagliClienteIva.Text = r.DizClienti[dgvEventi[3, e.RowIndex].Value.ToString()]._PartIVA;
-                    txBxDettagliClientePrif.Text = r.DizClienti[dgvEventi[3, e.RowIndex].Value.ToString()]._Ref;
+                    txBxDettagliClienteTel.Text = Registro.DizClienti[dgvEventi[3, e.RowIndex].Value.ToString()]._Telefono;
+                    txBxDettagliClienteMail.Text = Registro.DizClienti[dgvEventi[3, e.RowIndex].Value.ToString()]._Email;
+                    txBxDettagliClienteIndirizzo.Text = Registro.DizClienti[dgvEventi[3, e.RowIndex].Value.ToString()]._Indirizzo;
+                    txBxDettagliClienteIva.Text = Registro.DizClienti[dgvEventi[3, e.RowIndex].Value.ToString()]._PartIVA;
+                    txBxDettagliClientePrif.Text = Registro.DizClienti[dgvEventi[3, e.RowIndex].Value.ToString()]._Ref;
 
                 }
                 else if (e.ColumnIndex == 4)
@@ -1815,7 +1845,7 @@ namespace Calendario_AriBerg
 
                     //lvwDettagliComponenti.Items.Clear();
 
-                    foreach (Macchina m in r.DizClienti[dgvEventi[3, e.RowIndex].Value.ToString()]._Mach)
+                    foreach (Macchina m in Registro.DizClienti[dgvEventi[3, e.RowIndex].Value.ToString()]._Mach)
                     {
                         if (dgvEventi[4, e.RowIndex].Value.ToString() == m._Marca + "/" + m._Modello + "/" + m._Matricola)
                         {
@@ -1850,9 +1880,9 @@ namespace Calendario_AriBerg
                     p.X = gbxDettagli.Location.X;
                     gbxDettagli.Location = p;
 
-                    if (r.DizGiorni != null && r.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == r.DizGiorni[SelectedDate])
+                    if (Registro.DizGiorni != null && Registro.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == Registro.DizGiorni[SelectedDate])
                     {
-                        rtbNoteDettagli.Text = r.DizGiorni[SelectedDate][e.RowIndex].Note;
+                        rtbNoteDettagli.Text = Registro.DizGiorni[SelectedDate][e.RowIndex].Note;
                     }
                     else
                     {
@@ -1902,9 +1932,9 @@ namespace Calendario_AriBerg
                     p.X = gbxDettagli.Location.X;
                     gbxDettagli.Location = p;
 
-                    if (r.DizGiorni != null && r.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == r.DizGiorni[SelectedDate])
+                    if (Registro.DizGiorni != null && Registro.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == Registro.DizGiorni[SelectedDate])
                     {
-                        rtbNoteDettagli.Text = r.DizGiorni[SelectedDate][e.RowIndex].Note;
+                        rtbNoteDettagli.Text = Registro.DizGiorni[SelectedDate][e.RowIndex].Note;
                     }
                     else
                     {
@@ -1982,18 +2012,18 @@ namespace Calendario_AriBerg
 
             try
             {
-                if (r.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == r.DizGiorni[SelectedDate])
+                if (Registro.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == Registro.DizGiorni[SelectedDate])
                 {
-                    if (e.Cell.ColumnIndex == 3 && r.DizGiorni.ContainsKey(SelectedDate))
+                    if (e.Cell.ColumnIndex == 3 && Registro.DizGiorni.ContainsKey(SelectedDate))
                     {
-                        cBxModificaEventoCliente.Text = r.DizGiorni[SelectedDate][e.Cell.RowIndex].NomeCliente;
-                        rtbModificaNote.Text = r.DizGiorni[SelectedDate][e.Cell.RowIndex].Note;
+                        cBxModificaEventoCliente.Text = Registro.DizGiorni[SelectedDate][e.Cell.RowIndex].NomeCliente;
+                        rtbModificaNote.Text = Registro.DizGiorni[SelectedDate][e.Cell.RowIndex].Note;
                         //errore
                         // cBxModificaEventoMacchine.Text = r.DizGiorni[SelectedDate][e.Cell.RowIndex].Macchina;
 
                         listViewModificaOperazioni.Clear();
 
-                        foreach (object obj in r.DizGiorni[SelectedDate][e.Cell.RowIndex].Interventi)
+                        foreach (object obj in Registro.DizGiorni[SelectedDate][e.Cell.RowIndex].Interventi)
                         {
                             listViewModificaOperazioni.Items.Add(obj.ToString());
                         }
@@ -2051,12 +2081,12 @@ namespace Calendario_AriBerg
                 {
                     throw new Exception("Selezionare un evento \n per modificarlo");
                 }
-                if (!r.DizClienti.ContainsKey(cBxModificaEventoCliente.Text))
+                if (!Registro.DizClienti.ContainsKey(cBxModificaEventoCliente.Text))
                 {
                     throw new Exception("Inserire Cliente Valido");
                 }
                 bool checkmacchina = false;
-                foreach (Macchina m in r.DizClienti[cBxModificaEventoCliente.Text]._Mach)
+                foreach (Macchina m in Registro.DizClienti[cBxModificaEventoCliente.Text]._Mach)
                 {
                     if (m._Marca + "/" + m._Modello + "/" + m._Matricola == cBxModificaEventoMacchine.Text)
                     {
@@ -2170,21 +2200,21 @@ namespace Calendario_AriBerg
                 List<Evento> momentList = (List<Evento>)dgvEventi.DataSource;
                 bool filtrato = false;
 
-                if (r.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == r.DizGiorni[SelectedDate])
+                if (Registro.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == Registro.DizGiorni[SelectedDate])
                 {
                     dgvEventi.DataSource = null;
-                    r.RemoveEvento(r.DizGiorni[SelectedDate][app]);
+                    Registro.RemoveEvento(Registro.DizGiorni[SelectedDate][app]);
                 }
                 else
                 {
 
                     filtrato = true;
-                    foreach (Evento ev in r.DizGiorni[(DateTime)dgvEventi["Giorno", app].Value])
+                    foreach (Evento ev in Registro.DizGiorni[(DateTime)dgvEventi["Giorno", app].Value])
                     {
                         if (ev.ID == momentList[app].ID)
                         {
                             dgvEventi.DataSource = null;
-                            r.RemoveEvento(ev);
+                            Registro.RemoveEvento(ev);
                             momentList.RemoveAt(app);
                             break;
                         }
@@ -2198,9 +2228,9 @@ namespace Calendario_AriBerg
                 //r.salvaEventi();
                 //r.inviaSalvataggi();
 
-                if (r.DizGiorni.ContainsKey(SelectedDate) && filtrato == false)
+                if (Registro.DizGiorni.ContainsKey(SelectedDate) && filtrato == false)
                 {
-                    dgvEventi.DataSource = r.DizGiorni[SelectedDate];
+                    dgvEventi.DataSource = Registro.DizGiorni[SelectedDate];
                     HideColumnsEventi();
                     ariCalendario.SelectionStart = SelectedDate.AddDays(1);
                     ariCalendario.SelectionStart = SelectedDate.AddDays(-1);
@@ -2345,13 +2375,13 @@ namespace Calendario_AriBerg
                     Cliente cliente = new Cliente(tbxAggiungiClienteNome.Text, tbxAggiungiClienteInd.Text, tbxAggiungiClienteTel.Text, tbxAggiungiClienteIVA.Text, tbxAggiungiClienteMail.Text,
                         tbxAggiungiClientePrif.Text, listaMacchine);
 
-                    r.DizClienti.Add(cliente._Nome, cliente);
+                    Registro.DizClienti.Add(cliente._Nome, cliente);
 
                     gBxClientiAggiungiCliente.Visible = false;
 
                     //threadRicevi.Suspend();
                     dgvVisualizzaClienti.DataSource = null;
-                    dgvVisualizzaClienti.DataSource = r.DizClienti.Values.ToList();
+                    dgvVisualizzaClienti.DataSource = Registro.DizClienti.Values.ToList();
                     HideColumnsClienti();
 
                     //Interazione DB
@@ -2404,8 +2434,8 @@ namespace Calendario_AriBerg
 
                 lvwMostraMacchineAccessori.Items.Clear();
                 //lvwModificaCliente.Items.Clear();
-                tbxMostraIva.Text = r.DizClienti[e.Cell.Value.ToString()]._PartIVA;
-                tbxMostraPrif.Text = r.DizClienti[e.Cell.Value.ToString()]._Ref;
+                tbxMostraIva.Text = Registro.DizClienti[e.Cell.Value.ToString()]._PartIVA;
+                tbxMostraPrif.Text = Registro.DizClienti[e.Cell.Value.ToString()]._Ref;
                 if (listaMacchine != null)
                 {
                     listaMacchine.Clear();
@@ -2414,7 +2444,7 @@ namespace Calendario_AriBerg
                 {
                     listaMacchine = new List<Macchina>();
                 }
-                foreach (Macchina macchina in r.DizClienti[e.Cell.Value.ToString()]._Mach)
+                foreach (Macchina macchina in Registro.DizClienti[e.Cell.Value.ToString()]._Mach)
                 {
                     ListViewItem item = new ListViewItem
                     {
@@ -2436,12 +2466,12 @@ namespace Calendario_AriBerg
                     listaMacchine.Add(macchina);
                 }
 
-                txBxModificaClienteNome.Text = r.DizClienti[e.Cell.Value.ToString()]._Nome;
-                txBxModificaClienteTel.Text = r.DizClienti[e.Cell.Value.ToString()]._Telefono;
-                txBxModificaClienteMail.Text = r.DizClienti[e.Cell.Value.ToString()]._Email;
-                txBxModificaClienteInd.Text = r.DizClienti[e.Cell.Value.ToString()]._Indirizzo;
-                txBxModificaClienteIva.Text = r.DizClienti[e.Cell.Value.ToString()]._PartIVA;
-                txBxModificaClientePrif.Text = r.DizClienti[e.Cell.Value.ToString()]._Ref;
+                txBxModificaClienteNome.Text = Registro.DizClienti[e.Cell.Value.ToString()]._Nome;
+                txBxModificaClienteTel.Text = Registro.DizClienti[e.Cell.Value.ToString()]._Telefono;
+                txBxModificaClienteMail.Text = Registro.DizClienti[e.Cell.Value.ToString()]._Email;
+                txBxModificaClienteInd.Text = Registro.DizClienti[e.Cell.Value.ToString()]._Indirizzo;
+                txBxModificaClienteIva.Text = Registro.DizClienti[e.Cell.Value.ToString()]._PartIVA;
+                txBxModificaClientePrif.Text = Registro.DizClienti[e.Cell.Value.ToString()]._Ref;
 
             }
             else
@@ -2459,10 +2489,10 @@ namespace Calendario_AriBerg
             {
                 if (dgvVisualizzaClienti.CurrentCell.ColumnIndex == 0)
                 {
-                    chbxMostraNoleggio.Checked = r.DizClienti[dgvVisualizzaClienti.CurrentCell.Value.ToString()]._Mach[item.Index]._Noleggio;
-                    rtbMostraNote.Text = r.DizClienti[dgvVisualizzaClienti.CurrentCell.Value.ToString()]._Mach[item.Index]._Note;
+                    chbxMostraNoleggio.Checked = Registro.DizClienti[dgvVisualizzaClienti.CurrentCell.Value.ToString()]._Mach[item.Index]._Noleggio;
+                    rtbMostraNote.Text = Registro.DizClienti[dgvVisualizzaClienti.CurrentCell.Value.ToString()]._Mach[item.Index]._Note;
 
-                    foreach (Componenti componente in r.DizClienti[dgvVisualizzaClienti.CurrentCell.Value.ToString()]._Mach[item.Index]._Componenti)
+                    foreach (Componenti componente in Registro.DizClienti[dgvVisualizzaClienti.CurrentCell.Value.ToString()]._Mach[item.Index]._Componenti)
                     {
                         ListViewItem listViewItem = new ListViewItem
                         {
@@ -2486,7 +2516,7 @@ namespace Calendario_AriBerg
 
         private async void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            await Task.Run(new Action(() => { RefreshActualTab(); }));
+            await Task.Run(new Action(() => { RefreshCurrentTab(); }));
         }
 
         private void btnClientiEditCustomer_Click(object sender, EventArgs e)
@@ -2689,17 +2719,17 @@ namespace Calendario_AriBerg
         {
             Notifica notifica = new Notifica();
 
-            if (r.DizClienti != null)
+            if (Registro.DizClienti != null)
             {
                 if (rdBtnTrovaPerNome.Checked)
                 {
                     List<Cliente> nomeCliente = new List<Cliente>();
 
-                    foreach (KeyValuePair<string, Cliente> kv in r.DizClienti)
+                    foreach (KeyValuePair<string, Cliente> kv in Registro.DizClienti)
                     {
                         if (kv.Key == cbBxTrovaPerNome.Text)
                         {
-                            nomeCliente.Add(r.DizClienti[kv.Key]);
+                            nomeCliente.Add(Registro.DizClienti[kv.Key]);
                         }
                     }
 
@@ -2721,11 +2751,11 @@ namespace Calendario_AriBerg
                 {
                     List<Cliente> prifCliente = new List<Cliente>();
 
-                    foreach (KeyValuePair<string, Cliente> kv in r.DizClienti)
+                    foreach (KeyValuePair<string, Cliente> kv in Registro.DizClienti)
                     {
                         if (kv.Value._Ref == cbBxTrovaPerPRif.Text)
                         {
-                            prifCliente.Add(r.DizClienti[kv.Key]);
+                            prifCliente.Add(Registro.DizClienti[kv.Key]);
                         }
                     }
 
@@ -2747,13 +2777,13 @@ namespace Calendario_AriBerg
                 {
                     List<Cliente> matricolaMacchina = new List<Cliente>();
 
-                    foreach (KeyValuePair<string, Cliente> kv in r.DizClienti)
+                    foreach (KeyValuePair<string, Cliente> kv in Registro.DizClienti)
                     {
                         foreach (Macchina macchina in kv.Value._Mach)
                         {
                             if (macchina._Marca + "/" + macchina._Modello + "/" + macchina._Matricola == cbBxTrovaPerMatricola.Text)
                             {
-                                matricolaMacchina.Add(r.DizClienti[kv.Key]);
+                                matricolaMacchina.Add(Registro.DizClienti[kv.Key]);
                             }
                         }
                     }
@@ -2776,11 +2806,11 @@ namespace Calendario_AriBerg
                 {
                     List<Cliente> emailCliente = new List<Cliente>();
 
-                    foreach (KeyValuePair<string, Cliente> kv in r.DizClienti)
+                    foreach (KeyValuePair<string, Cliente> kv in Registro.DizClienti)
                     {
                         if (kv.Value._Email == cbBxTrovaPerMail.Text)
                         {
-                            emailCliente.Add(r.DizClienti[kv.Key]);
+                            emailCliente.Add(Registro.DizClienti[kv.Key]);
                         }
                     }
 
@@ -2814,18 +2844,18 @@ namespace Calendario_AriBerg
             rdBtnTrovaPerMatricola.Checked = false;
             rdBtnTrovaPerPRif.Checked = false;
 
-            dgvVisualizzaClienti.DataSource = r.DizClienti.Values.ToList();
+            dgvVisualizzaClienti.DataSource = Registro.DizClienti.Values.ToList();
             HideColumnsClienti();
             lblClienti.Text = "Tutti i clienti";
         }
 
         private void cBxAggiungiEventoCliente_TextChanged(object sender, EventArgs e)
         {
-            if (r.DizClienti.ContainsKey(cBxAggiungiEventoCliente.Text))
+            if (Registro.DizClienti.ContainsKey(cBxAggiungiEventoCliente.Text))
             {
                 cBxAggiungiEventoMacchine.Items.Clear();
                 cBxAggiungiEventoMacchine.Text = null;
-                foreach (Macchina macchina in r.DizClienti[cBxAggiungiEventoCliente.Text]._Mach)
+                foreach (Macchina macchina in Registro.DizClienti[cBxAggiungiEventoCliente.Text]._Mach)
                 {
                     cBxAggiungiEventoMacchine.Items.Add(macchina._Marca + "/" + macchina._Modello + "/" + macchina._Matricola);
                 }
@@ -2842,10 +2872,10 @@ namespace Calendario_AriBerg
 
             if (cellIndex == 0)
             {
-                r.DizClienti.Remove(key);
+                Registro.DizClienti.Remove(key);
 
                 dgvVisualizzaClienti.DataSource = null;
-                dgvVisualizzaClienti.DataSource = r.DizClienti.Values.ToList();
+                dgvVisualizzaClienti.DataSource = Registro.DizClienti.Values.ToList();
                 HideColumnsClienti();
                 AggiornaComboBox();
 
@@ -2878,7 +2908,7 @@ namespace Calendario_AriBerg
         {
             Notifica notifica = new Notifica();
 
-            if (r.DizGiorni != null)
+            if (Registro.DizGiorni != null)
             {
 
                 List<Evento> eventiTrovati = new List<Evento>();
@@ -2888,7 +2918,7 @@ namespace Calendario_AriBerg
                 {
                     s = cbBxSearchEventoCliente.Text;
 
-                    foreach (KeyValuePair<DateTime, List<Evento>> kv in r.DizGiorni)
+                    foreach (KeyValuePair<DateTime, List<Evento>> kv in Registro.DizGiorni)
                     {
                         foreach (Evento eventoLista in kv.Value)
                         {
@@ -2918,7 +2948,7 @@ namespace Calendario_AriBerg
                     s = cbBxSearchEventoMatricola.Text;
 
 
-                    foreach (KeyValuePair<DateTime, List<Evento>> kv in r.DizGiorni)
+                    foreach (KeyValuePair<DateTime, List<Evento>> kv in Registro.DizGiorni)
                     {
                         foreach (Evento eventoLista in kv.Value)
                         {
@@ -3713,7 +3743,7 @@ namespace Calendario_AriBerg
             try
             {
                 conn = Metodi.ConnectToDatabase();
-                string selectedType = dgvMarcheComponenti.SelectedCells[0].Value.ToString();
+                //string selectedType = dgvMarcheComponenti.SelectedCells[0].Value.ToString();
                 string query = $"DELETE FROM magazzino WHERE id_magazzino = '{tbCtrlMagazzini.SelectedTab.Name}'";
                 MySqlCommand DeleteComponentBrand = new MySqlCommand(query, conn);
                 int row = DeleteComponentBrand.ExecuteNonQuery();

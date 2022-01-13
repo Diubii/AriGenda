@@ -10,20 +10,21 @@ using System.Linq;
 
 namespace Calendario_AriBerg
 {
-    public class Registro
+    public static class Registro
     {
-        internal Dictionary<DateTime, List<Evento>> DizGiorni { get; set; } = new Dictionary<DateTime, List<Evento>>();
-        internal Dictionary<string, Cliente> DizClienti { get; set; } = new Dictionary<string, Cliente>();
-        internal Dictionary<string, Componenti> DizComponenti { get; set; } = new Dictionary<string, Componenti>();
-        internal Dictionary<string, Magazzino> DizMagazzini { get; set; } = new Dictionary<string, Magazzino>();
+        internal static List<Componenti> ComponentiAttuali { get; set; } = new List<Componenti>();
+        internal static Dictionary<DateTime, List<Evento>> DizGiorni { get; set; } = new Dictionary<DateTime, List<Evento>>();
+        internal static Dictionary<string, Cliente> DizClienti { get; set; } = new Dictionary<string, Cliente>();
+        internal static Dictionary<string, Componenti> DizComponenti { get; set; } = new Dictionary<string, Componenti>();
+        internal static Dictionary<string, Magazzino> DizMagazzini { get; set; } = new Dictionary<string, Magazzino>();
 
-        internal Dictionary<DateTime, List<Evento>> appDizGiorni { get; set; } = new Dictionary<DateTime, List<Evento>>();
-        internal Dictionary<string, Cliente> appDizClienti { get; set; } = new Dictionary<string, Cliente>();
-        internal Dictionary<string, Componenti> appDizComponenti { get; set; } = new Dictionary<string, Componenti>();
-        internal Dictionary<string, Magazzino> appDizMagazzini { get; set; } = new Dictionary<string, Magazzino>();
+        internal static Dictionary<DateTime, List<Evento>> appDizGiorni { get; set; } = new Dictionary<DateTime, List<Evento>>();
+        internal static Dictionary<string, Cliente> appDizClienti { get; set; } = new Dictionary<string, Cliente>();
+        internal static Dictionary<string, Componenti> appDizComponenti { get; set; } = new Dictionary<string, Componenti>();
+        internal static Dictionary<string, Magazzino> appDizMagazzini { get; set; } = new Dictionary<string, Magazzino>();
 
         //Gestione eventi
-        public void AddEvento(Evento e)
+        public static void AddEvento(Evento e)
         {
             if (DizGiorni.ContainsKey(e.Giorno))
             {
@@ -37,7 +38,7 @@ namespace Calendario_AriBerg
             }
         }
 
-        public void RemoveEvento(Evento e)
+        public static void RemoveEvento(Evento e)
         {
             if (DizGiorni.ContainsKey(e.Giorno))
             {
@@ -54,7 +55,7 @@ namespace Calendario_AriBerg
         }
 
         //Non funziona se viene cambiata la data
-        public void ModifyEvento(Evento enew, Evento eold)
+        public static void ModifyEvento(Evento enew, Evento eold)
         {
             if (eold.Giorno != enew.Giorno)
             {
@@ -78,40 +79,41 @@ namespace Calendario_AriBerg
         }
 
         //Gestione Clienti
-        public void AddCliente()
+        public static void AddCliente()
         {
 
         }
-        public void ModifyCliente(Cliente old,Cliente update)
+
+        public static void ModifyCliente(Cliente old,Cliente update)
         {
             DizClienti.Remove(old._Nome);
             DizClienti.Add(update._Nome, update);
 
         }
-        public void RemoveCliente()
+        public static void RemoveCliente()
         {
 
         }
     
         
         //Gestione Componenti
-        public void AddComponenti()
+        public static void AddComponenti()
         {
 
         }
 
-        public void ModifyComponenti()
+        public static void ModifyComponenti()
         {
 
         }
 
-        public void RemoveComponenti()
+        public static void RemoveComponenti()
         {
 
         }
 
         //Gestione Magazzini
-        public void AddMagazzino(Magazzino m)
+        public static void AddMagazzino(Magazzino m)
         {
             if (DizMagazzini.ContainsKey(m.Nome) == false)
             {
@@ -123,25 +125,25 @@ namespace Calendario_AriBerg
             }
         }
 
-        public void ModifyMagazzino()
+        public static void ModifyMagazzino()
         {
 
         }
 
-        public void DeleteMagazzino()
+        public static void DeleteMagazzino()
         {
 
         }
 
-     
+
         //////////////////////////////////////////
         //Gestione scambio dati con database
-       ////////////////////////////////////////////////////
-        
+        ////////////////////////////////////////////////////
+
         /// <summary>
         /// Pull dei dati dal database
         /// </summary>
-        internal void PullDati()
+        internal static void PullDati()
         {
             MySqlConnection conn = Metodi.ConnectToDatabase();
 
@@ -198,7 +200,7 @@ namespace Calendario_AriBerg
         /// <summary>
         /// Applica ai dizionari veri quelli di appoggio
         /// </summary>
-        internal void UpdateWithPull()
+        internal static void UpdateWithPull()
         {
 
         }
@@ -206,7 +208,7 @@ namespace Calendario_AriBerg
         /// <summary>
         /// Fa il pull e confronta i dizionari aggiornati di appoggio con quelli veri e pusha le differenze
         /// </summary>
-        internal void PushDati()
+        internal static void PushDati()
         {
             PullDati();
 
