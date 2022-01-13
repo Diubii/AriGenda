@@ -8,12 +8,12 @@ namespace Calendario_AriBerg
 {
     public class Componenti
     {
-        internal string Tipo { get; set; }
-        internal string Marca { get; set; }
-        internal int Soglia { get; set; }
-        internal int N_ordine { get; set; }
-        internal string Codice { get; set; }
-        internal int Quantita { get; set; }
+        public string Tipo { get; set; }
+        public string Marca { get; set; }
+        public int Soglia { get; set; }
+        public int N_ordine { get; set; }
+        public string Codice { get; set; }
+        public int Quantita { get; set; }
 
         public Componenti()
         {
