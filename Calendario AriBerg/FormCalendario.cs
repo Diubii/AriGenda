@@ -3223,7 +3223,12 @@ namespace Calendario_AriBerg
 
         private void btnAddComponente_Click(object sender, EventArgs e)
         {
-            if (Metodi.CheckForNewComponentsAndNotify(dgvComponenti)) return;
+            if (Metodi.CheckForNewComponentsAndNotify(dgvComponenti))
+            {
+                RefreshComponentsCatalogoAndCBX();
+                return;
+            }
+
             gBxAggiungiComponente.Visible = true;
         }
 
@@ -3234,10 +3239,12 @@ namespace Calendario_AriBerg
 
         private void btnRemoveComponente_Click(object sender, EventArgs e)
         {
-            if (Metodi.CheckForNewComponentsAndNotify(dgvComponenti)) return;
-
-            RefreshComponentsCatalogoAndCBX();
-            
+            if (Metodi.CheckForNewComponentsAndNotify(dgvComponenti))
+            {
+                RefreshComponentsCatalogoAndCBX();
+                return;
+            }
+                      
             MySqlConnection conn = null;
             try
             {
@@ -3263,9 +3270,11 @@ namespace Calendario_AriBerg
 
         private void btnModifyComponente_Click(object sender, EventArgs e)
         {
-            if (Metodi.CheckForNewComponentsAndNotify(dgvComponenti)) return;
-
-            RefreshComponentsCatalogoAndCBX();
+            if (Metodi.CheckForNewComponentsAndNotify(dgvComponenti))
+            {
+                RefreshComponentsCatalogoAndCBX();
+                return;
+            }           
 
             Componenti componente = (Componenti)dgvComponenti.CurrentRow.DataBoundItem;
             tbxModificaCodiceComponente.Text = componente.Codice;
