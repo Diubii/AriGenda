@@ -209,7 +209,7 @@ namespace Calendario_AriBerg
 
             }
         }
-
+       
         private void RefreshComponentsCatalogoAndCBX()
         {
             Invoke(new Action(() => {               
@@ -233,18 +233,7 @@ namespace Calendario_AriBerg
                 l.Add(c);
             }
 
-            List<Componenti> currentComponents = new List<Componenti>();
-
-            foreach (DataGridViewRow row in this.dgvComponenti.Rows)
-            {
-                Componenti comp = row.DataBoundItem as Componenti;
-            }
-
-            if (l.All(currentComponents.Contains) && l.Count == currentComponents.Count)
-            {
-                Notifica n = new Notifica();
-                n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
-            }
+            Metodi.CheckForNewComponentsAndNotify(dgvComponenti);
 
             BindingSource bs = new BindingSource();
             bs.DataSource = l;
@@ -3234,6 +3223,7 @@ namespace Calendario_AriBerg
 
         private void btnAddComponente_Click(object sender, EventArgs e)
         {
+            if (Metodi.CheckForNewComponentsAndNotify(dgvComponenti)) return;
             gBxAggiungiComponente.Visible = true;
         }
 
@@ -3244,6 +3234,10 @@ namespace Calendario_AriBerg
 
         private void btnRemoveComponente_Click(object sender, EventArgs e)
         {
+            if (Metodi.CheckForNewComponentsAndNotify(dgvComponenti)) return;
+
+            RefreshComponentsCatalogoAndCBX();
+            
             MySqlConnection conn = null;
             try
             {
@@ -3269,6 +3263,10 @@ namespace Calendario_AriBerg
 
         private void btnModifyComponente_Click(object sender, EventArgs e)
         {
+            if (Metodi.CheckForNewComponentsAndNotify(dgvComponenti)) return;
+
+            RefreshComponentsCatalogoAndCBX();
+
             Componenti componente = (Componenti)dgvComponenti.CurrentRow.DataBoundItem;
             tbxModificaCodiceComponente.Text = componente.Codice;
             cbxModificaMarcaComponente.SelectedItem = componente.Marca;
