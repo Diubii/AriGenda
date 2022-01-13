@@ -119,9 +119,9 @@ namespace Calendario_AriBerg
             t.Start();
         }
 
-        private void TimerTick(object sender, EventArgs e)
+        private async void TimerTick(object sender, EventArgs e)
         {
-            Task.Run(new Action(() => { Invoke(new Action(() => { RefreshActualTabAsync(); })); } ));            
+            await Task.Run(new Action(() => { Invoke(new Action(() => { RefreshActualTabAsync(); })); } ));            
         }
 
         private void RefreshActualTabAsync()
