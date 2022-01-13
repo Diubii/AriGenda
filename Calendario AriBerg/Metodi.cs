@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 
 namespace Calendario_AriBerg
 {
@@ -36,7 +37,7 @@ namespace Calendario_AriBerg
             }
         }
 
-        internal static bool CheckForNewComponents(DataGridView dgvComponenti)
+        internal static bool CheckForNewComponents(ref DataGridView dgvComponenti)
         {
             List<Componenti> l = new List<Componenti>();
             Componenti c = new Componenti();
@@ -58,9 +59,32 @@ namespace Calendario_AriBerg
             foreach (DataGridViewRow row in dgvComponenti.Rows)
             {
                 Componenti comp = row.DataBoundItem as Componenti;
+                currentComponents.Add(comp);
             }
 
-            if (!l.All(currentComponents.Contains) || l.Count != currentComponents.Count)
+            bool different = false;
+
+            foreach(Componenti comp in l)
+            {
+                if (currentComponents.Count == 0) break;
+
+                Componenti sameCode = currentComponents.Find(x => x.Codice == comp.Codice);
+                if(sameCode == null)
+                {
+                    different = true;
+                    break;
+                }
+                else
+                {
+                    if (JsonConvert.SerializeObject(comp) != JsonConvert.SerializeObject(sameCode))
+                    {
+                        different = true;
+                        break;
+                    }
+                }
+            }
+
+            if (different || l.Count != currentComponents.Count)
             {
                 return true;
             }
@@ -70,12 +94,13 @@ namespace Calendario_AriBerg
             }
         }
 
-        internal static bool CheckForNewComponentsAndNotify(DataGridView dgvComponenti)
+        internal static bool CheckForNewComponentsAndNotify(ref DataGridView dgvComponenti)
         {
-            if (Metodi.CheckForNewComponents(dgvComponenti))
+            if (Metodi.CheckForNewComponents(ref dgvComponenti))
             {
                 Notifica n = new Notifica();
                 n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
+                
                 return true;
             }
             else

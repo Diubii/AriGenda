@@ -111,6 +111,8 @@ namespace Calendario_AriBerg
             rdBtnTrovaPerNome.Checked = true;
             AggiornaComboBox();
 
+            dgvComponenti.AllowUserToAddRows = false;
+
             //timerUpdatePagina con database
             //t.Interval = 20000;
             //t.Tick += TimerTick;
@@ -233,7 +235,7 @@ namespace Calendario_AriBerg
                 l.Add(c);
             }
 
-            Metodi.CheckForNewComponentsAndNotify(dgvComponenti);
+            Invoke(new Action(() => { Metodi.CheckForNewComponentsAndNotify(ref dgvComponenti); }));
 
             BindingSource bs = new BindingSource();
             bs.DataSource = l;
@@ -3223,7 +3225,7 @@ namespace Calendario_AriBerg
 
         private void btnAddComponente_Click(object sender, EventArgs e)
         {
-            if (Metodi.CheckForNewComponentsAndNotify(dgvComponenti))
+            if (Metodi.CheckForNewComponents(ref dgvComponenti))
             {
                 RefreshComponentsCatalogoAndCBX();
                 return;
@@ -3239,7 +3241,7 @@ namespace Calendario_AriBerg
 
         private void btnRemoveComponente_Click(object sender, EventArgs e)
         {
-            if (Metodi.CheckForNewComponentsAndNotify(dgvComponenti))
+            if (Metodi.CheckForNewComponents(ref dgvComponenti))
             {
                 RefreshComponentsCatalogoAndCBX();
                 return;
@@ -3270,7 +3272,7 @@ namespace Calendario_AriBerg
 
         private void btnModifyComponente_Click(object sender, EventArgs e)
         {
-            if (Metodi.CheckForNewComponentsAndNotify(dgvComponenti))
+            if (Metodi.CheckForNewComponents(ref dgvComponenti))
             {
                 RefreshComponentsCatalogoAndCBX();
                 return;
