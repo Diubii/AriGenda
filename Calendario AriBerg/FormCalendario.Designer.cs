@@ -107,7 +107,6 @@ namespace Calendario_AriBerg
             this.rdBtnSearchEventoCliente = new System.Windows.Forms.RadioButton();
             this.cbBxSearchEventoMatricola = new System.Windows.Forms.ComboBox();
             this.cbBxSearchEventoCliente = new System.Windows.Forms.ComboBox();
-            this.ariCalendario = new Calendario_AriBerg.AriCalendario();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pnlCommands2 = new System.Windows.Forms.Panel();
             this.btnClientiAddCustomer = new System.Windows.Forms.Button();
@@ -316,6 +315,7 @@ namespace Calendario_AriBerg
             this.btnDelMarca = new System.Windows.Forms.Button();
             this.btnAddMarca = new System.Windows.Forms.Button();
             this.btnEditMarca = new System.Windows.Forms.Button();
+            this.ariCalendario = new Calendario_AriBerg.AriCalendario();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventi)).BeginInit();
             this.gbxLegenda.SuspendLayout();
             this.gbxAggiungi.SuspendLayout();
@@ -1366,23 +1366,6 @@ namespace Calendario_AriBerg
             this.cbBxSearchEventoCliente.Size = new System.Drawing.Size(206, 26);
             this.cbBxSearchEventoCliente.TabIndex = 0;
             // 
-            // ariCalendario
-            // 
-            this.ariCalendario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.ariCalendario.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ariCalendario.Font = new System.Drawing.Font("Segoe UI Light", 32.25F);
-            this.ariCalendario.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.ariCalendario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ariCalendario.Location = new System.Drawing.Point(3, 82);
-            this.ariCalendario.Margin = new System.Windows.Forms.Padding(20);
-            this.ariCalendario.MaxDate = new System.DateTime(2059, 12, 31, 0, 0, 0, 0);
-            this.ariCalendario.MaxSelectionCount = 1;
-            this.ariCalendario.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
-            this.ariCalendario.Name = "ariCalendario";
-            this.ariCalendario.TabIndex = 12;
-            this.ariCalendario.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.ariCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AriCalendario_DateChanged);
-            // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -2228,11 +2211,6 @@ namespace Calendario_AriBerg
             // cbBxAggiungiMacchinaTipoFiltro
             // 
             this.cbBxAggiungiMacchinaTipoFiltro.FormattingEnabled = true;
-            this.cbBxAggiungiMacchinaTipoFiltro.Items.AddRange(new object[] {
-            "Fa",
-            "Fo",
-            "Fi",
-            "GA"});
             this.cbBxAggiungiMacchinaTipoFiltro.Location = new System.Drawing.Point(146, 305);
             this.cbBxAggiungiMacchinaTipoFiltro.Name = "cbBxAggiungiMacchinaTipoFiltro";
             this.cbBxAggiungiMacchinaTipoFiltro.Size = new System.Drawing.Size(214, 28);
@@ -2888,6 +2866,7 @@ namespace Calendario_AriBerg
             // 
             // dgvMagazziniTotale
             // 
+            this.dgvMagazziniTotale.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvMagazziniTotale.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMagazziniTotale.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMagazziniTotale.Location = new System.Drawing.Point(3, 3);
@@ -2930,7 +2909,7 @@ namespace Calendario_AriBerg
             this.gBxAggiungiComponente.Controls.Add(this.btnExitAggiungiComponente);
             this.gBxAggiungiComponente.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gBxAggiungiComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gBxAggiungiComponente.Location = new System.Drawing.Point(3, 92);
+            this.gBxAggiungiComponente.Location = new System.Drawing.Point(3, 87);
             this.gBxAggiungiComponente.Name = "gBxAggiungiComponente";
             this.gBxAggiungiComponente.Size = new System.Drawing.Size(556, 502);
             this.gBxAggiungiComponente.TabIndex = 44;
@@ -3039,11 +3018,6 @@ namespace Calendario_AriBerg
             this.cbxAggiungiComponenteTipo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbxAggiungiComponenteTipo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbxAggiungiComponenteTipo.FormattingEnabled = true;
-            this.cbxAggiungiComponenteTipo.Items.AddRange(new object[] {
-            "Fa",
-            "Fo",
-            "Fi",
-            "GA"});
             this.cbxAggiungiComponenteTipo.Location = new System.Drawing.Point(23, 140);
             this.cbxAggiungiComponenteTipo.Name = "cbxAggiungiComponenteTipo";
             this.cbxAggiungiComponenteTipo.Size = new System.Drawing.Size(492, 33);
@@ -3254,9 +3228,9 @@ namespace Calendario_AriBerg
             // 
             // PnlCatalogo
             // 
+            this.PnlCatalogo.Controls.Add(this.dgvComponenti);
             this.PnlCatalogo.Controls.Add(this.gbxModificaComponente);
             this.PnlCatalogo.Controls.Add(this.lblCatalogoComponenti);
-            this.PnlCatalogo.Controls.Add(this.dgvComponenti);
             this.PnlCatalogo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PnlCatalogo.Location = new System.Drawing.Point(0, 0);
             this.PnlCatalogo.Name = "PnlCatalogo";
@@ -3385,11 +3359,6 @@ namespace Calendario_AriBerg
             this.cbxModificaTipoComponente.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbxModificaTipoComponente.FormattingEnabled = true;
-            this.cbxModificaTipoComponente.Items.AddRange(new object[] {
-            "Fa",
-            "Fo",
-            "Fi",
-            "GA"});
             this.cbxModificaTipoComponente.Location = new System.Drawing.Point(23, 140);
             this.cbxModificaTipoComponente.Name = "cbxModificaTipoComponente";
             this.cbxModificaTipoComponente.Size = new System.Drawing.Size(492, 33);
@@ -3447,11 +3416,12 @@ namespace Calendario_AriBerg
             // 
             // dgvComponenti
             // 
+            this.dgvComponenti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvComponenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvComponenti.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvComponenti.Location = new System.Drawing.Point(0, 0);
+            this.dgvComponenti.Location = new System.Drawing.Point(0, 39);
             this.dgvComponenti.Name = "dgvComponenti";
-            this.dgvComponenti.Size = new System.Drawing.Size(770, 722);
+            this.dgvComponenti.Size = new System.Drawing.Size(770, 683);
             this.dgvComponenti.TabIndex = 47;
             // 
             // pnlFiltriMagazzino
@@ -3468,9 +3438,9 @@ namespace Calendario_AriBerg
             this.pnlFiltriMagazzino.Controls.Add(this.cbBxFiltroMagazzinoCodice);
             this.pnlFiltriMagazzino.Controls.Add(this.cbBxFiltroMagazzinoTipo);
             this.pnlFiltriMagazzino.ForeColor = System.Drawing.Color.White;
-            this.pnlFiltriMagazzino.Location = new System.Drawing.Point(219, 7);
+            this.pnlFiltriMagazzino.Location = new System.Drawing.Point(219, 6);
             this.pnlFiltriMagazzino.Name = "pnlFiltriMagazzino";
-            this.pnlFiltriMagazzino.Size = new System.Drawing.Size(814, 72);
+            this.pnlFiltriMagazzino.Size = new System.Drawing.Size(814, 73);
             this.pnlFiltriMagazzino.TabIndex = 48;
             // 
             // checkBox5
@@ -3979,6 +3949,23 @@ namespace Calendario_AriBerg
             this.btnEditMarca.TabIndex = 25;
             this.btnEditMarca.UseVisualStyleBackColor = false;
             this.btnEditMarca.Click += new System.EventHandler(this.btnEditMarca_Click);
+            // 
+            // ariCalendario
+            // 
+            this.ariCalendario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.ariCalendario.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ariCalendario.Font = new System.Drawing.Font("Segoe UI Light", 32.25F);
+            this.ariCalendario.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.ariCalendario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.ariCalendario.Location = new System.Drawing.Point(3, 82);
+            this.ariCalendario.Margin = new System.Windows.Forms.Padding(20);
+            this.ariCalendario.MaxDate = new System.DateTime(2059, 12, 31, 0, 0, 0, 0);
+            this.ariCalendario.MaxSelectionCount = 1;
+            this.ariCalendario.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
+            this.ariCalendario.Name = "ariCalendario";
+            this.ariCalendario.TabIndex = 12;
+            this.ariCalendario.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.ariCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AriCalendario_DateChanged);
             // 
             // FormCalendario
             // 
