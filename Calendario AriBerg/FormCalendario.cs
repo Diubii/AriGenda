@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
@@ -11,7 +12,7 @@ namespace Calendario_AriBerg
 {
     public partial class FormCalendario : Form
     {
-        public Timer t = new Timer();
+        public System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
 
         public static Registro r = new Registro();
 
@@ -121,10 +122,11 @@ namespace Calendario_AriBerg
 
         private void TimerTick(object sender, EventArgs e)
         {
-            Task.Run(new Action(() => { Invoke(new Action(() => { RefreshActualTabAsync(); })); } ));            
+            Thread t = new Thread(new ThreadStart(RefreshActualTab));
+            t.Start();   
         }
 
-        private void RefreshActualTabAsync()
+        private void RefreshActualTab()
         {
             switch (tabControl1.SelectedIndex)
             {
@@ -166,7 +168,7 @@ namespace Calendario_AriBerg
                 types.Add(res.GetString(0));
             }
 
-            cbxAggiungiComponenteTipo.DataSource = types;
+            Invoke(new Action(() => { cbxAggiungiComponenteTipo.DataSource = types; }));
 
         }
         private void AggiornaComboBox() //Da mettere in modifica ed elimina cliente
@@ -2366,7 +2368,8 @@ namespace Calendario_AriBerg
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-             RefreshActualTabAsync();                  
+            Thread t = new Thread(new ThreadStart(RefreshActualTab));
+            t.Start();
         }
 
         private void btnClientiEditCustomer_Click(object sender, EventArgs e)
@@ -3218,8 +3221,10 @@ namespace Calendario_AriBerg
             BindingSource bs = new BindingSource();
             bs.DataSource = types.Select(x => new { Value = x }).ToList();
 
-            dgvTipiComponenti.DataSource = bs;
-            dgvTipiComponenti.Columns["Value"].HeaderText = "Tipi dei componenti";
+            
+            Invoke(new Action(() => {
+                dgvTipiComponenti.DataSource = bs;
+                dgvTipiComponenti.Columns["Value"].HeaderText = "Tipi dei componenti"; }));
         }
 
         private void btnAddMarca_Click(object sender, EventArgs e)
@@ -3335,8 +3340,11 @@ namespace Calendario_AriBerg
             BindingSource bs = new BindingSource();
             bs.DataSource = brands.Select(x => new { Value = x }).ToList();
 
-            dgvMarcheComponenti.DataSource = bs;
-            dgvMarcheComponenti.Columns["Value"].HeaderText = "Marche dei componenti";
+            
+            
+            Invoke(new Action(() => {
+                dgvMarcheComponenti.DataSource = bs;
+                dgvMarcheComponenti.Columns["Value"].HeaderText = "Marche dei componenti"; }));
         }
 
         private void chBxFiltroMagazzinoTipo_CheckedChanged(object sender, EventArgs e)
