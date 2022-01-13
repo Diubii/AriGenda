@@ -31,8 +31,6 @@ namespace Calendario_AriBerg
 
         private void FormCalendario_Load(object sender, EventArgs e)
         {          
-            CheckForIllegalCrossThreadCalls = false;
-
             bool error = false;
 
             //Configurazione data
@@ -127,7 +125,9 @@ namespace Calendario_AriBerg
 
         private void RefreshActualTab()
         {
-            switch (tabControl1.SelectedIndex)
+            int a = 0;
+            Invoke(new Action(() => { a = tabControl1.SelectedIndex; }));
+            switch (a)
             {
                 case 0:
                     break;
