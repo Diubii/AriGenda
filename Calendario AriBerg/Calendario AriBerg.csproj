@@ -187,6 +187,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\refreshing_gif.gif" />
     <None Include="Resources\magazzino_delete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

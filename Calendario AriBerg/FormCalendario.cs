@@ -127,7 +127,13 @@ namespace Calendario_AriBerg
         private void RefreshActualTab()
         {
             int a = 0;
-            Invoke(new Action(() => { a = tabControl1.SelectedIndex; }));
+            
+            Invoke(new Action(() =>
+            { 
+                a = tabControl1.SelectedIndex;
+                Cursor = Cursors.AppStarting;
+                Enabled = false;
+            }));       
             switch (a)
             {
                 case 0:
@@ -143,10 +149,20 @@ namespace Calendario_AriBerg
                     RefreshComponentTypesDataGridView();
                     break;
             }
+            
+            Invoke(new Action(() => 
+            {
+                Enabled = true;
+                Cursor = Cursors.Default; 
+            }));
         }
 
         private void RefreshComponentsCatalogoAndCBX()
         {
+            Invoke(new Action(() => {
+                Enabled = false;
+                Cursor = Cursors.AppStarting; 
+            }));
             MySqlDataReader reader;
             List<Componenti> l = new List<Componenti>();
             Componenti c = new Componenti();
@@ -176,6 +192,11 @@ namespace Calendario_AriBerg
                 dgvComponenti.Columns["Quantita"].Visible = false;
             }));
 
+            Invoke(new Action(() =>
+            {
+                Enabled = true;
+                Cursor = Cursors.Default;
+            }));
         }
         private void UpdateComboboxTabc2MarcType()
         {
@@ -3565,6 +3586,83 @@ namespace Calendario_AriBerg
                 RefreshComponentsCatalogoAndCBX();
                 gbxModificaComponente.Visible = false;
                 dgvComponenti.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                Notifica n = new Notifica();
+                n.Show(ex.Message, Notifica.enmType.Warning);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void btnConfirmFilterComponentsWarehouse_Click(object sender, EventArgs e)
+        {
+            string codice = null;
+            if (chBxFiltroMagazzinoCodice.Checked) codice = cbBxFiltroMagazzinoCodice.Text;
+
+            string marca = null;
+            if (chBxFiltroMagazzinoMarca.Checked) marca = cbBxFiltroMagazzinoMarca.Text;
+
+            string tipo = null;
+            if (chBxFiltroMagazzinoTipo.Checked) tipo = cbBxFiltroMagazzinoTipo.Text;
+
+            bool applyToCatalogue = false;
+            if (chBxFiltriMagazzinoApplicaCatalogo.Checked) applyToCatalogue = true;
+
+            bool applyToWarehouse = false;
+            if (chBxFiltriMagazzinoApplicaMagazzino.Checked) applyToWarehouse = true;
+
+            bool sottoSoglia = false;
+            if (chBxFiltriMagazzinoSottoSoglia.Checked) sottoSoglia = true;
+
+            MySqlConnection conn = null;
+
+            try
+            {
+                conn = Metodi.ConnectToDatabase();
+                string query = null;
+
+                if(!string.IsNullOrWhiteSpace(codice + marca + tipo))
+                {
+                    if (applyToCatalogue)
+                    {
+                        query = "SELECT * FROM componente WHERE";
+                        if (codice != null) query += $" codice_componente = '{codice}'";
+                        if (marca != null) if (query.EndsWith("WHERE") || query.EndsWith("AND")) query += $" marca_componente = '{marca}'"; else query += $" AND marca_componente = '{marca}'";
+                        if (tipo != null) if (query.EndsWith("WHERE") || query.EndsWith("AND")) query += $" tipo_componente = '{tipo}'"; else query += $" AND tipo_componente = '{tipo}'";
+                    }
+                }
+                else
+                {
+                    RefreshComponentsCatalogoAndCBX();
+                    return;
+                }
+
+                if (query == null) throw new Exception("Nessuna query generata.");
+
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataReader res = cmd.ExecuteReader();
+
+                if (!res.HasRows) throw new Exception("Nessun valore trovato.");
+
+                Componenti c = null;
+                List<Componenti> comps = new List<Componenti>();
+
+                while (res.Read())
+                {                   
+                    c = new Componenti(res.GetString(2), res.GetString(1), res.GetInt32(3), res.GetInt32(4), res.GetString(0), 0);
+                    comps.Add(c);
+                }
+
+                if (applyToCatalogue)
+                {
+                    BindingSource bs = new BindingSource();
+                    bs.DataSource = comps;
+                    dgvComponenti.DataSource = bs;
+                }
             }
             catch (Exception ex)
             {
