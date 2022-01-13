@@ -240,9 +240,10 @@ namespace Calendario_AriBerg
             this.label5 = new System.Windows.Forms.Label();
             this.btnExitEditComponente = new System.Windows.Forms.Button();
             this.tbCtrlMagazzini = new System.Windows.Forms.TabControl();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.Totale = new System.Windows.Forms.TabPage();
             this.dgvMagazziniTotale = new System.Windows.Forms.DataGridView();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.Centrale = new System.Windows.Forms.TabPage();
+            this.dgvMagazzinoCentrale = new System.Windows.Forms.DataGridView();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.lblMagazziniComponenti = new System.Windows.Forms.Label();
             this.MidMagPanel = new System.Windows.Forms.Panel();
@@ -276,13 +277,13 @@ namespace Calendario_AriBerg
             this.dgvComponenti = new System.Windows.Forms.DataGridView();
             this.lblCatalogoComponenti = new System.Windows.Forms.Label();
             this.pnlFiltriMagazzino = new System.Windows.Forms.Panel();
-            this.chBxFiltriMagazzinoApplicaMagazzino = new System.Windows.Forms.CheckBox();
-            this.chBxFiltriMagazzinoApplicaCatalogo = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.chBxFiltroMagazzinoCodice = new System.Windows.Forms.CheckBox();
             this.chBxFiltroMagazzinoMarca = new System.Windows.Forms.CheckBox();
             this.chBxFiltroMagazzinoTipo = new System.Windows.Forms.CheckBox();
-            this.chBxFiltriMagazzinoSottoSoglia = new System.Windows.Forms.CheckBox();
-            this.btnConfirmFilterComponentsWarehouse = new System.Windows.Forms.Button();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.cbBxFiltroMagazzinoMarca = new System.Windows.Forms.ComboBox();
             this.cbBxFiltroMagazzinoCodice = new System.Windows.Forms.ComboBox();
             this.cbBxFiltroMagazzinoTipo = new System.Windows.Forms.ComboBox();
@@ -303,14 +304,14 @@ namespace Calendario_AriBerg
             this.topPanelAltro = new System.Windows.Forms.Panel();
             this.pnlTipi = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.bntDeleteTextTipologie = new System.Windows.Forms.Button();
             this.txBxTipoComponente = new System.Windows.Forms.TextBox();
             this.btnDelComponente = new System.Windows.Forms.Button();
             this.btnAddTipoComponente = new System.Windows.Forms.Button();
             this.btnEditComponente = new System.Windows.Forms.Button();
             this.pnlMarche = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
+            this.bntDeleteTextMarche = new System.Windows.Forms.Button();
             this.txBxMarcaComponente = new System.Windows.Forms.TextBox();
             this.btnDelMarca = new System.Windows.Forms.Button();
             this.btnAddMarca = new System.Windows.Forms.Button();
@@ -353,8 +354,10 @@ namespace Calendario_AriBerg
             ((System.ComponentModel.ISupportInitialize)(this.nudModificaSoglia)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudModificaNOrdine)).BeginInit();
             this.tbCtrlMagazzini.SuspendLayout();
-            this.tabPage4.SuspendLayout();
+            this.Totale.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMagazziniTotale)).BeginInit();
+            this.Centrale.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMagazzinoCentrale)).BeginInit();
             this.MidMagPanel.SuspendLayout();
             this.gbxEditComponenti.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudEditNcomponenti)).BeginInit();
@@ -3010,8 +3013,8 @@ namespace Calendario_AriBerg
             // 
             // tbCtrlMagazzini
             // 
-            this.tbCtrlMagazzini.Controls.Add(this.tabPage4);
-            this.tbCtrlMagazzini.Controls.Add(this.tabPage5);
+            this.tbCtrlMagazzini.Controls.Add(this.Totale);
+            this.tbCtrlMagazzini.Controls.Add(this.Centrale);
             this.tbCtrlMagazzini.Controls.Add(this.tabPage6);
             this.tbCtrlMagazzini.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbCtrlMagazzini.Location = new System.Drawing.Point(890, 133);
@@ -3019,17 +3022,18 @@ namespace Calendario_AriBerg
             this.tbCtrlMagazzini.SelectedIndex = 0;
             this.tbCtrlMagazzini.Size = new System.Drawing.Size(542, 668);
             this.tbCtrlMagazzini.TabIndex = 45;
+            this.tbCtrlMagazzini.SelectedIndexChanged += new System.EventHandler(this.tbCtrlMagazzini_SelectedIndexChanged);
             // 
-            // tabPage4
+            // Totale
             // 
-            this.tabPage4.Controls.Add(this.dgvMagazziniTotale);
-            this.tabPage4.Location = new System.Drawing.Point(4, 27);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(534, 637);
-            this.tabPage4.TabIndex = 0;
-            this.tabPage4.Text = "Totale";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.Totale.Controls.Add(this.dgvMagazziniTotale);
+            this.Totale.Location = new System.Drawing.Point(4, 27);
+            this.Totale.Name = "Totale";
+            this.Totale.Padding = new System.Windows.Forms.Padding(3);
+            this.Totale.Size = new System.Drawing.Size(534, 637);
+            this.Totale.TabIndex = 0;
+            this.Totale.Text = "Totale";
+            this.Totale.UseVisualStyleBackColor = true;
             // 
             // dgvMagazziniTotale
             // 
@@ -3043,15 +3047,28 @@ namespace Calendario_AriBerg
             this.dgvMagazziniTotale.Size = new System.Drawing.Size(528, 631);
             this.dgvMagazziniTotale.TabIndex = 0;
             // 
-            // tabPage5
+            // Centrale
             // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 27);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(534, 637);
-            this.tabPage5.TabIndex = 1;
-            this.tabPage5.Text = "Centrale";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            this.Centrale.Controls.Add(this.dgvMagazzinoCentrale);
+            this.Centrale.Location = new System.Drawing.Point(4, 27);
+            this.Centrale.Name = "Centrale";
+            this.Centrale.Padding = new System.Windows.Forms.Padding(3);
+            this.Centrale.Size = new System.Drawing.Size(534, 637);
+            this.Centrale.TabIndex = 1;
+            this.Centrale.Text = "Centrale";
+            this.Centrale.UseVisualStyleBackColor = true;
+            // 
+            // dgvMagazzinoCentrale
+            // 
+            this.dgvMagazzinoCentrale.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvMagazzinoCentrale.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMagazzinoCentrale.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvMagazzinoCentrale.Location = new System.Drawing.Point(3, 3);
+            this.dgvMagazzinoCentrale.MultiSelect = false;
+            this.dgvMagazzinoCentrale.Name = "dgvMagazzinoCentrale";
+            this.dgvMagazzinoCentrale.ReadOnly = true;
+            this.dgvMagazzinoCentrale.Size = new System.Drawing.Size(528, 636);
+            this.dgvMagazzinoCentrale.TabIndex = 1;
             // 
             // tabPage6
             // 
@@ -3433,13 +3450,13 @@ namespace Calendario_AriBerg
             // pnlFiltriMagazzino
             // 
             this.pnlFiltriMagazzino.BackColor = System.Drawing.Color.DimGray;
-            this.pnlFiltriMagazzino.Controls.Add(this.chBxFiltriMagazzinoApplicaMagazzino);
-            this.pnlFiltriMagazzino.Controls.Add(this.chBxFiltriMagazzinoApplicaCatalogo);
+            this.pnlFiltriMagazzino.Controls.Add(this.checkBox5);
+            this.pnlFiltriMagazzino.Controls.Add(this.checkBox1);
             this.pnlFiltriMagazzino.Controls.Add(this.chBxFiltroMagazzinoCodice);
             this.pnlFiltriMagazzino.Controls.Add(this.chBxFiltroMagazzinoMarca);
             this.pnlFiltriMagazzino.Controls.Add(this.chBxFiltroMagazzinoTipo);
-            this.pnlFiltriMagazzino.Controls.Add(this.chBxFiltriMagazzinoSottoSoglia);
-            this.pnlFiltriMagazzino.Controls.Add(this.btnConfirmFilterComponentsWarehouse);
+            this.pnlFiltriMagazzino.Controls.Add(this.checkBox4);
+            this.pnlFiltriMagazzino.Controls.Add(this.button1);
             this.pnlFiltriMagazzino.Controls.Add(this.cbBxFiltroMagazzinoMarca);
             this.pnlFiltriMagazzino.Controls.Add(this.cbBxFiltroMagazzinoCodice);
             this.pnlFiltriMagazzino.Controls.Add(this.cbBxFiltroMagazzinoTipo);
@@ -3449,25 +3466,25 @@ namespace Calendario_AriBerg
             this.pnlFiltriMagazzino.Size = new System.Drawing.Size(814, 73);
             this.pnlFiltriMagazzino.TabIndex = 48;
             // 
-            // chBxFiltriMagazzinoApplicaMagazzino
+            // checkBox5
             // 
-            this.chBxFiltriMagazzinoApplicaMagazzino.AutoSize = true;
-            this.chBxFiltriMagazzinoApplicaMagazzino.Location = new System.Drawing.Point(437, 37);
-            this.chBxFiltriMagazzinoApplicaMagazzino.Name = "chBxFiltriMagazzinoApplicaMagazzino";
-            this.chBxFiltriMagazzinoApplicaMagazzino.Size = new System.Drawing.Size(151, 22);
-            this.chBxFiltriMagazzinoApplicaMagazzino.TabIndex = 34;
-            this.chBxFiltriMagazzinoApplicaMagazzino.Text = "Applica a magazzino";
-            this.chBxFiltriMagazzinoApplicaMagazzino.UseVisualStyleBackColor = true;
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(437, 37);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(151, 22);
+            this.checkBox5.TabIndex = 34;
+            this.checkBox5.Text = "Applica a magazzino";
+            this.checkBox5.UseVisualStyleBackColor = true;
             // 
-            // chBxFiltriMagazzinoApplicaCatalogo
+            // checkBox1
             // 
-            this.chBxFiltriMagazzinoApplicaCatalogo.AutoSize = true;
-            this.chBxFiltriMagazzinoApplicaCatalogo.Location = new System.Drawing.Point(437, 8);
-            this.chBxFiltriMagazzinoApplicaCatalogo.Name = "chBxFiltriMagazzinoApplicaCatalogo";
-            this.chBxFiltriMagazzinoApplicaCatalogo.Size = new System.Drawing.Size(138, 22);
-            this.chBxFiltriMagazzinoApplicaCatalogo.TabIndex = 33;
-            this.chBxFiltriMagazzinoApplicaCatalogo.Text = "Applica a catalogo";
-            this.chBxFiltriMagazzinoApplicaCatalogo.UseVisualStyleBackColor = true;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(437, 8);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(138, 22);
+            this.checkBox1.TabIndex = 33;
+            this.checkBox1.Text = "Applica a catalogo";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // chBxFiltroMagazzinoCodice
             // 
@@ -3502,31 +3519,30 @@ namespace Calendario_AriBerg
             this.chBxFiltroMagazzinoTipo.UseVisualStyleBackColor = true;
             this.chBxFiltroMagazzinoTipo.CheckedChanged += new System.EventHandler(this.chBxFiltroMagazzinoTipo_CheckedChanged);
             // 
-            // chBxFiltriMagazzinoSottoSoglia
+            // checkBox4
             // 
-            this.chBxFiltriMagazzinoSottoSoglia.AutoSize = true;
-            this.chBxFiltriMagazzinoSottoSoglia.Location = new System.Drawing.Point(601, 37);
-            this.chBxFiltriMagazzinoSottoSoglia.Name = "chBxFiltriMagazzinoSottoSoglia";
-            this.chBxFiltriMagazzinoSottoSoglia.Size = new System.Drawing.Size(100, 22);
-            this.chBxFiltriMagazzinoSottoSoglia.TabIndex = 31;
-            this.chBxFiltriMagazzinoSottoSoglia.Text = "Sotto Soglia";
-            this.chBxFiltriMagazzinoSottoSoglia.UseVisualStyleBackColor = true;
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(601, 37);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(100, 22);
+            this.checkBox4.TabIndex = 31;
+            this.checkBox4.Text = "Sotto Soglia";
+            this.checkBox4.UseVisualStyleBackColor = true;
             // 
-            // btnConfirmFilterComponentsWarehouse
+            // button1
             // 
-            this.btnConfirmFilterComponentsWarehouse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfirmFilterComponentsWarehouse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnConfirmFilterComponentsWarehouse.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.search_icon;
-            this.btnConfirmFilterComponentsWarehouse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnConfirmFilterComponentsWarehouse.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnConfirmFilterComponentsWarehouse.FlatAppearance.BorderSize = 15;
-            this.btnConfirmFilterComponentsWarehouse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConfirmFilterComponentsWarehouse.Location = new System.Drawing.Point(745, 6);
-            this.btnConfirmFilterComponentsWarehouse.Name = "btnConfirmFilterComponentsWarehouse";
-            this.btnConfirmFilterComponentsWarehouse.Size = new System.Drawing.Size(66, 58);
-            this.btnConfirmFilterComponentsWarehouse.TabIndex = 25;
-            this.btnConfirmFilterComponentsWarehouse.UseVisualStyleBackColor = false;
-            this.btnConfirmFilterComponentsWarehouse.Click += new System.EventHandler(this.btnConfirmFilterComponentsWarehouse_Click);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.button1.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.search_icon;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.button1.FlatAppearance.BorderSize = 15;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(745, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(66, 58);
+            this.button1.TabIndex = 25;
+            this.button1.UseVisualStyleBackColor = false;
             // 
             // cbBxFiltroMagazzinoMarca
             // 
@@ -3670,6 +3686,7 @@ namespace Calendario_AriBerg
             this.btnCancellaNomeMagazzino.TabIndex = 29;
             this.btnCancellaNomeMagazzino.Text = "Cancella";
             this.btnCancellaNomeMagazzino.UseVisualStyleBackColor = false;
+            this.btnCancellaNomeMagazzino.Click += new System.EventHandler(this.btnCancellaNomeMagazzino_Click);
             // 
             // tbxNomeMagazzino
             // 
@@ -3692,6 +3709,7 @@ namespace Calendario_AriBerg
             this.btnEliminaMagazzino.Size = new System.Drawing.Size(66, 58);
             this.btnEliminaMagazzino.TabIndex = 27;
             this.btnEliminaMagazzino.UseVisualStyleBackColor = false;
+            this.btnEliminaMagazzino.Click += new System.EventHandler(this.btnEliminaMagazzino_Click);
             // 
             // btnAggiungiMagazzino
             // 
@@ -3723,6 +3741,7 @@ namespace Calendario_AriBerg
             this.btnModificaMagazzino.Size = new System.Drawing.Size(66, 58);
             this.btnModificaMagazzino.TabIndex = 25;
             this.btnModificaMagazzino.UseVisualStyleBackColor = false;
+            this.btnModificaMagazzino.Click += new System.EventHandler(this.btnModificaMagazzino_Click);
             // 
             // tabPage7
             // 
@@ -3748,6 +3767,7 @@ namespace Calendario_AriBerg
             this.dgvTipiComponenti.ReadOnly = true;
             this.dgvTipiComponenti.Size = new System.Drawing.Size(725, 699);
             this.dgvTipiComponenti.TabIndex = 51;
+            this.dgvTipiComponenti.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvTipiComponenti_CellMouseClick);
             // 
             // dgvMarcheComponenti
             // 
@@ -3760,6 +3780,7 @@ namespace Calendario_AriBerg
             this.dgvMarcheComponenti.ReadOnly = true;
             this.dgvMarcheComponenti.Size = new System.Drawing.Size(704, 699);
             this.dgvMarcheComponenti.TabIndex = 52;
+            this.dgvMarcheComponenti.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvMarcheComponenti_CellMouseClick);
             // 
             // topPanelAltro
             // 
@@ -3775,7 +3796,7 @@ namespace Calendario_AriBerg
             // 
             this.pnlTipi.BackColor = System.Drawing.Color.DimGray;
             this.pnlTipi.Controls.Add(this.label9);
-            this.pnlTipi.Controls.Add(this.button2);
+            this.pnlTipi.Controls.Add(this.bntDeleteTextTipologie);
             this.pnlTipi.Controls.Add(this.txBxTipoComponente);
             this.pnlTipi.Controls.Add(this.btnDelComponente);
             this.pnlTipi.Controls.Add(this.btnAddTipoComponente);
@@ -3797,20 +3818,21 @@ namespace Calendario_AriBerg
             this.label9.TabIndex = 31;
             this.label9.Text = "Tipologie di componenti";
             // 
-            // button2
+            // bntDeleteTextTipologie
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Location = new System.Drawing.Point(235, 38);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(243, 58);
-            this.button2.TabIndex = 29;
-            this.button2.Text = "Cancella";
-            this.button2.UseVisualStyleBackColor = false;
+            this.bntDeleteTextTipologie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.bntDeleteTextTipologie.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bntDeleteTextTipologie.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.bntDeleteTextTipologie.FlatAppearance.BorderSize = 0;
+            this.bntDeleteTextTipologie.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bntDeleteTextTipologie.ForeColor = System.Drawing.Color.Black;
+            this.bntDeleteTextTipologie.Location = new System.Drawing.Point(235, 38);
+            this.bntDeleteTextTipologie.Name = "bntDeleteTextTipologie";
+            this.bntDeleteTextTipologie.Size = new System.Drawing.Size(243, 58);
+            this.bntDeleteTextTipologie.TabIndex = 29;
+            this.bntDeleteTextTipologie.Text = "Cancella";
+            this.bntDeleteTextTipologie.UseVisualStyleBackColor = false;
+            this.bntDeleteTextTipologie.Click += new System.EventHandler(this.bntDeleteTextTipologie_Click);
             // 
             // txBxTipoComponente
             // 
@@ -3868,7 +3890,7 @@ namespace Calendario_AriBerg
             // 
             this.pnlMarche.BackColor = System.Drawing.Color.DimGray;
             this.pnlMarche.Controls.Add(this.label8);
-            this.pnlMarche.Controls.Add(this.button6);
+            this.pnlMarche.Controls.Add(this.bntDeleteTextMarche);
             this.pnlMarche.Controls.Add(this.txBxMarcaComponente);
             this.pnlMarche.Controls.Add(this.btnDelMarca);
             this.pnlMarche.Controls.Add(this.btnAddMarca);
@@ -3890,20 +3912,21 @@ namespace Calendario_AriBerg
             this.label8.TabIndex = 30;
             this.label8.Text = "Marche";
             // 
-            // button6
+            // bntDeleteTextMarche
             // 
-            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.ForeColor = System.Drawing.Color.Black;
-            this.button6.Location = new System.Drawing.Point(226, 38);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(162, 58);
-            this.button6.TabIndex = 29;
-            this.button6.Text = "Cancella";
-            this.button6.UseVisualStyleBackColor = false;
+            this.bntDeleteTextMarche.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.bntDeleteTextMarche.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bntDeleteTextMarche.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.bntDeleteTextMarche.FlatAppearance.BorderSize = 0;
+            this.bntDeleteTextMarche.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bntDeleteTextMarche.ForeColor = System.Drawing.Color.Black;
+            this.bntDeleteTextMarche.Location = new System.Drawing.Point(226, 38);
+            this.bntDeleteTextMarche.Name = "bntDeleteTextMarche";
+            this.bntDeleteTextMarche.Size = new System.Drawing.Size(162, 58);
+            this.bntDeleteTextMarche.TabIndex = 29;
+            this.bntDeleteTextMarche.Text = "Cancella";
+            this.bntDeleteTextMarche.UseVisualStyleBackColor = false;
+            this.bntDeleteTextMarche.Click += new System.EventHandler(this.bntDeleteTextMarche_Click);
             // 
             // txBxMarcaComponente
             // 
@@ -3981,7 +4004,6 @@ namespace Calendario_AriBerg
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1443, 835);
             this.Controls.Add(this.tabControl1);
-            this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Font = new System.Drawing.Font("Calibri", 8.25F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -4041,8 +4063,10 @@ namespace Calendario_AriBerg
             ((System.ComponentModel.ISupportInitialize)(this.nudModificaSoglia)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudModificaNOrdine)).EndInit();
             this.tbCtrlMagazzini.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
+            this.Totale.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMagazziniTotale)).EndInit();
+            this.Centrale.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMagazzinoCentrale)).EndInit();
             this.MidMagPanel.ResumeLayout(false);
             this.MidMagPanel.PerformLayout();
             this.gbxEditComponenti.ResumeLayout(false);
@@ -4275,8 +4299,8 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.Button btnModifyComponente;
         private System.Windows.Forms.Button btnRemoveComponente;
         private System.Windows.Forms.TabControl tbCtrlMagazzini;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage Totale;
+        private System.Windows.Forms.TabPage Centrale;
         private System.Windows.Forms.DataGridView dgvComponenti;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.Label lblAggiungiComponenteCodice;
@@ -4289,15 +4313,16 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.Panel pnlFiltriMagazzino;
         private System.Windows.Forms.CheckBox chBxFiltroMagazzinoMarca;
         private System.Windows.Forms.CheckBox chBxFiltroMagazzinoTipo;
-        private System.Windows.Forms.Button btnConfirmFilterComponentsWarehouse;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox cbBxFiltroMagazzinoMarca;
         private System.Windows.Forms.ComboBox cbBxFiltroMagazzinoTipo;
         private System.Windows.Forms.CheckBox chBxFiltroMagazzinoCodice;
-        private System.Windows.Forms.CheckBox chBxFiltriMagazzinoSottoSoglia;
+        private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Label lblMagazziniComponenti;
         private System.Windows.Forms.Label lblCatalogoComponenti;
-        private System.Windows.Forms.CheckBox chBxFiltriMagazzinoApplicaCatalogo;
+        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ComboBox cbBxFiltroMagazzinoCodice;
+        private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.Button btnImmagazzinaComponente;
         private System.Windows.Forms.NumericUpDown nudNumeroComponenti;
         private System.Windows.Forms.Panel leftPanelClienti;
@@ -4342,13 +4367,13 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.DataGridView dgvMarcheComponenti;
         private System.Windows.Forms.Panel topPanelAltro;
         private System.Windows.Forms.Panel pnlTipi;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button bntDeleteTextTipologie;
         private System.Windows.Forms.TextBox txBxTipoComponente;
         private System.Windows.Forms.Button btnDelComponente;
         private System.Windows.Forms.Button btnAddTipoComponente;
         private System.Windows.Forms.Button btnEditComponente;
         private System.Windows.Forms.Panel pnlMarche;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button bntDeleteTextMarche;
         private System.Windows.Forms.TextBox txBxMarcaComponente;
         private System.Windows.Forms.Button btnDelMarca;
         private System.Windows.Forms.Button btnAddMarca;
@@ -4360,7 +4385,7 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.DataGridView dataGridView4;
         private System.Windows.Forms.DataGridView dataGridView3;
         private System.Windows.Forms.Button btnEditMarca;
-        private System.Windows.Forms.CheckBox chBxFiltriMagazzinoApplicaMagazzino;
+        private System.Windows.Forms.DataGridView dgvMagazzinoCentrale;
     }
 }
 

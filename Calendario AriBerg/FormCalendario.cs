@@ -127,13 +127,7 @@ namespace Calendario_AriBerg
         private void RefreshActualTab()
         {
             int a = 0;
-            
-            Invoke(new Action(() =>
-            { 
-                a = tabControl1.SelectedIndex;
-                Cursor = Cursors.AppStarting;
-                Enabled = false;
-            }));       
+            Invoke(new Action(() => { a = tabControl1.SelectedIndex; }));
             switch (a)
             {
                 case 0:
@@ -143,26 +137,75 @@ namespace Calendario_AriBerg
                 case 2:
                     UpdateComboboxTabc2MarcType();
                     RefreshComponentsCatalogoAndCBX();
+                    RefreshMagazzini();
                     break;
                 case 3:
                     RefreshComponentBrandsDataGridView();
                     RefreshComponentTypesDataGridView();
                     break;
             }
-            
-            Invoke(new Action(() => 
+        }
+
+        private void RefreshConetnutiMagazzini()
+        {
+
+        }
+
+        private void RefreshMagazzini()
+        {
+            ///0:id_magazzino
+
+            MySqlConnection Conn = new MySqlConnection();
+
+            Conn = Metodi.ConnectToDatabase();
+
+            MySqlDataReader reader;
+            string query = $"SELECT * From magazzino";
+            MySqlCommand GetMagazzini = new MySqlCommand(query, Conn);
+            reader = GetMagazzini.ExecuteReader();
+
+            List<string> Magazzini = new List<string>();
+
+            while (reader.Read())
             {
-                Enabled = true;
-                Cursor = Cursors.Default; 
-            }));
+                Magazzini.Add(reader.GetString(0));
+            }
+
+            foreach (TabPage t in tbCtrlMagazzini.TabPages)
+            {
+                if (t.Name != "Totale" && t.Name != "Centrale")
+                {
+                    Invoke(new Action(() => { tbCtrlMagazzini.TabPages.Remove(t); }));
+                }
+            }
+
+
+            foreach (string s in Magazzini)
+            {
+                if (!tbCtrlMagazzini.TabPages.ContainsKey(s))
+                {
+                    TabPage t = new TabPage(s);
+                    t.Name = s;
+                    Invoke(new Action(() =>
+                    {
+                        tbCtrlMagazzini.TabPages.Add(t);
+                    }));
+
+                    DataGridView d = new DataGridView();
+                    d.Name = "dgvMagazzino" + s;
+                    d.Dock = DockStyle.Fill;
+
+                    Invoke(new Action(() =>
+                    {
+                        tbCtrlMagazzini.TabPages[s].Controls.Add(d);
+                    }));
+                }
+
+            }
         }
 
         private void RefreshComponentsCatalogoAndCBX()
         {
-            Invoke(new Action(() => {
-                Enabled = false;
-                Cursor = Cursors.AppStarting; 
-            }));
             MySqlDataReader reader;
             List<Componenti> l = new List<Componenti>();
             Componenti c = new Componenti();
@@ -192,11 +235,6 @@ namespace Calendario_AriBerg
                 dgvComponenti.Columns["Quantita"].Visible = false;
             }));
 
-            Invoke(new Action(() =>
-            {
-                Enabled = true;
-                Cursor = Cursors.Default;
-            }));
         }
         private void UpdateComboboxTabc2MarcType()
         {
@@ -3214,15 +3252,27 @@ namespace Calendario_AriBerg
 
         private void btnAggiungiMagazzino_Click(object sender, EventArgs e)
         {
+
+            MySqlConnection conn = null;
             try
             {
-                Magazzino m = new Magazzino(tbxNomeMagazzino.Text);
-                r.AddMagazzino(m);
+                conn = Metodi.ConnectToDatabase();
+                string query = $"INSERT INTO magazzino VALUES('{tbxNomeMagazzino.Text}')";
+
+                MySqlCommand InsertMagazzino = new MySqlCommand(query, conn);
+                InsertMagazzino.ExecuteNonQuery();
+
+                RefreshMagazzini();
+
             }
-            catch (Exception a)
+            catch (Exception ex)
             {
                 Notifica n = new Notifica();
-                n.Show(a.Message, Notifica.enmType.Warning);
+                n.Show(ex.Message, Notifica.enmType.Warning);
+            }
+            finally
+            {
+                conn.Close();
             }
         }
 
@@ -3565,13 +3615,13 @@ namespace Calendario_AriBerg
 
                 List<TextBox> tx = new List<TextBox>();
 
-                foreach(Control c in gbxModificaComponente.Controls)
+                foreach (Control c in gbxModificaComponente.Controls)
                 {
-                    if(c is TextBox) tx.Add((TextBox)c);
+                    if (c is TextBox) tx.Add((TextBox)c);
                 }
 
                 if (Metodi.AreThereAnyEmptyTextBoxes(tx)) throw new ArgumentNullException();
-            
+
                 conn = Metodi.ConnectToDatabase();
                 string query = $"UPDATE componente SET codice_componente = '{tbxModificaCodiceComponente.Text}', " +
                     $"marca_componente = '{cbxModificaMarcaComponente.Text}', " +
@@ -3579,7 +3629,7 @@ namespace Calendario_AriBerg
                     $"soglia_componente = '{nudModificaSoglia.Value}', " +
                     $"n_ordine_componente = '{nudModificaNOrdine.Value}' " +
                     $"WHERE codice_componente = '{comp.Codice}'";
-                    
+
                 MySqlCommand command = new MySqlCommand(query, conn);
                 command.ExecuteNonQuery();
 
@@ -3598,70 +3648,84 @@ namespace Calendario_AriBerg
             }
         }
 
-        private void btnConfirmFilterComponentsWarehouse_Click(object sender, EventArgs e)
+        private void btnCancellaNomeMagazzino_Click(object sender, EventArgs e)
         {
-            string codice = null;
-            if (chBxFiltroMagazzinoCodice.Checked) codice = cbBxFiltroMagazzinoCodice.Text;
+            tbxNomeMagazzino.Text = null;
+        }
 
-            string marca = null;
-            if (chBxFiltroMagazzinoMarca.Checked) marca = cbBxFiltroMagazzinoMarca.Text;
+        private void bntDeleteTextMarche_Click(object sender, EventArgs e)
+        {
+            txBxMarcaComponente.Text = null;
+        }
 
-            string tipo = null;
-            if (chBxFiltroMagazzinoTipo.Checked) tipo = cbBxFiltroMagazzinoTipo.Text;
+        private void bntDeleteTextTipologie_Click(object sender, EventArgs e)
+        {
+            txBxTipoComponente.Text = null;
+        }
 
-            bool applyToCatalogue = false;
-            if (chBxFiltriMagazzinoApplicaCatalogo.Checked) applyToCatalogue = true;
+        private void dgvMarcheComponenti_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            txBxMarcaComponente.Text = (string)dgvMarcheComponenti.CurrentRow.Cells[0].Value;
+        }
 
-            bool applyToWarehouse = false;
-            if (chBxFiltriMagazzinoApplicaMagazzino.Checked) applyToWarehouse = true;
+        private void dgvTipiComponenti_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            txBxTipoComponente.Text = (string)dgvTipiComponenti.CurrentRow.Cells[0].Value;
+        }
 
-            bool sottoSoglia = false;
-            if (chBxFiltriMagazzinoSottoSoglia.Checked) sottoSoglia = true;
+        private void tbCtrlMagazzini_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tbCtrlMagazzini.SelectedTab.Name != "Totale" && tbCtrlMagazzini.SelectedTab.Name != "Centrale")
+            {
+                tbxNomeMagazzino.Text = tbCtrlMagazzini.SelectedTab.Name;
+            }
+        }
 
+        private void btnModificaMagazzino_Click(object sender, EventArgs e)
+        {
             MySqlConnection conn = null;
 
             try
             {
-                conn = Metodi.ConnectToDatabase();
-                string query = null;
 
-                if(!string.IsNullOrWhiteSpace(codice + marca + tipo))
+                conn = Metodi.ConnectToDatabase();
+                string query = $"UPDATE magazzino SET id_magazzino = '{tbxNomeMagazzino.Text}' WHERE id_magazzino = '{tbCtrlMagazzini.SelectedTab.Name}'";
+
+                MySqlCommand command = new MySqlCommand(query, conn);
+                command.ExecuteNonQuery();
+
+                RefreshMagazzini();
+            }
+            catch (Exception ex)
+            {
+                Notifica n = new Notifica();
+                n.Show(ex.Message, Notifica.enmType.Warning);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void btnEliminaMagazzino_Click(object sender, EventArgs e)
+        {
+            MySqlConnection conn = null;
+            try
+            {
+                conn = Metodi.ConnectToDatabase();
+                string selectedType = dgvMarcheComponenti.SelectedCells[0].Value.ToString();
+                string query = $"DELETE FROM magazzino WHERE id_magazzino = '{tbCtrlMagazzini.SelectedTab.Name}'";
+                MySqlCommand DeleteComponentBrand = new MySqlCommand(query, conn);
+                int row = DeleteComponentBrand.ExecuteNonQuery();
+
+                if (row > 0)
                 {
-                    if (applyToCatalogue)
-                    {
-                        query = "SELECT * FROM componente WHERE";
-                        if (codice != null) query += $" codice_componente = '{codice}'";
-                        if (marca != null) if (query.EndsWith("WHERE") || query.EndsWith("AND")) query += $" marca_componente = '{marca}'"; else query += $" AND marca_componente = '{marca}'";
-                        if (tipo != null) if (query.EndsWith("WHERE") || query.EndsWith("AND")) query += $" tipo_componente = '{tipo}'"; else query += $" AND tipo_componente = '{tipo}'";
-                    }
+                    RefreshMagazzini();
                 }
                 else
                 {
-                    RefreshComponentsCatalogoAndCBX();
-                    return;
-                }
-
-                if (query == null) throw new Exception("Nessuna query generata.");
-
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                MySqlDataReader res = cmd.ExecuteReader();
-
-                if (!res.HasRows) throw new Exception("Nessun valore trovato.");
-
-                Componenti c = null;
-                List<Componenti> comps = new List<Componenti>();
-
-                while (res.Read())
-                {                   
-                    c = new Componenti(res.GetString(2), res.GetString(1), res.GetInt32(3), res.GetInt32(4), res.GetString(0), 0);
-                    comps.Add(c);
-                }
-
-                if (applyToCatalogue)
-                {
-                    BindingSource bs = new BindingSource();
-                    bs.DataSource = comps;
-                    dgvComponenti.DataSource = bs;
+                    Notifica n = new Notifica();
+                    n.Show("Il magazzino non è stato cancellato correttamente, riprovare.", Notifica.enmType.Warning);
                 }
             }
             catch (Exception ex)
@@ -3673,6 +3737,8 @@ namespace Calendario_AriBerg
             {
                 conn.Close();
             }
+
+
         }
     }
 }
