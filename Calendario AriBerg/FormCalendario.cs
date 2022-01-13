@@ -3337,7 +3337,7 @@ namespace Calendario_AriBerg
             {
                 conn = Metodi.ConnectToDatabase();
                 string selectedType = dgvMarcheComponenti.SelectedCells[0].Value.ToString();
-                //string query = $"INSERT INTO componente VALUES({txBx})";
+                string query = $"INSERT INTO componente VALUES({txBx})";
             }
             catch (Exception ex)
             {

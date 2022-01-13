@@ -36,7 +36,7 @@ namespace Calendario_AriBerg
                 }
             }
 
-            return true;
+            return false;
         }
 
         static internal bool AreThereAnyEmptyTextBoxes(TextBox tb)
