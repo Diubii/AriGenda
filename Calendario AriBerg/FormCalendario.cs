@@ -120,10 +120,9 @@ namespace Calendario_AriBerg
             t.Start();
         }
 
-        private void TimerTick(object sender, EventArgs e)
+        private async void TimerTick(object sender, EventArgs e)
         {
-            Thread t = new Thread(new ThreadStart(RefreshActualTab));
-            t.Start();   
+            await Task.Run(new Action(() => { RefreshActualTab(); }));
         }
 
         private void RefreshActualTab()
@@ -2366,10 +2365,9 @@ namespace Calendario_AriBerg
             //}
         }
 
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        private async void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Thread t = new Thread(new ThreadStart(RefreshActualTab));
-            t.Start();
+            await Task.Run(new Action(() => { RefreshActualTab(); }));
         }
 
         private void btnClientiEditCustomer_Click(object sender, EventArgs e)
