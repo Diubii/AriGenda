@@ -119,12 +119,12 @@ namespace Calendario_AriBerg
             t.Start();
         }
 
-        private async void TimerTick(object sender, EventArgs e)
+        private void TimerTick(object sender, EventArgs e)
         {
-            await RefreshActualTab();
+            Task.Run(new Action(() => { Invoke(new Action(() => { RefreshActualTabAsync(); })); } ));            
         }
 
-        private async Task RefreshActualTab()
+        private void RefreshActualTabAsync()
         {
             switch (tabControl1.SelectedIndex)
             {
@@ -133,23 +133,23 @@ namespace Calendario_AriBerg
                 case 1:
                     break;
                 case 2:
-                    await UpdateComboboxTabc2();
+                    UpdateComboboxTabc2();
                     break;
                 case 3:
-                    await RefreshComponentBrandsDataGridView();
-                    await RefreshComponentTypesDataGridView();
+                    RefreshComponentBrandsDataGridView();
+                    RefreshComponentTypesDataGridView();
                     break;
             }           
         }
 
-        private async Task UpdateComboboxTabc2()
+        private void UpdateComboboxTabc2()
         {
             List<string> brands = new List<string>();
             List<string> types = new List<string>();
             string query = "SELECT * FROM marca_componente";
 
             MySqlCommand FetchTypes = new MySqlCommand(query, Metodi.ConnectToDatabase());
-            MySqlDataReader res = (MySqlDataReader) await FetchTypes.ExecuteReaderAsync();
+            MySqlDataReader res = FetchTypes.ExecuteReader();
 
             while (res.Read())
             {
@@ -159,7 +159,7 @@ namespace Calendario_AriBerg
             query = "SELECT * FROM tipo_componente";
 
             FetchTypes = new MySqlCommand(query, Metodi.ConnectToDatabase());
-            res = (MySqlDataReader)await FetchTypes.ExecuteReaderAsync();
+            res = FetchTypes.ExecuteReader();
 
             while (res.Read())
             {
@@ -2364,9 +2364,9 @@ namespace Calendario_AriBerg
             //}
         }
 
-        private async void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-             await RefreshActualTab();                  
+             RefreshActualTabAsync();                  
         }
 
         private void btnClientiEditCustomer_Click(object sender, EventArgs e)
@@ -3202,13 +3202,13 @@ namespace Calendario_AriBerg
             }
         }
 
-        private async Task RefreshComponentTypesDataGridView()
+        private void RefreshComponentTypesDataGridView()
         {
             List<string> types = new List<string>();
             string query = "SELECT * FROM tipo_componente";
 
             MySqlCommand FetchTypes = new MySqlCommand(query, Metodi.ConnectToDatabase());
-            MySqlDataReader res = (MySqlDataReader)await FetchTypes.ExecuteReaderAsync();
+            MySqlDataReader res = FetchTypes.ExecuteReader();
 
             while (res.Read())
             {
@@ -3319,13 +3319,13 @@ namespace Calendario_AriBerg
             }
         }
 
-        private async Task RefreshComponentBrandsDataGridView()
+        private void RefreshComponentBrandsDataGridView()
         {
             List<string> brands = new List<string>();
             string query = "SELECT * FROM marca_componente";
 
             MySqlCommand FetchTypes = new MySqlCommand(query, Metodi.ConnectToDatabase());
-            MySqlDataReader res = (MySqlDataReader)await FetchTypes.ExecuteReaderAsync();
+            MySqlDataReader res = FetchTypes.ExecuteReader();
 
             while (res.Read())
             {
@@ -3385,7 +3385,7 @@ namespace Calendario_AriBerg
             {
                 conn = Metodi.ConnectToDatabase();
                 string selectedType = dgvMarcheComponenti.SelectedCells[0].Value.ToString();
-                string query = $"INSERT INTO componente VALUES({txBx})";
+                //string query = $"INSERT INTO componente VALUES({txBx})";
             }
             catch (Exception ex)
             {
