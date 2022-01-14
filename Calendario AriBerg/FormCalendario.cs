@@ -153,7 +153,7 @@ namespace Calendario_AriBerg
                     }
                     break;
                 case 3:
-                    if (Metodi.CheckForNewBrands(ref dgvMarcheComponenti)|| Metodi.CheckForNewComponents(ref dgvTipiComponenti))
+                    if (Metodi.CheckForNewBrands(ref dgvMarcheComponenti) || Metodi.CheckForNewTypes(ref dgvTipiComponenti))
                     {
                         RefreshComponentBrandsDataGridView();
                         RefreshComponentTypesDataGridView();
@@ -3699,7 +3699,7 @@ namespace Calendario_AriBerg
             ///2: tipo_componente
             ///3: soglia_componente
             ///4: n_ordine_componente
-            ///
+
             MySqlConnection conn = null;
 
             try
@@ -3836,7 +3836,89 @@ namespace Calendario_AriBerg
 
         private void btnSearchComponenti_Click(object sender, EventArgs e)
         {
+            ///INDICI TABELLA COMPONENTI
+            ///0: codice_componente
+            ///1: marca_componente
+            ///2: tipo_componente
+            ///3: soglia_componente
+            ///4: n_ordine_componente
 
+            MySqlConnection conn = null;
+
+            try
+            {               
+                using (conn = Metodi.ConnectToDatabase())
+                {
+                    string marca = null;
+                    if (chBxFiltroMagazzinoMarca.Checked) marca = cbBxFiltroMagazzinoMarca.Text;
+
+                    string tipo = null;
+                    if (chBxFiltroMagazzinoTipo.Checked) tipo = cbBxFiltroMagazzinoTipo.Text;
+
+                    string codice = null;
+                    if (chBxFiltroMagazzinoCodice.Checked) codice = cbBxFiltroMagazzinoCodice.Text;
+
+                    bool applicaAMagazzino = false;
+                    if (chbxFiltroAMagazzino.Checked) applicaAMagazzino = true;
+
+                    bool applicaACatalogo = false;
+                    if (chbxFiltroACatalogo.Checked) applicaACatalogo = true;
+
+                    bool sottoSoglia = false;
+                    if (chBxSottoSoglia.Checked) sottoSoglia = true;
+                    
+                    if(string.IsNullOrWhiteSpace(marca + tipo + codice))
+                    {
+                        RefreshComponentsCatalogoAndCBX();
+                        return;
+                    }
+
+                    string query = "SELECT * FROM componente WHERE";
+
+                    if (marca != null) query += $" marca_componente = '{marca}'";
+                    if (tipo != null && query.EndsWith("WHERE")) query += $" tipo_componente = '{tipo}'"; else if(tipo != null) query += $" AND tipo_componente = '{tipo}'";
+                    if (codice != null && query.EndsWith("WHERE")) query += $" codice_componente = '{codice}'"; else if(codice != null) query += $" AND codice_componente = '{codice}'";
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    MySqlDataReader res = cmd.ExecuteReader();
+
+                    List<Componenti> components = new List<Componenti>();
+
+                    if (!res.HasRows)
+                    {
+                        RefreshComponentsCatalogoAndCBX();
+                        throw new Exception("Nessun risultato.");
+                    }
+
+                    while (res.Read())
+                    {
+                        Componenti component = new Componenti(res.GetString("tipo_componente"),
+                            res.GetString("marca_componente"),
+                            res.GetInt32("soglia_componente"),
+                            res.GetInt32("n_ordine_componente"),
+                            res.GetString("codice_componente"),
+                            0);
+
+                        components.Add(component);
+                    }
+
+                    BindingSource bsCatalogo = new BindingSource()
+                    {
+                        DataSource = components
+                    };
+
+                    if (applicaACatalogo) dgvComponenti.DataSource = bsCatalogo; else throw new Exception("Applicare il filtro al catalogo o al magazzino.");
+                }
+            }
+            catch(Exception ex)
+            {
+                Notifica n = new Notifica();
+                n.Show(ex.Message, Notifica.enmType.Warning);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }
