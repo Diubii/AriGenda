@@ -278,13 +278,13 @@ namespace Calendario_AriBerg
             this.dgvComponenti = new System.Windows.Forms.DataGridView();
             this.lblCatalogoComponenti = new System.Windows.Forms.Label();
             this.pnlFiltriMagazzino = new System.Windows.Forms.Panel();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chbxFiltroAMagazzino = new System.Windows.Forms.CheckBox();
+            this.chbxFiltroACatalogo = new System.Windows.Forms.CheckBox();
             this.chBxFiltroMagazzinoCodice = new System.Windows.Forms.CheckBox();
             this.chBxFiltroMagazzinoMarca = new System.Windows.Forms.CheckBox();
             this.chBxFiltroMagazzinoTipo = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSearchComponenti = new System.Windows.Forms.Button();
             this.cbBxFiltroMagazzinoMarca = new System.Windows.Forms.ComboBox();
             this.cbBxFiltroMagazzinoCodice = new System.Windows.Forms.ComboBox();
             this.cbBxFiltroMagazzinoTipo = new System.Windows.Forms.ComboBox();
@@ -3468,13 +3468,13 @@ namespace Calendario_AriBerg
             // pnlFiltriMagazzino
             // 
             this.pnlFiltriMagazzino.BackColor = System.Drawing.Color.DimGray;
-            this.pnlFiltriMagazzino.Controls.Add(this.checkBox5);
-            this.pnlFiltriMagazzino.Controls.Add(this.checkBox1);
+            this.pnlFiltriMagazzino.Controls.Add(this.chbxFiltroAMagazzino);
+            this.pnlFiltriMagazzino.Controls.Add(this.chbxFiltroACatalogo);
             this.pnlFiltriMagazzino.Controls.Add(this.chBxFiltroMagazzinoCodice);
             this.pnlFiltriMagazzino.Controls.Add(this.chBxFiltroMagazzinoMarca);
             this.pnlFiltriMagazzino.Controls.Add(this.chBxFiltroMagazzinoTipo);
             this.pnlFiltriMagazzino.Controls.Add(this.checkBox4);
-            this.pnlFiltriMagazzino.Controls.Add(this.button1);
+            this.pnlFiltriMagazzino.Controls.Add(this.btnSearchComponenti);
             this.pnlFiltriMagazzino.Controls.Add(this.cbBxFiltroMagazzinoMarca);
             this.pnlFiltriMagazzino.Controls.Add(this.cbBxFiltroMagazzinoCodice);
             this.pnlFiltriMagazzino.Controls.Add(this.cbBxFiltroMagazzinoTipo);
@@ -3484,25 +3484,25 @@ namespace Calendario_AriBerg
             this.pnlFiltriMagazzino.Size = new System.Drawing.Size(814, 73);
             this.pnlFiltriMagazzino.TabIndex = 48;
             // 
-            // checkBox5
+            // chbxFiltroAMagazzino
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(437, 37);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(151, 22);
-            this.checkBox5.TabIndex = 34;
-            this.checkBox5.Text = "Applica a magazzino";
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.chbxFiltroAMagazzino.AutoSize = true;
+            this.chbxFiltroAMagazzino.Location = new System.Drawing.Point(437, 37);
+            this.chbxFiltroAMagazzino.Name = "chbxFiltroAMagazzino";
+            this.chbxFiltroAMagazzino.Size = new System.Drawing.Size(151, 22);
+            this.chbxFiltroAMagazzino.TabIndex = 34;
+            this.chbxFiltroAMagazzino.Text = "Applica a magazzino";
+            this.chbxFiltroAMagazzino.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // chbxFiltroACatalogo
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(437, 8);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(138, 22);
-            this.checkBox1.TabIndex = 33;
-            this.checkBox1.Text = "Applica a catalogo";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chbxFiltroACatalogo.AutoSize = true;
+            this.chbxFiltroACatalogo.Location = new System.Drawing.Point(437, 8);
+            this.chbxFiltroACatalogo.Name = "chbxFiltroACatalogo";
+            this.chbxFiltroACatalogo.Size = new System.Drawing.Size(138, 22);
+            this.chbxFiltroACatalogo.TabIndex = 33;
+            this.chbxFiltroACatalogo.Text = "Applica a catalogo";
+            this.chbxFiltroACatalogo.UseVisualStyleBackColor = true;
             // 
             // chBxFiltroMagazzinoCodice
             // 
@@ -3547,20 +3547,21 @@ namespace Calendario_AriBerg
             this.checkBox4.Text = "Sotto Soglia";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnSearchComponenti
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.button1.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.search_icon;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.button1.FlatAppearance.BorderSize = 15;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(745, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(66, 58);
-            this.button1.TabIndex = 25;
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnSearchComponenti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearchComponenti.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.btnSearchComponenti.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.search_icon;
+            this.btnSearchComponenti.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSearchComponenti.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.btnSearchComponenti.FlatAppearance.BorderSize = 15;
+            this.btnSearchComponenti.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearchComponenti.Location = new System.Drawing.Point(745, 6);
+            this.btnSearchComponenti.Name = "btnSearchComponenti";
+            this.btnSearchComponenti.Size = new System.Drawing.Size(66, 58);
+            this.btnSearchComponenti.TabIndex = 25;
+            this.btnSearchComponenti.UseVisualStyleBackColor = false;
+            this.btnSearchComponenti.Click += new System.EventHandler(this.btnSearchComponenti_Click);
             // 
             // cbBxFiltroMagazzinoMarca
             // 
@@ -4314,16 +4315,16 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.Panel pnlFiltriMagazzino;
         private System.Windows.Forms.CheckBox chBxFiltroMagazzinoMarca;
         private System.Windows.Forms.CheckBox chBxFiltroMagazzinoTipo;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSearchComponenti;
         private System.Windows.Forms.ComboBox cbBxFiltroMagazzinoMarca;
         private System.Windows.Forms.ComboBox cbBxFiltroMagazzinoTipo;
         private System.Windows.Forms.CheckBox chBxFiltroMagazzinoCodice;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Label lblMagazziniComponenti;
         private System.Windows.Forms.Label lblCatalogoComponenti;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chbxFiltroACatalogo;
         private System.Windows.Forms.ComboBox cbBxFiltroMagazzinoCodice;
-        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox chbxFiltroAMagazzino;
         private System.Windows.Forms.Button btnImmagazzinaComponente;
         private System.Windows.Forms.NumericUpDown nudNumeroComponenti;
         private System.Windows.Forms.Panel leftPanelClienti;

@@ -109,7 +109,156 @@ namespace Calendario_AriBerg
             }
         }
 
-        static internal bool AreThereAnyEmptyTextBoxes(List<TextBox> list)
+        internal static bool CheckForNewBrands(ref DataGridView dvgBrands)
+        {
+            List<string> l = new List<string>();
+            string c;
+
+            MySqlConnection conn = Metodi.ConnectToDatabase();
+            string query = $"SELECT * From marca_componente";
+            MySqlCommand command = new MySqlCommand(query, conn);
+
+            MySqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                c = reader.GetString(0);
+                l.Add(c);
+            }
+
+            List<string> currentBrands = new List<string>();
+
+
+
+
+            foreach (DataGridViewRow row in dvgBrands.Rows)
+            {
+                string brand = row.Cells[0].Value.ToString();
+                currentBrands.Add(brand);
+            }
+
+            bool different = false;
+
+            foreach (string brand in l)
+            {
+                if (currentBrands.Count == 0) break;
+
+                string sameCode = currentBrands.Find(x => x == brand);
+                if (sameCode == null)
+                {
+                    different = true;
+                    break;
+                }
+                else
+                {
+                    if (brand != sameCode)
+                    {
+                        different = true;
+                        break;
+                    }
+                }
+            }
+
+            if (different || l.Count != currentBrands.Count)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        internal static bool CheckForNewBrandsAndNotify(ref DataGridView dvgBrands)
+        {
+            if (Metodi.CheckForNewBrands(ref dvgBrands))
+            {
+                Notifica n = new Notifica();
+                n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        internal static bool CheckForNewTypes(ref DataGridView dvgTypes)
+        {
+            List<string> l = new List<string>();
+            string c;
+
+            MySqlConnection conn = Metodi.ConnectToDatabase();
+            string query = $"SELECT * From tipo_componente";
+            MySqlCommand command = new MySqlCommand(query, conn);
+
+            MySqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                c = reader.GetString(0);
+                l.Add(c);
+            }
+
+            List<string> currentTypes = new List<string>();
+
+
+            foreach (DataGridViewRow row in dvgTypes.Rows)
+            {
+                string tipo = row.Cells[0].Value.ToString();
+                currentTypes.Add(tipo);
+            }
+
+            bool different = false;
+
+            foreach (string tipo in l)
+            {
+                if (currentTypes.Count == 0) break;
+
+                string sameCode = currentTypes.Find(x => x == tipo);
+                if (sameCode == null)
+                {
+                    different = true;
+                    break;
+                }
+                else
+                {
+                    if (tipo != sameCode)
+                    {
+                        different = true;
+                        break;
+                    }
+                }
+            }
+
+            if (different || l.Count != currentTypes.Count)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        internal static bool CheckForNewTypesAndNotify(ref DataGridView dvgTypes)
+        {
+            if (Metodi.CheckForNewTypes(ref dvgTypes))
+            {
+                Notifica n = new Notifica();
+                n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+            static internal bool AreThereAnyEmptyTextBoxes(List<TextBox> list)
         {
             foreach(TextBox tb in list)
             {

@@ -139,13 +139,30 @@ namespace Calendario_AriBerg
                 case 1:
                     break;
                 case 2:
-                    UpdateComboboxTabc2MarcType();
-                    RefreshComponentsCatalogoAndCBX();
-                    RefreshMagazzini();
+                    if (Metodi.CheckForNewComponents(ref dgvComponenti))
+                    {
+
+                        UpdateComboboxTabc2MarcType();
+                        RefreshComponentsCatalogoAndCBX();
+                        RefreshMagazzini();
+                        Invoke(new Action(() =>
+                        {
+                            Notifica n = new Notifica();
+                            n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
+                        }));
+                    }
                     break;
                 case 3:
-                    RefreshComponentBrandsDataGridView();
-                    RefreshComponentTypesDataGridView();
+                    if (Metodi.CheckForNewBrands(ref dgvMarcheComponenti)|| Metodi.CheckForNewComponents(ref dgvTipiComponenti))
+                    {
+                        RefreshComponentBrandsDataGridView();
+                        RefreshComponentTypesDataGridView();
+                        Invoke(new Action(() =>
+                        {
+                            Notifica n = new Notifica();
+                            n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
+                        }));
+                    }
                     break;
             }
             Invoke(new Action(() => {
@@ -235,7 +252,7 @@ namespace Calendario_AriBerg
                 l.Add(c);
             }
 
-            Invoke(new Action(() => { Metodi.CheckForNewComponentsAndNotify(ref dgvComponenti); }));
+            
 
             BindingSource bs = new BindingSource();
             bs.DataSource = l;
@@ -3225,7 +3242,7 @@ namespace Calendario_AriBerg
 
         private void btnAddComponente_Click(object sender, EventArgs e)
         {
-            if (Metodi.CheckForNewComponents(ref dgvComponenti))
+            if (Metodi.CheckForNewComponentsAndNotify(ref dgvComponenti))
             {
                 RefreshComponentsCatalogoAndCBX();
                 return;
@@ -3241,7 +3258,7 @@ namespace Calendario_AriBerg
 
         private void btnRemoveComponente_Click(object sender, EventArgs e)
         {
-            if (Metodi.CheckForNewComponents(ref dgvComponenti))
+            if (Metodi.CheckForNewComponentsAndNotify(ref dgvComponenti))
             {
                 RefreshComponentsCatalogoAndCBX();
                 return;
@@ -3272,7 +3289,7 @@ namespace Calendario_AriBerg
 
         private void btnModifyComponente_Click(object sender, EventArgs e)
         {
-            if (Metodi.CheckForNewComponents(ref dgvComponenti))
+            if (Metodi.CheckForNewComponentsAndNotify(ref dgvComponenti))
             {
                 RefreshComponentsCatalogoAndCBX();
                 return;
@@ -3317,6 +3334,12 @@ namespace Calendario_AriBerg
 
         private void btnAddTipoComponente_Click(object sender, EventArgs e)
         {
+            if (Metodi.CheckForNewTypesAndNotify(ref dgvTipiComponenti))
+            {
+                RefreshComponentTypesDataGridView();
+
+                return;
+            }
             MySqlConnection conn = null;
             try
             {
@@ -3349,6 +3372,12 @@ namespace Calendario_AriBerg
 
         private void btnEditComponente_Click(object sender, EventArgs e)
         {
+            if (Metodi.CheckForNewTypesAndNotify(ref dgvTipiComponenti))
+            {
+                RefreshComponentTypesDataGridView();
+
+                return;
+            }
             MySqlConnection conn = null;
             try
             {
@@ -3376,6 +3405,12 @@ namespace Calendario_AriBerg
 
         private void btnDelComponente_Click(object sender, EventArgs e)
         {
+            if (Metodi.CheckForNewTypesAndNotify(ref dgvTipiComponenti))
+            {
+                RefreshComponentTypesDataGridView();
+
+                return;
+            }
             MySqlConnection conn = null;
             try
             {
@@ -3427,7 +3462,12 @@ namespace Calendario_AriBerg
 
         private void btnAddMarca_Click(object sender, EventArgs e)
         {
+            if (Metodi.CheckForNewBrandsAndNotify(ref dgvMarcheComponenti))
+            {
+                RefreshComponentBrandsDataGridView();
 
+                return;
+            }
 
             MySqlConnection conn = null;
             try
@@ -3461,6 +3501,11 @@ namespace Calendario_AriBerg
 
         private void btnEditMarca_Click(object sender, EventArgs e)
         {
+            if (Metodi.CheckForNewBrandsAndNotify(ref dgvMarcheComponenti))
+            {
+                RefreshComponentBrandsDataGridView();
+                return;
+            }
             MySqlConnection conn = null;
             try
             {
@@ -3494,6 +3539,11 @@ namespace Calendario_AriBerg
 
         private void btnDelMarca_Click(object sender, EventArgs e)
         {
+            if (Metodi.CheckForNewBrandsAndNotify(ref dgvMarcheComponenti))
+            {
+                RefreshComponentBrandsDataGridView();
+                return;
+            }
             MySqlConnection conn = null;
             try
             {
@@ -3539,6 +3589,8 @@ namespace Calendario_AriBerg
 
             BindingSource bs = new BindingSource();
             bs.DataSource = brands.Select(x => new { Value = x }).ToList();
+
+            
 
             Invoke(new Action(() =>
             {
@@ -3779,6 +3831,11 @@ namespace Calendario_AriBerg
                 conn.Close();
             }
 
+
+        }
+
+        private void btnSearchComponenti_Click(object sender, EventArgs e)
+        {
 
         }
     }
