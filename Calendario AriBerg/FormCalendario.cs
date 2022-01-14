@@ -121,8 +121,7 @@ namespace Calendario_AriBerg
 
         private void Caricamento()
         {
-            Task.Run(new Action(() =>
-            {
+
                 Invoke(new Action(() =>
                 {
                     Cursor = Cursors.AppStarting;
@@ -133,19 +132,8 @@ namespace Calendario_AriBerg
                     pbxWait.Enabled = true;
                     pbxWait.Visible = true;
                 }));
-            }));
         }
 
-        private void CaricamentoSync()
-        {
-                    Cursor = Cursors.AppStarting;
-                    foreach(Control c in Controls)
-                    {
-                        c.Enabled = false;
-                    }
-                    pbxWait.Visible = true;
-                    pbxWait.Enabled = true;                  
-        }
 
 
         private void EndCaricamento()
@@ -3312,7 +3300,7 @@ namespace Calendario_AriBerg
 
         private void btnAddComponente_Click(object sender, EventArgs e)
         {    
-            CaricamentoSync();           
+            Caricamento();           
             if (Metodi.CheckForNewComponentsAndNotify(ref dgvComponenti))
             {
                 
