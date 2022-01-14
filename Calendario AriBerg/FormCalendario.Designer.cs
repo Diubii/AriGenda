@@ -242,7 +242,7 @@ namespace Calendario_AriBerg
             this.btnExitEditComponente = new System.Windows.Forms.Button();
             this.tbCtrlMagazzini = new System.Windows.Forms.TabControl();
             this.Totale = new System.Windows.Forms.TabPage();
-            this.dgvMagazziniTotale = new System.Windows.Forms.DataGridView();
+            this.dgvMagazzinoTotale = new System.Windows.Forms.DataGridView();
             this.Centrale = new System.Windows.Forms.TabPage();
             this.dgvMagazzinoCentrale = new System.Windows.Forms.DataGridView();
             this.tabPage6 = new System.Windows.Forms.TabPage();
@@ -355,7 +355,7 @@ namespace Calendario_AriBerg
             ((System.ComponentModel.ISupportInitialize)(this.nudModificaNOrdine)).BeginInit();
             this.tbCtrlMagazzini.SuspendLayout();
             this.Totale.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMagazziniTotale)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMagazzinoTotale)).BeginInit();
             this.Centrale.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMagazzinoCentrale)).BeginInit();
             this.MidMagPanel.SuspendLayout();
@@ -3043,7 +3043,7 @@ namespace Calendario_AriBerg
             // 
             // Totale
             // 
-            this.Totale.Controls.Add(this.dgvMagazziniTotale);
+            this.Totale.Controls.Add(this.dgvMagazzinoTotale);
             this.Totale.Location = new System.Drawing.Point(4, 27);
             this.Totale.Name = "Totale";
             this.Totale.Padding = new System.Windows.Forms.Padding(3);
@@ -3052,17 +3052,16 @@ namespace Calendario_AriBerg
             this.Totale.Text = "Totale";
             this.Totale.UseVisualStyleBackColor = true;
             // 
-            // dgvMagazziniTotale
+            // dgvMagazzinoTotale
             // 
-            this.dgvMagazziniTotale.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvMagazziniTotale.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMagazziniTotale.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvMagazziniTotale.Location = new System.Drawing.Point(3, 3);
-            this.dgvMagazziniTotale.MultiSelect = false;
-            this.dgvMagazziniTotale.Name = "dgvMagazziniTotale";
-            this.dgvMagazziniTotale.ReadOnly = true;
-            this.dgvMagazziniTotale.Size = new System.Drawing.Size(528, 631);
-            this.dgvMagazziniTotale.TabIndex = 0;
+            this.dgvMagazzinoTotale.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvMagazzinoTotale.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMagazzinoTotale.Location = new System.Drawing.Point(44, 62);
+            this.dgvMagazzinoTotale.MultiSelect = false;
+            this.dgvMagazzinoTotale.Name = "dgvMagazzinoTotale";
+            this.dgvMagazzinoTotale.ReadOnly = true;
+            this.dgvMagazzinoTotale.Size = new System.Drawing.Size(451, 544);
+            this.dgvMagazzinoTotale.TabIndex = 0;
             // 
             // Centrale
             // 
@@ -4066,7 +4065,7 @@ namespace Calendario_AriBerg
             ((System.ComponentModel.ISupportInitialize)(this.nudModificaNOrdine)).EndInit();
             this.tbCtrlMagazzini.ResumeLayout(false);
             this.Totale.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMagazziniTotale)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMagazzinoTotale)).EndInit();
             this.Centrale.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMagazzinoCentrale)).EndInit();
             this.MidMagPanel.ResumeLayout(false);
@@ -4354,7 +4353,7 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.Label lblAggiornaComponentiMagazzino;
         private System.Windows.Forms.Label lblModificaComponentiMagazzino;
         private System.Windows.Forms.Label lblEliminaComponenteImmagazzinato;
-        private System.Windows.Forms.DataGridView dgvMagazziniTotale;
+        private System.Windows.Forms.DataGridView dgvMagazzinoTotale;
         private System.Windows.Forms.ComboBox cbxAggiungiMarcaComponente;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;

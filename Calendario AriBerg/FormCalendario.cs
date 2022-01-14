@@ -145,6 +145,7 @@ namespace Calendario_AriBerg
                         UpdateComboboxTabc2MarcType();
                         RefreshComponentsCatalogoAndCBX();
                         RefreshMagazzini();
+                        RefreshConetnutiMagazzini();
                         Invoke(new Action(() =>
                         {
                             Notifica n = new Notifica();
@@ -153,7 +154,7 @@ namespace Calendario_AriBerg
                     }
                     break;
                 case 3:
-                    if (Metodi.CheckForNewBrands(ref dgvMarcheComponenti)|| Metodi.CheckForNewComponents(ref dgvTipiComponenti))
+                    if (Metodi.CheckForNewBrands(ref dgvMarcheComponenti)|| Metodi.CheckForNewTypes(ref dgvTipiComponenti))
                     {
                         RefreshComponentBrandsDataGridView();
                         RefreshComponentTypesDataGridView();
@@ -173,8 +174,54 @@ namespace Calendario_AriBerg
 
         private void RefreshConetnutiMagazzini()
         {
+            MySqlConnection Conn = new MySqlConnection();
 
+            Conn = Metodi.ConnectToDatabase();
+
+            MySqlDataReader reader;
+            List<Componenti> catalogo = new List<Componenti>();
+            Componenti c = new Componenti();
+
+            MySqlConnection conn = Metodi.ConnectToDatabase();
+            string query = $"SELECT * From componente";
+            MySqlCommand command = new MySqlCommand(query, conn);
+
+            reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                c = new Componenti(reader.GetString(2), reader.GetString(1), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(0), 0);
+                catalogo.Add(c);
+            }
+
+            //tante liste quante sono i magazzini
+            Dictionary<string, Magazzino> MagazziniAssemblyMegazord = new Dictionary<string, Magazzino>();
+            foreach (TabPage t in tbCtrlMagazzini.TabPages)
+            {
+                Magazzino m = new Magazzino(t.Name);
+                MagazziniAssemblyMegazord.Add(t.Name, m);
+            }
+                //0: id_magazzino
+                ///1:marca_componente
+                ///2:codice_componente
+                ///3:qiantità_componente
+                query = $"SELECT * From componenti_magazzino";
+            MySqlCommand GetMagazzini = new MySqlCommand(query, Conn);
+            reader = GetMagazzini.ExecuteReader();        
+            
+            while (reader.Read())
+            {
+                MagazziniAssemblyMegazord[reader.GetString(0)].Listacomponenti.Add((Componenti)catalogo.First(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)));
+                MagazziniAssemblyMegazord["Totale"].Listacomponenti.Add((Componenti)catalogo.Find(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)));
+            }
+            
+            foreach(TabPage t in tbCtrlMagazzini.TabPages)
+            {
+                DataGridView d = (DataGridView)t.Controls["dgvMagazzino" + t.Name];
+                Invoke(new Action(() => { d.DataSource = MagazziniAssemblyMegazord[t.Name].Listacomponenti; }));
+            }
         }
+
 
         private void RefreshMagazzini()
         {
@@ -219,6 +266,7 @@ namespace Calendario_AriBerg
                     DataGridView d = new DataGridView();
                     d.Name = "dgvMagazzino" + s;
                     d.Dock = DockStyle.Fill;
+                    d.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
                     Invoke(new Action(() =>
                     {
@@ -267,11 +315,6 @@ namespace Calendario_AriBerg
                 dgvComponenti.Columns["Quantita"].Visible = false;
             }));
             Registro.ComponentiAttuali = l;
-
-            Invoke(new Action(() => {
-                Enabled = true;
-                Cursor = Cursors.Default;
-            }));
         }
 
         private void UpdateComboboxTabc2MarcType()

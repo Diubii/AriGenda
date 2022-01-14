@@ -68,7 +68,7 @@ namespace Calendario_AriBerg
             {
                 if (currentComponents.Count == 0) break;
 
-                Componenti sameCode = currentComponents.Find(x => x.Codice == comp.Codice);
+                Componenti sameCode = currentComponents.Find(x => x?.Codice == comp.Codice);
                 if(sameCode == null)
                 {
                     different = true;
