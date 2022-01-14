@@ -276,6 +276,9 @@
     <None Include="Resources\components_remove.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\AriLoading.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Resources\Logo AriGenda.ico" />
     <None Include="Resources\Logo_AriGenda.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

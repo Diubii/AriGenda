@@ -119,18 +119,54 @@ namespace Calendario_AriBerg
             //t.Start();
         }
 
-        private async void TimerTick(object sender, EventArgs e)
+        private void Caricamento()
         {
-            await Task.Run(new Action(() => { RefreshCurrentTab(); }));
+            Task.Run(new Action(() =>
+            {
+                Invoke(new Action(() =>
+                {
+                    Cursor = Cursors.AppStarting;
+                    foreach (Control c in Controls)
+                    {
+                        c.Enabled = false;
+                    }
+                    pbxWait.Enabled = true;
+                    pbxWait.Visible = true;
+                }));
+            }));
         }
 
+        private void CaricamentoSync()
+        {
+                    Cursor = Cursors.AppStarting;
+                    foreach(Control c in Controls)
+                    {
+                        c.Enabled = false;
+                    }
+                    pbxWait.Visible = true;
+                    pbxWait.Enabled = true;                  
+        }
+
+
+        private void EndCaricamento()
+        {
+
+            Invoke(new Action(() => {
+                foreach (Control c in Controls)
+                {
+                    c.Enabled = true;
+                }
+                Cursor = Cursors.Default;
+                pbxWait.Visible = false;
+
+            }));
+        }
         private void RefreshCurrentTab()
         {
             int a = 0;
-            Invoke(new Action(() => {
-                Cursor = Cursors.AppStarting;
-                Enabled = false;
-                a = tabControl1.SelectedIndex; 
+            Invoke(new Action(() =>
+            {
+                a = tabControl1.SelectedIndex;
             }));
             switch (a)
             {
@@ -141,7 +177,6 @@ namespace Calendario_AriBerg
                 case 2:
                     if (Metodi.CheckForNewComponents(ref dgvComponenti))
                     {
-
                         UpdateComboboxTabc2MarcType();
                         RefreshComponentsCatalogoAndCBX();
                         RefreshMagazzini();
@@ -154,7 +189,7 @@ namespace Calendario_AriBerg
                     }
                     break;
                 case 3:
-                    if (Metodi.CheckForNewBrands(ref dgvMarcheComponenti)|| Metodi.CheckForNewComponents(ref dgvTipiComponenti))
+                    if (Metodi.CheckForNewBrands(ref dgvMarcheComponenti)|| Metodi.CheckForNewTypes(ref dgvTipiComponenti))
                     {
                         RefreshComponentBrandsDataGridView();
                         RefreshComponentTypesDataGridView();
@@ -166,10 +201,8 @@ namespace Calendario_AriBerg
                     }
                     break;
             }
-            Invoke(new Action(() => {
-                Enabled = true;
-                Cursor = Cursors.Default;
-            }));
+
+            EndCaricamento();
         }
 
         private void RefreshConetnutiMagazzini()
@@ -2563,6 +2596,7 @@ namespace Calendario_AriBerg
 
         private async void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Caricamento(); 
             await Task.Run(new Action(() => { RefreshCurrentTab(); }));
         }
 
@@ -2580,10 +2614,7 @@ namespace Calendario_AriBerg
             }
         }
 
-        public void AGGIORNATUTTO()
-        {
 
-        }
 
         private void FormCalendario_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -3280,14 +3311,18 @@ namespace Calendario_AriBerg
         }
 
         private void btnAddComponente_Click(object sender, EventArgs e)
-        {
+        {    
+            CaricamentoSync();           
             if (Metodi.CheckForNewComponentsAndNotify(ref dgvComponenti))
             {
+                
                 RefreshComponentsCatalogoAndCBX();
+                EndCaricamento();
                 return;
             }
 
             gBxAggiungiComponente.Visible = true;
+            EndCaricamento();
         }
 
         private void btnExitAggiungiComponente_Click(object sender, EventArgs e)
@@ -3967,5 +4002,12 @@ namespace Calendario_AriBerg
 
             }
         }
+
+        private void mur_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Pesce di apvile a tutti da mavva!!");
+        }
+
+
     }
 }
