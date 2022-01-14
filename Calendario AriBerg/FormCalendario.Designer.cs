@@ -283,7 +283,7 @@ namespace Calendario_AriBerg
             this.chBxFiltroMagazzinoCodice = new System.Windows.Forms.CheckBox();
             this.chBxFiltroMagazzinoMarca = new System.Windows.Forms.CheckBox();
             this.chBxFiltroMagazzinoTipo = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.chBxSottoSoglia = new System.Windows.Forms.CheckBox();
             this.btnSearchComponenti = new System.Windows.Forms.Button();
             this.cbBxFiltroMagazzinoMarca = new System.Windows.Forms.ComboBox();
             this.cbBxFiltroMagazzinoCodice = new System.Windows.Forms.ComboBox();
@@ -3472,7 +3472,7 @@ namespace Calendario_AriBerg
             this.pnlFiltriMagazzino.Controls.Add(this.chBxFiltroMagazzinoCodice);
             this.pnlFiltriMagazzino.Controls.Add(this.chBxFiltroMagazzinoMarca);
             this.pnlFiltriMagazzino.Controls.Add(this.chBxFiltroMagazzinoTipo);
-            this.pnlFiltriMagazzino.Controls.Add(this.checkBox4);
+            this.pnlFiltriMagazzino.Controls.Add(this.chBxSottoSoglia);
             this.pnlFiltriMagazzino.Controls.Add(this.btnSearchComponenti);
             this.pnlFiltriMagazzino.Controls.Add(this.cbBxFiltroMagazzinoMarca);
             this.pnlFiltriMagazzino.Controls.Add(this.cbBxFiltroMagazzinoCodice);
@@ -3536,15 +3536,15 @@ namespace Calendario_AriBerg
             this.chBxFiltroMagazzinoTipo.UseVisualStyleBackColor = true;
             this.chBxFiltroMagazzinoTipo.CheckedChanged += new System.EventHandler(this.chBxFiltroMagazzinoTipo_CheckedChanged);
             // 
-            // checkBox4
+            // chBxSottoSoglia
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(601, 37);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(100, 22);
-            this.checkBox4.TabIndex = 31;
-            this.checkBox4.Text = "Sotto Soglia";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.chBxSottoSoglia.AutoSize = true;
+            this.chBxSottoSoglia.Location = new System.Drawing.Point(601, 37);
+            this.chBxSottoSoglia.Name = "chBxSottoSoglia";
+            this.chBxSottoSoglia.Size = new System.Drawing.Size(100, 22);
+            this.chBxSottoSoglia.TabIndex = 31;
+            this.chBxSottoSoglia.Text = "Sotto Soglia";
+            this.chBxSottoSoglia.UseVisualStyleBackColor = true;
             // 
             // btnSearchComponenti
             // 
@@ -4318,7 +4318,7 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.ComboBox cbBxFiltroMagazzinoMarca;
         private System.Windows.Forms.ComboBox cbBxFiltroMagazzinoTipo;
         private System.Windows.Forms.CheckBox chBxFiltroMagazzinoCodice;
-        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox chBxSottoSoglia;
         private System.Windows.Forms.Label lblMagazziniComponenti;
         private System.Windows.Forms.Label lblCatalogoComponenti;
         private System.Windows.Forms.CheckBox chbxFiltroACatalogo;
