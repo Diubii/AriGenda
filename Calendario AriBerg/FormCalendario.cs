@@ -279,10 +279,6 @@ namespace Calendario_AriBerg
        
         private void RefreshComponentsCatalogoAndCBX()
         {
-            Invoke(new Action(() => {               
-                Cursor = Cursors.AppStarting;
-                Enabled = false;
-            }));
 
             MySqlDataReader reader;
             List<Componenti> l = new List<Componenti>();
@@ -3879,6 +3875,11 @@ namespace Calendario_AriBerg
 
         private void btnSearchComponenti_Click(object sender, EventArgs e)
         {
+
+            Cursor = Cursors.AppStarting;
+            Enabled = false;
+
+
             ///INDICI TABELLA COMPONENTI
             ///0: codice_componente
             ///1: marca_componente
@@ -3961,6 +3962,9 @@ namespace Calendario_AriBerg
             finally
             {
                 conn.Close();
+                Cursor = Cursors.Default;
+                Enabled = true;
+
             }
         }
     }
