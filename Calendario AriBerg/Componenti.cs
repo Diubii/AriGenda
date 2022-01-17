@@ -20,6 +20,15 @@ namespace Calendario_AriBerg
 
         }
 
+        public Componenti(Componenti Comp)
+        {
+            this.Tipo = Comp.Tipo;
+            this.Marca = Comp.Marca;
+            this.Soglia = Comp.Soglia;
+            this.N_ordine = Comp.N_ordine;
+            this.Codice = Comp.Codice;
+            this.Quantita = Comp.Quantita;
+        }
         public Componenti(string tipo, string marca, int soglia, int n_ordine, string codice, int quantita)
         {
             this.Tipo = tipo;
