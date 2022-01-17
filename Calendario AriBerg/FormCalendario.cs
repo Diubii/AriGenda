@@ -3336,5 +3336,10 @@ namespace Calendario_AriBerg
                 cbBxAggiungiMacchinaCodiceFiltro.DataSource = bsCodici;
             }
         }
+
+        private void btnCloseEditComponenti_Click(object sender, EventArgs e)
+        {
+            gbxEditComponenti.Visible = false;
+        }
     }
 }
