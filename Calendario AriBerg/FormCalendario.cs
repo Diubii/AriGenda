@@ -1362,14 +1362,29 @@ namespace Calendario_AriBerg
 
         private void btnAggiungiMacchinaAggiungiComponenti_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaTipoFiltro.Text) /*|| string.IsNullOrWhiteSpace(txBxAggiungiMacchinaCodiceFiltro.Text)*/)
+            if (!string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaTipoFiltro.Text) && 
+                !string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaCodiceFiltro.Text) && 
+                !string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaMarcaFiltro.Text))
             {
-                ListViewItem item = new ListViewItem
+                Componenti c = Registro.ComponentiAttuali.Find(x => x.Codice == cbBxAggiungiMacchinaCodiceFiltro.Text && x.Marca == cbBxAggiungiMacchinaMarcaFiltro.Text && x.Tipo == cbBxAggiungiMacchinaTipoFiltro.Text);
+
+                List<Componenti> compsInDGV = new List<Componenti>();
+                compsInDGV.Add(c);
+
+                foreach(DataGridViewRow dgvr in dgvComponentiAggiungiMacchina.Rows)
                 {
-                    Text = cbBxAggiungiMacchinaTipoFiltro.Text
+                    compsInDGV.Add(dgvr.DataBoundItem as Componenti);
+                }
+
+                BindingSource bs = new BindingSource()
+                {
+                    DataSource = compsInDGV
                 };
-                //item.SubItems.Add(txBxAggiungiMacchinaCodiceFiltro.Text);
-                //lvAggiungiMacchinaFiltri.Items.Add(item);
+
+                dgvComponentiAggiungiMacchina.DataSource = bs;
+                dgvComponentiAggiungiMacchina.Columns["Quantita"].Visible = false;
+                dgvComponentiAggiungiMacchina.Columns["Soglia"].Visible = false;
+                dgvComponentiAggiungiMacchina.Columns["N_ordine"].Visible = false;
             }
         }
 
@@ -3236,5 +3251,70 @@ namespace Calendario_AriBerg
             EditContenutiMagazzinoApply(true, false);
         }
 
+        private void cbBxAggiungiMacchinaTipoFiltro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaTipoFiltro.Text))
+            {
+                cbBxAggiungiMacchinaCodiceFiltro.DataSource = null;
+                cbBxAggiungiMacchinaMarcaFiltro.DataSource = null;
+                MySqlConnection conn = Metodi.ConnectToDatabase();
+                string query = $"SELECT marca_componente, codice_componente FROM componente WHERE tipo_componente = '{cbBxAggiungiMacchinaTipoFiltro.Text}'";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataReader res = cmd.ExecuteReader();
+
+                List<string> marche = new List<string>();
+                List<string> codici = new List<string>();
+                while (res.Read())
+                {
+                    marche.Add(res.GetString(0));
+                    codici.Add(res.GetString(1));
+                }
+
+                if (marche.Count == 0) return;
+
+                cbBxAggiungiMacchinaMarcaFiltro.Enabled = true;
+                cbBxAggiungiMacchinaCodiceFiltro.Enabled = true;
+
+                BindingSource bsMarche = new BindingSource()
+                {
+                    DataSource = marche
+                };
+
+                BindingSource bsCodici = new BindingSource()
+                {
+                    DataSource = codici
+                };
+
+                cbBxAggiungiMacchinaCodiceFiltro.DataSource = bsCodici;
+                cbBxAggiungiMacchinaMarcaFiltro.DataSource = bsMarche;
+            }
+        }
+
+        private void cbBxAggiungiMacchinaMarcaFiltro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaTipoFiltro.Text))
+            {
+                cbBxAggiungiMacchinaCodiceFiltro.DataSource = null;
+                MySqlConnection conn = Metodi.ConnectToDatabase();
+                string query = $"SELECT codice_componente FROM componente WHERE tipo_componente = '{cbBxAggiungiMacchinaTipoFiltro.Text}' AND marca_componente = '{cbBxAggiungiMacchinaMarcaFiltro.Text}'";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataReader res = cmd.ExecuteReader();
+
+                List<string> codici = new List<string>();
+                while (res.Read())
+                {
+                    codici.Add(res.GetString(0));
+                }
+
+                cbBxAggiungiMacchinaCodiceFiltro.Enabled = true;
+
+                BindingSource bsCodici = new BindingSource()
+                {
+                    DataSource = codici
+                };
+
+                cbBxAggiungiMacchinaCodiceFiltro.DataSource = bsCodici;
+            }
+        }
     }
 }
