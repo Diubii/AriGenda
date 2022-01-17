@@ -37,6 +37,102 @@ namespace Calendario_AriBerg
             }
         }
 
+        internal static bool CheckForNewCustomers()
+        {
+            ///0: id_cliente
+            ///1: nome_cliente
+            ///2: telefono_cliente
+            ///3: mail_cliente
+            ///4: indirizzo_cliente
+            ///5: p.iva_cliente
+            ///6: p.rif_cliente
+            
+            List<Cliente> l = new List<Cliente>();
+            Cliente c = new Cliente();
+
+            MySqlConnection conn = Metodi.ConnectToDatabase();
+            string query = $"SELECT * FROM cliente";
+            MySqlCommand command = new MySqlCommand(query, conn);
+
+            MySqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string p_iva = null;
+                if (!reader.IsDBNull(reader.GetOrdinal("p.iva_cliente")))
+                {
+                    p_iva = reader.GetString(5);
+                }
+
+                string p_rif = null;
+                if (!reader.IsDBNull(reader.GetOrdinal("p.rif_cliente")))
+                {
+                    p_iva = reader.GetString(6);
+                }
+                c = new Cliente(reader.GetString(1), 
+                    reader.GetString(4), 
+                    reader.GetString(2),
+                    p_iva,
+                    reader.GetString(3),
+                    p_rif, 
+                    null);
+                l.Add(c);
+            }
+
+            List<Cliente> currentClienti = new List<Cliente>();
+
+            foreach (Cliente cl in Registro.ClientiAttuali)
+            {
+                currentClienti.Add(cl);
+            }
+
+            bool different = false;
+            
+            foreach (Cliente cl in l)
+            {
+                if (currentClienti.Count == 0) break;
+
+                Cliente sameCode = currentClienti.Find(x => x?._Email == cl._Email && x._Telefono == cl._Telefono);
+                if (sameCode == null)
+                {
+                    different = true;
+                    break;
+                }
+                else
+                {
+                    if (JsonConvert.SerializeObject(cl) != JsonConvert.SerializeObject(sameCode))
+                    {
+                        different = true;
+                        break;
+                    }
+                }
+            }
+
+            if (different || l.Count != currentClienti.Count)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        internal static bool CheckForNewCustomersAndNotify()
+        {
+            if (Metodi.CheckForNewCustomers())
+            {
+                Notifica n = new Notifica();
+                n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         internal static bool CheckForNewComponents()
         {
             List<Componenti> l = new List<Componenti>();
@@ -106,6 +202,18 @@ namespace Calendario_AriBerg
             {
                 return false;
             }
+        }
+
+        internal static int GetCustomerID(DataGridViewRow dgvr)
+        {
+            Cliente cl = dgvr.DataBoundItem as Cliente;
+            MySqlConnection conn = ConnectToDatabase();
+            string query = $"SELECT id_cliente FROM cliente WHERE telefono_cliente = {cl._Telefono} AND mail_cliente = {cl._Email}";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlDataReader res = cmd.ExecuteReader();
+
+            res.Read();
+            return res.GetInt32(0);
         }
 
         internal static bool CheckForNewBrands(ref DataGridView dvgBrands)

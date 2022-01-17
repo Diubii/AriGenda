@@ -13,6 +13,8 @@ namespace Calendario_AriBerg
     public static class Registro
     {
         internal static List<Componenti> ComponentiAttuali { get; set; } = new List<Componenti>();
+        internal static List<Cliente> ClientiAttuali { get; set; } = new List<Cliente>();
+
         internal static Dictionary<DateTime, List<Evento>> DizGiorni { get; set; } = new Dictionary<DateTime, List<Evento>>();
         internal static Dictionary<string, Cliente> DizClienti { get; set; } = new Dictionary<string, Cliente>();
         internal static Dictionary<string, Componenti> DizComponenti { get; set; } = new Dictionary<string, Componenti>();
