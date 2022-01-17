@@ -153,21 +153,6 @@ namespace Calendario_AriBerg
                     break;
 
                 case 1:
-                    if (Metodi.CheckForNewCustomers())
-                    {
-                        RefreshCustomers();
-                        if (Metodi.CheckForNewComponents()) RefreshComponentsCatalogoAndCBX();
-                        if (Metodi.CheckForNewTypes(ref dgvTipiComponenti)) RefreshComponentTypesDataGridView();
-                        List<string> types = new List<string>();
-                        foreach (DataGridViewRow dgvr in dgvTipiComponenti.Rows) types.Add(dgvr.Cells[0].Value.ToString());
-                        cbBxAggiungiMacchinaTipoFiltro.DataSource = types;
-
-                        Invoke(new Action(() =>
-                        {
-                            Notifica n = new Notifica();
-                            n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
-                        }));
-                    }
                     break;
 
                 case 2:
@@ -1325,7 +1310,7 @@ namespace Calendario_AriBerg
 
         private void btnAggiungiMacchinaAggiungiComponenti_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaTipoFiltro.Text) || string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaCodiceFiltro.Text))
+            if (string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaTipoFiltro.Text) || string.IsNullOrWhiteSpace(txBxAggiungiMacchinaCodiceFiltro.Text))
             {
             }
             else
@@ -1334,7 +1319,7 @@ namespace Calendario_AriBerg
                 {
                     Text = cbBxAggiungiMacchinaTipoFiltro.Text
                 };
-                item.SubItems.Add(cbBxAggiungiMacchinaCodiceFiltro.Text);
+                item.SubItems.Add(txBxAggiungiMacchinaCodiceFiltro.Text);
                 //lvAggiungiMacchinaFiltri.Items.Add(item);
             }
         }
@@ -3135,11 +3120,6 @@ namespace Calendario_AriBerg
         private void btnEliminaComponenteImmagazzinato_Click(object sender, EventArgs e)
         {
             EditContenutiMagazzinoApply(true, false);
-        }
-
-        private void cbBxAggiungiMacchinaTipoFiltro_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(cbBxAggiungiMacchinaTipoFiltro)
         }
     }
 }
