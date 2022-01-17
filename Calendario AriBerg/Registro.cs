@@ -20,6 +20,10 @@ namespace Calendario_AriBerg
         internal static Dictionary<string, Componenti> DizComponenti { get; set; } = new Dictionary<string, Componenti>();
         internal static Dictionary<string, Magazzino> DizMagazzini { get; set; } = new Dictionary<string, Magazzino>();
 
+        internal static Dictionary<DateTime, List<Evento>> appDizGiorni { get; set; } = new Dictionary<DateTime, List<Evento>>();
+        internal static Dictionary<string, Cliente> appDizClienti { get; set; } = new Dictionary<string, Cliente>();
+        internal static Dictionary<string, Componenti> appDizComponenti { get; set; } = new Dictionary<string, Componenti>();
+        internal static Dictionary<string, Magazzino> appDizMagazzini { get; set; } = new Dictionary<string, Magazzino>();
 
         //Gestione eventi
         public static void AddEvento(Evento e)
@@ -73,7 +77,7 @@ namespace Calendario_AriBerg
                 }
             }
 
-
+            
         }
 
         //Gestione Clienti
@@ -82,7 +86,7 @@ namespace Calendario_AriBerg
 
         }
 
-        public static void ModifyCliente(Cliente old, Cliente update)
+        public static void ModifyCliente(Cliente old,Cliente update)
         {
             DizClienti.Remove(old._Nome);
             DizClienti.Add(update._Nome, update);
@@ -92,7 +96,46 @@ namespace Calendario_AriBerg
         {
 
         }
+    
+        
+        //Gestione Componenti
+        public static void AddComponenti()
+        {
 
+        }
+
+        public static void ModifyComponenti()
+        {
+
+        }
+
+        public static void RemoveComponenti()
+        {
+
+        }
+
+        //Gestione Magazzini
+        public static void AddMagazzino(Magazzino m)
+        {
+            if (DizMagazzini.ContainsKey(m.Nome) == false)
+            {
+                DizMagazzini.Add(m.Nome, m);
+            }
+            else
+            {
+                throw new Exception("Nomw magazzino già in uso");
+            }
+        }
+
+        public static void ModifyMagazzino()
+        {
+
+        }
+
+        public static void DeleteMagazzino()
+        {
+
+        }
 
 
         //////////////////////////////////////////
@@ -131,24 +174,24 @@ namespace Calendario_AriBerg
                 string note_evento = res.GetString(6);
 
                 Dictionary<DateTime, List<Evento>> tempDizGiorni = new Dictionary<DateTime, List<Evento>>();
-
-                foreach (KeyValuePair<DateTime, List<Evento>> kv in DizGiorni)
+                
+                foreach(KeyValuePair<DateTime, List<Evento>> kv in DizGiorni)
                 {
                     tempDizGiorni.Add(kv.Key, kv.Value);
                 }
 
-                foreach (KeyValuePair<DateTime, List<Evento>> kv in tempDizGiorni)
+                foreach(KeyValuePair<DateTime, List<Evento>> kv in tempDizGiorni)
                 {
                     //Evento ev = tempDizGiorni.Values.First(x => x.First(y => y.ID.ToString() == id_evento).ID.ToString() == id_evento).First(x => x.ID.ToString() == id_evento);
 
                     bool found = false;
 
-                    foreach (Evento e in kv.Value)
+                    foreach(Evento e in kv.Value)
                     {
-                        if (e.ID.ToString() == id_evento)
+                        if(e.ID.ToString() == id_evento)
                         {
                             found = true;
-
+                            
                         }
                     }
                 }
@@ -156,5 +199,37 @@ namespace Calendario_AriBerg
         }
 
 
+        /// <summary>
+        /// Applica ai dizionari veri quelli di appoggio
+        /// </summary>
+        internal static void UpdateWithPull()
+        {
+
+        }
+
+        /// <summary>
+        /// Fa il pull e confronta i dizionari aggiornati di appoggio con quelli veri e pusha le differenze
+        /// </summary>
+        internal static void PushDati()
+        {
+            PullDati();
+
+            Dictionary<int, Evento> eventiToUpdate = new Dictionary<int, Evento>();
+
+            foreach(KeyValuePair<DateTime,List<Evento>> kv in DizGiorni)
+            {
+                foreach(Evento e in kv.Value)
+                {
+                    
+                    if(e != appDizGiorni.Values.First(x => x.First(y => y.ID == e.ID).ID == e.ID).First(x => x.ID == e.ID))
+                    {
+                        eventiToUpdate.Add(e.ID, e);
+                    }                  
+                }
+            }
+
+            string query = "Update eventi";
+
+        }
     }
 }
