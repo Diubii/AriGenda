@@ -23,7 +23,7 @@ namespace Calendario_AriBerg
         {
             try
             {
-                string remoteConnectionString = $"Server=192.168.1.4; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
+                string remoteConnectionString = $"Server=database.diubi.dev; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
                 MySqlConnection conn = new MySqlConnection(remoteConnectionString);
                 conn.Open();
                 return conn;
@@ -365,7 +365,112 @@ namespace Calendario_AriBerg
             }
         }
 
-            static internal bool AreThereAnyEmptyTextBoxes(List<TextBox> list)
+        internal static bool CheckForNewDatiMagazzini(TabControl tbCtrlMagazzini)
+        {
+            MySqlConnection Conn = new MySqlConnection();
+
+            Conn = Metodi.ConnectToDatabase();
+
+            MySqlDataReader reader;
+            string query = $"SELECT * From magazzino";
+            MySqlCommand GetMagazzini = new MySqlCommand(query, Conn);
+            reader = GetMagazzini.ExecuteReader();
+
+            Dictionary<string,Magazzino> Magazzininew = new Dictionary<string, Magazzino>();
+
+            while (reader.Read())
+            {
+                Magazzininew.Add(reader.GetString(0),new Magazzino(reader.GetString(0)));
+            }
+            Magazzininew.Add("Totale", new Magazzino("Totale"));
+            reader.Close();
+
+            List<Componenti> catalogo = new List<Componenti>();
+            Componenti c = new Componenti();
+
+            MySqlConnection conn = Metodi.ConnectToDatabase();
+            query = $"SELECT * From componente";
+            MySqlCommand command = new MySqlCommand(query, conn);
+
+            reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                c = new Componenti(reader.GetString(2), reader.GetString(1), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(0), 0);
+                catalogo.Add(c);
+            }
+            
+
+            query = $"SELECT * From componenti_magazzino";
+            GetMagazzini = new MySqlCommand(query, Conn);
+            reader = GetMagazzini.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Componenti comp = new Componenti((Componenti)catalogo.First(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)));
+                Magazzininew[reader.GetString(0)].Listacomponenti.Add(comp);
+                Magazzininew[reader.GetString(0)].Listacomponenti.Find(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)).Quantita = reader.GetInt32(3);
+                if (Magazzininew["Totale"].Listacomponenti.Find(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)) == null)
+                {
+                    Componenti Compino = new Componenti((Componenti)catalogo.First(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)));
+                    Compino.Quantita = reader.GetInt32(3);
+                    Magazzininew["Totale"].Listacomponenti.Add(Compino);
+                }
+                else
+                {
+                    Magazzininew["Totale"].Listacomponenti.Find(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)).Quantita += reader.GetInt32(3);
+                }
+            }
+
+            bool different = false;
+
+            foreach (Magazzino mag in Magazzininew.Values)
+            {
+                if (Registro.DizMagazzini.Count == 0) break;
+
+                Magazzino sameCode = Registro.DizMagazzini[mag.Nome];
+                if (sameCode == null)
+                {
+                    different = true;
+                    break;
+                }
+                else
+                {
+                    if (JsonConvert.SerializeObject(mag) != JsonConvert.SerializeObject(sameCode))
+                    {
+                        different = true;
+                        break;
+                    }
+                }
+            }
+
+            if (different || Magazzininew.Count != Registro.DizMagazzini.Count)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        internal static bool CheckForNewDatiMagazziniAndNotify(TabControl tbCtrlMagazzini)
+        {
+            if (Metodi.CheckForNewDatiMagazzini(tbCtrlMagazzini))
+            {
+                Notifica n = new Notifica();
+                n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        static internal bool AreThereAnyEmptyTextBoxes(List<TextBox> list)
         {
             foreach(TextBox tb in list)
             {
