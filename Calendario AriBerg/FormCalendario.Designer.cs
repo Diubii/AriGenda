@@ -29,6 +29,7 @@ namespace Calendario_AriBerg
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCalendario));
             this.dgvEventi = new System.Windows.Forms.DataGridView();
             this.lblEventi = new System.Windows.Forms.Label();
             this.btnLegenda = new System.Windows.Forms.Button();
@@ -2865,7 +2866,7 @@ namespace Calendario_AriBerg
             this.gbxModificaComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.gbxModificaComponente.Location = new System.Drawing.Point(3, 85);
             this.gbxModificaComponente.Name = "gbxModificaComponente";
-            this.gbxModificaComponente.Size = new System.Drawing.Size(556, 502);
+            this.gbxModificaComponente.Size = new System.Drawing.Size(556, 499);
             this.gbxModificaComponente.TabIndex = 57;
             this.gbxModificaComponente.TabStop = false;
             this.gbxModificaComponente.Text = "Modifica componente";
@@ -2887,7 +2888,7 @@ namespace Calendario_AriBerg
             this.btnModificaComponente.FlatAppearance.BorderSize = 0;
             this.btnModificaComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificaComponente.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModificaComponente.Location = new System.Drawing.Point(0, 445);
+            this.btnModificaComponente.Location = new System.Drawing.Point(0, 442);
             this.btnModificaComponente.Name = "btnModificaComponente";
             this.btnModificaComponente.Size = new System.Drawing.Size(556, 56);
             this.btnModificaComponente.TabIndex = 12;
@@ -4031,6 +4032,7 @@ namespace Calendario_AriBerg
             this.Controls.Add(this.pbxWait);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Calibri", 8.25F);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.MinimumSize = new System.Drawing.Size(1280, 720);
             this.Name = "FormCalendario";
