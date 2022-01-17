@@ -121,8 +121,9 @@ namespace Calendario_AriBerg
             {
                 c.Enabled = false;
             }
+            pbxWait.Location = new Point(this.Width/2 - pbxWait.Width/2, this.Height/2 - pbxWait.Height/2 - pbxWait.Height / 4);
             pbxWait.Enabled = true;
-            //pbxWait.Visible = true;
+            pbxWait.Visible = true;
             pbxWait.BringToFront();
         }
 
@@ -135,7 +136,7 @@ namespace Calendario_AriBerg
             }
             Cursor = Cursors.Default;
             pbxWait.Enabled = true;
-            //pbxWait.Visible = false;
+            pbxWait.Visible = false;
             pbxWait.SendToBack();
         }
 
@@ -155,13 +156,9 @@ namespace Calendario_AriBerg
                     break;
 
                 case 2:
-                    if (Metodi.CheckForNewBrands(ref dgvMarcheComponenti) || Metodi.CheckForNewTypes(ref dgvTipiComponenti))
-                    {
-                        RefreshComponentBrandsDataGridView();
-                        RefreshComponentTypesDataGridView();
-                        UpdateComboboxTabc2MarcType();                       
-                    }
-                    if (Metodi.CheckForNewComponents(ref dgvComponenti))
+                    UpdateCBXTipi();
+
+                    if (Metodi.CheckForNewComponents())
                     {                      
                         RefreshComponentsCatalogoAndCBX();
                         RefreshMagazzini();
@@ -190,6 +187,24 @@ namespace Calendario_AriBerg
             }
 
             Invoke(new Action(() => { EndCaricamento(); }));
+        }
+
+        private void UpdateCBXTipi()
+        {
+            List<string> tipiAttuali = new List<string>();
+            foreach (string s in cbBxFiltroMagazzinoTipo.Items) tipiAttuali.Add(s);
+
+            List<string> tipiDatabase = new List<string>();
+            foreach (DataGridViewRow dgvr in dgvTipiComponenti.Rows) tipiDatabase.Add(dgvr.Cells[0].Value.ToString());
+
+            var res = false;
+
+            if (tipiDatabase.Count > 0)
+            {
+                res = tipiDatabase.All(tipiAttuali.Contains) && tipiDatabase.Count == tipiAttuali.Count;
+            }
+
+            if (!res) UpdateComboboxTabc2MarcType();
         }
 
         private void RefreshConetnutiMagazzini()
@@ -3248,14 +3263,9 @@ namespace Calendario_AriBerg
         private void btnAddComponente_Click(object sender, EventArgs e)
         {
             Caricamento();
+            UpdateCBXTipi();
 
-            if (Metodi.CheckForNewBrands(ref dgvMarcheComponenti) || Metodi.CheckForNewTypes(ref dgvTipiComponenti))
-            {               
-                RefreshComponentBrandsDataGridView();
-                RefreshComponentTypesDataGridView();
-                UpdateComboboxTabc2MarcType();
-            }
-            if (Metodi.CheckForNewComponentsAndNotify(ref dgvComponenti))
+            if (Metodi.CheckForNewComponentsAndNotify())
             {
                 RefreshComponentsCatalogoAndCBX();
                 EndCaricamento();
@@ -3275,7 +3285,7 @@ namespace Calendario_AriBerg
         {
             Caricamento();
 
-            if (Metodi.CheckForNewComponentsAndNotify(ref dgvComponenti))
+            if (Metodi.CheckForNewComponentsAndNotify())
             {
                 RefreshComponentsCatalogoAndCBX();
                 EndCaricamento();
@@ -3309,13 +3319,8 @@ namespace Calendario_AriBerg
         private void btnModifyComponente_Click(object sender, EventArgs e)
         {
             Caricamento();
-            if (Metodi.CheckForNewBrands(ref dgvMarcheComponenti) || Metodi.CheckForNewTypes(ref dgvTipiComponenti))
-            {                
-                RefreshComponentBrandsDataGridView();
-                RefreshComponentTypesDataGridView();
-                UpdateComboboxTabc2MarcType();
-            }
-            if (Metodi.CheckForNewComponentsAndNotify(ref dgvComponenti))
+            UpdateCBXTipi();
+            if (Metodi.CheckForNewComponentsAndNotify())
             {
                 RefreshComponentsCatalogoAndCBX();
                 EndCaricamento();

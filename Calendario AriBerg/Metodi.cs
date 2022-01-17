@@ -37,7 +37,7 @@ namespace Calendario_AriBerg
             }
         }
 
-        internal static bool CheckForNewComponents(ref DataGridView dgvComponenti)
+        internal static bool CheckForNewComponents()
         {
             List<Componenti> l = new List<Componenti>();
             Componenti c = new Componenti();
@@ -56,10 +56,9 @@ namespace Calendario_AriBerg
 
             List<Componenti> currentComponents = new List<Componenti>();
 
-            foreach (DataGridViewRow row in dgvComponenti.Rows)
+            foreach (Componenti comps in Registro.ComponentiAttuali)
             {
-                Componenti comp = row.DataBoundItem as Componenti;
-                currentComponents.Add(comp);
+                currentComponents.Add(comps);
             }
 
             bool different = false;
@@ -94,9 +93,9 @@ namespace Calendario_AriBerg
             }
         }
 
-        internal static bool CheckForNewComponentsAndNotify(ref DataGridView dgvComponenti)
+        internal static bool CheckForNewComponentsAndNotify()
         {
-            if (Metodi.CheckForNewComponents(ref dgvComponenti))
+            if (Metodi.CheckForNewComponents())
             {
                 Notifica n = new Notifica();
                 n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
