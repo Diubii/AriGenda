@@ -153,6 +153,8 @@ namespace Calendario_AriBerg
                     break;
 
                 case 1:
+
+
                     break;
 
                 case 2:
@@ -1310,7 +1312,7 @@ namespace Calendario_AriBerg
 
         private void btnAggiungiMacchinaAggiungiComponenti_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaTipoFiltro.Text) || string.IsNullOrWhiteSpace(txBxAggiungiMacchinaCodiceFiltro.Text))
+            if (string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaTipoFiltro.Text) || string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaCodiceFiltro.Text))
             {
             }
             else
@@ -1319,7 +1321,7 @@ namespace Calendario_AriBerg
                 {
                     Text = cbBxAggiungiMacchinaTipoFiltro.Text
                 };
-                item.SubItems.Add(txBxAggiungiMacchinaCodiceFiltro.Text);
+                item.SubItems.Add(cbBxAggiungiMacchinaCodiceFiltro.Text);
                 //lvAggiungiMacchinaFiltri.Items.Add(item);
             }
         }
@@ -3124,7 +3126,7 @@ namespace Calendario_AriBerg
 
         private void cbBxAggiungiMacchinaTipoFiltro_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cbBxAggiungiMacchinaTipoFiltro.)
+            //if(cbBxAggiungiMacchinaTipoFiltro.)
         }
     }
 }
