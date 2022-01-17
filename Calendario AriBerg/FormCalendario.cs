@@ -3188,12 +3188,32 @@ namespace Calendario_AriBerg
             {
                 Caricamento();
                 conn = Metodi.ConnectToDatabase();
-                string query = $"INSERT INTO componenti_magazzino VALUES('{tbCtrlMagazzini.SelectedTab.Name}','{dgvComponenti.CurrentRow.Cells[1].Value}','{dgvComponenti.CurrentRow.Cells[0].Value}','{(int)nudNumeroComponenti.Value}')";
-                MySqlCommand InsertMagazzino = new MySqlCommand(query, conn);
-                InsertMagazzino.ExecuteNonQuery();
+                if (remove == false)
+                {
+                    int quantapp = (int)((DataGridView)tbCtrlMagazzini.SelectedTab.Controls[0]).CurrentRow.Cells[5].Value;
+                    if (pos == true) { quantapp += (int)nudEditNcomponenti.Value; }
+                    else { quantapp -= (int)nudEditNcomponenti.Value; }
+                    if(quantapp<0)
+                    {
+                        Notifica naa = new Notifica();
+                        naa.Show("La modifica porta il valore sotto lo zero. Operazione non valida.", Notifica.enmType.Warning);
+                        return;
+                    }
+                    string query = $"UPDATE componenti_magazzino SET quantità_componente='{quantapp}' WHERE id_magazzino='{tbCtrlMagazzini.SelectedTab.Name}' and marca_componente='{((DataGridView)tbCtrlMagazzini.SelectedTab.Controls[0]).CurrentRow.Cells[1].Value}' and codice_componente='{((DataGridView)tbCtrlMagazzini.SelectedTab.Controls[0]).CurrentRow.Cells[0].Value}'";
+                    MySqlCommand InsertMagazzino = new MySqlCommand(query, conn);
+                    InsertMagazzino.ExecuteNonQuery();
 
+                }
+                else
+                {
+                    string query = $"DELETE FROM componenti_magazzino WHERE id_magazzino='{tbCtrlMagazzini.SelectedTab.Name}' and marca_componente='{((DataGridView)tbCtrlMagazzini.SelectedTab.Controls[0]).CurrentRow.Cells[1].Value}' and codice_componente='{((DataGridView)tbCtrlMagazzini.SelectedTab.Controls[0]).CurrentRow.Cells[0].Value}'";
+                    MySqlCommand InsertMagazzino = new MySqlCommand(query, conn);
+                    InsertMagazzino.ExecuteNonQuery();
+                }
                 RefreshMagazzini();
                 RefreshConetnutiMagazzini();
+                Notifica n = new Notifica();
+                n.Show("Modifica apportata correttamente.", Notifica.enmType.Success);
             }
             catch (Exception ex)
             {
