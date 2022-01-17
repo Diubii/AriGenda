@@ -37,6 +37,111 @@ namespace Calendario_AriBerg
             }
         }
 
+        internal static bool CheckForNewDatiMagazzini(TabControl tbCtrlMagazzini)
+        {
+            MySqlConnection Conn = new MySqlConnection();
+
+            Conn = Metodi.ConnectToDatabase();
+
+            MySqlDataReader reader;
+            string query = $"SELECT * From magazzino";
+            MySqlCommand GetMagazzini = new MySqlCommand(query, Conn);
+            reader = GetMagazzini.ExecuteReader();
+
+            Dictionary<string, Magazzino> Magazzininew = new Dictionary<string, Magazzino>();
+
+            while (reader.Read())
+            {
+                Magazzininew.Add(reader.GetString(0), new Magazzino(reader.GetString(0)));
+            }
+            Magazzininew.Add("Totale", new Magazzino("Totale"));
+            reader.Close();
+
+            List<Componenti> catalogo = new List<Componenti>();
+            Componenti c = new Componenti();
+
+            MySqlConnection conn = Metodi.ConnectToDatabase();
+            query = $"SELECT * From componente";
+            MySqlCommand command = new MySqlCommand(query, conn);
+
+            reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                c = new Componenti(reader.GetString(2), reader.GetString(1), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(0), 0);
+                catalogo.Add(c);
+            }
+
+
+            query = $"SELECT * From componenti_magazzino";
+            GetMagazzini = new MySqlCommand(query, Conn);
+            reader = GetMagazzini.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Componenti comp = new Componenti((Componenti)catalogo.First(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)));
+                Magazzininew[reader.GetString(0)].Listacomponenti.Add(comp);
+                Magazzininew[reader.GetString(0)].Listacomponenti.Find(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)).Quantita = reader.GetInt32(3);
+                if (Magazzininew["Totale"].Listacomponenti.Find(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)) == null)
+                {
+                    Componenti Compino = new Componenti((Componenti)catalogo.First(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)));
+                    Compino.Quantita = reader.GetInt32(3);
+                    Magazzininew["Totale"].Listacomponenti.Add(Compino);
+                }
+                else
+                {
+                    Magazzininew["Totale"].Listacomponenti.Find(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)).Quantita += reader.GetInt32(3);
+                }
+            }
+
+            bool different = false;
+
+            foreach (Magazzino mag in Magazzininew.Values)
+            {
+                if (Registro.DizMagazzini.Count == 0) break;
+
+                Magazzino sameCode = Registro.DizMagazzini[mag.Nome];
+                if (sameCode == null)
+                {
+                    different = true;
+                    break;
+                }
+                else
+                {
+                    if (JsonConvert.SerializeObject(mag) != JsonConvert.SerializeObject(sameCode))
+                    {
+                        different = true;
+                        break;
+                    }
+                }
+            }
+
+            if (different || Magazzininew.Count != Registro.DizMagazzini.Count)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        internal static bool CheckForNewDatiMagazziniAndNotify(TabControl tbCtrlMagazzini)
+        {
+            if (Metodi.CheckForNewDatiMagazzini(tbCtrlMagazzini))
+            {
+                Notifica n = new Notifica();
+                n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         internal static bool CheckForNewCustomers()
         {
             ///0: id_cliente
@@ -46,7 +151,7 @@ namespace Calendario_AriBerg
             ///4: indirizzo_cliente
             ///5: p.iva_cliente
             ///6: p.rif_cliente
-            
+
             List<Cliente> l = new List<Cliente>();
             Cliente c = new Cliente();
 
@@ -67,14 +172,14 @@ namespace Calendario_AriBerg
                 string p_rif = null;
                 if (!reader.IsDBNull(reader.GetOrdinal("p.rif_cliente")))
                 {
-                    p_iva = reader.GetString(6);
+                    p_rif = reader.GetString(6);
                 }
-                c = new Cliente(reader.GetString(1), 
-                    reader.GetString(4), 
+                c = new Cliente(reader.GetString(1),
+                    reader.GetString(4),
                     reader.GetString(2),
                     p_iva,
                     reader.GetString(3),
-                    p_rif, 
+                    p_rif,
                     null);
                 l.Add(c);
             }
@@ -87,7 +192,7 @@ namespace Calendario_AriBerg
             }
 
             bool different = false;
-            
+
             foreach (Cliente cl in l)
             {
                 if (currentClienti.Count == 0) break;
@@ -195,7 +300,7 @@ namespace Calendario_AriBerg
             {
                 Notifica n = new Notifica();
                 n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
-                
+
                 return true;
             }
             else
