@@ -3013,8 +3013,7 @@ namespace Calendario_AriBerg
 
         private void btnSearchComponenti_Click(object sender, EventArgs e)
         {
-            Cursor = Cursors.AppStarting;
-            Enabled = false;
+            Caricamento();
 
             ///INDICI TABELLA COMPONENTI
             ///0: codice_componente
@@ -3098,8 +3097,7 @@ namespace Calendario_AriBerg
             finally
             {
                 conn.Close();
-                Cursor = Cursors.Default;
-                Enabled = true;
+                EndCaricamento();
             }
         }
 
@@ -3237,5 +3235,6 @@ namespace Calendario_AriBerg
         {
             EditContenutiMagazzinoApply(true, false);
         }
+
     }
 }

@@ -171,6 +171,7 @@ namespace Calendario_AriBerg
             this.cbBxTrovaPerNome = new System.Windows.Forms.ComboBox();
             this.RightPanelClienti = new System.Windows.Forms.Panel();
             this.gBxAggiungiMacchina = new System.Windows.Forms.GroupBox();
+            this.cbBxAggiungiMacchinaCodiceFiltro = new System.Windows.Forms.ComboBox();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.cbBxAggiungiMacchinaTipoFiltro = new System.Windows.Forms.ComboBox();
             this.lblAggiungiMacchinaMarca = new System.Windows.Forms.Label();
@@ -247,6 +248,10 @@ namespace Calendario_AriBerg
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.lblMagazziniComponenti = new System.Windows.Forms.Label();
             this.MidMagPanel = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.nudNumeroComponenti = new System.Windows.Forms.NumericUpDown();
+            this.btnImmagazzinaComponente = new System.Windows.Forms.Button();
             this.gbxEditComponenti = new System.Windows.Forms.GroupBox();
             this.lblAggiornaComponentiMagazzino = new System.Windows.Forms.Label();
             this.lblModificaComponentiMagazzino = new System.Windows.Forms.Label();
@@ -255,10 +260,6 @@ namespace Calendario_AriBerg
             this.nudEditNcomponenti = new System.Windows.Forms.NumericUpDown();
             this.btnMenoComponenti = new System.Windows.Forms.Button();
             this.btnPlusComponenti = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.nudNumeroComponenti = new System.Windows.Forms.NumericUpDown();
-            this.btnImmagazzinaComponente = new System.Windows.Forms.Button();
             this.LeftMagPanel = new System.Windows.Forms.Panel();
             this.PnlCatalogo = new System.Windows.Forms.Panel();
             this.gBxAggiungiComponente = new System.Windows.Forms.GroupBox();
@@ -318,7 +319,6 @@ namespace Calendario_AriBerg
             this.btnAddMarca = new System.Windows.Forms.Button();
             this.btnEditMarca = new System.Windows.Forms.Button();
             this.pbxWait = new System.Windows.Forms.PictureBox();
-            this.cbBxAggiungiMacchinaCodiceFiltro = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventi)).BeginInit();
             this.gbxLegenda.SuspendLayout();
             this.gbxAggiungi.SuspendLayout();
@@ -361,9 +361,9 @@ namespace Calendario_AriBerg
             this.Centrale.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMagazzinoCentrale)).BeginInit();
             this.MidMagPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNumeroComponenti)).BeginInit();
             this.gbxEditComponenti.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudEditNcomponenti)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudNumeroComponenti)).BeginInit();
             this.LeftMagPanel.SuspendLayout();
             this.PnlCatalogo.SuspendLayout();
             this.gBxAggiungiComponente.SuspendLayout();
@@ -2241,6 +2241,17 @@ namespace Calendario_AriBerg
             this.gBxAggiungiMacchina.Text = "Aggiungi macchina/accessorio";
             this.gBxAggiungiMacchina.Visible = false;
             // 
+            // cbBxAggiungiMacchinaCodiceFiltro
+            // 
+            this.cbBxAggiungiMacchinaCodiceFiltro.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbBxAggiungiMacchinaCodiceFiltro.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbBxAggiungiMacchinaCodiceFiltro.Enabled = false;
+            this.cbBxAggiungiMacchinaCodiceFiltro.FormattingEnabled = true;
+            this.cbBxAggiungiMacchinaCodiceFiltro.Location = new System.Drawing.Point(146, 337);
+            this.cbBxAggiungiMacchinaCodiceFiltro.Name = "cbBxAggiungiMacchinaCodiceFiltro";
+            this.cbBxAggiungiMacchinaCodiceFiltro.Size = new System.Drawing.Size(214, 28);
+            this.cbBxAggiungiMacchinaCodiceFiltro.TabIndex = 50;
+            // 
             // dataGridView4
             // 
             this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -3118,16 +3129,61 @@ namespace Calendario_AriBerg
             // 
             // MidMagPanel
             // 
-            this.MidMagPanel.Controls.Add(this.gbxEditComponenti);
             this.MidMagPanel.Controls.Add(this.label7);
             this.MidMagPanel.Controls.Add(this.label6);
             this.MidMagPanel.Controls.Add(this.nudNumeroComponenti);
             this.MidMagPanel.Controls.Add(this.btnImmagazzinaComponente);
+            this.MidMagPanel.Controls.Add(this.gbxEditComponenti);
             this.MidMagPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.MidMagPanel.Location = new System.Drawing.Point(773, 79);
             this.MidMagPanel.Name = "MidMagPanel";
             this.MidMagPanel.Size = new System.Drawing.Size(117, 722);
             this.MidMagPanel.TabIndex = 54;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label7.Location = new System.Drawing.Point(28, 103);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(61, 18);
+            this.label7.TabIndex = 53;
+            this.label7.Text = "Quantità";
+            // 
+            // label6
+            // 
+            this.label6.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label6.Location = new System.Drawing.Point(0, 16);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(117, 68);
+            this.label6.TabIndex = 52;
+            this.label6.Text = "Immagazzina componente selezionato";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nudNumeroComponenti
+            // 
+            this.nudNumeroComponenti.Location = new System.Drawing.Point(25, 124);
+            this.nudNumeroComponenti.Name = "nudNumeroComponenti";
+            this.nudNumeroComponenti.Size = new System.Drawing.Size(64, 26);
+            this.nudNumeroComponenti.TabIndex = 51;
+            // 
+            // btnImmagazzinaComponente
+            // 
+            this.btnImmagazzinaComponente.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnImmagazzinaComponente.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.componenti_transfer;
+            this.btnImmagazzinaComponente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnImmagazzinaComponente.FlatAppearance.BorderColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnImmagazzinaComponente.FlatAppearance.BorderSize = 3;
+            this.btnImmagazzinaComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImmagazzinaComponente.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImmagazzinaComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnImmagazzinaComponente.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnImmagazzinaComponente.Location = new System.Drawing.Point(25, 171);
+            this.btnImmagazzinaComponente.Name = "btnImmagazzinaComponente";
+            this.btnImmagazzinaComponente.Size = new System.Drawing.Size(64, 73);
+            this.btnImmagazzinaComponente.TabIndex = 1;
+            this.btnImmagazzinaComponente.UseVisualStyleBackColor = false;
+            this.btnImmagazzinaComponente.Click += new System.EventHandler(this.btnImmagazzinaComponente_Click);
             // 
             // gbxEditComponenti
             // 
@@ -3215,50 +3271,6 @@ namespace Calendario_AriBerg
             this.btnPlusComponenti.TabIndex = 0;
             this.btnPlusComponenti.Text = "+";
             this.btnPlusComponenti.UseVisualStyleBackColor = false;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label7.Location = new System.Drawing.Point(28, 103);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(61, 18);
-            this.label7.TabIndex = 53;
-            this.label7.Text = "Quantità";
-            // 
-            // label6
-            // 
-            this.label6.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label6.Location = new System.Drawing.Point(0, 16);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(117, 68);
-            this.label6.TabIndex = 52;
-            this.label6.Text = "Immagazzina componente selezionato";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // nudNumeroComponenti
-            // 
-            this.nudNumeroComponenti.Location = new System.Drawing.Point(25, 124);
-            this.nudNumeroComponenti.Name = "nudNumeroComponenti";
-            this.nudNumeroComponenti.Size = new System.Drawing.Size(64, 26);
-            this.nudNumeroComponenti.TabIndex = 51;
-            // 
-            // btnImmagazzinaComponente
-            // 
-            this.btnImmagazzinaComponente.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnImmagazzinaComponente.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.componenti_transfer;
-            this.btnImmagazzinaComponente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnImmagazzinaComponente.FlatAppearance.BorderColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnImmagazzinaComponente.FlatAppearance.BorderSize = 3;
-            this.btnImmagazzinaComponente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImmagazzinaComponente.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImmagazzinaComponente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnImmagazzinaComponente.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnImmagazzinaComponente.Location = new System.Drawing.Point(25, 171);
-            this.btnImmagazzinaComponente.Name = "btnImmagazzinaComponente";
-            this.btnImmagazzinaComponente.Size = new System.Drawing.Size(64, 73);
-            this.btnImmagazzinaComponente.TabIndex = 1;
-            this.btnImmagazzinaComponente.UseVisualStyleBackColor = false;
             // 
             // LeftMagPanel
             // 
@@ -4028,17 +4040,6 @@ namespace Calendario_AriBerg
             this.pbxWait.TabStop = false;
             this.pbxWait.Visible = false;
             // 
-            // cbBxAggiungiMacchinaCodiceFiltro
-            // 
-            this.cbBxAggiungiMacchinaCodiceFiltro.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbBxAggiungiMacchinaCodiceFiltro.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbBxAggiungiMacchinaCodiceFiltro.Enabled = false;
-            this.cbBxAggiungiMacchinaCodiceFiltro.FormattingEnabled = true;
-            this.cbBxAggiungiMacchinaCodiceFiltro.Location = new System.Drawing.Point(146, 337);
-            this.cbBxAggiungiMacchinaCodiceFiltro.Name = "cbBxAggiungiMacchinaCodiceFiltro";
-            this.cbBxAggiungiMacchinaCodiceFiltro.Size = new System.Drawing.Size(214, 28);
-            this.cbBxAggiungiMacchinaCodiceFiltro.TabIndex = 50;
-            // 
             // FormCalendario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4111,10 +4112,10 @@ namespace Calendario_AriBerg
             ((System.ComponentModel.ISupportInitialize)(this.dgvMagazzinoCentrale)).EndInit();
             this.MidMagPanel.ResumeLayout(false);
             this.MidMagPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNumeroComponenti)).EndInit();
             this.gbxEditComponenti.ResumeLayout(false);
             this.gbxEditComponenti.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudEditNcomponenti)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudNumeroComponenti)).EndInit();
             this.LeftMagPanel.ResumeLayout(false);
             this.PnlCatalogo.ResumeLayout(false);
             this.gBxAggiungiComponente.ResumeLayout(false);
