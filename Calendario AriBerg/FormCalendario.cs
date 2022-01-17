@@ -3234,5 +3234,10 @@ namespace Calendario_AriBerg
         {
             EditContenutiMagazzinoApply(true, false);
         }
+
+        private void cbBxAggiungiMacchinaTipoFiltro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cbBxAggiungiMacchinaTipoFiltro.)
+        }
     }
 }
