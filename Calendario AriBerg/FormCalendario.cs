@@ -3237,7 +3237,7 @@ namespace Calendario_AriBerg
 
         private void cbBxAggiungiMacchinaTipoFiltro_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cbBxAggiungiMacchinaTipoFiltro.)
+            if(cbBxAggiungiMacchinaTipoFiltro)
         }
     }
 }
