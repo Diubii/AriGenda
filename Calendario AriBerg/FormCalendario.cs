@@ -121,11 +121,12 @@ namespace Calendario_AriBerg
             {
                 c.Enabled = false;
             }
-            pbxWait.Location = new Point(this.Width / 2 - pbxWait.Width / 2, this.Height / 2 - pbxWait.Height / 2 - pbxWait.Height / 4);
+            pbxWait.Location = new Point(this.Width/2 - pbxWait.Width/2, this.Height/2 - pbxWait.Height/2 - pbxWait.Height / 4);
             pbxWait.Enabled = true;
             pbxWait.Visible = true;
             pbxWait.BringToFront();
         }
+
 
         private void EndCaricamento()
         {
@@ -152,21 +153,6 @@ namespace Calendario_AriBerg
                     break;
 
                 case 1:
-                    if (Metodi.CheckForNewCustomers())
-                    {
-                        RefreshCustomers();
-                        if (Metodi.CheckForNewComponents()) RefreshComponentsCatalogoAndCBX();
-                        if (Metodi.CheckForNewTypes(ref dgvTipiComponenti)) RefreshComponentTypesDataGridView();
-                        List<string> types = new List<string>();
-                        foreach (DataGridViewRow dgvr in dgvTipiComponenti.Rows) types.Add(dgvr.Cells[0].Value.ToString());
-                        cbBxAggiungiMacchinaTipoFiltro.DataSource = types;
-
-                        Invoke(new Action(() =>
-                        {
-                            Notifica n = new Notifica();
-                            n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
-                        }));
-                    }
                     break;
 
                 case 2:
@@ -174,7 +160,7 @@ namespace Calendario_AriBerg
 
 
                     if (Metodi.CheckForNewComponents())
-                    {
+                    {                      
                         RefreshComponentsCatalogoAndCBX();
                         RefreshMagazzini();
                         RefreshConetnutiMagazzini();
@@ -1246,12 +1232,10 @@ namespace Calendario_AriBerg
         {
             if (gBxClientiAggiungiCliente.Visible == true)
             {
-                gBxClientiAggiungiCliente.SendToBack();
                 gBxClientiAggiungiCliente.Visible = false;
             }
             else
             {
-                gBxClientiAggiungiCliente.BringToFront();
                 gBxClientiAggiungiCliente.Visible = true;
                 gBxClientiModificaClienti.Visible = false;
             }
@@ -1264,14 +1248,6 @@ namespace Calendario_AriBerg
 
         private void btnConfermaAggiungiMacchina_Click(object sender, EventArgs e)
         {
-            ///INDICI TABELLA MACCHINA
-            ///0: marca_macchina
-            ///1: modello_macchina
-            ///2: matricola_macchina
-            ///3: noleggio_macchina
-            ///4: id_cliente
-            ///5: note_macchina
-
             Notifica notifica = new Notifica();
             try
             {
@@ -1289,28 +1265,6 @@ namespace Calendario_AriBerg
 
                 macchina = new Macchina(txBxAggiungiMacchinaMarca.Text, txBxAggiungiMacchinaModello.Text,
                     txBxAggiungiMacchinaMatricola.Text, componenti, chBxAggiungiMacchinaNoleggio.Checked, rtbAggiungiMacchinaNote.Text);
-                MySqlConnection conn = Metodi.ConnectToDatabase();
-                string query = $"INSERT INTO macchina VALUES({txBxAggiungiMacchinaMarca.Text}, " +
-                    $"{txBxAggiungiMacchinaModello.Text}, " +
-                    $"{txBxAggiungiMacchinaMatricola.Text}, " +
-                    $"{chBxAggiungiMacchinaNoleggio.Checked}, " +
-                    $"{Metodi.GetCustomerID(dgvVisualizzaClienti.CurrentRow)}" +
-                    $"{rtbAggiungiMacchinaNote.Text})";
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
-
-                conn = Metodi.ConnectToDatabase();
-                foreach (Componenti c in componenti)
-                {
-                    query = $"INSERT INTO componenti_macchina VALUES({c.Codice}, " +
-                                        $"{c.Marca}, " +
-                                        $"{txBxAggiungiMacchinaMarca.Text}, " +
-                                        $"{txBxAggiungiMacchinaMatricola.Text}";
-                    cmd = new MySqlCommand(query, conn);
-                    cmd.ExecuteNonQuery();
-                }
-                conn.Close();
 
                 listaMacchine.Add(macchina);
 
@@ -1321,18 +1275,13 @@ namespace Calendario_AriBerg
                 items.SubItems.Add(macchina._Modello);
                 items.SubItems.Add(macchina._Matricola);
 
-                BindingSource bs = new BindingSource()
-                {
-                    DataSource = items
-                };
-
                 if (gBxClientiModificaClienti.Visible == true)
                 {
-                    dgvModificaCliente.DataSource = bs;
+                    //lvwModificaCliente.Items.Add(items);
                 }
                 else
                 {
-                    dgvAggiungiClientiMacchine.DataSource = bs;
+                    //lvwAggiungiClientiMacchine.Items.Add(items);
                 }
 
                 notifica.Show("Macchina aggiunta correttamente!", Notifica.enmType.Success); //pepepe
@@ -1361,13 +1310,16 @@ namespace Calendario_AriBerg
 
         private void btnAggiungiMacchinaAggiungiComponenti_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaTipoFiltro.Text) /*|| string.IsNullOrWhiteSpace(txBxAggiungiMacchinaCodiceFiltro.Text)*/)
+            if (string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaTipoFiltro.Text) || string.IsNullOrWhiteSpace(txBxAggiungiMacchinaCodiceFiltro.Text))
+            {
+            }
+            else
             {
                 ListViewItem item = new ListViewItem
                 {
                     Text = cbBxAggiungiMacchinaTipoFiltro.Text
                 };
-                //item.SubItems.Add(txBxAggiungiMacchinaCodiceFiltro.Text);
+                item.SubItems.Add(txBxAggiungiMacchinaCodiceFiltro.Text);
                 //lvAggiungiMacchinaFiltri.Items.Add(item);
             }
         }
@@ -1385,86 +1337,21 @@ namespace Calendario_AriBerg
             }
         }
 
-        private void RefreshCustomers()
-        {
-            List<Cliente> l = new List<Cliente>();
-
-            MySqlConnection conn = Metodi.ConnectToDatabase();
-            string query = $"SELECT * FROM cliente";
-            MySqlCommand command = new MySqlCommand(query, conn);
-
-            MySqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                string p_iva = null;
-                if (!reader.IsDBNull(reader.GetOrdinal("p.iva_cliente")))
-                {
-                    p_iva = reader.GetString(5);
-                }
-
-                string p_rif = null;
-                if (!reader.IsDBNull(reader.GetOrdinal("p.rif_cliente")))
-                {
-                    p_rif = reader.GetString(6);
-                }
-                Cliente c = new Cliente(reader.GetString(1),
-                    reader.GetString(4),
-                    reader.GetString(2),
-                    p_iva,
-                    reader.GetString(3),
-                    p_rif,
-                    null);
-                l.Add(c);
-            }
-
-            Registro.ClientiAttuali = l;
-
-            BindingSource bs = new BindingSource()
-            {
-                DataSource = l
-            };
-            
-            Invoke(new Action(() => { dgvVisualizzaClienti.DataSource = bs; }));
-        }
-
         private void btnConfermaAggiungiCliente_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = null;
             Notifica notifica = new Notifica();
-
-            if (Metodi.CheckForNewCustomersAndNotify()) return;
 
             try
             {
-                List<TextBox> txBxs = new List<TextBox>();
-                foreach (Control c in gBxClientiAggiungiCliente.Controls)
+                if (!string.IsNullOrWhiteSpace(tbxAggiungiClienteNome.Text) && !string.IsNullOrWhiteSpace(tbxAggiungiClienteTel.Text) && !string.IsNullOrWhiteSpace(tbxAggiungiClienteMail.Text)
+                    && !string.IsNullOrWhiteSpace(tbxAggiungiClienteMail.Text) && !string.IsNullOrWhiteSpace(tbxAggiungiClienteInd.Text) && !string.IsNullOrWhiteSpace(tbxAggiungiClienteIVA.Text)
+                    && !string.IsNullOrWhiteSpace(tbxAggiungiClientePrif.Text))
                 {
-                    if (c is TextBox box) 
-                    {
-                        if (!string.IsNullOrWhiteSpace(c.Tag.ToString()))
-                        {
-                            if (c.Tag.ToString() == "Mandatory") txBxs.Add(box);
-                        } 
-                    } 
-                }
+                    Cliente cliente = new Cliente(tbxAggiungiClienteNome.Text, tbxAggiungiClienteInd.Text, tbxAggiungiClienteTel.Text, tbxAggiungiClienteIVA.Text, tbxAggiungiClienteMail.Text,
+                        tbxAggiungiClientePrif.Text, listaMacchine);
 
-                if (!Metodi.AreThereAnyEmptyTextBoxes(txBxs))
-                {
-                    conn = Metodi.ConnectToDatabase();
-                    string query = $"INSERT INTO cliente VALUES('{0}', " +
-                        $"'{tbxAggiungiClienteNome.Text}', " +
-                        $"'{tbxAggiungiClienteTel.Text}', " +
-                        $"'{tbxAggiungiClienteMail.Text}', " +
-                        $"'{tbxAggiungiClienteInd.Text}'" +
-                        ", @IVA" +
-                        ", @P_RIF"+
-                        ");";
-                                              
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@IVA", tbxAggiungiClienteIVA.Text);
-                    cmd.Parameters.AddWithValue("@P_RIF", tbxAggiungiClientePrif.Text);
-                    cmd.ExecuteNonQuery();
+                    Registro.DizClienti.Add(cliente._Nome, cliente);
+
                     gBxClientiAggiungiCliente.Visible = false;
 
                     //threadRicevi.Suspend();
@@ -1495,22 +1382,16 @@ namespace Calendario_AriBerg
 
                     gBxAggiungiMacchina.Visible = false;
                     gBxModificaMacchina.Visible = false;
-
-                    RefreshCustomers();
-                    //notifica.Show("Cliente aggiunto correttamente!", Notifica.enmType.Success);
+                    notifica.Show("Cliente aggiunto correttamente!", Notifica.enmType.Success);
                 }
                 else
                 {
-                    throw new Exception("Completare tutti i campi obbligatori.");
+                    throw new Exception("Completare tutti i campi");
                 }
             }
             catch (Exception exc)
             {
                 notifica.Show(exc.Message, Notifica.enmType.Warning);
-            }
-            finally
-            {
-                conn.Close();
             }
         }
 
@@ -1521,52 +1402,57 @@ namespace Calendario_AriBerg
 
         private void dgvVisualizzaClienti_CellStateChanged(object sender, DataGridViewCellStateChangedEventArgs e)
         {
-            btnClientiEditCustomer.Enabled = true;
-            btnClientiDeleteCustomer.Enabled = true;
-
-            lvwMostraMacchineAccessori.Items.Clear();
-            //lvwModificaCliente.Items.Clear();
-            Cliente CurrentCliente = (Cliente)dgvVisualizzaClienti.CurrentRow.DataBoundItem;
-            tbxMostraIva.Text = CurrentCliente._PartIVA;
-            if (string.IsNullOrWhiteSpace(tbxMostraIva.Text)) tbxMostraIva.Text = "None";
-            tbxMostraPrif.Text = CurrentCliente._Ref;
-            if (string.IsNullOrWhiteSpace(tbxMostraPrif.Text)) tbxMostraPrif.Text = "None";
-            if (listaMacchine != null)
+            if (e.Cell.ColumnIndex == 0)
             {
-                listaMacchine.Clear();
+                btnClientiEditCustomer.Enabled = true;
+                btnClientiDeleteCustomer.Enabled = true;
+
+                lvwMostraMacchineAccessori.Items.Clear();
+                //lvwModificaCliente.Items.Clear();
+                tbxMostraIva.Text = Registro.DizClienti[e.Cell.Value.ToString()]._PartIVA;
+                tbxMostraPrif.Text = Registro.DizClienti[e.Cell.Value.ToString()]._Ref;
+                if (listaMacchine != null)
+                {
+                    listaMacchine.Clear();
+                }
+                else
+                {
+                    listaMacchine = new List<Macchina>();
+                }
+                foreach (Macchina macchina in Registro.DizClienti[e.Cell.Value.ToString()]._Mach)
+                {
+                    ListViewItem item = new ListViewItem
+                    {
+                        Text = macchina._Marca
+                    };
+                    item.SubItems.Add(macchina._Modello);
+                    item.SubItems.Add(macchina._Matricola);
+
+                    lvwMostraMacchineAccessori.Items.Add(item);
+
+                    ListViewItem itemm = new ListViewItem
+                    {
+                        Text = macchina._Marca
+                    };
+                    itemm.SubItems.Add(macchina._Modello);
+                    itemm.SubItems.Add(macchina._Matricola);
+                    //lvwModificaCliente.Items.Add(itemm);
+
+                    listaMacchine.Add(macchina);
+                }
+
+                txBxModificaClienteNome.Text = Registro.DizClienti[e.Cell.Value.ToString()]._Nome;
+                txBxModificaClienteTel.Text = Registro.DizClienti[e.Cell.Value.ToString()]._Telefono;
+                txBxModificaClienteMail.Text = Registro.DizClienti[e.Cell.Value.ToString()]._Email;
+                txBxModificaClienteInd.Text = Registro.DizClienti[e.Cell.Value.ToString()]._Indirizzo;
+                txBxModificaClienteIva.Text = Registro.DizClienti[e.Cell.Value.ToString()]._PartIVA;
+                txBxModificaClientePrif.Text = Registro.DizClienti[e.Cell.Value.ToString()]._Ref;
             }
             else
             {
-                listaMacchine = new List<Macchina>();
+                btnClientiEditCustomer.Enabled = false;
+                btnClientiDeleteCustomer.Enabled = false;
             }
-            foreach (Macchina macchina in CurrentCliente._Mach)
-            {
-                ListViewItem item = new ListViewItem
-                {
-                    Text = macchina._Marca
-                };
-                item.SubItems.Add(macchina._Modello);
-                item.SubItems.Add(macchina._Matricola);
-
-                lvwMostraMacchineAccessori.Items.Add(item);
-
-                ListViewItem itemm = new ListViewItem
-                {
-                    Text = macchina._Marca
-                };
-                itemm.SubItems.Add(macchina._Modello);
-                itemm.SubItems.Add(macchina._Matricola);
-                //lvwModificaCliente.Items.Add(itemm);
-
-                listaMacchine.Add(macchina);
-            }
-
-            txBxModificaClienteNome.Text = CurrentCliente._Nome;
-            txBxModificaClienteTel.Text = CurrentCliente._Telefono;
-            txBxModificaClienteMail.Text = CurrentCliente._Email;
-            txBxModificaClienteInd.Text = CurrentCliente._Indirizzo;
-            txBxModificaClienteIva.Text = CurrentCliente._PartIVA;
-            txBxModificaClientePrif.Text = CurrentCliente._Ref;
         }
 
         private void lvwMostraMacchineAccessori_SelectedIndexChanged(object sender, EventArgs e)
@@ -1612,12 +1498,10 @@ namespace Calendario_AriBerg
         {
             if (gBxClientiModificaClienti.Visible == true)
             {
-                gBxClientiModificaClienti.SendToBack();
                 gBxClientiModificaClienti.Visible = false;
             }
             else
             {
-                gBxClientiModificaClienti.BringToFront();
                 gBxClientiModificaClienti.Visible = true;
                 gBxClientiAggiungiCliente.Visible = false;
             }
@@ -2523,7 +2407,7 @@ namespace Calendario_AriBerg
         }
 
         private void btnDelComponente_Click(object sender, EventArgs e)
-        {
+        {          
             MySqlConnection conn = null;
             try
             {
@@ -2583,6 +2467,7 @@ namespace Calendario_AriBerg
 
         private void btnAddMarca_Click(object sender, EventArgs e)
         {
+
             if (string.IsNullOrWhiteSpace(txBxMarcaComponente.Text))
             {
                 Notifica n = new Notifica();
@@ -2590,6 +2475,7 @@ namespace Calendario_AriBerg
             }
             else
             {
+
                 MySqlConnection conn = null;
                 try
                 {
@@ -2677,7 +2563,7 @@ namespace Calendario_AriBerg
         }
 
         private void btnDelMarca_Click(object sender, EventArgs e)
-        {
+        {            
             MySqlConnection conn = null;
             try
             {
@@ -2846,13 +2732,14 @@ namespace Calendario_AriBerg
             ///3: soglia_componente
             ///4: n_ordine_componente
 
-            if (string.IsNullOrWhiteSpace(tbxModificaCodiceComponente.Text) || string.IsNullOrWhiteSpace(cbxModificaMarcaComponente.Text) || string.IsNullOrWhiteSpace(cbxModificaTipoComponente.Text))
+            if (string.IsNullOrWhiteSpace(tbxModificaCodiceComponente.Text)|| string.IsNullOrWhiteSpace(cbxModificaMarcaComponente.Text)|| string.IsNullOrWhiteSpace(cbxModificaTipoComponente.Text))
             {
                 Notifica n = new Notifica();
                 n.Show("Compila tutti i campi", Notifica.enmType.Warning);
             }
             else
             {
+
                 MySqlConnection conn = null;
 
                 try
