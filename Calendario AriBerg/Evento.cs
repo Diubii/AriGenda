@@ -18,10 +18,10 @@ namespace Calendario_AriBerg
     {
         static public int numEventi;
         private int id;
-        private DateTime giorno;          //da data selezionata
-        private string nomeCliente;
-        private Macchina macchina;
-        private TimeSpan Tempo { get; set; }
+        private DateTime giorno;          //da data selezionata +cadenza quindi lista di date possibile
+        private string nomeCliente;       //modficare la data è ok e anche la ricorrenza da uno qualunque degli eventi e sposta tutti gli altri                                   
+        private Macchina macchina;        //se vuole modificare altro però diverrà un evento singolo farlo capire bene
+        private TimeSpan Tempo { get; set; }               //se cambia cadenza o termine influenza solo eventi nuovi... quindi quando giorno passa eventi divengono singoli
         private List<InterventiPoss> interventi = new List<InterventiPoss>();
         private List<Componenti> componenti = new List<Componenti>();  //metti i componenti anche pianificati ma solo quando la data è passata aggiorna il magazzino
         private string operazioni;
