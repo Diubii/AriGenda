@@ -20,6 +20,14 @@ namespace Calendario_AriBerg
         private Macchina macchina;
         private List<Macchina> listaMacchine;
 
+        private string FiltroAttivoMagazzino = null;
+        private string FiltroAttivoCatalogo = null;
+
+        private string CurrentComponentiFiltroTipo = null;
+        private string CurrentComponentiFiltroCodice = null;
+        private string CurrentComponentiFiltroMarca = null;
+        private bool CurrentComponentiFiltroSottoSoglia = false;
+
         public FormCalendario()
         {
             InitializeComponent();
@@ -364,7 +372,7 @@ namespace Calendario_AriBerg
                 dgvComponenti.DataSource = bs;
 
                 int app = cbBxFiltroMagazzinoCodice.SelectedIndex;
-                cbBxFiltroMagazzinoCodice.DataSource = l.Select(x => x.Codice).ToList();
+                cbBxFiltroMagazzinoCodice.DataSource = l.Select(x => x.Codice).Distinct().ToList();
                 if (cbBxFiltroMagazzinoCodice.Items.Count > app) cbBxFiltroMagazzinoCodice.SelectedIndex = app;
 
                 dgvComponenti.Columns["Quantita"].Visible = false;
@@ -2352,12 +2360,24 @@ namespace Calendario_AriBerg
                 string query = $"DELETE FROM componente WHERE codice_componente = '{componente.Codice}'";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 int row = cmd.ExecuteNonQuery();
-                RefreshComponentsCatalogoAndCBX();
+                
 
                 if (row == 0) throw new Exception("Nessuna riga modificata.");
 
                 Notifica n = new Notifica();
                 n.Show("Componente eliminato con successo!", Notifica.enmType.Success);
+
+                if (!string.IsNullOrWhiteSpace(FiltroAttivoCatalogo))
+                {
+                    if(dgvComponenti.Rows.Count > 0)
+                    {
+                        if(!string.IsNullOrWhiteSpace(FiltroAttivoCatalogo)) ReApplyFiltroCatalogo();
+                    }
+                    else
+                    {
+                        RefreshComponentsCatalogoAndCBX();
+                    }                    
+                }
             }
             catch (Exception ex)
             {
@@ -2425,6 +2445,7 @@ namespace Calendario_AriBerg
 
                     RefreshMagazzini();
                     RefreshConetnutiMagazzini();
+                    if (!string.IsNullOrWhiteSpace(FiltroAttivoMagazzino)) ReApplyFiltroMagazzino(CurrentComponentiFiltroMarca, CurrentComponentiFiltroCodice, CurrentComponentiFiltroTipo, CurrentComponentiFiltroSottoSoglia);
                 }
                 catch (Exception ex)
                 {
@@ -2440,11 +2461,75 @@ namespace Calendario_AriBerg
             }
         }
 
+        private void ReApplyFiltroMagazzino(string marca, string codice, string tipo, bool sottoSoglia)
+        {
+            MySqlCommand cmd = new MySqlCommand(FiltroAttivoMagazzino, Metodi.ConnectToDatabase());
+            MySqlDataReader res = cmd.ExecuteReader();
+
+            List<Componenti> components = new List<Componenti>();
+
+            if (!res.HasRows)
+            {
+                RefreshComponentsCatalogoAndCBX();
+                throw new Exception("Nessun risultato.");
+            }
+
+            while (res.Read())
+            {
+                Componenti component = new Componenti(res.GetString("tipo_componente"),
+                    res.GetString("marca_componente"),
+                    res.GetInt32("soglia_componente"),
+                    res.GetInt32("n_ordine_componente"),
+                    res.GetString("codice_componente"),
+                    0);
+
+                components.Add(component);
+            }
+
+            RefreshConetnutiMagazzini();
+
+            List<DataGridView> dgvs = new List<DataGridView>();
+
+            foreach (TabPage tp in tbCtrlMagazzini.TabPages)
+            {
+                foreach (Control c in tp.Controls)
+                {
+                    if (c is DataGridView)
+                    {
+                        dgvs.Add((DataGridView)c);
+                    }
+                }
+            }
+
+            foreach (DataGridView dg in dgvs)
+            {
+                List<Componenti> componentiInMagSel = new List<Componenti>();
+                foreach (DataGridViewRow dgvr in dg.Rows)
+                {
+                    componentiInMagSel.Add(dgvr.DataBoundItem as Componenti);
+                }
+
+                List<Componenti> filtered = (from comp in componentiInMagSel
+                                             where (marca == null || comp.Marca == marca)
+                                                && (codice == null || comp.Codice == codice)
+                                                && (tipo == null || comp.Tipo == tipo)
+                                                && (sottoSoglia == false || comp.Soglia > comp.Quantita)
+                                             select comp).ToList();
+
+                BindingSource bs = new BindingSource()
+                {
+                    DataSource = filtered
+                };
+
+                dg.DataSource = bs;
+            }
+        }
+
         private void btnAddTipoComponente_Click(object sender, EventArgs e)
         {
+            Notifica n = new Notifica();
             if (string.IsNullOrWhiteSpace(txBxTipoComponente.Text))
-            {
-                Notifica n = new Notifica();
+            {         
                 n.Show("Inserisci un nome valido per la tipologia.", Notifica.enmType.Warning);
             }
             else
@@ -2467,17 +2552,16 @@ namespace Calendario_AriBerg
 
                     if (row > 0)
                     {
+                        n.Show("Tipo aggiunto correttamente!", Notifica.enmType.Success);
                         RefreshComponentTypesDataGridView();
                     }
                     else
                     {
-                        Notifica n = new Notifica();
                         n.Show("Il tipo del componente non è stato aggiunto correttamente, riprovare.", Notifica.enmType.Warning);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Notifica n = new Notifica();
                     n.Show(ex.Message, Notifica.enmType.Warning);
                 }
                 finally
@@ -2490,9 +2574,9 @@ namespace Calendario_AriBerg
 
         private void btnEditComponente_Click(object sender, EventArgs e)
         {
+            Notifica n = new Notifica();
             if (string.IsNullOrWhiteSpace(txBxTipoComponente.Text))
             {
-                Notifica n = new Notifica();
                 n.Show("Inserisci un nome valido per la tipologia.", Notifica.enmType.Warning);
             }
             else
@@ -2515,12 +2599,12 @@ namespace Calendario_AriBerg
 
                     if (row > 0)
                     {
+                        n.Show("Tipo modificato correttamente!", Notifica.enmType.Success);
                         RefreshComponentTypesDataGridView();
                     }
                 }
                 catch (Exception ex)
                 {
-                    Notifica n = new Notifica();
                     n.Show(ex.Message, Notifica.enmType.Warning);
                 }
                 finally
@@ -2533,6 +2617,7 @@ namespace Calendario_AriBerg
 
         private void btnDelComponente_Click(object sender, EventArgs e)
         {
+            Notifica n = new Notifica();
             MySqlConnection conn = null;
             try
             {
@@ -2552,12 +2637,12 @@ namespace Calendario_AriBerg
 
                 if (row > 0)
                 {
+                    n.Show("Tipo eliminato correttamente!", Notifica.enmType.Success);
                     RefreshComponentTypesDataGridView();
                 }
             }
             catch (Exception ex)
             {
-                Notifica n = new Notifica();
                 n.Show(ex.Message, Notifica.enmType.Warning);
             }
             finally
@@ -2592,10 +2677,9 @@ namespace Calendario_AriBerg
 
         private void btnAddMarca_Click(object sender, EventArgs e)
         {
-
+            Notifica n = new Notifica();
             if (string.IsNullOrWhiteSpace(txBxMarcaComponente.Text))
-            {
-                Notifica n = new Notifica();
+            {                
                 n.Show("Inserisci un nome valido per la marca.", Notifica.enmType.Warning);
             }
             else
@@ -2619,16 +2703,15 @@ namespace Calendario_AriBerg
                     if (row > 0)
                     {
                         RefreshComponentBrandsDataGridView();
+                        n.Show("Marca aggiunta correttamente!", Notifica.enmType.Success);
                     }
                     else
                     {
-                        Notifica n = new Notifica();
                         n.Show("La marca del componente non è stata aggiunta correttamente, riprovare.", Notifica.enmType.Warning);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Notifica n = new Notifica();
                     n.Show(ex.Message, Notifica.enmType.Warning);
                 }
                 finally
@@ -2641,9 +2724,9 @@ namespace Calendario_AriBerg
 
         private void btnEditMarca_Click(object sender, EventArgs e)
         {
+            Notifica n = new Notifica();
             if (string.IsNullOrWhiteSpace(txBxMarcaComponente.Text))
             {
-                Notifica n = new Notifica();
                 n.Show("Inserisci un nome valido per la marca.", Notifica.enmType.Warning);
             }
             else
@@ -2666,17 +2749,16 @@ namespace Calendario_AriBerg
 
                     if (row > 0)
                     {
+                        n.Show("Marca modificata correttamente!", Notifica.enmType.Success);
                         RefreshComponentBrandsDataGridView();
                     }
                     else
                     {
-                        Notifica n = new Notifica();
                         n.Show("La marca del componente non è stata aggiornata correttamente, riprovare.", Notifica.enmType.Warning);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Notifica n = new Notifica();
                     n.Show(ex.Message, Notifica.enmType.Warning);
                 }
                 finally
@@ -2689,6 +2771,7 @@ namespace Calendario_AriBerg
 
         private void btnDelMarca_Click(object sender, EventArgs e)
         {
+            Notifica n = new Notifica();
             MySqlConnection conn = null;
             try
             {
@@ -2706,17 +2789,16 @@ namespace Calendario_AriBerg
 
                 if (row > 0)
                 {
+                    n.Show("Marca eliminata correttamente!", Notifica.enmType.Success);
                     RefreshComponentBrandsDataGridView();
                 }
                 else
-                {
-                    Notifica n = new Notifica();
+                {                   
                     n.Show("La marca del componente non è stata cancellata correttamente, riprovare.", Notifica.enmType.Warning);
                 }
             }
             catch (Exception ex)
             {
-                Notifica n = new Notifica();
                 n.Show(ex.Message, Notifica.enmType.Warning);
             }
             finally
@@ -2833,6 +2915,8 @@ namespace Calendario_AriBerg
                     Notifica n = new Notifica();
                     n.Show("Componente aggiunto con successo!", Notifica.enmType.Success);
                     gBxAggiungiComponente.Visible = false;
+                    Registro.ComponentiAttuali = l;
+                    ReApplyFiltroCatalogo();
                 }
                 catch (Exception ex)
                 {
@@ -2901,6 +2985,8 @@ namespace Calendario_AriBerg
                     Notifica n = new Notifica();
                     n.Show("Componente modificato con successo!", Notifica.enmType.Success);
                     gbxModificaComponente.Visible = false;
+
+                    ReApplyFiltroCatalogo();
                 }
                 catch (Exception ex)
                 {
@@ -2911,6 +2997,42 @@ namespace Calendario_AriBerg
                 {
                     conn.Close();
                 }
+            }
+        }
+
+        private void ReApplyFiltroCatalogo()
+        {
+            if (!string.IsNullOrWhiteSpace(FiltroAttivoCatalogo))
+            {
+                MySqlCommand cmd = new MySqlCommand(FiltroAttivoCatalogo, Metodi.ConnectToDatabase());
+                MySqlDataReader res = cmd.ExecuteReader();
+
+                List<Componenti> components = new List<Componenti>();
+
+                if (!res.HasRows)
+                {
+                    RefreshComponentsCatalogoAndCBX();
+                    throw new Exception("Nessun risultato.");
+                }
+
+                while (res.Read())
+                {
+                    Componenti component = new Componenti(res.GetString("tipo_componente"),
+                        res.GetString("marca_componente"),
+                        res.GetInt32("soglia_componente"),
+                        res.GetInt32("n_ordine_componente"),
+                        res.GetString("codice_componente"),
+                        0);
+
+                    components.Add(component);
+                }
+
+                BindingSource bsCatalogo = new BindingSource()
+                {
+                    DataSource = components
+                };
+
+                dgvComponenti.DataSource = bsCatalogo;
             }
         }
 
@@ -2979,6 +3101,7 @@ namespace Calendario_AriBerg
 
                     RefreshMagazzini();
                     RefreshConetnutiMagazzini();
+                    if (!string.IsNullOrWhiteSpace(FiltroAttivoMagazzino)) ReApplyFiltroMagazzino(CurrentComponentiFiltroMarca, CurrentComponentiFiltroCodice, CurrentComponentiFiltroTipo, CurrentComponentiFiltroSottoSoglia);
                     Notifica n = new Notifica();
                     n.Show("Magazzino modificato con successo!", Notifica.enmType.Success);
                 }
@@ -3023,6 +3146,7 @@ namespace Calendario_AriBerg
                     Notifica n = new Notifica();
                     n.Show("Magazzino eliminato con successo!", Notifica.enmType.Success);
                     RefreshConetnutiMagazzini();
+                    if(!string.IsNullOrWhiteSpace(FiltroAttivoMagazzino)) ReApplyFiltroMagazzino(CurrentComponentiFiltroMarca, CurrentComponentiFiltroCodice, CurrentComponentiFiltroTipo, CurrentComponentiFiltroSottoSoglia);
                 }
                 else
                 {
@@ -3077,20 +3201,25 @@ namespace Calendario_AriBerg
                     bool sottoSoglia = false;
                     if (chBxSottoSoglia.Checked) sottoSoglia = true;
 
-                    if (string.IsNullOrWhiteSpace(marca + tipo + codice))
+                    if (string.IsNullOrWhiteSpace(marca + tipo + codice) && sottoSoglia == false)
                     {
                         RefreshComponentsCatalogoAndCBX();
                         RefreshConetnutiMagazzini();
                         return;
                     }
 
-                    if(!applicaACatalogo && !applicaAMagazzino) throw new Exception("Applicare il filtro al catalogo o al magazzino.");
+                    if (!applicaACatalogo && !applicaAMagazzino)
+                    {
+                        FiltroAttivoCatalogo = null;
+                        FiltroAttivoMagazzino = null;
+                        throw new Exception("Applicare il filtro al catalogo o al magazzino.");                      
+                    }
 
-                    string query = "SELECT * FROM componente WHERE";
+                    string query = "SELECT * FROM componente";
 
-                    if (marca != null) query += $" marca_componente = '{marca}'";
-                    if (tipo != null && query.EndsWith("WHERE")) query += $" tipo_componente = '{tipo}'"; else if (tipo != null) query += $" AND tipo_componente = '{tipo}'";
-                    if (codice != null && query.EndsWith("WHERE")) query += $" codice_componente = '{codice}'"; else if (codice != null) query += $" AND codice_componente = '{codice}'";
+                    if (marca != null) query += $"WHERE marca_componente = '{marca}'";
+                    if (tipo != null && query.EndsWith("componente")) query += $" tipo_componente = '{tipo}'"; else if (tipo != null) query += $" AND tipo_componente = '{tipo}'";
+                    if (codice != null && query.EndsWith("componente")) query += $" codice_componente = '{codice}'"; else if (codice != null) query += $" AND codice_componente = '{codice}'";
 
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     MySqlDataReader res = cmd.ExecuteReader();
@@ -3120,7 +3249,15 @@ namespace Calendario_AriBerg
                         DataSource = components
                     };
 
-                    if (applicaACatalogo) dgvComponenti.DataSource = bsCatalogo;
+                    if (applicaACatalogo)
+                    {
+                        dgvComponenti.DataSource = bsCatalogo;
+                        FiltroAttivoCatalogo = query;
+                    }
+                    else
+                    {
+                        FiltroAttivoCatalogo = null;
+                    }
 
                     if (applicaAMagazzino)
                     {
@@ -3128,30 +3265,31 @@ namespace Calendario_AriBerg
 
                         List<DataGridView> dgvs = new List<DataGridView>();
 
-                        foreach(TabPage tp in tbCtrlMagazzini.TabPages)
+                        foreach (TabPage tp in tbCtrlMagazzini.TabPages)
                         {
-                            foreach(Control c in tp.Controls)
+                            foreach (Control c in tp.Controls)
                             {
-                                if(c is DataGridView)
+                                if (c is DataGridView)
                                 {
-                                    dgvs.Add((DataGridView) c);
+                                    dgvs.Add((DataGridView)c);
                                 }
                             }
                         }
 
-                        foreach(DataGridView dg in dgvs)
+                        foreach (DataGridView dg in dgvs)
                         {
                             List<Componenti> componentiInMagSel = new List<Componenti>();
-                            foreach(DataGridViewRow dgvr in dg.Rows)
+                            foreach (DataGridViewRow dgvr in dg.Rows)
                             {
                                 componentiInMagSel.Add(dgvr.DataBoundItem as Componenti);
                             }
 
                             List<Componenti> filtered = (from comp in componentiInMagSel
-                                                        where (marca == null || comp.Marca == marca)
-                                                           && (codice == null || comp.Codice == codice)
-                                                           && (tipo == null || comp.Tipo == tipo)
-                                                        select comp).ToList();
+                                                         where (marca == null || comp.Marca == marca)
+                                                            && (codice == null || comp.Codice == codice)
+                                                            && (tipo == null || comp.Tipo == tipo)
+                                                            && (sottoSoglia == false || comp.Soglia > comp.Quantita)
+                                                         select comp).ToList();
 
                             BindingSource bs = new BindingSource()
                             {
@@ -3159,9 +3297,20 @@ namespace Calendario_AriBerg
                             };
 
                             dg.DataSource = bs;
+
+                            FiltroAttivoMagazzino = query;
                         }
                     }
-                }
+                    else
+                    {
+                        FiltroAttivoMagazzino = null;
+                    }
+
+                    CurrentComponentiFiltroCodice = codice;
+                    CurrentComponentiFiltroMarca = marca;
+                    CurrentComponentiFiltroTipo = tipo;
+                    CurrentComponentiFiltroSottoSoglia = sottoSoglia;
+                }                
             }
             catch (Exception ex)
             {
@@ -3399,6 +3548,11 @@ namespace Calendario_AriBerg
         private void btnCloseEditComponenti_Click(object sender, EventArgs e)
         {
             gbxEditComponenti.Visible = false;
+        }
+
+        private void pnlFiltriMagazzino_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
