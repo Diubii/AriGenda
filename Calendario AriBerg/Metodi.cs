@@ -23,7 +23,7 @@ namespace Calendario_AriBerg
         {
             try
             {
-                string remoteConnectionString = $"Server=192.168.1.4; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
+                string remoteConnectionString = $"Server=database.diubi.dev; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
                 MySqlConnection conn = new MySqlConnection(remoteConnectionString);
                 conn.Open();
                 return conn;
@@ -268,7 +268,7 @@ namespace Calendario_AriBerg
             {
                 if (currentComponents.Count == 0) break;
 
-                Componenti sameCode = currentComponents.Find(x => x?.Codice == comp.Codice);
+                Componenti sameCode = currentComponents.Find(x => x?.Codice == comp.Codice && x?.Marca== comp.Marca);
                 if(sameCode == null)
                 {
                     different = true;

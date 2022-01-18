@@ -2892,7 +2892,7 @@ namespace Calendario_AriBerg
                         $"tipo_componente = '{cbxModificaTipoComponente.Text}', " +
                         $"soglia_componente = '{nudModificaSoglia.Value}', " +
                         $"n_ordine_componente = '{nudModificaNOrdine.Value}' " +
-                        $"WHERE codice_componente = '{comp.Codice}'";
+                        $"WHERE codice_componente = '{comp.Codice}' and marca_componente = '{comp.Marca}'";
 
                     MySqlCommand command = new MySqlCommand(query, conn);
                     command.ExecuteNonQuery();
