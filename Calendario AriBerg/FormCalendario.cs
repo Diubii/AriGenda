@@ -1282,7 +1282,7 @@ namespace Calendario_AriBerg
                 List<Componenti> componenti = new List<Componenti>();
 
 
-                macchina = new Macchina(txBxAggiungiMacchinaMarca.Text, txBxAggiungiMacchinaModello.Text,
+                macchina = new Macchina(Metodi.GetCustomerID(dgvVisualizzaClienti.CurrentRow) ,txBxAggiungiMacchinaMarca.Text, txBxAggiungiMacchinaModello.Text,
                     txBxAggiungiMacchinaMatricola.Text, componenti, chBxAggiungiMacchinaNoleggio.Checked, rtbAggiungiMacchinaNote.Text);
                 MySqlConnection conn = Metodi.ConnectToDatabase();
                 string query = $"INSERT INTO macchina VALUES({txBxAggiungiMacchinaMarca.Text}, " +
@@ -1397,13 +1397,77 @@ namespace Calendario_AriBerg
 
         private void RefreshCustomers()
         {
-            List<Cliente> l = new List<Cliente>();
-
             MySqlConnection conn = Metodi.ConnectToDatabase();
-            string query = $"SELECT * FROM cliente";
+            ///componenti
+            ///0:codice_componente
+            ///1:marca_componente
+            ///2:tipo_componente
+            ///3:soglia_componente
+            ///4:n_ordine_componente
+            List<Componenti> Catalogo = new List<Componenti>();
+            Componenti c = new Componenti();
+
+
+            string query = $"SELECT * From componente";
             MySqlCommand command = new MySqlCommand(query, conn);
 
             MySqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                c = new Componenti(reader.GetString(2), reader.GetString(1), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(0), 0);
+                Catalogo.Add(c);
+            }
+
+            reader.Close();
+
+            ///Macchina
+            ///0:marca_macchina
+            ///1:modello_macchina
+            ///2:matricola_macchina
+            ///3:noleggio_macchina
+            ///4:id_cliente
+            ///5:note_macchina
+            List<Macchina> macchine = new List<Macchina>();
+            Macchina m;
+
+            List<Componenti> CompL = new List<Componenti>();
+            query = $"SELECT * From macchina";
+            command = new MySqlCommand(query, conn);
+
+            reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                m = new Macchina(reader.GetInt32(4), reader.GetString(0), reader.GetString(1), reader.GetString(2), CompL, reader.GetBoolean(3), reader.GetString(5));
+                macchine.Add(m);
+            }
+            reader.Close();
+
+            ///Componenti macchina
+            ///0:codice_componente
+            ///1:marca_componente
+            ///2:marca_macchina
+            ///3:matricola_macchina
+
+            query = $"SELECT * From componenti_macchina";
+            command = new MySqlCommand(query, conn);
+
+            reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                c = new Componenti((Componenti)Catalogo.First(x => x.Codice == reader.GetString(0) && x.Marca == reader.GetString(1)));
+                macchine.Find(x => x?._Marca == reader.GetString(2) && x?._Matricola == reader.GetString(3))._Componenti.Add(c);
+            }
+
+            reader.Close();
+            List<Cliente> l = new List<Cliente>();
+
+            query = $"SELECT * FROM cliente";
+            command = new MySqlCommand(query, conn);
+
+            reader = command.ExecuteReader();
 
             while (reader.Read())
             {
@@ -1418,14 +1482,14 @@ namespace Calendario_AriBerg
                 {
                     p_rif = reader.GetString(6);
                 }
-                Cliente c = new Cliente(reader.GetString(1),
+                Cliente Cl = new Cliente(reader.GetString(1),
                     reader.GetString(4),
                     reader.GetString(2),
                     p_iva,
                     reader.GetString(3),
                     p_rif,
-                    null);
-                l.Add(c);
+                    macchine.FindAll(x => x._cliente == Metodi.GetCustomerID(reader.GetString(3), reader.GetString(2))));
+                l.Add(Cl);
             }
 
             Registro.ClientiAttuali = l;
@@ -1529,50 +1593,6 @@ namespace Calendario_AriBerg
             gBxAggiungiMacchina.Visible = false;
         }
 
-        private void dgvVisualizzaClienti_CellStateChanged(object sender, DataGridViewCellStateChangedEventArgs e)
-        {
-            btnClientiEditCustomer.Enabled = true;
-            btnClientiDeleteCustomer.Enabled = true;
-
-            Cliente CurrentCliente = (Cliente)dgvVisualizzaClienti.CurrentRow.DataBoundItem;
-            tbxMostraIva.Text = CurrentCliente._PartIVA;
-            if (string.IsNullOrWhiteSpace(tbxMostraIva.Text)) tbxMostraIva.Text = "None";
-            tbxMostraPrif.Text = CurrentCliente._Ref;
-            if (string.IsNullOrWhiteSpace(tbxMostraPrif.Text)) tbxMostraPrif.Text = "None";
-            if (listaMacchine != null)
-            {
-                listaMacchine.Clear();
-            }
-            else
-            {
-                listaMacchine = new List<Macchina>();
-            }
-            foreach (Macchina macchina in CurrentCliente._Mach)
-            {
-
-/*
-                lvwMostraMacchineAccessori.Items.Add(item);
-
-                dgvMostraMacchineAccessori.DataSource=
-
-                ListViewItem itemm = new ListViewItem
-                {
-                    Text = macchina._Marca
-                };
-                itemm.SubItems.Add(macchina._Modello);
-                itemm.SubItems.Add(macchina._Matricola);
-                //lvwModificaCliente.Items.Add(itemm);
-
-                listaMacchine.Add(macchina);*/  //errore
-            }
-
-            txBxModificaClienteNome.Text = CurrentCliente._Nome;
-            txBxModificaClienteTel.Text = CurrentCliente._Telefono;
-            txBxModificaClienteMail.Text = CurrentCliente._Email;
-            txBxModificaClienteInd.Text = CurrentCliente._Indirizzo;
-            txBxModificaClienteIva.Text = CurrentCliente._PartIVA;
-            txBxModificaClientePrif.Text = CurrentCliente._Ref;
-        }
 
         private void lvwMostraMacchineAccessori_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2206,7 +2226,7 @@ namespace Calendario_AriBerg
                     //componenti.Add(componente);
                 }
 
-                macchina = new Macchina(tbxModificaMacchinaMarca.Text, tbxModificaMacchinaModello.Text,
+                macchina = new Macchina(Metodi.GetCustomerID(dgvVisualizzaClienti.CurrentRow),tbxModificaMacchinaMarca.Text, tbxModificaMacchinaModello.Text,
                     tbxModificaMacchinaMatricola.Text, componenti, chBxModificaMacchinaNoleggio.Checked, rtbModificaMacchinaNote.Text);
                 listaMacchine.Add(macchina);
 
@@ -3399,6 +3419,52 @@ namespace Calendario_AriBerg
         private void btnCloseEditComponenti_Click(object sender, EventArgs e)
         {
             gbxEditComponenti.Visible = false;
+        }
+
+        private void dgvVisualizzaClienti_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnClientiEditCustomer.Enabled = true;
+            btnClientiDeleteCustomer.Enabled = true;
+
+            Cliente CurrentCliente = (Cliente)dgvVisualizzaClienti.CurrentRow.DataBoundItem;
+            tbxMostraIva.Text = CurrentCliente._PartIVA;
+            if (string.IsNullOrWhiteSpace(tbxMostraIva.Text)) tbxMostraIva.Text = "None";
+            tbxMostraPrif.Text = CurrentCliente._Ref;
+            if (string.IsNullOrWhiteSpace(tbxMostraPrif.Text)) tbxMostraPrif.Text = "None";
+
+            
+
+            BindingSource bs = new BindingSource() { DataSource=Registro.ClientiAttuali.Find(x => x._Email == CurrentCliente._Email &&
+            x._Telefono == CurrentCliente._Telefono)._Mach.ToList() };
+            dgvMostraMacchineAccessori.DataSource = bs;
+            dgvMostraMacchineAccessori.Columns[0].Visible = false;
+            dgvMostraMacchineAccessori.Columns[5].Visible = false;
+
+            txBxModificaClienteNome.Text = CurrentCliente._Nome;
+            txBxModificaClienteTel.Text = CurrentCliente._Telefono;
+            txBxModificaClienteMail.Text = CurrentCliente._Email;
+            txBxModificaClienteInd.Text = CurrentCliente._Indirizzo;
+            txBxModificaClienteIva.Text = CurrentCliente._PartIVA;
+            txBxModificaClientePrif.Text = CurrentCliente._Ref;
+            dgvModificaCliente.DataSource = bs;
+        }
+
+        private void dgvMostraMacchineAccessori_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Cliente CurrentCliente = (Cliente)dgvVisualizzaClienti.CurrentRow.DataBoundItem;
+            Cliente CattualeCompleto = Registro.ClientiAttuali.Find(x => x._Email == CurrentCliente._Email && x._Telefono == CurrentCliente._Telefono);
+            Macchina Mattuale = CattualeCompleto._Mach.Find(x => x?._Marca == dgvMostraMacchineAccessori.CurrentRow.Cells[1].Value && x?._Matricola == dgvMostraMacchineAccessori.CurrentRow.Cells[3].Value);
+            BindingSource bs = new BindingSource()
+            {
+                DataSource = Mattuale._Componenti.ToList()
+            };
+            rtbMostraNote.Text = Mattuale._Note;
+            chbxMostraNoleggio.Checked = Mattuale._Noleggio;
+            dgvMostraComponentiMacchina.DataSource = bs;
+            dgvMostraComponentiMacchina.Columns[3].Visible=false;
+            dgvMostraComponentiMacchina.Columns[4].Visible = false;
+            dgvMostraComponentiMacchina.Columns[5].Visible = false;
+
         }
     }
 }

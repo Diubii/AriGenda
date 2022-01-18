@@ -23,7 +23,7 @@ namespace Calendario_AriBerg
         {
             try
             {
-                string remoteConnectionString = $"Server=192.168.1.4; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
+                string remoteConnectionString = $"Server=database.diubi.dev; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
                 MySqlConnection conn = new MySqlConnection(remoteConnectionString);
                 conn.Open();
                 return conn;
@@ -166,6 +166,8 @@ namespace Calendario_AriBerg
                 Catalogo.Add(c);
             }
 
+            reader.Close();
+
             ///Macchina
             ///0:marca_macchina
             ///1:modello_macchina
@@ -176,26 +178,37 @@ namespace Calendario_AriBerg
             List<Macchina> macchine = new List<Macchina>();
             Macchina m;
 
+            List<Componenti> CompL = new List<Componenti>();
             query = $"SELECT * From macchina";
             command = new MySqlCommand(query, conn);
 
             reader = command.ExecuteReader();
 
-           /* while (reader.Read())
+            while (reader.Read())
             {
-                m = new Macchina(reader.GetString(2), reader.GetString(1), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(0), 0);
+                m = new Macchina(reader.GetInt32(4),reader.GetString(0),reader.GetString(1),reader.GetString(2) ,CompL,reader.GetBoolean(3),reader.GetString(5));
                 macchine.Add(m);
-            }*/
-
+            }
+            reader.Close();
 
             ///Componenti macchina
             ///0:codice_componente
             ///1:marca_componente
             ///2:marca_macchina
             ///3:matricola_macchina
-            List<Componenti> componentiMac = new List<Componenti>();
-            
 
+            query = $"SELECT * From componenti_macchina";
+            command = new MySqlCommand(query, conn);
+
+            reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                c = new Componenti((Componenti)Catalogo.First(x => x.Codice == reader.GetString(0) && x.Marca == reader.GetString(1)));
+                macchine.Find(x => x?._Marca == reader.GetString(2) && x?._Matricola == reader.GetString(3))._Componenti.Add(c);
+            }
+
+            reader.Close();
             ///0: id_cliente
             ///1: nome_cliente
             ///2: telefono_cliente
@@ -230,7 +243,7 @@ namespace Calendario_AriBerg
                     p_iva,
                     reader.GetString(3),
                     p_rif,
-                    null);
+                    macchine.FindAll(x=>x._cliente==GetCustomerID(reader.GetString(3), reader.GetString(2))));
                 l.Add(Cl);
             }
                    
@@ -360,6 +373,17 @@ namespace Calendario_AriBerg
             }
         }
 
+
+        internal static int GetCustomerID(string mail , string cell)
+        {
+            MySqlConnection conn = ConnectToDatabase();
+            string query = $"SELECT id_cliente FROM cliente WHERE telefono_cliente = '{cell}' AND mail_cliente = '{mail}'";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlDataReader res = cmd.ExecuteReader();
+
+            res.Read();
+            return res.GetInt32(0);
+        }
         internal static int GetCustomerID(DataGridViewRow dgvr)
         {
             Cliente cl = dgvr.DataBoundItem as Cliente;

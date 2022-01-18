@@ -8,7 +8,7 @@ namespace Calendario_AriBerg
 {
     public class Macchina
     {
-        //public int _cliente { get; set; }
+        public int _cliente { get; set; }
         public string _Marca { get; set; }
         public string _Modello { get; set; }
         public string _Matricola { get; set; }
@@ -18,9 +18,9 @@ namespace Calendario_AriBerg
 
         public string _Note { get; set; }
 
-        public Macchina( string marca, string modello, string matricola, List<Componenti> componenti, bool noleggio = false, string note = null)
+        public Macchina( int cliente,string marca, string modello, string matricola, List<Componenti> componenti, bool noleggio = false, string note = null)
         {
-            //_cliente = cliente;
+            _cliente = cliente;
             _Marca = marca;
             _Modello = modello;
             _Matricola = matricola;
