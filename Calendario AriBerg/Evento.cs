@@ -18,7 +18,8 @@ namespace Calendario_AriBerg
     {
         static public int numEventi;
         private int id;
-        private DateTime giorno;          //da data selezionata +cadenza quindi lista di date possibile
+        private int id_ricorrenza;
+        private List<DateTime> giorno;          //da data selezionata +cadenza quindi lista di date possibile
         private string nomeCliente;       //modficare la data è ok e anche la ricorrenza da uno qualunque degli eventi e sposta tutti gli altri                                   
         private Macchina macchina;        //se vuole modificare altro però diverrà un evento singolo farlo capire bene
         private TimeSpan Tempo { get; set; }               //se cambia cadenza o termine influenza solo eventi nuovi... quindi quando giorno passa eventi divengono singoli
@@ -31,7 +32,7 @@ namespace Calendario_AriBerg
         {
         }
 
-        public Evento(DateTime giorno, string nomeCliente, Macchina macchina, List<InterventiPoss> interventi, string note = null)
+        public Evento(List<DateTime> giorno, string nomeCliente, Macchina macchina, List<InterventiPoss> interventi, string note = null)
         {
             id = NumEventi;
             Giorno = giorno;
@@ -70,7 +71,7 @@ namespace Calendario_AriBerg
             }
         }
 
-        public DateTime Giorno
+        public List<DateTime> Giorno
         {
             get => giorno;
 

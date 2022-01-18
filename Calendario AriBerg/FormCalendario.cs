@@ -43,12 +43,13 @@ namespace Calendario_AriBerg
             Macchina m = new Macchina(12,"a","a","aa",c,false,"ayeyey");
             List<InterventiPoss> l = new List<InterventiPoss>();
             l.Add(InterventiPoss.Controllo_Generale);
-            Evento ev = new Evento(DateTime.Now.AddDays(2).Date, "cacone", m, l, "bubaya");
+            List<DateTime> datess = new List<DateTime>();
+            datess.Add(DateTime.Now.AddDays(2).Date);
+            Evento ev = new Evento(datess, "cacone", m, l, "bubaya");
 
             List<Evento> eevv = new List<Evento>();
             eevv.Add(ev);
 
-            Registro.DizGiorni.Add(DateTime.Now.AddDays(2).Date, eevv);
 
             /*//Connessione database query test
             Connection = Metodi.ConnectToDatabase();
@@ -61,10 +62,6 @@ namespace Calendario_AriBerg
             if (Registro.DizClienti == null)
             {
                 Registro.DizClienti = new Dictionary<string, Cliente>();
-            }
-            if (Registro.DizGiorni == null)
-            {
-                Registro.DizGiorni = new Dictionary<DateTime, List<Evento>>();
             }
 
             ariCalendario.Refresh();
@@ -98,12 +95,6 @@ namespace Calendario_AriBerg
             }
 
             //configdgwEventi
-            if (Registro.DizGiorni != null && Registro.DizGiorni.ContainsKey(SelectedDate))
-            {
-                dgvEventi.DataSource = Registro.DizGiorni[SelectedDate];
-                HideColumnsEventi();
-            }
-
             if (DateTime.Now.Date == new DateTime(DateTime.Now.Year, 4, 1))
             {
                 mur.Visible = true;
@@ -551,16 +542,6 @@ namespace Calendario_AriBerg
             SelectedDate = ariCalendario.SelectionStart;
             btnAdd.Enabled = true;
 
-            if (Registro.DizGiorni != null && Registro.DizGiorni.ContainsKey(SelectedDate))
-            {
-                dgvEventi.DataSource = Registro.DizGiorni[SelectedDate];
-                HideColumnsEventi();
-                //ResizeDetilsCose();
-            }
-            else
-            {
-                dgvEventi.DataSource = null;
-            }
         }
 
         private void GeneraScadenze()
@@ -569,14 +550,7 @@ namespace Calendario_AriBerg
 
             try
             {
-                if (Registro.DizGiorni.ContainsKey(DateTime.Now.Date.AddDays(1)))
-                {
-                    foreach (Evento ev in Registro.DizGiorni[DateTime.Now.Date.AddDays(1)])
-                    {
-                        Notifica n = new Notifica(ev, this);
-                        n.Show("Cliente:" + ev.NomeCliente + "\nMacchina:" + ev.Macchina, Notifica.enmType.Scadenza);
-                    }
-                }
+
             }
             catch (Exception e)
             {
@@ -586,21 +560,7 @@ namespace Calendario_AriBerg
 
         public void SetCalendarValue(Evento ev)
         {
-            ariCalendario.SelectionStart = ev.Giorno;
-            int i = 0;
-            foreach (Evento evnt in Registro.DizGiorni[ev.Giorno])
-            {
-                if (evnt.ID == ev.ID)
-                {
-                    break;
-                }
-                i++;
-            }
-            dgvEventi.CurrentCell = dgvEventi[3, i];
-            Rectangle re = dgvEventi.GetCellDisplayRectangle(3, i, false);
-            p.Y = dgvEventi.Location.Y + Location.Y + (Width / 30) + re.Y + re.Height;
-            p.X = dgvEventi.Location.X + Location.X + dgvEventi.RowHeadersWidth + 30;
-            Cursor.Position = p;
+
         }
 
         private void BtnExitLegend_Click(object sender, EventArgs e)
@@ -617,7 +577,7 @@ namespace Calendario_AriBerg
 
         private void dgwEventi_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (Registro.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == Registro.DizGiorni[SelectedDate])
+           /* if (Registro.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == Registro.DizGiorni[SelectedDate])
             {
                 if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 6)
                 {
@@ -737,7 +697,7 @@ namespace Calendario_AriBerg
                         }
                     }
                 }
-            }
+            }*/
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -835,7 +795,6 @@ namespace Calendario_AriBerg
                 //r.AddEvento(app);
 
                 dgvEventi.DataSource = null;
-                dgvEventi.DataSource = Registro.DizGiorni[SelectedDate];
                 HideColumnsEventi();
                 dgvEventi.Refresh();
 
@@ -860,16 +819,6 @@ namespace Calendario_AriBerg
             }
         }
 
-        private void dgwEventi_MouseEnter(object sender, EventArgs e)
-        {
-            ariCalendario.Enabled = false;
-        }
-
-        private void dgwEventi_MouseLeave(object sender, EventArgs e)
-        {
-            ariCalendario.Enabled = true;
-        }
-
         private void btnModify_Click(object sender, EventArgs e)
         {
             if (gbxModificaEvento.Visible == false)
@@ -890,7 +839,7 @@ namespace Calendario_AriBerg
 
             try
             {
-                if (Registro.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == Registro.DizGiorni[SelectedDate])
+                /*if (Registro.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == Registro.DizGiorni[SelectedDate])
                 {
                     if (e.Cell.ColumnIndex == 3 && Registro.DizGiorni.ContainsKey(SelectedDate))
                     {
@@ -940,7 +889,7 @@ namespace Calendario_AriBerg
                         btnModify.Enabled = false;
                         btnRemove.Enabled = false;
                     }
-                }
+                }*/
             }
             catch (ArgumentNullException exc)
             {
@@ -1075,10 +1024,10 @@ namespace Calendario_AriBerg
                 List<Evento> momentList = (List<Evento>)dgvEventi.DataSource;
                 bool filtrato = false;
 
-                if (Registro.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == Registro.DizGiorni[SelectedDate])
+                /*if (Registro.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == Registro.DizGiorni[SelectedDate])
                 {
                     dgvEventi.DataSource = null;
-                    Registro.RemoveEvento(Registro.DizGiorni[SelectedDate][app]);
+                    //Registro.RemoveEvento(Registro.DizGiorni[SelectedDate][app]);
                 }
                 else
                 {
@@ -1088,7 +1037,7 @@ namespace Calendario_AriBerg
                         if (ev.ID == momentList[app].ID)
                         {
                             dgvEventi.DataSource = null;
-                            Registro.RemoveEvento(ev);
+                            //Registro.RemoveEvento(ev);
                             momentList.RemoveAt(app);
                             break;
                         }
@@ -1114,7 +1063,7 @@ namespace Calendario_AriBerg
                     dgvEventi.Columns["Giorno"].Visible = true;
                 }
 
-                notifica.Show("Evento eliminato correttamente!", Notifica.enmType.Success);
+                notifica.Show("Evento eliminato correttamente!", Notifica.enmType.Success);*/
             }
             catch (Exception exc)
             {
@@ -1972,7 +1921,7 @@ namespace Calendario_AriBerg
         {
             Notifica notifica = new Notifica();
 
-            if (Registro.DizGiorni != null)
+            /*if (Registro.DizGiorni != null)
             {
                 List<Evento> eventiTrovati = new List<Evento>();
                 string s = null;
@@ -2037,7 +1986,7 @@ namespace Calendario_AriBerg
                 {
                     //ResizeDetilsCose();
                 }
-            }
+            }*/
         }
 
         private void rdBtnSearchEventoCliente_CheckedChanged(object sender, EventArgs e)
@@ -2052,29 +2001,6 @@ namespace Calendario_AriBerg
             cbBxSearchEventoMatricola.Enabled = true;
         }
 
-        private void gBxDettagliMacchinaAccessorio_MouseLeave(object sender, EventArgs e)
-        {
-            bool b = gBxDettagliMacchinaAccessorio.ClientRectangle.Contains(gBxDettagliMacchinaAccessorio.PointToClient(Cursor.Position));
-            if (b)
-            {
-            }
-            else
-            {
-                gBxDettagliMacchinaAccessorio.Visible = false;
-                gBxDettagliMacchinaAccessorio.Enabled = false;
-            }
-        }
-
-        private void gBxDettagliMacchinaAccessorio_MouseHover(object sender, EventArgs e)
-        {
-            gBxDettagliMacchinaAccessorio.Visible = false;
-            gBxDettagliMacchinaAccessorio.Enabled = false;
-        }
-
-        private void gBxDettagliCliente_MouseEnter(object sender, EventArgs e)
-        {
-            gBxDettagliCliente.Visible = false;
-        }
 
         private void pbxAlloStoricoCliente_Click(object sender, EventArgs e)
         {

@@ -58,8 +58,6 @@ namespace Calendario_AriBerg
             this.cbxAggiungiEventoTipo = new System.Windows.Forms.ComboBox();
             this.lblAggiungiEventoUtilizzi = new System.Windows.Forms.Label();
             this.pnlAggiungiOrarioEvento = new System.Windows.Forms.Panel();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.nudAddEventoTimeMinutes = new System.Windows.Forms.NumericUpDown();
             this.chbxAggiungiEventoOrario = new System.Windows.Forms.CheckBox();
             this.nudAddEventoTimeHour = new System.Windows.Forms.NumericUpDown();
@@ -83,6 +81,8 @@ namespace Calendario_AriBerg
             this.dtpAggiungiEventoRicorrenteTermine = new System.Windows.Forms.DateTimePicker();
             this.cbxAggiungiEventoCadenzaUnita = new System.Windows.Forms.ComboBox();
             this.lblAggiungiEventoCadenza = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.pnlCommands1 = new System.Windows.Forms.Panel();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnModify = new System.Windows.Forms.Button();
@@ -90,6 +90,8 @@ namespace Calendario_AriBerg
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.gbxDettagliEvento = new System.Windows.Forms.GroupBox();
+            this.gbxDettagliEventoUtilizzi = new System.Windows.Forms.GroupBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnCloseDettagliEvento = new System.Windows.Forms.Button();
             this.gBxDettagliCliente = new System.Windows.Forms.GroupBox();
             this.lblDettagliClientePrif = new System.Windows.Forms.Label();
@@ -217,8 +219,7 @@ namespace Calendario_AriBerg
             this.btnConfermaModificaCliente = new System.Windows.Forms.Button();
             this.RightPanelClienti = new System.Windows.Forms.Panel();
             this.gBxAggiungiMacchina = new System.Windows.Forms.GroupBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.cbBxAggiungiMacchinaMarca = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.cbBxAggiungiMacchinaMarcaFiltro = new System.Windows.Forms.ComboBox();
             this.cbBxAggiungiMacchinaCodiceFiltro = new System.Windows.Forms.ComboBox();
@@ -367,10 +368,8 @@ namespace Calendario_AriBerg
             this.btnAddMarca = new System.Windows.Forms.Button();
             this.btnEditMarca = new System.Windows.Forms.Button();
             this.pbxWait = new System.Windows.Forms.PictureBox();
-            this.cbBxAggiungiMacchinaMarca = new System.Windows.Forms.ComboBox();
-            this.ariCalendario = new Calendario_AriBerg.AriCalendario();
-            this.gbxDettagliEventoUtilizzi = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventi)).BeginInit();
             this.gbxLegenda.SuspendLayout();
             this.gbxAggiungi.SuspendLayout();
@@ -384,6 +383,8 @@ namespace Calendario_AriBerg
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.gbxDettagliEvento.SuspendLayout();
+            this.gbxDettagliEventoUtilizzi.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gBxDettagliCliente.SuspendLayout();
             this.gBxDettagliMacchinaAccessorio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDettagliComponenti)).BeginInit();
@@ -450,8 +451,6 @@ namespace Calendario_AriBerg
             this.pnlTipi.SuspendLayout();
             this.pnlMarche.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxWait)).BeginInit();
-            this.gbxDettagliEventoUtilizzi.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvEventi
@@ -471,8 +470,6 @@ namespace Calendario_AriBerg
             this.dgvEventi.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEventi_CellDoubleClick);
             this.dgvEventi.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgwEventi_CellPainting);
             this.dgvEventi.CellStateChanged += new System.Windows.Forms.DataGridViewCellStateChangedEventHandler(this.dgwEventi_CellStateChanged);
-            this.dgvEventi.MouseEnter += new System.EventHandler(this.dgwEventi_MouseEnter);
-            this.dgvEventi.MouseLeave += new System.EventHandler(this.dgwEventi_MouseLeave);
             // 
             // lblEventi
             // 
@@ -521,7 +518,7 @@ namespace Calendario_AriBerg
             this.gbxLegenda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbxLegenda.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
             this.gbxLegenda.ForeColor = System.Drawing.Color.White;
-            this.gbxLegenda.Location = new System.Drawing.Point(1198, 0);
+            this.gbxLegenda.Location = new System.Drawing.Point(1194, 3);
             this.gbxLegenda.Name = "gbxLegenda";
             this.gbxLegenda.Size = new System.Drawing.Size(241, 177);
             this.gbxLegenda.TabIndex = 7;
@@ -699,7 +696,7 @@ namespace Calendario_AriBerg
             this.gbxAggiungi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbxAggiungi.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
             this.gbxAggiungi.ForeColor = System.Drawing.Color.White;
-            this.gbxAggiungi.Location = new System.Drawing.Point(6, 85);
+            this.gbxAggiungi.Location = new System.Drawing.Point(645, 183);
             this.gbxAggiungi.Name = "gbxAggiungi";
             this.gbxAggiungi.Size = new System.Drawing.Size(619, 726);
             this.gbxAggiungi.TabIndex = 8;
@@ -812,8 +809,8 @@ namespace Calendario_AriBerg
             // pnlAggiungiOrarioEvento
             // 
             this.pnlAggiungiOrarioEvento.BackColor = System.Drawing.Color.Gray;
-            this.pnlAggiungiOrarioEvento.Controls.Add(this.label11);
-            this.pnlAggiungiOrarioEvento.Controls.Add(this.label10);
+            this.pnlAggiungiOrarioEvento.Controls.Add(this.label13);
+            this.pnlAggiungiOrarioEvento.Controls.Add(this.label14);
             this.pnlAggiungiOrarioEvento.Controls.Add(this.nudAddEventoTimeMinutes);
             this.pnlAggiungiOrarioEvento.Controls.Add(this.chbxAggiungiEventoOrario);
             this.pnlAggiungiOrarioEvento.Controls.Add(this.nudAddEventoTimeHour);
@@ -821,26 +818,6 @@ namespace Calendario_AriBerg
             this.pnlAggiungiOrarioEvento.Name = "pnlAggiungiOrarioEvento";
             this.pnlAggiungiOrarioEvento.Size = new System.Drawing.Size(225, 60);
             this.pnlAggiungiOrarioEvento.TabIndex = 30;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(195, 21);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(23, 19);
-            this.label11.TabIndex = 36;
-            this.label11.Text = "M";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(122, 21);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(19, 19);
-            this.label10.TabIndex = 35;
-            this.label10.Text = "H";
             // 
             // nudAddEventoTimeMinutes
             // 
@@ -1076,9 +1053,10 @@ namespace Calendario_AriBerg
             // 
             this.cbxAggiungiEventoCadenzaUnita.FormattingEnabled = true;
             this.cbxAggiungiEventoCadenzaUnita.Items.AddRange(new object[] {
-            "Settimana",
-            "Mese",
-            "Anno"});
+            "Giorni",
+            "Settimane",
+            "Mesi",
+            "Anni"});
             this.cbxAggiungiEventoCadenzaUnita.Location = new System.Drawing.Point(170, 46);
             this.cbxAggiungiEventoCadenzaUnita.Name = "cbxAggiungiEventoCadenzaUnita";
             this.cbxAggiungiEventoCadenzaUnita.Size = new System.Drawing.Size(115, 25);
@@ -1092,6 +1070,28 @@ namespace Calendario_AriBerg
             this.lblAggiungiEventoCadenza.Size = new System.Drawing.Size(62, 17);
             this.lblAggiungiEventoCadenza.TabIndex = 25;
             this.lblAggiungiEventoCadenza.Text = "Cadenza:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(136, 305);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(52, 19);
+            this.label11.TabIndex = 55;
+            this.label11.Text = "Marca";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(136, 274);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(39, 19);
+            this.label10.TabIndex = 56;
+            this.label10.Text = "Tipo";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // pnlCommands1
             // 
@@ -1182,15 +1182,15 @@ namespace Calendario_AriBerg
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.tabPage1.Controls.Add(this.gbxDettagliEvento);
             this.tabPage1.Controls.Add(this.gbxLegenda);
-            this.tabPage1.Controls.Add(this.gbxModificaEvento);
             this.tabPage1.Controls.Add(this.gbxAggiungi);
+            this.tabPage1.Controls.Add(this.gbxDettagliEvento);
+            this.tabPage1.Controls.Add(this.gbxModificaEvento);
+            this.tabPage1.Controls.Add(this.dgvEventi);
+            this.tabPage1.Controls.Add(this.ariCalendario);
             this.tabPage1.Controls.Add(this.btnLegenda);
             this.tabPage1.Controls.Add(this.pnlCercaEvento);
             this.tabPage1.Controls.Add(this.pnlCommands1);
-            this.tabPage1.Controls.Add(this.dgvEventi);
-            this.tabPage1.Controls.Add(this.ariCalendario);
             this.tabPage1.Controls.Add(this.lblEventi);
             this.tabPage1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
@@ -1202,19 +1202,42 @@ namespace Calendario_AriBerg
             // 
             // gbxDettagliEvento
             // 
+            this.gbxDettagliEvento.Controls.Add(this.gbxDettagli);
             this.gbxDettagliEvento.Controls.Add(this.gbxDettagliEventoUtilizzi);
             this.gbxDettagliEvento.Controls.Add(this.btnCloseDettagliEvento);
             this.gbxDettagliEvento.Controls.Add(this.gBxDettagliCliente);
             this.gbxDettagliEvento.Controls.Add(this.gBxDettagliMacchinaAccessorio);
-            this.gbxDettagliEvento.Controls.Add(this.gbxDettagli);
             this.gbxDettagliEvento.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gbxDettagliEvento.Location = new System.Drawing.Point(0, 81);
+            this.gbxDettagliEvento.Location = new System.Drawing.Point(1283, 370);
             this.gbxDettagliEvento.Name = "gbxDettagliEvento";
             this.gbxDettagliEvento.Size = new System.Drawing.Size(622, 727);
             this.gbxDettagliEvento.TabIndex = 62;
             this.gbxDettagliEvento.TabStop = false;
             this.gbxDettagliEvento.Text = "Dettagli Evento";
             this.gbxDettagliEvento.Visible = false;
+            // 
+            // gbxDettagliEventoUtilizzi
+            // 
+            this.gbxDettagliEventoUtilizzi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbxDettagliEventoUtilizzi.Controls.Add(this.dataGridView1);
+            this.gbxDettagliEventoUtilizzi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gbxDettagliEventoUtilizzi.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
+            this.gbxDettagliEventoUtilizzi.ForeColor = System.Drawing.Color.White;
+            this.gbxDettagliEventoUtilizzi.Location = new System.Drawing.Point(8, 240);
+            this.gbxDettagliEventoUtilizzi.Name = "gbxDettagliEventoUtilizzi";
+            this.gbxDettagliEventoUtilizzi.Size = new System.Drawing.Size(400, 218);
+            this.gbxDettagliEventoUtilizzi.TabIndex = 36;
+            this.gbxDettagliEventoUtilizzi.TabStop = false;
+            this.gbxDettagliEventoUtilizzi.Text = "Dettagli utilizzi";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 20);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(394, 195);
+            this.dataGridView1.TabIndex = 35;
             // 
             // btnCloseDettagliEvento
             // 
@@ -1254,7 +1277,6 @@ namespace Calendario_AriBerg
             this.gBxDettagliCliente.TabIndex = 14;
             this.gBxDettagliCliente.TabStop = false;
             this.gBxDettagliCliente.Text = "Dettagli cliente";
-            this.gBxDettagliCliente.MouseEnter += new System.EventHandler(this.gBxDettagliCliente_MouseEnter);
             // 
             // lblDettagliClientePrif
             // 
@@ -1372,8 +1394,6 @@ namespace Calendario_AriBerg
             this.gBxDettagliMacchinaAccessorio.TabIndex = 13;
             this.gBxDettagliMacchinaAccessorio.TabStop = false;
             this.gBxDettagliMacchinaAccessorio.Text = "Dettagli macchina / accessorio";
-            this.gBxDettagliMacchinaAccessorio.MouseLeave += new System.EventHandler(this.gBxDettagliMacchinaAccessorio_MouseLeave);
-            this.gBxDettagliMacchinaAccessorio.MouseHover += new System.EventHandler(this.gBxDettagliMacchinaAccessorio_MouseHover);
             // 
             // dgvDettagliComponenti
             // 
@@ -1465,7 +1485,7 @@ namespace Calendario_AriBerg
             this.gbxModificaEvento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbxModificaEvento.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
             this.gbxModificaEvento.ForeColor = System.Drawing.Color.White;
-            this.gbxModificaEvento.Location = new System.Drawing.Point(3, 84);
+            this.gbxModificaEvento.Location = new System.Drawing.Point(10, 102);
             this.gbxModificaEvento.Name = "gbxModificaEvento";
             this.gbxModificaEvento.Size = new System.Drawing.Size(619, 726);
             this.gbxModificaEvento.TabIndex = 61;
@@ -1853,9 +1873,10 @@ namespace Calendario_AriBerg
             // 
             this.cbxModificaEventoCadenzaUnita.FormattingEnabled = true;
             this.cbxModificaEventoCadenzaUnita.Items.AddRange(new object[] {
-            "Settimana",
-            "Mese",
-            "Anno"});
+            "Giorni",
+            "Settimane",
+            "Mesi",
+            "Anni"});
             this.cbxModificaEventoCadenzaUnita.Location = new System.Drawing.Point(170, 46);
             this.cbxModificaEventoCadenzaUnita.Name = "cbxModificaEventoCadenzaUnita";
             this.cbxModificaEventoCadenzaUnita.Size = new System.Drawing.Size(115, 25);
@@ -2827,23 +2848,15 @@ namespace Calendario_AriBerg
             this.gBxAggiungiMacchina.Text = "Aggiungi macchina/accessorio";
             this.gBxAggiungiMacchina.Visible = false;
             // 
-            // label10
+            // cbBxAggiungiMacchinaMarca
             // 
-            this.label10.Location = new System.Drawing.Point(136, 274);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(69, 28);
-            this.label10.TabIndex = 56;
-            this.label10.Text = "Tipo";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label11
-            // 
-            this.label11.Location = new System.Drawing.Point(136, 305);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(69, 28);
-            this.label11.TabIndex = 55;
-            this.label11.Text = "Marca";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cbBxAggiungiMacchinaMarca.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbBxAggiungiMacchinaMarca.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbBxAggiungiMacchinaMarca.FormattingEnabled = true;
+            this.cbBxAggiungiMacchinaMarca.Location = new System.Drawing.Point(136, 68);
+            this.cbBxAggiungiMacchinaMarca.Name = "cbBxAggiungiMacchinaMarca";
+            this.cbBxAggiungiMacchinaMarca.Size = new System.Drawing.Size(240, 28);
+            this.cbBxAggiungiMacchinaMarca.TabIndex = 57;
             // 
             // label12
             // 
@@ -3728,7 +3741,7 @@ namespace Calendario_AriBerg
             this.dgvMagazzinoCentrale.MultiSelect = false;
             this.dgvMagazzinoCentrale.Name = "dgvMagazzinoCentrale";
             this.dgvMagazzinoCentrale.ReadOnly = true;
-            this.dgvMagazzinoCentrale.Size = new System.Drawing.Size(534, 642);
+            this.dgvMagazzinoCentrale.Size = new System.Drawing.Size(534, 637);
             this.dgvMagazzinoCentrale.TabIndex = 1;
             this.dgvMagazzinoCentrale.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMagazzinoCentrale_CellDoubleClick);
             // 
@@ -4686,55 +4699,25 @@ namespace Calendario_AriBerg
             this.pbxWait.TabStop = false;
             this.pbxWait.Visible = false;
             // 
-            // cbBxAggiungiMacchinaMarca
+            // label13
             // 
-            this.cbBxAggiungiMacchinaMarca.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbBxAggiungiMacchinaMarca.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbBxAggiungiMacchinaMarca.FormattingEnabled = true;
-            this.cbBxAggiungiMacchinaMarca.Location = new System.Drawing.Point(136, 68);
-            this.cbBxAggiungiMacchinaMarca.Name = "cbBxAggiungiMacchinaMarca";
-            this.cbBxAggiungiMacchinaMarca.Size = new System.Drawing.Size(240, 28);
-            this.cbBxAggiungiMacchinaMarca.TabIndex = 57;
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(198, 21);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(23, 19);
+            this.label13.TabIndex = 38;
+            this.label13.Text = "M";
             // 
-            // ariCalendario
+            // label14
             // 
-            this.ariCalendario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.ariCalendario.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ariCalendario.Font = new System.Drawing.Font("Segoe UI Light", 32.25F);
-            this.ariCalendario.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.ariCalendario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ariCalendario.Location = new System.Drawing.Point(3, 82);
-            this.ariCalendario.Margin = new System.Windows.Forms.Padding(20);
-            this.ariCalendario.MaxDate = new System.DateTime(2059, 12, 31, 0, 0, 0, 0);
-            this.ariCalendario.MaxSelectionCount = 1;
-            this.ariCalendario.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
-            this.ariCalendario.Name = "ariCalendario";
-            this.ariCalendario.TabIndex = 12;
-            this.ariCalendario.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.ariCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AriCalendario_DateChanged);
-            // 
-            // gbxDettagliEventoUtilizzi
-            // 
-            this.gbxDettagliEventoUtilizzi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbxDettagliEventoUtilizzi.Controls.Add(this.dataGridView1);
-            this.gbxDettagliEventoUtilizzi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gbxDettagliEventoUtilizzi.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
-            this.gbxDettagliEventoUtilizzi.ForeColor = System.Drawing.Color.White;
-            this.gbxDettagliEventoUtilizzi.Location = new System.Drawing.Point(8, 240);
-            this.gbxDettagliEventoUtilizzi.Name = "gbxDettagliEventoUtilizzi";
-            this.gbxDettagliEventoUtilizzi.Size = new System.Drawing.Size(400, 218);
-            this.gbxDettagliEventoUtilizzi.TabIndex = 36;
-            this.gbxDettagliEventoUtilizzi.TabStop = false;
-            this.gbxDettagliEventoUtilizzi.Text = "Dettagli utilizzi";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 20);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(394, 195);
-            this.dataGridView1.TabIndex = 35;
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(125, 21);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(19, 19);
+            this.label14.TabIndex = 37;
+            this.label14.Text = "H";
             // 
             // FormCalendario
             // 
@@ -4769,6 +4752,8 @@ namespace Calendario_AriBerg
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.gbxDettagliEvento.ResumeLayout(false);
+            this.gbxDettagliEventoUtilizzi.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.gBxDettagliCliente.ResumeLayout(false);
             this.gBxDettagliCliente.PerformLayout();
             this.gBxDettagliMacchinaAccessorio.ResumeLayout(false);
@@ -4857,8 +4842,6 @@ namespace Calendario_AriBerg
             this.pnlMarche.ResumeLayout(false);
             this.pnlMarche.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxWait)).EndInit();
-            this.gbxDettagliEventoUtilizzi.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -5203,6 +5186,8 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cbBxAggiungiMacchinaMarca;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
     }
 }
 
