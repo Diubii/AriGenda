@@ -1281,13 +1281,6 @@ namespace Calendario_AriBerg
 
                 List<Componenti> componenti = new List<Componenti>();
 
-                //foreach (ListViewItem item in lvAggiungiMacchinaFiltri.Items)
-                {
-                    //errore
-                    // Componenti componente = new Componenti(item.Text, item.SubItems[1].Text);
-
-                    //componenti.Add(componente);
-                }
 
                 macchina = new Macchina(txBxAggiungiMacchinaMarca.Text, txBxAggiungiMacchinaModello.Text,
                     txBxAggiungiMacchinaMatricola.Text, componenti, chBxAggiungiMacchinaNoleggio.Checked, rtbAggiungiMacchinaNote.Text);
@@ -1337,7 +1330,7 @@ namespace Calendario_AriBerg
                     dgvAggiungiClientiMacchine.DataSource = bs;
                 }
 
-                notifica.Show("Macchina aggiunta correttamente!", Notifica.enmType.Success); //pepepe
+                notifica.Show("Macchina aggiunta correttamente!", Notifica.enmType.Success); 
                 macchina = null;
                 gBxAggiungiMacchina.Visible = false;
 
@@ -1541,8 +1534,6 @@ namespace Calendario_AriBerg
             btnClientiEditCustomer.Enabled = true;
             btnClientiDeleteCustomer.Enabled = true;
 
-            lvwMostraMacchineAccessori.Items.Clear();
-            //lvwModificaCliente.Items.Clear();
             Cliente CurrentCliente = (Cliente)dgvVisualizzaClienti.CurrentRow.DataBoundItem;
             tbxMostraIva.Text = CurrentCliente._PartIVA;
             if (string.IsNullOrWhiteSpace(tbxMostraIva.Text)) tbxMostraIva.Text = "None";
@@ -1558,14 +1549,11 @@ namespace Calendario_AriBerg
             }
             foreach (Macchina macchina in CurrentCliente._Mach)
             {
-                ListViewItem item = new ListViewItem
-                {
-                    Text = macchina._Marca
-                };
-                item.SubItems.Add(macchina._Modello);
-                item.SubItems.Add(macchina._Matricola);
 
+/*
                 lvwMostraMacchineAccessori.Items.Add(item);
+
+                dgvMostraMacchineAccessori.DataSource=
 
                 ListViewItem itemm = new ListViewItem
                 {
@@ -1575,7 +1563,7 @@ namespace Calendario_AriBerg
                 itemm.SubItems.Add(macchina._Matricola);
                 //lvwModificaCliente.Items.Add(itemm);
 
-                listaMacchine.Add(macchina);
+                listaMacchine.Add(macchina);*/  //errore
             }
 
             txBxModificaClienteNome.Text = CurrentCliente._Nome;
@@ -1588,7 +1576,7 @@ namespace Calendario_AriBerg
 
         private void lvwMostraMacchineAccessori_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lvwMostraComponenti.Items.Clear();
+            /*lvwMostraComponenti.Items.Clear();
 
             foreach (ListViewItem item in lvwMostraMacchineAccessori.SelectedItems)
             {
@@ -1608,7 +1596,7 @@ namespace Calendario_AriBerg
                         lvwMostraComponenti.Items.Add(listViewItem);
                     }
                 }
-            }
+            }*/ //errore
         }
 
         private void btnAggiungiMacchinaRimuoviComponenti_Click(object sender, EventArgs e)
@@ -2128,7 +2116,7 @@ namespace Calendario_AriBerg
 
         private void pbxAlloStoricoMacchina_Click(object sender, EventArgs e)
         {
-            if (lvwMostraMacchineAccessori.SelectedItems.Count > 0)
+           /* if (lvwMostraMacchineAccessori.SelectedItems.Count > 0)
             {
                 if (dgvVisualizzaClienti.CurrentCell.ColumnIndex == 0)
                 {
@@ -2145,7 +2133,7 @@ namespace Calendario_AriBerg
             {
                 Notifica n = new Notifica();
                 n.Show("Seleziona una macchina", Notifica.enmType.Info);
-            }
+            }*/ //errore
         }
 
         private void btnModificaClienteChiudi_Click(object sender, EventArgs e)
@@ -2436,6 +2424,7 @@ namespace Calendario_AriBerg
                     InsertMagazzino.ExecuteNonQuery();
 
                     RefreshMagazzini();
+                    RefreshConetnutiMagazzini();
                 }
                 catch (Exception ex)
                 {
@@ -2989,6 +2978,7 @@ namespace Calendario_AriBerg
                     command.ExecuteNonQuery();
 
                     RefreshMagazzini();
+                    RefreshConetnutiMagazzini();
                     Notifica n = new Notifica();
                     n.Show("Magazzino modificato con successo!", Notifica.enmType.Success);
                 }
@@ -3008,7 +2998,16 @@ namespace Calendario_AriBerg
         private void btnEliminaMagazzino_Click(object sender, EventArgs e)
         {
             Caricamento();
-
+            if (Metodi.CheckForNewComponents() || Metodi.CheckForNewDatiMagazzini(tbCtrlMagazzini))
+            {
+                RefreshComponentsCatalogoAndCBX();
+                RefreshMagazzini();
+                RefreshConetnutiMagazzini();
+                EndCaricamento();
+                Notifica n = new Notifica();
+                n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
+                return;
+            }
             MySqlConnection conn = null;
             try
             {
@@ -3023,6 +3022,7 @@ namespace Calendario_AriBerg
                     RefreshMagazzini();
                     Notifica n = new Notifica();
                     n.Show("Magazzino eliminato con successo!", Notifica.enmType.Success);
+                    RefreshConetnutiMagazzini();
                 }
                 else
                 {

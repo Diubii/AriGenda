@@ -99,7 +99,7 @@ namespace Calendario_AriBerg
             foreach (Magazzino mag in Magazzininew.Values)
             {
                 if (Registro.DizMagazzini.Count == 0) break;
-
+                if (Magazzininew.Count != Registro.DizMagazzini.Count) { different = true; break; }
                 Magazzino sameCode = Registro.DizMagazzini[mag.Nome];
                 if (sameCode == null)
                 {
@@ -116,7 +116,7 @@ namespace Calendario_AriBerg
                 }
             }
 
-            if (different || Magazzininew.Count != Registro.DizMagazzini.Count)
+            if (different )
             {
                 return true;
             }
@@ -144,6 +144,58 @@ namespace Calendario_AriBerg
 
         internal static bool CheckForNewCustomers()
         {
+            MySqlConnection conn = Metodi.ConnectToDatabase();
+            ///componenti
+            ///0:codice_componente
+            ///1:marca_componente
+            ///2:tipo_componente
+            ///3:soglia_componente
+            ///4:n_ordine_componente
+            List<Componenti> Catalogo = new List<Componenti>();
+            Componenti c = new Componenti();
+
+
+            string query = $"SELECT * From componente";
+            MySqlCommand command = new MySqlCommand(query, conn);
+
+            MySqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                c = new Componenti(reader.GetString(2), reader.GetString(1), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(0), 0);
+                Catalogo.Add(c);
+            }
+
+            ///Macchina
+            ///0:marca_macchina
+            ///1:modello_macchina
+            ///2:matricola_macchina
+            ///3:noleggio_macchina
+            ///4:id_cliente
+            ///5:note_macchina
+            List<Macchina> macchine = new List<Macchina>();
+            Macchina m;
+
+            query = $"SELECT * From macchina";
+            command = new MySqlCommand(query, conn);
+
+            reader = command.ExecuteReader();
+
+           /* while (reader.Read())
+            {
+                m = new Macchina(reader.GetString(2), reader.GetString(1), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(0), 0);
+                macchine.Add(m);
+            }*/
+
+
+            ///Componenti macchina
+            ///0:codice_componente
+            ///1:marca_componente
+            ///2:marca_macchina
+            ///3:matricola_macchina
+            List<Componenti> componentiMac = new List<Componenti>();
+            
+
             ///0: id_cliente
             ///1: nome_cliente
             ///2: telefono_cliente
@@ -153,13 +205,11 @@ namespace Calendario_AriBerg
             ///6: p.rif_cliente
 
             List<Cliente> l = new List<Cliente>();
-            Cliente c = new Cliente();
+            Cliente Cl = new Cliente();
+             query = $"SELECT * FROM cliente";
+            command = new MySqlCommand(query, conn);
 
-            MySqlConnection conn = Metodi.ConnectToDatabase();
-            string query = $"SELECT * FROM cliente";
-            MySqlCommand command = new MySqlCommand(query, conn);
-
-            MySqlDataReader reader = command.ExecuteReader();
+            reader = command.ExecuteReader();
 
             while (reader.Read())
             {
@@ -174,15 +224,16 @@ namespace Calendario_AriBerg
                 {
                     p_rif = reader.GetString(6);
                 }
-                c = new Cliente(reader.GetString(1),
+                Cl = new Cliente(reader.GetString(1),
                     reader.GetString(4),
                     reader.GetString(2),
                     p_iva,
                     reader.GetString(3),
                     p_rif,
                     null);
-                l.Add(c);
+                l.Add(Cl);
             }
+                   
 
             List<Cliente> currentClienti = new List<Cliente>();
 
