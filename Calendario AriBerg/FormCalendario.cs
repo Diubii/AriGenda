@@ -325,6 +325,7 @@ namespace Calendario_AriBerg
                     }));
 
                     DataGridView d = new DataGridView();
+                    d.AllowUserToAddRows = false;
                     d.Name = "dgvMagazzino" + s;
                     d.Dock = DockStyle.Fill;
                     d.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -2366,6 +2367,9 @@ namespace Calendario_AriBerg
                 RefreshComponentsCatalogoAndCBX();
 
                 if (row == 0) throw new Exception("Nessuna riga modificata.");
+
+                Notifica n = new Notifica();
+                n.Show("Componente eliminato con successo!", Notifica.enmType.Success);
             }
             catch (Exception ex)
             {
@@ -2404,6 +2408,7 @@ namespace Calendario_AriBerg
 
         private void btnAggiungiMagazzino_Click(object sender, EventArgs e)
         {
+            Notifica n = new Notifica();
             Caricamento();
             if (Metodi.CheckForNewComponents() || Metodi.CheckForNewDatiMagazzini(tbCtrlMagazzini))
             {
@@ -2411,13 +2416,11 @@ namespace Calendario_AriBerg
                 RefreshMagazzini();
                 RefreshConetnutiMagazzini();
                 EndCaricamento();
-                Notifica n = new Notifica();
                 n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
                 return;
             }
             if (string.IsNullOrWhiteSpace(tbxNomeMagazzino.Text))
             {
-                Notifica n = new Notifica();
                 n.Show("Inserire un nome valido", Notifica.enmType.Warning);
             }
             else
@@ -2436,7 +2439,6 @@ namespace Calendario_AriBerg
                 }
                 catch (Exception ex)
                 {
-                    Notifica n = new Notifica();
                     n.Show(ex.Message, Notifica.enmType.Warning);
                 }
                 finally
@@ -2444,6 +2446,8 @@ namespace Calendario_AriBerg
                     conn.Close();
                     EndCaricamento();
                 }
+                
+                n.Show("Magazzino aggiunto con successo!", Notifica.enmType.Success);
             }
         }
 
@@ -2836,6 +2840,10 @@ namespace Calendario_AriBerg
                     bs.DataSource = l;
                     dgvComponenti.DataSource = bs;
                     dgvComponenti.Columns["Quantita"].Visible = false;
+
+                    Notifica n = new Notifica();
+                    n.Show("Componente aggiunto con successo!", Notifica.enmType.Success);
+                    gBxAggiungiComponente.Visible = false;
                 }
                 catch (Exception ex)
                 {
@@ -2900,6 +2908,10 @@ namespace Calendario_AriBerg
                     RefreshComponentsCatalogoAndCBX();
                     gbxModificaComponente.Visible = false;
                     dgvComponenti.Enabled = true;
+
+                    Notifica n = new Notifica();
+                    n.Show("Componente modificato con successo!", Notifica.enmType.Success);
+                    gbxModificaComponente.Visible = false;
                 }
                 catch (Exception ex)
                 {
@@ -2977,6 +2989,8 @@ namespace Calendario_AriBerg
                     command.ExecuteNonQuery();
 
                     RefreshMagazzini();
+                    Notifica n = new Notifica();
+                    n.Show("Magazzino modificato con successo!", Notifica.enmType.Success);
                 }
                 catch (Exception ex)
                 {
@@ -3007,6 +3021,8 @@ namespace Calendario_AriBerg
                 if (row > 0)
                 {
                     RefreshMagazzini();
+                    Notifica n = new Notifica();
+                    n.Show("Magazzino eliminato con successo!", Notifica.enmType.Success);
                 }
                 else
                 {
@@ -3064,8 +3080,11 @@ namespace Calendario_AriBerg
                     if (string.IsNullOrWhiteSpace(marca + tipo + codice))
                     {
                         RefreshComponentsCatalogoAndCBX();
+                        RefreshConetnutiMagazzini();
                         return;
                     }
+
+                    if(!applicaACatalogo && !applicaAMagazzino) throw new Exception("Applicare il filtro al catalogo o al magazzino.");
 
                     string query = "SELECT * FROM componente WHERE";
 
@@ -3101,7 +3120,47 @@ namespace Calendario_AriBerg
                         DataSource = components
                     };
 
-                    if (applicaACatalogo) dgvComponenti.DataSource = bsCatalogo; else throw new Exception("Applicare il filtro al catalogo o al magazzino.");
+                    if (applicaACatalogo) dgvComponenti.DataSource = bsCatalogo;
+
+                    if (applicaAMagazzino)
+                    {
+                        RefreshConetnutiMagazzini();
+
+                        List<DataGridView> dgvs = new List<DataGridView>();
+
+                        foreach(TabPage tp in tbCtrlMagazzini.TabPages)
+                        {
+                            foreach(Control c in tp.Controls)
+                            {
+                                if(c is DataGridView)
+                                {
+                                    dgvs.Add((DataGridView) c);
+                                }
+                            }
+                        }
+
+                        foreach(DataGridView dg in dgvs)
+                        {
+                            List<Componenti> componentiInMagSel = new List<Componenti>();
+                            foreach(DataGridViewRow dgvr in dg.Rows)
+                            {
+                                componentiInMagSel.Add(dgvr.DataBoundItem as Componenti);
+                            }
+
+                            List<Componenti> filtered = (from comp in componentiInMagSel
+                                                        where (marca == null || comp.Marca == marca)
+                                                           && (codice == null || comp.Codice == codice)
+                                                           && (tipo == null || comp.Tipo == tipo)
+                                                        select comp).ToList();
+
+                            BindingSource bs = new BindingSource()
+                            {
+                                DataSource = filtered
+                            };
+
+                            dg.DataSource = bs;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
