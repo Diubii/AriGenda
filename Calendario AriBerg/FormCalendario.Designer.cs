@@ -29,8 +29,6 @@ namespace Calendario_AriBerg
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCalendario));
             this.dgvEventi = new System.Windows.Forms.DataGridView();
             this.lblEventi = new System.Windows.Forms.Label();
@@ -117,27 +115,6 @@ namespace Calendario_AriBerg
             this.btnClientiDeleteCustomer = new System.Windows.Forms.Button();
             this.dgvVisualizzaClienti = new System.Windows.Forms.DataGridView();
             this.leftPanelClienti = new System.Windows.Forms.Panel();
-            this.gBxClientiModificaClienti = new System.Windows.Forms.GroupBox();
-            this.dgvModificaCliente = new System.Windows.Forms.DataGridView();
-            this.pnlModificaClienteMacchine = new System.Windows.Forms.Panel();
-            this.btnModificaAggiungiMacchina = new System.Windows.Forms.Button();
-            this.btnModificaModificaMacchina = new System.Windows.Forms.Button();
-            this.btnModificaEliminaMacchina = new System.Windows.Forms.Button();
-            this.lblModificaClienteMacchinaAccessori = new System.Windows.Forms.Label();
-            this.lblModificaClientePrif = new System.Windows.Forms.Label();
-            this.txBxModificaClientePrif = new System.Windows.Forms.TextBox();
-            this.lblModificaClienteIva = new System.Windows.Forms.Label();
-            this.txBxModificaClienteIva = new System.Windows.Forms.TextBox();
-            this.lblModificaClienteInd = new System.Windows.Forms.Label();
-            this.txBxModificaClienteInd = new System.Windows.Forms.TextBox();
-            this.lblModificaClienteMail = new System.Windows.Forms.Label();
-            this.txBxModificaClienteMail = new System.Windows.Forms.TextBox();
-            this.lblModificaClienteTel = new System.Windows.Forms.Label();
-            this.txBxModificaClienteTel = new System.Windows.Forms.TextBox();
-            this.lblModificaClienteNome = new System.Windows.Forms.Label();
-            this.txBxModificaClienteNome = new System.Windows.Forms.TextBox();
-            this.btnModificaClienteChiudi = new System.Windows.Forms.Button();
-            this.btnConfermaModificaCliente = new System.Windows.Forms.Button();
             this.gBxClientiAggiungiCliente = new System.Windows.Forms.GroupBox();
             this.dgvAggiungiClientiMacchine = new System.Windows.Forms.DataGridView();
             this.pnlAggiungiClienteButtonsMacchina = new System.Windows.Forms.Panel();
@@ -170,14 +147,37 @@ namespace Calendario_AriBerg
             this.cbBxTrovaPerMail = new System.Windows.Forms.ComboBox();
             this.cbBxTrovaPerPRif = new System.Windows.Forms.ComboBox();
             this.cbBxTrovaPerNome = new System.Windows.Forms.ComboBox();
+            this.gBxClientiModificaClienti = new System.Windows.Forms.GroupBox();
+            this.dgvModificaCliente = new System.Windows.Forms.DataGridView();
+            this.pnlModificaClienteMacchine = new System.Windows.Forms.Panel();
+            this.btnModificaAggiungiMacchina = new System.Windows.Forms.Button();
+            this.btnModificaModificaMacchina = new System.Windows.Forms.Button();
+            this.btnModificaEliminaMacchina = new System.Windows.Forms.Button();
+            this.lblModificaClienteMacchinaAccessori = new System.Windows.Forms.Label();
+            this.lblModificaClientePrif = new System.Windows.Forms.Label();
+            this.txBxModificaClientePrif = new System.Windows.Forms.TextBox();
+            this.lblModificaClienteIva = new System.Windows.Forms.Label();
+            this.txBxModificaClienteIva = new System.Windows.Forms.TextBox();
+            this.lblModificaClienteInd = new System.Windows.Forms.Label();
+            this.txBxModificaClienteInd = new System.Windows.Forms.TextBox();
+            this.lblModificaClienteMail = new System.Windows.Forms.Label();
+            this.txBxModificaClienteMail = new System.Windows.Forms.TextBox();
+            this.lblModificaClienteTel = new System.Windows.Forms.Label();
+            this.txBxModificaClienteTel = new System.Windows.Forms.TextBox();
+            this.lblModificaClienteNome = new System.Windows.Forms.Label();
+            this.txBxModificaClienteNome = new System.Windows.Forms.TextBox();
+            this.btnModificaClienteChiudi = new System.Windows.Forms.Button();
+            this.btnConfermaModificaCliente = new System.Windows.Forms.Button();
             this.RightPanelClienti = new System.Windows.Forms.Panel();
             this.gBxAggiungiMacchina = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.cbBxAggiungiMacchinaMarcaFiltro = new System.Windows.Forms.ComboBox();
             this.cbBxAggiungiMacchinaCodiceFiltro = new System.Windows.Forms.ComboBox();
             this.dgvComponentiAggiungiMacchina = new System.Windows.Forms.DataGridView();
             this.cbBxAggiungiMacchinaTipoFiltro = new System.Windows.Forms.ComboBox();
             this.lblAggiungiMacchinaMarca = new System.Windows.Forms.Label();
-            this.txBxAggiungiMacchinaMarca = new System.Windows.Forms.TextBox();
             this.chBxAggiungiMacchinaNoleggio = new System.Windows.Forms.CheckBox();
             this.rtbAggiungiMacchinaNote = new System.Windows.Forms.RichTextBox();
             this.lblAggiungiMacchinaNote = new System.Windows.Forms.Label();
@@ -193,18 +193,21 @@ namespace Calendario_AriBerg
             this.gBxVisualizzaCliente = new System.Windows.Forms.GroupBox();
             this.dgvMostraComponentiMacchina = new System.Windows.Forms.DataGridView();
             this.dgvMostraMacchineAccessori = new System.Windows.Forms.DataGridView();
-            this.lblMostraComponenti = new System.Windows.Forms.Label();
-            this.chbxMostraNoleggio = new System.Windows.Forms.CheckBox();
             this.rtbMostraNote = new System.Windows.Forms.RichTextBox();
             this.pbxAlloStoricoMacchina = new System.Windows.Forms.PictureBox();
-            this.lblMostraNote = new System.Windows.Forms.Label();
             this.pbxAlloStoricoCliente = new System.Windows.Forms.PictureBox();
             this.lblMostraMacchineAccessori = new System.Windows.Forms.Label();
             this.lblMostraPrif = new System.Windows.Forms.Label();
             this.tbxMostraPrif = new System.Windows.Forms.TextBox();
             this.lblMostraIva = new System.Windows.Forms.Label();
             this.tbxMostraIva = new System.Windows.Forms.TextBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.chbxMostraNoleggio = new System.Windows.Forms.CheckBox();
+            this.lblMostraComponenti = new System.Windows.Forms.Label();
+            this.lblMostraNote = new System.Windows.Forms.Label();
             this.gBxModificaMacchina = new System.Windows.Forms.GroupBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.cBxModificaMacchinaTipo = new System.Windows.Forms.ComboBox();
             this.lblModificaMacchinaMarca = new System.Windows.Forms.Label();
@@ -317,10 +320,8 @@ namespace Calendario_AriBerg
             this.btnAddMarca = new System.Windows.Forms.Button();
             this.btnEditMarca = new System.Windows.Forms.Button();
             this.pbxWait = new System.Windows.Forms.PictureBox();
+            this.cbBxAggiungiMacchinaMarca = new System.Windows.Forms.ComboBox();
             this.ariCalendario = new Calendario_AriBerg.AriCalendario();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventi)).BeginInit();
             this.gbxLegenda.SuspendLayout();
             this.gbxAggiungi.SuspendLayout();
@@ -338,13 +339,13 @@ namespace Calendario_AriBerg
             this.pnlCommands2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVisualizzaClienti)).BeginInit();
             this.leftPanelClienti.SuspendLayout();
-            this.gBxClientiModificaClienti.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvModificaCliente)).BeginInit();
-            this.pnlModificaClienteMacchine.SuspendLayout();
             this.gBxClientiAggiungiCliente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAggiungiClientiMacchine)).BeginInit();
             this.pnlAggiungiClienteButtonsMacchina.SuspendLayout();
             this.gBxClientiTrova.SuspendLayout();
+            this.gBxClientiModificaClienti.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvModificaCliente)).BeginInit();
+            this.pnlModificaClienteMacchine.SuspendLayout();
             this.RightPanelClienti.SuspendLayout();
             this.gBxAggiungiMacchina.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComponentiAggiungiMacchina)).BeginInit();
@@ -353,6 +354,7 @@ namespace Calendario_AriBerg
             ((System.ComponentModel.ISupportInitialize)(this.dgvMostraMacchineAccessori)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAlloStoricoMacchina)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAlloStoricoCliente)).BeginInit();
+            this.panel4.SuspendLayout();
             this.gBxModificaMacchina.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.tabPage3.SuspendLayout();
@@ -386,7 +388,6 @@ namespace Calendario_AriBerg
             this.pnlTipi.SuspendLayout();
             this.pnlMarche.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxWait)).BeginInit();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvEventi
@@ -1491,277 +1492,14 @@ namespace Calendario_AriBerg
             // 
             // leftPanelClienti
             // 
-            this.leftPanelClienti.Controls.Add(this.gBxClientiModificaClienti);
             this.leftPanelClienti.Controls.Add(this.gBxClientiAggiungiCliente);
             this.leftPanelClienti.Controls.Add(this.gBxClientiTrova);
+            this.leftPanelClienti.Controls.Add(this.gBxClientiModificaClienti);
             this.leftPanelClienti.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftPanelClienti.Location = new System.Drawing.Point(3, 79);
             this.leftPanelClienti.Name = "leftPanelClienti";
             this.leftPanelClienti.Size = new System.Drawing.Size(460, 722);
             this.leftPanelClienti.TabIndex = 50;
-            // 
-            // gBxClientiModificaClienti
-            // 
-            this.gBxClientiModificaClienti.Controls.Add(this.dgvModificaCliente);
-            this.gBxClientiModificaClienti.Controls.Add(this.pnlModificaClienteMacchine);
-            this.gBxClientiModificaClienti.Controls.Add(this.lblModificaClienteMacchinaAccessori);
-            this.gBxClientiModificaClienti.Controls.Add(this.lblModificaClientePrif);
-            this.gBxClientiModificaClienti.Controls.Add(this.txBxModificaClientePrif);
-            this.gBxClientiModificaClienti.Controls.Add(this.lblModificaClienteIva);
-            this.gBxClientiModificaClienti.Controls.Add(this.txBxModificaClienteIva);
-            this.gBxClientiModificaClienti.Controls.Add(this.lblModificaClienteInd);
-            this.gBxClientiModificaClienti.Controls.Add(this.txBxModificaClienteInd);
-            this.gBxClientiModificaClienti.Controls.Add(this.lblModificaClienteMail);
-            this.gBxClientiModificaClienti.Controls.Add(this.txBxModificaClienteMail);
-            this.gBxClientiModificaClienti.Controls.Add(this.lblModificaClienteTel);
-            this.gBxClientiModificaClienti.Controls.Add(this.txBxModificaClienteTel);
-            this.gBxClientiModificaClienti.Controls.Add(this.lblModificaClienteNome);
-            this.gBxClientiModificaClienti.Controls.Add(this.txBxModificaClienteNome);
-            this.gBxClientiModificaClienti.Controls.Add(this.btnModificaClienteChiudi);
-            this.gBxClientiModificaClienti.Controls.Add(this.btnConfermaModificaCliente);
-            this.gBxClientiModificaClienti.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gBxClientiModificaClienti.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gBxClientiModificaClienti.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gBxClientiModificaClienti.Location = new System.Drawing.Point(0, 0);
-            this.gBxClientiModificaClienti.Name = "gBxClientiModificaClienti";
-            this.gBxClientiModificaClienti.Size = new System.Drawing.Size(460, 722);
-            this.gBxClientiModificaClienti.TabIndex = 24;
-            this.gBxClientiModificaClienti.TabStop = false;
-            this.gBxClientiModificaClienti.Text = "Modifica cliente:";
-            this.gBxClientiModificaClienti.Visible = false;
-            // 
-            // dgvModificaCliente
-            // 
-            this.dgvModificaCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvModificaCliente.Location = new System.Drawing.Point(23, 389);
-            this.dgvModificaCliente.Name = "dgvModificaCliente";
-            this.dgvModificaCliente.Size = new System.Drawing.Size(421, 183);
-            this.dgvModificaCliente.TabIndex = 60;
-            // 
-            // pnlModificaClienteMacchine
-            // 
-            this.pnlModificaClienteMacchine.BackColor = System.Drawing.Color.DimGray;
-            this.pnlModificaClienteMacchine.Controls.Add(this.btnModificaAggiungiMacchina);
-            this.pnlModificaClienteMacchine.Controls.Add(this.btnModificaModificaMacchina);
-            this.pnlModificaClienteMacchine.Controls.Add(this.btnModificaEliminaMacchina);
-            this.pnlModificaClienteMacchine.Location = new System.Drawing.Point(23, 305);
-            this.pnlModificaClienteMacchine.Name = "pnlModificaClienteMacchine";
-            this.pnlModificaClienteMacchine.Size = new System.Drawing.Size(236, 76);
-            this.pnlModificaClienteMacchine.TabIndex = 57;
-            // 
-            // btnModificaAggiungiMacchina
-            // 
-            this.btnModificaAggiungiMacchina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnModificaAggiungiMacchina.BackColor = System.Drawing.Color.LimeGreen;
-            this.btnModificaAggiungiMacchina.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.aircompressoradd_icon;
-            this.btnModificaAggiungiMacchina.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnModificaAggiungiMacchina.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
-            this.btnModificaAggiungiMacchina.FlatAppearance.BorderSize = 3;
-            this.btnModificaAggiungiMacchina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModificaAggiungiMacchina.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModificaAggiungiMacchina.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnModificaAggiungiMacchina.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnModificaAggiungiMacchina.Location = new System.Drawing.Point(12, 13);
-            this.btnModificaAggiungiMacchina.Name = "btnModificaAggiungiMacchina";
-            this.btnModificaAggiungiMacchina.Size = new System.Drawing.Size(64, 51);
-            this.btnModificaAggiungiMacchina.TabIndex = 4;
-            this.btnModificaAggiungiMacchina.UseVisualStyleBackColor = false;
-            this.btnModificaAggiungiMacchina.Click += new System.EventHandler(this.btnModificaAggiungiMacchina_Click);
-            // 
-            // btnModificaModificaMacchina
-            // 
-            this.btnModificaModificaMacchina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnModificaModificaMacchina.BackColor = System.Drawing.Color.Goldenrod;
-            this.btnModificaModificaMacchina.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.aircompressoredit_icon;
-            this.btnModificaModificaMacchina.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnModificaModificaMacchina.Enabled = false;
-            this.btnModificaModificaMacchina.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
-            this.btnModificaModificaMacchina.FlatAppearance.BorderSize = 3;
-            this.btnModificaModificaMacchina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModificaModificaMacchina.Font = new System.Drawing.Font("Calibri", 12F);
-            this.btnModificaModificaMacchina.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnModificaModificaMacchina.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnModificaModificaMacchina.Location = new System.Drawing.Point(82, 12);
-            this.btnModificaModificaMacchina.Name = "btnModificaModificaMacchina";
-            this.btnModificaModificaMacchina.Size = new System.Drawing.Size(68, 51);
-            this.btnModificaModificaMacchina.TabIndex = 5;
-            this.btnModificaModificaMacchina.UseVisualStyleBackColor = false;
-            this.btnModificaModificaMacchina.Click += new System.EventHandler(this.btnModificaModificaMacchina_Click);
-            // 
-            // btnModificaEliminaMacchina
-            // 
-            this.btnModificaEliminaMacchina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnModificaEliminaMacchina.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnModificaEliminaMacchina.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.aircompressordelete_icon;
-            this.btnModificaEliminaMacchina.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnModificaEliminaMacchina.Enabled = false;
-            this.btnModificaEliminaMacchina.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnModificaEliminaMacchina.FlatAppearance.BorderSize = 3;
-            this.btnModificaEliminaMacchina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModificaEliminaMacchina.Font = new System.Drawing.Font("Calibri", 12F);
-            this.btnModificaEliminaMacchina.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnModificaEliminaMacchina.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnModificaEliminaMacchina.Location = new System.Drawing.Point(156, 13);
-            this.btnModificaEliminaMacchina.Name = "btnModificaEliminaMacchina";
-            this.btnModificaEliminaMacchina.Size = new System.Drawing.Size(61, 50);
-            this.btnModificaEliminaMacchina.TabIndex = 6;
-            this.btnModificaEliminaMacchina.UseVisualStyleBackColor = false;
-            this.btnModificaEliminaMacchina.Click += new System.EventHandler(this.btnModificaEliminaMacchina_Click);
-            // 
-            // lblModificaClienteMacchinaAccessori
-            // 
-            this.lblModificaClienteMacchinaAccessori.AutoSize = true;
-            this.lblModificaClienteMacchinaAccessori.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModificaClienteMacchinaAccessori.ForeColor = System.Drawing.Color.White;
-            this.lblModificaClienteMacchinaAccessori.Location = new System.Drawing.Point(17, 271);
-            this.lblModificaClienteMacchinaAccessori.Name = "lblModificaClienteMacchinaAccessori";
-            this.lblModificaClienteMacchinaAccessori.Size = new System.Drawing.Size(209, 25);
-            this.lblModificaClienteMacchinaAccessori.TabIndex = 56;
-            this.lblModificaClienteMacchinaAccessori.Text = "Macchine/accessori:";
-            // 
-            // lblModificaClientePrif
-            // 
-            this.lblModificaClientePrif.AutoSize = true;
-            this.lblModificaClientePrif.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModificaClientePrif.ForeColor = System.Drawing.Color.White;
-            this.lblModificaClientePrif.Location = new System.Drawing.Point(17, 219);
-            this.lblModificaClientePrif.Name = "lblModificaClientePrif";
-            this.lblModificaClientePrif.Size = new System.Drawing.Size(64, 25);
-            this.lblModificaClientePrif.TabIndex = 54;
-            this.lblModificaClientePrif.Text = "P.Rif:";
-            // 
-            // txBxModificaClientePrif
-            // 
-            this.txBxModificaClientePrif.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txBxModificaClientePrif.Location = new System.Drawing.Point(109, 219);
-            this.txBxModificaClientePrif.Name = "txBxModificaClientePrif";
-            this.txBxModificaClientePrif.Size = new System.Drawing.Size(335, 26);
-            this.txBxModificaClientePrif.TabIndex = 53;
-            // 
-            // lblModificaClienteIva
-            // 
-            this.lblModificaClienteIva.AutoSize = true;
-            this.lblModificaClienteIva.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModificaClienteIva.ForeColor = System.Drawing.Color.White;
-            this.lblModificaClienteIva.Location = new System.Drawing.Point(17, 184);
-            this.lblModificaClienteIva.Name = "lblModificaClienteIva";
-            this.lblModificaClienteIva.Size = new System.Drawing.Size(57, 25);
-            this.lblModificaClienteIva.TabIndex = 52;
-            this.lblModificaClienteIva.Text = " IVA:";
-            // 
-            // txBxModificaClienteIva
-            // 
-            this.txBxModificaClienteIva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txBxModificaClienteIva.Location = new System.Drawing.Point(109, 183);
-            this.txBxModificaClienteIva.Name = "txBxModificaClienteIva";
-            this.txBxModificaClienteIva.Size = new System.Drawing.Size(335, 26);
-            this.txBxModificaClienteIva.TabIndex = 51;
-            // 
-            // lblModificaClienteInd
-            // 
-            this.lblModificaClienteInd.AutoSize = true;
-            this.lblModificaClienteInd.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModificaClienteInd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.lblModificaClienteInd.Location = new System.Drawing.Point(17, 147);
-            this.lblModificaClienteInd.Name = "lblModificaClienteInd";
-            this.lblModificaClienteInd.Size = new System.Drawing.Size(47, 25);
-            this.lblModificaClienteInd.TabIndex = 50;
-            this.lblModificaClienteInd.Text = "Ind:";
-            // 
-            // txBxModificaClienteInd
-            // 
-            this.txBxModificaClienteInd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txBxModificaClienteInd.Location = new System.Drawing.Point(109, 147);
-            this.txBxModificaClienteInd.Name = "txBxModificaClienteInd";
-            this.txBxModificaClienteInd.Size = new System.Drawing.Size(335, 26);
-            this.txBxModificaClienteInd.TabIndex = 49;
-            // 
-            // lblModificaClienteMail
-            // 
-            this.lblModificaClienteMail.AutoSize = true;
-            this.lblModificaClienteMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModificaClienteMail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.lblModificaClienteMail.Location = new System.Drawing.Point(17, 109);
-            this.lblModificaClienteMail.Name = "lblModificaClienteMail";
-            this.lblModificaClienteMail.Size = new System.Drawing.Size(58, 25);
-            this.lblModificaClienteMail.TabIndex = 48;
-            this.lblModificaClienteMail.Text = "Mail:";
-            // 
-            // txBxModificaClienteMail
-            // 
-            this.txBxModificaClienteMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txBxModificaClienteMail.Location = new System.Drawing.Point(109, 111);
-            this.txBxModificaClienteMail.Name = "txBxModificaClienteMail";
-            this.txBxModificaClienteMail.Size = new System.Drawing.Size(335, 26);
-            this.txBxModificaClienteMail.TabIndex = 47;
-            // 
-            // lblModificaClienteTel
-            // 
-            this.lblModificaClienteTel.AutoSize = true;
-            this.lblModificaClienteTel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModificaClienteTel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.lblModificaClienteTel.Location = new System.Drawing.Point(17, 79);
-            this.lblModificaClienteTel.Name = "lblModificaClienteTel";
-            this.lblModificaClienteTel.Size = new System.Drawing.Size(48, 25);
-            this.lblModificaClienteTel.TabIndex = 46;
-            this.lblModificaClienteTel.Text = "Tel:";
-            // 
-            // txBxModificaClienteTel
-            // 
-            this.txBxModificaClienteTel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txBxModificaClienteTel.Location = new System.Drawing.Point(109, 75);
-            this.txBxModificaClienteTel.Name = "txBxModificaClienteTel";
-            this.txBxModificaClienteTel.Size = new System.Drawing.Size(335, 26);
-            this.txBxModificaClienteTel.TabIndex = 45;
-            // 
-            // lblModificaClienteNome
-            // 
-            this.lblModificaClienteNome.AutoSize = true;
-            this.lblModificaClienteNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModificaClienteNome.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.lblModificaClienteNome.Location = new System.Drawing.Point(17, 39);
-            this.lblModificaClienteNome.Name = "lblModificaClienteNome";
-            this.lblModificaClienteNome.Size = new System.Drawing.Size(74, 25);
-            this.lblModificaClienteNome.TabIndex = 44;
-            this.lblModificaClienteNome.Text = "Nome:";
-            // 
-            // txBxModificaClienteNome
-            // 
-            this.txBxModificaClienteNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txBxModificaClienteNome.Location = new System.Drawing.Point(109, 40);
-            this.txBxModificaClienteNome.Name = "txBxModificaClienteNome";
-            this.txBxModificaClienteNome.Size = new System.Drawing.Size(335, 26);
-            this.txBxModificaClienteNome.TabIndex = 43;
-            // 
-            // btnModificaClienteChiudi
-            // 
-            this.btnModificaClienteChiudi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnModificaClienteChiudi.BackColor = System.Drawing.Color.Red;
-            this.btnModificaClienteChiudi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModificaClienteChiudi.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Bold);
-            this.btnModificaClienteChiudi.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnModificaClienteChiudi.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnModificaClienteChiudi.Location = new System.Drawing.Point(435, 14);
-            this.btnModificaClienteChiudi.Name = "btnModificaClienteChiudi";
-            this.btnModificaClienteChiudi.Size = new System.Drawing.Size(25, 25);
-            this.btnModificaClienteChiudi.TabIndex = 24;
-            this.btnModificaClienteChiudi.Text = "X";
-            this.btnModificaClienteChiudi.UseVisualStyleBackColor = false;
-            this.btnModificaClienteChiudi.Click += new System.EventHandler(this.btnModificaClienteChiudi_Click);
-            // 
-            // btnConfermaModificaCliente
-            // 
-            this.btnConfermaModificaCliente.BackColor = System.Drawing.Color.Goldenrod;
-            this.btnConfermaModificaCliente.FlatAppearance.BorderSize = 0;
-            this.btnConfermaModificaCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConfermaModificaCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfermaModificaCliente.Location = new System.Drawing.Point(0, 580);
-            this.btnConfermaModificaCliente.Name = "btnConfermaModificaCliente";
-            this.btnConfermaModificaCliente.Size = new System.Drawing.Size(474, 56);
-            this.btnConfermaModificaCliente.TabIndex = 12;
-            this.btnConfermaModificaCliente.Text = "Modifica";
-            this.btnConfermaModificaCliente.UseVisualStyleBackColor = false;
-            this.btnConfermaModificaCliente.Click += new System.EventHandler(this.btnConfermaModificaCliente_Click);
             // 
             // gBxClientiAggiungiCliente
             // 
@@ -1795,10 +1533,12 @@ namespace Calendario_AriBerg
             // 
             // dgvAggiungiClientiMacchine
             // 
+            this.dgvAggiungiClientiMacchine.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAggiungiClientiMacchine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAggiungiClientiMacchine.Location = new System.Drawing.Point(22, 401);
             this.dgvAggiungiClientiMacchine.Name = "dgvAggiungiClientiMacchine";
-            this.dgvAggiungiClientiMacchine.Size = new System.Drawing.Size(422, 173);
+            this.dgvAggiungiClientiMacchine.ReadOnly = true;
+            this.dgvAggiungiClientiMacchine.Size = new System.Drawing.Size(422, 256);
             this.dgvAggiungiClientiMacchine.TabIndex = 43;
             // 
             // pnlAggiungiClienteButtonsMacchina
@@ -2024,7 +1764,7 @@ namespace Calendario_AriBerg
             this.btnConfermaAggiungiCliente.FlatAppearance.BorderSize = 0;
             this.btnConfermaAggiungiCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfermaAggiungiCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfermaAggiungiCliente.Location = new System.Drawing.Point(0, 580);
+            this.btnConfermaAggiungiCliente.Location = new System.Drawing.Point(-14, 666);
             this.btnConfermaAggiungiCliente.Name = "btnConfermaAggiungiCliente";
             this.btnConfermaAggiungiCliente.Size = new System.Drawing.Size(474, 56);
             this.btnConfermaAggiungiCliente.TabIndex = 12;
@@ -2188,6 +1928,277 @@ namespace Calendario_AriBerg
             this.cbBxTrovaPerNome.Size = new System.Drawing.Size(284, 28);
             this.cbBxTrovaPerNome.TabIndex = 20;
             // 
+            // gBxClientiModificaClienti
+            // 
+            this.gBxClientiModificaClienti.Controls.Add(this.dgvModificaCliente);
+            this.gBxClientiModificaClienti.Controls.Add(this.pnlModificaClienteMacchine);
+            this.gBxClientiModificaClienti.Controls.Add(this.lblModificaClienteMacchinaAccessori);
+            this.gBxClientiModificaClienti.Controls.Add(this.lblModificaClientePrif);
+            this.gBxClientiModificaClienti.Controls.Add(this.txBxModificaClientePrif);
+            this.gBxClientiModificaClienti.Controls.Add(this.lblModificaClienteIva);
+            this.gBxClientiModificaClienti.Controls.Add(this.txBxModificaClienteIva);
+            this.gBxClientiModificaClienti.Controls.Add(this.lblModificaClienteInd);
+            this.gBxClientiModificaClienti.Controls.Add(this.txBxModificaClienteInd);
+            this.gBxClientiModificaClienti.Controls.Add(this.lblModificaClienteMail);
+            this.gBxClientiModificaClienti.Controls.Add(this.txBxModificaClienteMail);
+            this.gBxClientiModificaClienti.Controls.Add(this.lblModificaClienteTel);
+            this.gBxClientiModificaClienti.Controls.Add(this.txBxModificaClienteTel);
+            this.gBxClientiModificaClienti.Controls.Add(this.lblModificaClienteNome);
+            this.gBxClientiModificaClienti.Controls.Add(this.txBxModificaClienteNome);
+            this.gBxClientiModificaClienti.Controls.Add(this.btnModificaClienteChiudi);
+            this.gBxClientiModificaClienti.Controls.Add(this.btnConfermaModificaCliente);
+            this.gBxClientiModificaClienti.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gBxClientiModificaClienti.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gBxClientiModificaClienti.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.gBxClientiModificaClienti.Location = new System.Drawing.Point(0, 0);
+            this.gBxClientiModificaClienti.Name = "gBxClientiModificaClienti";
+            this.gBxClientiModificaClienti.Size = new System.Drawing.Size(460, 722);
+            this.gBxClientiModificaClienti.TabIndex = 24;
+            this.gBxClientiModificaClienti.TabStop = false;
+            this.gBxClientiModificaClienti.Text = "Modifica cliente:";
+            this.gBxClientiModificaClienti.Visible = false;
+            // 
+            // dgvModificaCliente
+            // 
+            this.dgvModificaCliente.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvModificaCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvModificaCliente.Location = new System.Drawing.Point(14, 391);
+            this.dgvModificaCliente.Name = "dgvModificaCliente";
+            this.dgvModificaCliente.Size = new System.Drawing.Size(430, 266);
+            this.dgvModificaCliente.TabIndex = 60;
+            // 
+            // pnlModificaClienteMacchine
+            // 
+            this.pnlModificaClienteMacchine.BackColor = System.Drawing.Color.DimGray;
+            this.pnlModificaClienteMacchine.Controls.Add(this.btnModificaAggiungiMacchina);
+            this.pnlModificaClienteMacchine.Controls.Add(this.btnModificaModificaMacchina);
+            this.pnlModificaClienteMacchine.Controls.Add(this.btnModificaEliminaMacchina);
+            this.pnlModificaClienteMacchine.Location = new System.Drawing.Point(23, 305);
+            this.pnlModificaClienteMacchine.Name = "pnlModificaClienteMacchine";
+            this.pnlModificaClienteMacchine.Size = new System.Drawing.Size(236, 76);
+            this.pnlModificaClienteMacchine.TabIndex = 57;
+            // 
+            // btnModificaAggiungiMacchina
+            // 
+            this.btnModificaAggiungiMacchina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnModificaAggiungiMacchina.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnModificaAggiungiMacchina.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.aircompressoradd_icon;
+            this.btnModificaAggiungiMacchina.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnModificaAggiungiMacchina.FlatAppearance.BorderColor = System.Drawing.Color.LimeGreen;
+            this.btnModificaAggiungiMacchina.FlatAppearance.BorderSize = 3;
+            this.btnModificaAggiungiMacchina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificaAggiungiMacchina.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificaAggiungiMacchina.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnModificaAggiungiMacchina.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnModificaAggiungiMacchina.Location = new System.Drawing.Point(12, 13);
+            this.btnModificaAggiungiMacchina.Name = "btnModificaAggiungiMacchina";
+            this.btnModificaAggiungiMacchina.Size = new System.Drawing.Size(64, 51);
+            this.btnModificaAggiungiMacchina.TabIndex = 4;
+            this.btnModificaAggiungiMacchina.UseVisualStyleBackColor = false;
+            this.btnModificaAggiungiMacchina.Click += new System.EventHandler(this.btnModificaAggiungiMacchina_Click);
+            // 
+            // btnModificaModificaMacchina
+            // 
+            this.btnModificaModificaMacchina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnModificaModificaMacchina.BackColor = System.Drawing.Color.Goldenrod;
+            this.btnModificaModificaMacchina.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.aircompressoredit_icon;
+            this.btnModificaModificaMacchina.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnModificaModificaMacchina.Enabled = false;
+            this.btnModificaModificaMacchina.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
+            this.btnModificaModificaMacchina.FlatAppearance.BorderSize = 3;
+            this.btnModificaModificaMacchina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificaModificaMacchina.Font = new System.Drawing.Font("Calibri", 12F);
+            this.btnModificaModificaMacchina.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnModificaModificaMacchina.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnModificaModificaMacchina.Location = new System.Drawing.Point(82, 12);
+            this.btnModificaModificaMacchina.Name = "btnModificaModificaMacchina";
+            this.btnModificaModificaMacchina.Size = new System.Drawing.Size(68, 51);
+            this.btnModificaModificaMacchina.TabIndex = 5;
+            this.btnModificaModificaMacchina.UseVisualStyleBackColor = false;
+            this.btnModificaModificaMacchina.Click += new System.EventHandler(this.btnModificaModificaMacchina_Click);
+            // 
+            // btnModificaEliminaMacchina
+            // 
+            this.btnModificaEliminaMacchina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnModificaEliminaMacchina.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnModificaEliminaMacchina.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.aircompressordelete_icon;
+            this.btnModificaEliminaMacchina.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnModificaEliminaMacchina.Enabled = false;
+            this.btnModificaEliminaMacchina.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnModificaEliminaMacchina.FlatAppearance.BorderSize = 3;
+            this.btnModificaEliminaMacchina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificaEliminaMacchina.Font = new System.Drawing.Font("Calibri", 12F);
+            this.btnModificaEliminaMacchina.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnModificaEliminaMacchina.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnModificaEliminaMacchina.Location = new System.Drawing.Point(156, 13);
+            this.btnModificaEliminaMacchina.Name = "btnModificaEliminaMacchina";
+            this.btnModificaEliminaMacchina.Size = new System.Drawing.Size(61, 50);
+            this.btnModificaEliminaMacchina.TabIndex = 6;
+            this.btnModificaEliminaMacchina.UseVisualStyleBackColor = false;
+            this.btnModificaEliminaMacchina.Click += new System.EventHandler(this.btnModificaEliminaMacchina_Click);
+            // 
+            // lblModificaClienteMacchinaAccessori
+            // 
+            this.lblModificaClienteMacchinaAccessori.AutoSize = true;
+            this.lblModificaClienteMacchinaAccessori.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblModificaClienteMacchinaAccessori.ForeColor = System.Drawing.Color.White;
+            this.lblModificaClienteMacchinaAccessori.Location = new System.Drawing.Point(17, 271);
+            this.lblModificaClienteMacchinaAccessori.Name = "lblModificaClienteMacchinaAccessori";
+            this.lblModificaClienteMacchinaAccessori.Size = new System.Drawing.Size(209, 25);
+            this.lblModificaClienteMacchinaAccessori.TabIndex = 56;
+            this.lblModificaClienteMacchinaAccessori.Text = "Macchine/accessori:";
+            // 
+            // lblModificaClientePrif
+            // 
+            this.lblModificaClientePrif.AutoSize = true;
+            this.lblModificaClientePrif.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblModificaClientePrif.ForeColor = System.Drawing.Color.White;
+            this.lblModificaClientePrif.Location = new System.Drawing.Point(17, 219);
+            this.lblModificaClientePrif.Name = "lblModificaClientePrif";
+            this.lblModificaClientePrif.Size = new System.Drawing.Size(64, 25);
+            this.lblModificaClientePrif.TabIndex = 54;
+            this.lblModificaClientePrif.Text = "P.Rif:";
+            // 
+            // txBxModificaClientePrif
+            // 
+            this.txBxModificaClientePrif.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txBxModificaClientePrif.Location = new System.Drawing.Point(109, 219);
+            this.txBxModificaClientePrif.Name = "txBxModificaClientePrif";
+            this.txBxModificaClientePrif.Size = new System.Drawing.Size(335, 26);
+            this.txBxModificaClientePrif.TabIndex = 53;
+            this.txBxModificaClientePrif.Tag = "NotMandatory";
+            // 
+            // lblModificaClienteIva
+            // 
+            this.lblModificaClienteIva.AutoSize = true;
+            this.lblModificaClienteIva.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblModificaClienteIva.ForeColor = System.Drawing.Color.White;
+            this.lblModificaClienteIva.Location = new System.Drawing.Point(17, 184);
+            this.lblModificaClienteIva.Name = "lblModificaClienteIva";
+            this.lblModificaClienteIva.Size = new System.Drawing.Size(57, 25);
+            this.lblModificaClienteIva.TabIndex = 52;
+            this.lblModificaClienteIva.Text = " IVA:";
+            // 
+            // txBxModificaClienteIva
+            // 
+            this.txBxModificaClienteIva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txBxModificaClienteIva.Location = new System.Drawing.Point(109, 183);
+            this.txBxModificaClienteIva.Name = "txBxModificaClienteIva";
+            this.txBxModificaClienteIva.Size = new System.Drawing.Size(335, 26);
+            this.txBxModificaClienteIva.TabIndex = 51;
+            this.txBxModificaClienteIva.Tag = "NotMandatory";
+            // 
+            // lblModificaClienteInd
+            // 
+            this.lblModificaClienteInd.AutoSize = true;
+            this.lblModificaClienteInd.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblModificaClienteInd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.lblModificaClienteInd.Location = new System.Drawing.Point(17, 147);
+            this.lblModificaClienteInd.Name = "lblModificaClienteInd";
+            this.lblModificaClienteInd.Size = new System.Drawing.Size(47, 25);
+            this.lblModificaClienteInd.TabIndex = 50;
+            this.lblModificaClienteInd.Text = "Ind:";
+            // 
+            // txBxModificaClienteInd
+            // 
+            this.txBxModificaClienteInd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txBxModificaClienteInd.Location = new System.Drawing.Point(109, 147);
+            this.txBxModificaClienteInd.Name = "txBxModificaClienteInd";
+            this.txBxModificaClienteInd.Size = new System.Drawing.Size(335, 26);
+            this.txBxModificaClienteInd.TabIndex = 49;
+            this.txBxModificaClienteInd.Tag = "Mandatory";
+            // 
+            // lblModificaClienteMail
+            // 
+            this.lblModificaClienteMail.AutoSize = true;
+            this.lblModificaClienteMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblModificaClienteMail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.lblModificaClienteMail.Location = new System.Drawing.Point(17, 109);
+            this.lblModificaClienteMail.Name = "lblModificaClienteMail";
+            this.lblModificaClienteMail.Size = new System.Drawing.Size(58, 25);
+            this.lblModificaClienteMail.TabIndex = 48;
+            this.lblModificaClienteMail.Text = "Mail:";
+            // 
+            // txBxModificaClienteMail
+            // 
+            this.txBxModificaClienteMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txBxModificaClienteMail.Location = new System.Drawing.Point(109, 111);
+            this.txBxModificaClienteMail.Name = "txBxModificaClienteMail";
+            this.txBxModificaClienteMail.Size = new System.Drawing.Size(335, 26);
+            this.txBxModificaClienteMail.TabIndex = 47;
+            this.txBxModificaClienteMail.Tag = "Mandatory";
+            // 
+            // lblModificaClienteTel
+            // 
+            this.lblModificaClienteTel.AutoSize = true;
+            this.lblModificaClienteTel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblModificaClienteTel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.lblModificaClienteTel.Location = new System.Drawing.Point(17, 79);
+            this.lblModificaClienteTel.Name = "lblModificaClienteTel";
+            this.lblModificaClienteTel.Size = new System.Drawing.Size(48, 25);
+            this.lblModificaClienteTel.TabIndex = 46;
+            this.lblModificaClienteTel.Text = "Tel:";
+            // 
+            // txBxModificaClienteTel
+            // 
+            this.txBxModificaClienteTel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txBxModificaClienteTel.Location = new System.Drawing.Point(109, 75);
+            this.txBxModificaClienteTel.Name = "txBxModificaClienteTel";
+            this.txBxModificaClienteTel.Size = new System.Drawing.Size(335, 26);
+            this.txBxModificaClienteTel.TabIndex = 45;
+            this.txBxModificaClienteTel.Tag = "Mandatory";
+            // 
+            // lblModificaClienteNome
+            // 
+            this.lblModificaClienteNome.AutoSize = true;
+            this.lblModificaClienteNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblModificaClienteNome.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.lblModificaClienteNome.Location = new System.Drawing.Point(17, 39);
+            this.lblModificaClienteNome.Name = "lblModificaClienteNome";
+            this.lblModificaClienteNome.Size = new System.Drawing.Size(74, 25);
+            this.lblModificaClienteNome.TabIndex = 44;
+            this.lblModificaClienteNome.Text = "Nome:";
+            // 
+            // txBxModificaClienteNome
+            // 
+            this.txBxModificaClienteNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txBxModificaClienteNome.Location = new System.Drawing.Point(109, 40);
+            this.txBxModificaClienteNome.Name = "txBxModificaClienteNome";
+            this.txBxModificaClienteNome.Size = new System.Drawing.Size(335, 26);
+            this.txBxModificaClienteNome.TabIndex = 43;
+            this.txBxModificaClienteNome.Tag = "Mandatory";
+            // 
+            // btnModificaClienteChiudi
+            // 
+            this.btnModificaClienteChiudi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnModificaClienteChiudi.BackColor = System.Drawing.Color.Red;
+            this.btnModificaClienteChiudi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificaClienteChiudi.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Bold);
+            this.btnModificaClienteChiudi.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnModificaClienteChiudi.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnModificaClienteChiudi.Location = new System.Drawing.Point(435, 14);
+            this.btnModificaClienteChiudi.Name = "btnModificaClienteChiudi";
+            this.btnModificaClienteChiudi.Size = new System.Drawing.Size(25, 25);
+            this.btnModificaClienteChiudi.TabIndex = 24;
+            this.btnModificaClienteChiudi.Text = "X";
+            this.btnModificaClienteChiudi.UseVisualStyleBackColor = false;
+            this.btnModificaClienteChiudi.Click += new System.EventHandler(this.btnModificaClienteChiudi_Click);
+            // 
+            // btnConfermaModificaCliente
+            // 
+            this.btnConfermaModificaCliente.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnConfermaModificaCliente.BackColor = System.Drawing.Color.Goldenrod;
+            this.btnConfermaModificaCliente.FlatAppearance.BorderSize = 0;
+            this.btnConfermaModificaCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConfermaModificaCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfermaModificaCliente.Location = new System.Drawing.Point(0, 666);
+            this.btnConfermaModificaCliente.Name = "btnConfermaModificaCliente";
+            this.btnConfermaModificaCliente.Size = new System.Drawing.Size(460, 56);
+            this.btnConfermaModificaCliente.TabIndex = 12;
+            this.btnConfermaModificaCliente.Text = "Modifica";
+            this.btnConfermaModificaCliente.UseVisualStyleBackColor = false;
+            this.btnConfermaModificaCliente.Click += new System.EventHandler(this.btnConfermaModificaCliente_Click);
+            // 
             // RightPanelClienti
             // 
             this.RightPanelClienti.Controls.Add(this.gBxAggiungiMacchina);
@@ -2201,12 +2212,15 @@ namespace Calendario_AriBerg
             // 
             // gBxAggiungiMacchina
             // 
+            this.gBxAggiungiMacchina.Controls.Add(this.cbBxAggiungiMacchinaMarca);
+            this.gBxAggiungiMacchina.Controls.Add(this.label10);
+            this.gBxAggiungiMacchina.Controls.Add(this.label11);
+            this.gBxAggiungiMacchina.Controls.Add(this.label12);
             this.gBxAggiungiMacchina.Controls.Add(this.cbBxAggiungiMacchinaMarcaFiltro);
             this.gBxAggiungiMacchina.Controls.Add(this.cbBxAggiungiMacchinaCodiceFiltro);
             this.gBxAggiungiMacchina.Controls.Add(this.dgvComponentiAggiungiMacchina);
             this.gBxAggiungiMacchina.Controls.Add(this.cbBxAggiungiMacchinaTipoFiltro);
             this.gBxAggiungiMacchina.Controls.Add(this.lblAggiungiMacchinaMarca);
-            this.gBxAggiungiMacchina.Controls.Add(this.txBxAggiungiMacchinaMarca);
             this.gBxAggiungiMacchina.Controls.Add(this.chBxAggiungiMacchinaNoleggio);
             this.gBxAggiungiMacchina.Controls.Add(this.rtbAggiungiMacchinaNote);
             this.gBxAggiungiMacchina.Controls.Add(this.lblAggiungiMacchinaNote);
@@ -2230,15 +2244,42 @@ namespace Calendario_AriBerg
             this.gBxAggiungiMacchina.Text = "Aggiungi macchina/accessorio";
             this.gBxAggiungiMacchina.Visible = false;
             // 
+            // label10
+            // 
+            this.label10.Location = new System.Drawing.Point(136, 274);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(69, 28);
+            this.label10.TabIndex = 56;
+            this.label10.Text = "Tipo";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label11
+            // 
+            this.label11.Location = new System.Drawing.Point(136, 305);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(69, 28);
+            this.label11.TabIndex = 55;
+            this.label11.Text = "Marca";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label12
+            // 
+            this.label12.Location = new System.Drawing.Point(136, 337);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(69, 28);
+            this.label12.TabIndex = 54;
+            this.label12.Text = "Codice";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // cbBxAggiungiMacchinaMarcaFiltro
             // 
             this.cbBxAggiungiMacchinaMarcaFiltro.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbBxAggiungiMacchinaMarcaFiltro.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbBxAggiungiMacchinaMarcaFiltro.Enabled = false;
             this.cbBxAggiungiMacchinaMarcaFiltro.FormattingEnabled = true;
-            this.cbBxAggiungiMacchinaMarcaFiltro.Location = new System.Drawing.Point(137, 305);
+            this.cbBxAggiungiMacchinaMarcaFiltro.Location = new System.Drawing.Point(207, 305);
             this.cbBxAggiungiMacchinaMarcaFiltro.Name = "cbBxAggiungiMacchinaMarcaFiltro";
-            this.cbBxAggiungiMacchinaMarcaFiltro.Size = new System.Drawing.Size(239, 28);
+            this.cbBxAggiungiMacchinaMarcaFiltro.Size = new System.Drawing.Size(169, 28);
             this.cbBxAggiungiMacchinaMarcaFiltro.TabIndex = 51;
             this.cbBxAggiungiMacchinaMarcaFiltro.SelectedIndexChanged += new System.EventHandler(this.cbBxAggiungiMacchinaMarcaFiltro_SelectedIndexChanged);
             // 
@@ -2248,9 +2289,9 @@ namespace Calendario_AriBerg
             this.cbBxAggiungiMacchinaCodiceFiltro.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbBxAggiungiMacchinaCodiceFiltro.Enabled = false;
             this.cbBxAggiungiMacchinaCodiceFiltro.FormattingEnabled = true;
-            this.cbBxAggiungiMacchinaCodiceFiltro.Location = new System.Drawing.Point(136, 337);
+            this.cbBxAggiungiMacchinaCodiceFiltro.Location = new System.Drawing.Point(207, 337);
             this.cbBxAggiungiMacchinaCodiceFiltro.Name = "cbBxAggiungiMacchinaCodiceFiltro";
-            this.cbBxAggiungiMacchinaCodiceFiltro.Size = new System.Drawing.Size(240, 28);
+            this.cbBxAggiungiMacchinaCodiceFiltro.Size = new System.Drawing.Size(169, 28);
             this.cbBxAggiungiMacchinaCodiceFiltro.TabIndex = 50;
             // 
             // dgvComponentiAggiungiMacchina
@@ -2258,10 +2299,10 @@ namespace Calendario_AriBerg
             this.dgvComponentiAggiungiMacchina.AllowUserToAddRows = false;
             this.dgvComponentiAggiungiMacchina.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvComponentiAggiungiMacchina.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvComponentiAggiungiMacchina.Location = new System.Drawing.Point(13, 375);
+            this.dgvComponentiAggiungiMacchina.Location = new System.Drawing.Point(24, 375);
             this.dgvComponentiAggiungiMacchina.Name = "dgvComponentiAggiungiMacchina";
             this.dgvComponentiAggiungiMacchina.ReadOnly = true;
-            this.dgvComponentiAggiungiMacchina.Size = new System.Drawing.Size(370, 143);
+            this.dgvComponentiAggiungiMacchina.Size = new System.Drawing.Size(353, 143);
             this.dgvComponentiAggiungiMacchina.TabIndex = 48;
             // 
             // cbBxAggiungiMacchinaTipoFiltro
@@ -2269,9 +2310,9 @@ namespace Calendario_AriBerg
             this.cbBxAggiungiMacchinaTipoFiltro.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbBxAggiungiMacchinaTipoFiltro.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbBxAggiungiMacchinaTipoFiltro.FormattingEnabled = true;
-            this.cbBxAggiungiMacchinaTipoFiltro.Location = new System.Drawing.Point(137, 274);
+            this.cbBxAggiungiMacchinaTipoFiltro.Location = new System.Drawing.Point(207, 274);
             this.cbBxAggiungiMacchinaTipoFiltro.Name = "cbBxAggiungiMacchinaTipoFiltro";
-            this.cbBxAggiungiMacchinaTipoFiltro.Size = new System.Drawing.Size(239, 28);
+            this.cbBxAggiungiMacchinaTipoFiltro.Size = new System.Drawing.Size(169, 28);
             this.cbBxAggiungiMacchinaTipoFiltro.TabIndex = 47;
             this.cbBxAggiungiMacchinaTipoFiltro.SelectedIndexChanged += new System.EventHandler(this.cbBxAggiungiMacchinaTipoFiltro_SelectedIndexChanged);
             // 
@@ -2280,20 +2321,12 @@ namespace Calendario_AriBerg
             this.lblAggiungiMacchinaMarca.AutoSize = true;
             this.lblAggiungiMacchinaMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAggiungiMacchinaMarca.ForeColor = System.Drawing.Color.White;
-            this.lblAggiungiMacchinaMarca.Location = new System.Drawing.Point(19, 68);
+            this.lblAggiungiMacchinaMarca.Location = new System.Drawing.Point(59, 67);
             this.lblAggiungiMacchinaMarca.Name = "lblAggiungiMacchinaMarca";
             this.lblAggiungiMacchinaMarca.Size = new System.Drawing.Size(72, 25);
             this.lblAggiungiMacchinaMarca.TabIndex = 46;
             this.lblAggiungiMacchinaMarca.Text = "Marca";
             this.lblAggiungiMacchinaMarca.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // txBxAggiungiMacchinaMarca
-            // 
-            this.txBxAggiungiMacchinaMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txBxAggiungiMacchinaMarca.Location = new System.Drawing.Point(137, 69);
-            this.txBxAggiungiMacchinaMarca.Name = "txBxAggiungiMacchinaMarca";
-            this.txBxAggiungiMacchinaMarca.Size = new System.Drawing.Size(269, 26);
-            this.txBxAggiungiMacchinaMarca.TabIndex = 45;
             // 
             // chBxAggiungiMacchinaNoleggio
             // 
@@ -2329,7 +2362,7 @@ namespace Calendario_AriBerg
             this.lblAggiungiMacchinaMatricola.AutoSize = true;
             this.lblAggiungiMacchinaMatricola.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAggiungiMacchinaMatricola.ForeColor = System.Drawing.Color.White;
-            this.lblAggiungiMacchinaMatricola.Location = new System.Drawing.Point(19, 156);
+            this.lblAggiungiMacchinaMatricola.Location = new System.Drawing.Point(31, 155);
             this.lblAggiungiMacchinaMatricola.Name = "lblAggiungiMacchinaMatricola";
             this.lblAggiungiMacchinaMatricola.Size = new System.Drawing.Size(100, 25);
             this.lblAggiungiMacchinaMatricola.TabIndex = 35;
@@ -2341,7 +2374,7 @@ namespace Calendario_AriBerg
             this.txBxAggiungiMacchinaMatricola.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txBxAggiungiMacchinaMatricola.Location = new System.Drawing.Point(136, 157);
             this.txBxAggiungiMacchinaMatricola.Name = "txBxAggiungiMacchinaMatricola";
-            this.txBxAggiungiMacchinaMatricola.Size = new System.Drawing.Size(270, 26);
+            this.txBxAggiungiMacchinaMatricola.Size = new System.Drawing.Size(240, 26);
             this.txBxAggiungiMacchinaMatricola.TabIndex = 34;
             // 
             // lblAggiungiMacchinaComponenti
@@ -2390,7 +2423,7 @@ namespace Calendario_AriBerg
             this.lblAggiungiMacchinaModello.AutoSize = true;
             this.lblAggiungiMacchinaModello.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAggiungiMacchinaModello.ForeColor = System.Drawing.Color.White;
-            this.lblAggiungiMacchinaModello.Location = new System.Drawing.Point(19, 111);
+            this.lblAggiungiMacchinaModello.Location = new System.Drawing.Point(43, 112);
             this.lblAggiungiMacchinaModello.Name = "lblAggiungiMacchinaModello";
             this.lblAggiungiMacchinaModello.Size = new System.Drawing.Size(88, 25);
             this.lblAggiungiMacchinaModello.TabIndex = 28;
@@ -2401,7 +2434,7 @@ namespace Calendario_AriBerg
             this.txBxAggiungiMacchinaModello.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txBxAggiungiMacchinaModello.Location = new System.Drawing.Point(137, 111);
             this.txBxAggiungiMacchinaModello.Name = "txBxAggiungiMacchinaModello";
-            this.txBxAggiungiMacchinaModello.Size = new System.Drawing.Size(269, 26);
+            this.txBxAggiungiMacchinaModello.Size = new System.Drawing.Size(239, 26);
             this.txBxAggiungiMacchinaModello.TabIndex = 27;
             // 
             // btnChiudigBxAggiungiMacchine
@@ -2428,7 +2461,7 @@ namespace Calendario_AriBerg
             this.btnConfermaAggiungiMacchina.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfermaAggiungiMacchina.Location = new System.Drawing.Point(0, 666);
             this.btnConfermaAggiungiMacchina.Name = "btnConfermaAggiungiMacchina";
-            this.btnConfermaAggiungiMacchina.Size = new System.Drawing.Size(380, 56);
+            this.btnConfermaAggiungiMacchina.Size = new System.Drawing.Size(412, 56);
             this.btnConfermaAggiungiMacchina.TabIndex = 12;
             this.btnConfermaAggiungiMacchina.Text = "Aggiungi";
             this.btnConfermaAggiungiMacchina.UseVisualStyleBackColor = false;
@@ -2462,14 +2495,6 @@ namespace Calendario_AriBerg
             this.dgvMostraComponentiMacchina.AllowUserToAddRows = false;
             this.dgvMostraComponentiMacchina.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvMostraComponentiMacchina.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvMostraComponentiMacchina.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvMostraComponentiMacchina.Location = new System.Drawing.Point(6, 430);
             this.dgvMostraComponentiMacchina.Name = "dgvMostraComponentiMacchina";
             this.dgvMostraComponentiMacchina.ReadOnly = true;
@@ -2480,47 +2505,12 @@ namespace Calendario_AriBerg
             // 
             this.dgvMostraMacchineAccessori.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvMostraMacchineAccessori.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvMostraMacchineAccessori.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvMostraMacchineAccessori.Location = new System.Drawing.Point(0, 165);
             this.dgvMostraMacchineAccessori.Name = "dgvMostraMacchineAccessori";
             this.dgvMostraMacchineAccessori.ReadOnly = true;
             this.dgvMostraMacchineAccessori.Size = new System.Drawing.Size(412, 235);
             this.dgvMostraMacchineAccessori.TabIndex = 51;
             this.dgvMostraMacchineAccessori.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMostraMacchineAccessori_CellClick);
-            // 
-            // lblMostraComponenti
-            // 
-            this.lblMostraComponenti.AutoSize = true;
-            this.lblMostraComponenti.BackColor = System.Drawing.Color.Gray;
-            this.lblMostraComponenti.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMostraComponenti.ForeColor = System.Drawing.Color.White;
-            this.lblMostraComponenti.Location = new System.Drawing.Point(147, 4);
-            this.lblMostraComponenti.Name = "lblMostraComponenti";
-            this.lblMostraComponenti.Size = new System.Drawing.Size(127, 25);
-            this.lblMostraComponenti.TabIndex = 48;
-            this.lblMostraComponenti.Text = "Componenti";
-            // 
-            // chbxMostraNoleggio
-            // 
-            this.chbxMostraNoleggio.AutoCheck = false;
-            this.chbxMostraNoleggio.AutoSize = true;
-            this.chbxMostraNoleggio.BackColor = System.Drawing.Color.Gray;
-            this.chbxMostraNoleggio.Enabled = false;
-            this.chbxMostraNoleggio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chbxMostraNoleggio.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.chbxMostraNoleggio.Location = new System.Drawing.Point(290, 175);
-            this.chbxMostraNoleggio.Name = "chbxMostraNoleggio";
-            this.chbxMostraNoleggio.Size = new System.Drawing.Size(113, 29);
-            this.chbxMostraNoleggio.TabIndex = 50;
-            this.chbxMostraNoleggio.Text = "Noleggio";
-            this.chbxMostraNoleggio.UseVisualStyleBackColor = false;
             // 
             // rtbMostraNote
             // 
@@ -2543,17 +2533,6 @@ namespace Calendario_AriBerg
             this.pbxAlloStoricoMacchina.TabIndex = 43;
             this.pbxAlloStoricoMacchina.TabStop = false;
             this.pbxAlloStoricoMacchina.Click += new System.EventHandler(this.pbxAlloStoricoMacchina_Click);
-            // 
-            // lblMostraNote
-            // 
-            this.lblMostraNote.AutoSize = true;
-            this.lblMostraNote.BackColor = System.Drawing.Color.Gray;
-            this.lblMostraNote.ForeColor = System.Drawing.Color.Red;
-            this.lblMostraNote.Location = new System.Drawing.Point(15, 179);
-            this.lblMostraNote.Name = "lblMostraNote";
-            this.lblMostraNote.Size = new System.Drawing.Size(63, 25);
-            this.lblMostraNote.TabIndex = 48;
-            this.lblMostraNote.Text = "Note:";
             // 
             // pbxAlloStoricoCliente
             // 
@@ -2619,6 +2598,55 @@ namespace Calendario_AriBerg
             this.tbxMostraIva.Size = new System.Drawing.Size(306, 26);
             this.tbxMostraIva.TabIndex = 33;
             // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.Gray;
+            this.panel4.Controls.Add(this.chbxMostraNoleggio);
+            this.panel4.Controls.Add(this.lblMostraComponenti);
+            this.panel4.Controls.Add(this.lblMostraNote);
+            this.panel4.Location = new System.Drawing.Point(0, 401);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(415, 318);
+            this.panel4.TabIndex = 53;
+            // 
+            // chbxMostraNoleggio
+            // 
+            this.chbxMostraNoleggio.AutoCheck = false;
+            this.chbxMostraNoleggio.AutoSize = true;
+            this.chbxMostraNoleggio.BackColor = System.Drawing.Color.Gray;
+            this.chbxMostraNoleggio.Enabled = false;
+            this.chbxMostraNoleggio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chbxMostraNoleggio.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.chbxMostraNoleggio.Location = new System.Drawing.Point(290, 175);
+            this.chbxMostraNoleggio.Name = "chbxMostraNoleggio";
+            this.chbxMostraNoleggio.Size = new System.Drawing.Size(113, 29);
+            this.chbxMostraNoleggio.TabIndex = 50;
+            this.chbxMostraNoleggio.Text = "Noleggio";
+            this.chbxMostraNoleggio.UseVisualStyleBackColor = false;
+            // 
+            // lblMostraComponenti
+            // 
+            this.lblMostraComponenti.AutoSize = true;
+            this.lblMostraComponenti.BackColor = System.Drawing.Color.Gray;
+            this.lblMostraComponenti.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMostraComponenti.ForeColor = System.Drawing.Color.White;
+            this.lblMostraComponenti.Location = new System.Drawing.Point(147, 4);
+            this.lblMostraComponenti.Name = "lblMostraComponenti";
+            this.lblMostraComponenti.Size = new System.Drawing.Size(127, 25);
+            this.lblMostraComponenti.TabIndex = 48;
+            this.lblMostraComponenti.Text = "Componenti";
+            // 
+            // lblMostraNote
+            // 
+            this.lblMostraNote.AutoSize = true;
+            this.lblMostraNote.BackColor = System.Drawing.Color.Gray;
+            this.lblMostraNote.ForeColor = System.Drawing.Color.Red;
+            this.lblMostraNote.Location = new System.Drawing.Point(15, 179);
+            this.lblMostraNote.Name = "lblMostraNote";
+            this.lblMostraNote.Size = new System.Drawing.Size(63, 25);
+            this.lblMostraNote.TabIndex = 48;
+            this.lblMostraNote.Text = "Note:";
+            // 
             // gBxModificaMacchina
             // 
             this.gBxModificaMacchina.Controls.Add(this.comboBox2);
@@ -2650,6 +2678,32 @@ namespace Calendario_AriBerg
             this.gBxModificaMacchina.TabStop = false;
             this.gBxModificaMacchina.Text = "Modifica macchina/accessorio";
             this.gBxModificaMacchina.Visible = false;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Fa",
+            "Fo",
+            "Fi",
+            "GA"});
+            this.comboBox2.Location = new System.Drawing.Point(164, 305);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(158, 28);
+            this.comboBox2.TabIndex = 50;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Fa",
+            "Fo",
+            "Fi",
+            "GA"});
+            this.comboBox1.Location = new System.Drawing.Point(170, 341);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(158, 28);
+            this.comboBox1.TabIndex = 49;
             // 
             // dataGridView3
             // 
@@ -3089,7 +3143,7 @@ namespace Calendario_AriBerg
             this.dgvMagazzinoCentrale.MultiSelect = false;
             this.dgvMagazzinoCentrale.Name = "dgvMagazzinoCentrale";
             this.dgvMagazzinoCentrale.ReadOnly = true;
-            this.dgvMagazzinoCentrale.Size = new System.Drawing.Size(534, 637);
+            this.dgvMagazzinoCentrale.Size = new System.Drawing.Size(534, 642);
             this.dgvMagazzinoCentrale.TabIndex = 1;
             this.dgvMagazzinoCentrale.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMagazzinoCentrale_CellDoubleClick);
             // 
@@ -4047,6 +4101,16 @@ namespace Calendario_AriBerg
             this.pbxWait.TabStop = false;
             this.pbxWait.Visible = false;
             // 
+            // cbBxAggiungiMacchinaMarca
+            // 
+            this.cbBxAggiungiMacchinaMarca.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbBxAggiungiMacchinaMarca.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbBxAggiungiMacchinaMarca.FormattingEnabled = true;
+            this.cbBxAggiungiMacchinaMarca.Location = new System.Drawing.Point(136, 68);
+            this.cbBxAggiungiMacchinaMarca.Name = "cbBxAggiungiMacchinaMarca";
+            this.cbBxAggiungiMacchinaMarca.Size = new System.Drawing.Size(240, 28);
+            this.cbBxAggiungiMacchinaMarca.TabIndex = 57;
+            // 
             // ariCalendario
             // 
             this.ariCalendario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
@@ -4063,43 +4127,6 @@ namespace Calendario_AriBerg
             this.ariCalendario.TabIndex = 12;
             this.ariCalendario.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.ariCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AriCalendario_DateChanged);
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.Gray;
-            this.panel4.Controls.Add(this.chbxMostraNoleggio);
-            this.panel4.Controls.Add(this.lblMostraComponenti);
-            this.panel4.Controls.Add(this.lblMostraNote);
-            this.panel4.Location = new System.Drawing.Point(0, 401);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(415, 318);
-            this.panel4.TabIndex = 53;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Fa",
-            "Fo",
-            "Fi",
-            "GA"});
-            this.comboBox1.Location = new System.Drawing.Point(170, 341);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(158, 28);
-            this.comboBox1.TabIndex = 49;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "Fa",
-            "Fo",
-            "Fi",
-            "GA"});
-            this.comboBox2.Location = new System.Drawing.Point(164, 305);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(158, 28);
-            this.comboBox2.TabIndex = 50;
             // 
             // FormCalendario
             // 
@@ -4140,16 +4167,16 @@ namespace Calendario_AriBerg
             this.pnlCommands2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVisualizzaClienti)).EndInit();
             this.leftPanelClienti.ResumeLayout(false);
-            this.gBxClientiModificaClienti.ResumeLayout(false);
-            this.gBxClientiModificaClienti.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvModificaCliente)).EndInit();
-            this.pnlModificaClienteMacchine.ResumeLayout(false);
             this.gBxClientiAggiungiCliente.ResumeLayout(false);
             this.gBxClientiAggiungiCliente.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAggiungiClientiMacchine)).EndInit();
             this.pnlAggiungiClienteButtonsMacchina.ResumeLayout(false);
             this.gBxClientiTrova.ResumeLayout(false);
             this.gBxClientiTrova.PerformLayout();
+            this.gBxClientiModificaClienti.ResumeLayout(false);
+            this.gBxClientiModificaClienti.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvModificaCliente)).EndInit();
+            this.pnlModificaClienteMacchine.ResumeLayout(false);
             this.RightPanelClienti.ResumeLayout(false);
             this.gBxAggiungiMacchina.ResumeLayout(false);
             this.gBxAggiungiMacchina.PerformLayout();
@@ -4160,6 +4187,8 @@ namespace Calendario_AriBerg
             ((System.ComponentModel.ISupportInitialize)(this.dgvMostraMacchineAccessori)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAlloStoricoMacchina)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAlloStoricoCliente)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.gBxModificaMacchina.ResumeLayout(false);
             this.gBxModificaMacchina.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
@@ -4203,8 +4232,6 @@ namespace Calendario_AriBerg
             this.pnlMarche.ResumeLayout(false);
             this.pnlMarche.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxWait)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -4332,7 +4359,6 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.CheckBox chBxAggiungiMacchinaNoleggio;
         private System.Windows.Forms.ComboBox cbBxAggiungiMacchinaTipoFiltro;
         private System.Windows.Forms.Label lblAggiungiMacchinaMarca;
-        private System.Windows.Forms.TextBox txBxAggiungiMacchinaMarca;
         private System.Windows.Forms.Label lblMostraComponenti;
         private System.Windows.Forms.CheckBox chbxMostraNoleggio;
         private System.Windows.Forms.RichTextBox rtbMostraNote;
@@ -4500,6 +4526,10 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox cbBxAggiungiMacchinaMarca;
     }
 }
 

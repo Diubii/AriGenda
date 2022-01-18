@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
+using static System.Windows.Forms.Control;
 
 namespace Calendario_AriBerg
 {
@@ -23,7 +24,7 @@ namespace Calendario_AriBerg
         {
             try
             {
-                string remoteConnectionString = $"Server=database.diubi.dev; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
+                string remoteConnectionString = $"Server=192.168.1.4; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
                 MySqlConnection conn = new MySqlConnection(remoteConnectionString);
                 conn.Open();
                 return conn;
@@ -545,20 +546,70 @@ namespace Calendario_AriBerg
             }
         }
 
-            static internal bool AreThereAnyEmptyTextBoxes(List<TextBox> list)
+        static internal bool AreThereAnyEmptyTextBoxes(List<TextBox> list, string tag = null)
         {
-            foreach(TextBox tb in list)
+            if (!string.IsNullOrWhiteSpace(tag))
             {
-                if (string.IsNullOrWhiteSpace(tb.Text))
+                foreach (TextBox tb in list)
                 {
-                    return true;
+                    if (string.IsNullOrWhiteSpace(tb.Text))
+                    {
+                        return true;
+                    }
                 }
-            }
 
-            return false;
+                return false;
+            }
+            else
+            {
+                foreach (TextBox tb in list)
+                {
+                    if (string.IsNullOrWhiteSpace(tb.Text) && tb.Tag.ToString() == tag)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
         }
 
-        static internal bool AreThereAnyEmptyTextBoxes(TextBox tb)
+        static internal bool AreThereAnyEmptyTextBoxes(ControlCollection cc, string tag = null)
+        {
+            if (!string.IsNullOrWhiteSpace(tag))
+            {
+                foreach (Control c in cc)
+                {
+                    if (c is TextBox tb)
+                    {
+                        if (string.IsNullOrWhiteSpace(tb.Text) && tb.Tag.ToString() == tag)
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+                return false;
+            }
+            else
+            {
+                foreach (Control c in cc)
+                {
+                    if (c is TextBox tb)
+                    {
+                        if (string.IsNullOrWhiteSpace(tb.Text))
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+                return false;
+            }
+        }
+    
+
+        static internal bool IsThisTextBoxEmpty(TextBox tb)
         {
             if (string.IsNullOrWhiteSpace(tb.Text))
             {
