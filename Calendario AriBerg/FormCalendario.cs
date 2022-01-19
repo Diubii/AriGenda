@@ -12,7 +12,6 @@ namespace Calendario_AriBerg
     {
         public System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
 
-        private Point p = new Point();
         private DateTime SelectedDate;
 
         //Inizializzazione del Thread che riceve i files
@@ -39,18 +38,7 @@ namespace Calendario_AriBerg
             //Configurazione data
             SelectedDate = DateTime.Now.Date;
 
-            /*//Connessione database query test
-            Connection = Metodi.ConnectToDatabase();
-            string query = "Update cliente set indirizzo_cliente = 'prova' where id_cliente='1'";
-            MySqlCommand command = new MySqlCommand(query,Connection);
-            command.ExecuteNonQuery();
-            Connection.Close();*/
 
-            //configurazione registro
-            if (Registro.DizClienti == null)
-            {
-                Registro.DizClienti = new Dictionary<string, Cliente>();
-            }
 
             ariCalendario.Refresh();
             lblEventi.Text = "Eventi del: " + DateTime.Now.Day + "/" + DateTime.Now.Month + "/" + DateTime.Now.Year;
@@ -92,16 +80,7 @@ namespace Calendario_AriBerg
                 mur.Visible = false;
             }
 
-            //configdgwEventi
-            if (Registro.DizClienti != null)
-            {
-                dgvVisualizzaClienti.DataSource = Registro.DizClienti.Values.ToList();
-                HideColumnsClienti();
-                dgvVisualizzaClienti.AutoGenerateColumns = true;
-            }
-
             rdBtnTrovaPerNome.Checked = true;
-            AggiornaComboBox();
 
             dgvComponenti.AllowUserToAddRows = false;
             dgvAggiungiClientiMacchine.AllowUserToAddRows = false;
@@ -460,56 +439,7 @@ namespace Calendario_AriBerg
             }));
         }
 
-        private void AggiornaComboBox() //Da mettere in modifica ed elimina cliente
-        {
-            if (Registro.DizClienti != null)
-            {
-                cbBxTrovaPerNome.Items.Clear();
-                cbBxTrovaPerMail.Items.Clear();
-                cbBxTrovaPerPRif.Items.Clear();
-                cbBxTrovaPerMatricola.Items.Clear();
-
-                cBxAggiungiEventoCliente.Items.Clear();
-                cBxAggiungiEventoMacchine.Items.Clear();
-                cBxModificaEventoCliente.Items.Clear();
-                cBxModificaEventoMacchina.Items.Clear();
-
-                cbBxSearchEventoCliente.Items.Clear();
-                cbBxSearchEventoMatricola.Items.Clear();
-
-                foreach (KeyValuePair<string, Cliente> kv in Registro.DizClienti)
-                {
-                    cbBxTrovaPerNome.Items.Add(kv.Key);
-                    cbBxTrovaPerPRif.Items.Add(kv.Value._Ref);
-                    cbBxTrovaPerMail.Items.Add(kv.Value._Email);
-
-                    foreach (Macchina macchina in kv.Value._Mach)
-                    {
-                        cbBxTrovaPerMatricola.Items.Add(macchina._Marca + "/" + macchina._Modello + "/" + macchina._Matricola);
-                        cBxAggiungiEventoMacchine.Items.Add(macchina._Marca + "/" + macchina._Modello + "/" + macchina._Matricola);
-                        cBxModificaEventoMacchina.Items.Add(macchina._Marca + "/" + macchina._Modello + "/" + macchina._Matricola);
-                        cbBxSearchEventoMatricola.Items.Add(macchina._Marca + "/" + macchina._Modello + "/" + macchina._Matricola);
-                    }
-
-                    cBxAggiungiEventoCliente.Items.Add(kv.Key);
-                    cBxModificaEventoCliente.Items.Add(kv.Key);
-                    cbBxSearchEventoCliente.Items.Add(kv.Key);
-                }
-
-                cbBxTrovaPerNome.Refresh();
-                cbBxTrovaPerMail.Refresh();
-                cbBxTrovaPerPRif.Refresh();
-                cbBxTrovaPerMatricola.Refresh();
-
-                cBxAggiungiEventoCliente.Refresh();
-                cBxAggiungiEventoMacchine.Refresh();
-                cBxModificaEventoCliente.Refresh();
-                cBxModificaEventoMacchina.Refresh();
-
-                cbBxSearchEventoCliente.Refresh();
-                cbBxSearchEventoMatricola.Refresh();
-            }
-        }
+        
 
         private void HideColumnsEventi()
         {
@@ -732,98 +662,13 @@ namespace Calendario_AriBerg
 
         private void btnConfermaAggiungi_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (!Registro.DizClienti.ContainsKey(cBxAggiungiEventoCliente.Text))
-                {
-                    throw new Exception("Inserire Cliente Valido");
-                }
-                bool checkmacchina = false;
-                foreach (Macchina m in Registro.DizClienti[cBxAggiungiEventoCliente.Text]._Mach)
-                {
-                    if (m._Marca + "/" + m._Modello + "/" + m._Matricola == cBxAggiungiEventoMacchine.Text)
-                    {
-                        checkmacchina = true;
-                    }
-                }
-                if (checkmacchina == false)
-                {
-                    throw new Exception("Inserire macchina valida");
-                }
-                List<InterventiPoss> interventis = new List<InterventiPoss>();
-                foreach (ListViewItem item in listViewAggiungiIntervento.Items)
-                {
-                    switch (item.Text)
-                    {
-                        case "Manut_Completa":
-                            interventis.Add(InterventiPoss.Manut_Completa);
-                            break;
-
-                        case "Manut_Parziale":
-                            interventis.Add(InterventiPoss.Manut_Parziale);
-                            break;
-
-                        case "Controllo_Generale":
-                            interventis.Add(InterventiPoss.Controllo_Generale);
-                            break;
-
-                        case "Sost_Elementi_Filtrantiecc":
-                            interventis.Add(InterventiPoss.Sost_Elementi_Filtrantiecc);
-                            break;
-
-                        case "Controllo_Fgas":
-                            interventis.Add(InterventiPoss.Controllo_Fgas);
-                            break;
-
-                        default:
-                            throw new Exception("Intervento non valido");
-                    }
-                }
-                if (SelectedDate.Date < DateTime.Now.Date)
-                {
-                    throw new Exception("Data passata.");
-                }
-                //Errore
-                //Evento app = new Evento(SelectedDate, cBxAggiungiEventoCliente.Text, cBxAggiungiEventoMacchine.Text, interventis, rtbAggiungiNote.Text);
-                //r.AddEvento(app);
-
-                dgvEventi.DataSource = null;
-                HideColumnsEventi();
-                dgvEventi.Refresh();
-
-                //Interazione DB
-                //r.salvaEventi();
-                //r.inviaSalvataggi();
-
-                Notifica notifica = new Notifica();
-                notifica.Show("Evento aggiunto correttamente!", Notifica.enmType.Success);
-            }
-            catch (Exception exc)
-            {
-                Notifica notifica = new Notifica();
-                if (exc.Message == "Data passata.")
-                {
-                    notifica.Show("ACHIEVEMENT UNLOCKED:\n BACK TO THE FUTURE \n(Questo è un errore comunque :D)", Notifica.enmType.TimeTravel);
-                }
-                else
-                {
-                    notifica.Show(exc.Message, Notifica.enmType.Warning);
-                }
-            }
+                //cancellato da rifare
+                
         }
 
         private void btnModify_Click(object sender, EventArgs e)
         {
-            if (gbxModificaEvento.Visible == false)
-            {
-                gbxModificaEvento.Enabled = true;
-                gbxModificaEvento.Visible = true;
-            }
-            else
-            {
-                gbxModificaEvento.Enabled = false;
-                gbxModificaEvento.Visible = false;
-            }
+            //cancellato da rifare
         }
 
         private void dgwEventi_CellStateChanged(object sender, DataGridViewCellStateChangedEventArgs e)
@@ -892,97 +737,7 @@ namespace Calendario_AriBerg
 
         private void btnConfermaModifica_Click(object sender, EventArgs e)
         {
-            Notifica notifica = new Notifica();
-
-            try
-            {
-                if (dgvEventi.CurrentCell == null)
-                {
-                    throw new Exception("Selezionare un evento \n per modificarlo");
-                }
-                if (!Registro.DizClienti.ContainsKey(cBxModificaEventoCliente.Text))
-                {
-                    throw new Exception("Inserire Cliente Valido");
-                }
-                bool checkmacchina = false;
-                foreach (Macchina m in Registro.DizClienti[cBxModificaEventoCliente.Text]._Mach)
-                {
-                    if (m._Marca + "/" + m._Modello + "/" + m._Matricola == cBxModificaEventoMacchina.Text)
-                    {
-                        checkmacchina = true;
-                    }
-                }
-                if (checkmacchina == false)
-                {
-                    throw new Exception("Inserire macchina valida");
-                }
-                List<InterventiPoss> interventis = new List<InterventiPoss>();
-
-                foreach (ListViewItem item in listViewModificaIntervento.Items)
-                {
-                    switch (item.Text)
-                    {
-                        case "Manut_Completa":
-                            interventis.Add(InterventiPoss.Manut_Completa);
-                            break;
-
-                        case "Manut_Parziale":
-                            interventis.Add(InterventiPoss.Manut_Parziale);
-                            break;
-
-                        case "Controllo_Generale":
-                            interventis.Add(InterventiPoss.Controllo_Generale);
-                            break;
-
-                        case "Sost_Elementi_Filtrantiecc":
-                            interventis.Add(InterventiPoss.Sost_Elementi_Filtrantiecc);
-                            break;
-
-                        case "Controllo_Fgas":
-                            interventis.Add(InterventiPoss.Controllo_Fgas);
-                            break;
-
-                        default:
-                            throw new Exception("Intervento non valido");
-                    }
-                }
-                //errore
-                // Evento ev = new Evento(SelectedDate, cBxModificaEventoCliente.Text, cBxModificaEventoMacchine.Text, interventis, rtbModificaNote.Text);
-                /*
-                 Evento.numEventi--;
-                 List<Evento> momentlist = (List<Evento>)dgwEventi.DataSource;
-                 if (r.DizGiorni.ContainsKey(SelectedDate) && dgwEventi.DataSource == r.DizGiorni[SelectedDate])
-                 {
-                     r.ModifyEvento(ev, r.DizGiorni[SelectedDate][dgwEventi.CurrentCell.RowIndex]);
-                 }
-                 else
-                 {
-                     r.ModifyEvento(ev, momentlist[dgwEventi.CurrentCell.RowIndex]);
-                     momentlist.RemoveAt(dgwEventi.CurrentCell.RowIndex);
-                     momentlist.Add(ev);
-                 }
-                 //Salvataggio
-                 r.salvaEventi();
-                 r.inviaSalvataggi();
-
-                 dgwEventi.DataSource = null;
-                 if (r.DizGiorni.ContainsKey(SelectedDate) && dgwEventi.DataSource == r.DizGiorni[SelectedDate])
-                 {
-                     dgwEventi.DataSource = r.DizGiorni[SelectedDate];
-                     HideColumnsEventi();
-                 }
-                 else
-                 {
-                     dgwEventi.DataSource = momentlist;
-                     HideColumnsEventi();
-                 }
-                */
-                notifica.Show("Evento modificato correttamente!", Notifica.enmType.Success);
-            }
-            catch (Exception exc)
-            {
-                notifica.Show(exc.Message, Notifica.enmType.Warning);
-            }
+            //Cancellato da rifare
         }
 
         private void btnExitModifica_Click(object sender, EventArgs e)
@@ -1009,59 +764,7 @@ namespace Calendario_AriBerg
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            Notifica notifica = new Notifica();
-
-            try
-            {
-                int app = dgvEventi.CurrentCell.RowIndex;
-                List<Evento> momentList = (List<Evento>)dgvEventi.DataSource;
-                bool filtrato = false;
-
-                /*if (Registro.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == Registro.DizGiorni[SelectedDate])
-                {
-                    dgvEventi.DataSource = null;
-                    //Registro.RemoveEvento(Registro.DizGiorni[SelectedDate][app]);
-                }
-                else
-                {
-                    filtrato = true;
-                    foreach (Evento ev in Registro.DizGiorni[(DateTime)dgvEventi["Giorno", app].Value])
-                    {
-                        if (ev.ID == momentList[app].ID)
-                        {
-                            dgvEventi.DataSource = null;
-                            //Registro.RemoveEvento(ev);
-                            momentList.RemoveAt(app);
-                            break;
-                        }
-                    }
-                }
-
-                //Salvataggio
-                //Interazione DB
-                //r.salvaEventi();
-                //r.inviaSalvataggi();
-
-                if (Registro.DizGiorni.ContainsKey(SelectedDate) && filtrato == false)
-                {
-                    dgvEventi.DataSource = Registro.DizGiorni[SelectedDate];
-                    HideColumnsEventi();
-                    ariCalendario.SelectionStart = SelectedDate.AddDays(1);
-                    ariCalendario.SelectionStart = SelectedDate.AddDays(-1);
-                }
-                else
-                {
-                    dgvEventi.DataSource = momentList;
-                    HideColumnsEventi();
-                    dgvEventi.Columns["Giorno"].Visible = true;
-                }
-
-                notifica.Show("Evento eliminato correttamente!", Notifica.enmType.Success);*/
-            }
-            catch (Exception exc)
-            {
-                notifica.Show(exc.Message, Notifica.enmType.Warning);
-            }
+           //Cancellato da rifare
         }
 
         private void btnClientiAddCustomer_Click(object sender, EventArgs e)
@@ -1443,17 +1146,11 @@ namespace Calendario_AriBerg
 
                     //threadRicevi.Suspend();
                     dgvVisualizzaClienti.DataSource = null;
-                    dgvVisualizzaClienti.DataSource = Registro.DizClienti.Values.ToList();
+                    //dgvVisualizzaClienti.DataSource = Registro.DizClienti.Values.ToList();
                     HideColumnsClienti();
 
                     dgvAggiungiClientiMacchine.DataSource = null;
 
-                    //Interazione DB
-                    //r.salvaClienti();
-                    //r.inviaSalvataggi();
-
-                    AggiornaComboBox();
-                    //threadRicevi.Resume();
 
                     foreach (Control c in gBxClientiAggiungiCliente.Controls)
                     {
@@ -1726,118 +1423,7 @@ namespace Calendario_AriBerg
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            Notifica notifica = new Notifica();
-
-            if (Registro.DizClienti != null)
-            {
-                if (rdBtnTrovaPerNome.Checked)
-                {
-                    List<Cliente> nomeCliente = new List<Cliente>();
-
-                    foreach (KeyValuePair<string, Cliente> kv in Registro.DizClienti)
-                    {
-                        if (kv.Key == cbBxTrovaPerNome.Text)
-                        {
-                            nomeCliente.Add(Registro.DizClienti[kv.Key]);
-                        }
-                    }
-
-                    if (nomeCliente.Count > 0)
-                    {
-                        dgvVisualizzaClienti.DataSource = null;
-                        dgvVisualizzaClienti.DataSource = nomeCliente;
-                        HideColumnsClienti();
-                        lblClienti.Text = "Filtrato per nome: " + cbBxTrovaPerNome.Text;
-                        return;
-                    }
-                    else
-                    {
-                        notifica.Show("Nessun risultato trovato.", Notifica.enmType.Warning);
-                        return;
-                    }
-                }
-                else if (rdBtnTrovaPerPRif.Checked)
-                {
-                    List<Cliente> prifCliente = new List<Cliente>();
-
-                    foreach (KeyValuePair<string, Cliente> kv in Registro.DizClienti)
-                    {
-                        if (kv.Value._Ref == cbBxTrovaPerPRif.Text)
-                        {
-                            prifCliente.Add(Registro.DizClienti[kv.Key]);
-                        }
-                    }
-
-                    if (prifCliente.Count > 0)
-                    {
-                        dgvVisualizzaClienti.DataSource = null;
-                        dgvVisualizzaClienti.DataSource = prifCliente;
-                        HideColumnsClienti();
-                        lblClienti.Text = "Filtrato per P.Rif: " + cbBxTrovaPerPRif.Text;
-                        return;
-                    }
-                    else
-                    {
-                        notifica.Show("Nessun risultato trovato.", Notifica.enmType.Warning);
-                        return;
-                    }
-                }
-                else if (rdBtnTrovaPerMatricola.Checked)
-                {
-                    List<Cliente> matricolaMacchina = new List<Cliente>();
-
-                    foreach (KeyValuePair<string, Cliente> kv in Registro.DizClienti)
-                    {
-                        foreach (Macchina macchina in kv.Value._Mach)
-                        {
-                            if (macchina._Marca + "/" + macchina._Modello + "/" + macchina._Matricola == cbBxTrovaPerMatricola.Text)
-                            {
-                                matricolaMacchina.Add(Registro.DizClienti[kv.Key]);
-                            }
-                        }
-                    }
-
-                    if (matricolaMacchina.Count > 0)
-                    {
-                        dgvVisualizzaClienti.DataSource = null;
-                        dgvVisualizzaClienti.DataSource = matricolaMacchina;
-                        HideColumnsClienti();
-                        lblClienti.Text = "Filtrato per macchina: " + cbBxTrovaPerMatricola.Text;
-                        return;
-                    }
-                    else
-                    {
-                        notifica.Show("Nessun risultato trovato.", Notifica.enmType.Warning);
-                        return;
-                    }
-                }
-                else if (rdBtnTrovaPerMail.Checked)
-                {
-                    List<Cliente> emailCliente = new List<Cliente>();
-
-                    foreach (KeyValuePair<string, Cliente> kv in Registro.DizClienti)
-                    {
-                        if (kv.Value._Email == cbBxTrovaPerMail.Text)
-                        {
-                            emailCliente.Add(Registro.DizClienti[kv.Key]);
-                        }
-                    }
-
-                    if (emailCliente.Count > 0)
-                    {
-                        dgvVisualizzaClienti.DataSource = null;
-                        dgvVisualizzaClienti.DataSource = emailCliente;
-                        HideColumnsClienti();
-                        lblClienti.Text = "Filtrato per mail: " + cbBxTrovaPerMail.Text;
-                        return;
-                    }
-                    else
-                    {
-                        notifica.Show("Nessun risultato trovato.", Notifica.enmType.Warning);
-                        return;
-                    }
-                }
-            }
+            //Cancellato da Rifare
         }
 
         private void dgvVisualizzaClienti_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -1848,56 +1434,17 @@ namespace Calendario_AriBerg
 
         private void btnEliminaFiltridgvVisualizzaClienti_Click(object sender, EventArgs e)
         {
-            rdBtnTrovaPerNome.Checked = false;
-            rdBtnTrovaPerMail.Checked = false;
-            rdBtnTrovaPerMatricola.Checked = false;
-            rdBtnTrovaPerPRif.Checked = false;
-
-            dgvVisualizzaClienti.DataSource = Registro.DizClienti.Values.ToList();
-            HideColumnsClienti();
-            lblClienti.Text = "Tutti i clienti";
+            //Cancellato da rifare
         }
 
         private void cBxAggiungiEventoCliente_TextChanged(object sender, EventArgs e)
         {
-            if (Registro.DizClienti.ContainsKey(cBxAggiungiEventoCliente.Text))
-            {
-                cBxAggiungiEventoMacchine.Items.Clear();
-                cBxAggiungiEventoMacchine.Text = null;
-                foreach (Macchina macchina in Registro.DizClienti[cBxAggiungiEventoCliente.Text]._Mach)
-                {
-                    cBxAggiungiEventoMacchine.Items.Add(macchina._Marca + "/" + macchina._Modello + "/" + macchina._Matricola);
-                }
-                cBxAggiungiEventoMacchine.Refresh();
-            }
+           //Cancellato da rifare
         }
 
         private void btnClientiDeleteCustomer_Click(object sender, EventArgs e)
-        {
-            int cellIndex = dgvVisualizzaClienti.CurrentCell.ColumnIndex;
-            string key = dgvVisualizzaClienti.CurrentCell.Value.ToString();
-            dgvVisualizzaClienti.CurrentCell = null;
-            Notifica notifica = new Notifica();
-
-            if (cellIndex == 0)
-            {
-                Registro.DizClienti.Remove(key);
-
-                dgvVisualizzaClienti.DataSource = null;
-                dgvVisualizzaClienti.DataSource = Registro.DizClienti.Values.ToList();
-                HideColumnsClienti();
-                AggiornaComboBox();
-
-                //Interazione DB
-                //r.salvaClienti();
-                //r.inviaSalvataggi();
-
-                notifica.Show("Cliente eliminato correttamente!", Notifica.enmType.Success);
-            }
-            else
-            {
-                notifica.Show("Scegliere la cella col nome del cliente.", Notifica.enmType.Warning);
-            }
+        {           
+            //Cancellato da rifare
         }
 
         private void btnAggiungiModificaMacchina_Click(object sender, EventArgs e)
@@ -3779,6 +3326,31 @@ namespace Calendario_AriBerg
             };
 
             dgvComponentiModificaMacchina.DataSource = bs;
+        }
+
+        private void btnModificaEventoConferma_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnModifyInfoEventoRicorrente_MouseHover(object sender, EventArgs e)
+        {
+            pnlModifyEventoInfo.Visible = true;
+        }
+
+        private void btnModifyInfoEventoRicorrente_MouseLeave(object sender, EventArgs e)
+        {
+            pnlModifyEventoInfo.Visible = false;
+        }
+
+        private void btnAddInfoEventoRicorrente_MouseHover(object sender, EventArgs e)
+        {
+            pnlAddEventoInfo.Visible = true;
+        }
+
+        private void btnAddInfoEventoRicorrente_MouseLeave(object sender, EventArgs e)
+        {
+            pnlAddEventoInfo.Visible = false;
         }
     }
 }

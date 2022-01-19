@@ -66,12 +66,6 @@ namespace Calendario_AriBerg
             public InterventiPoss codice_intervento;
         }
 
-        public struct CoppiaMarcaCodice
-        {
-            public string Marca;
-            public string Codice;
-        }
-
         internal static bool CheckForNewEventiMese(DateTime d)
         {
 
