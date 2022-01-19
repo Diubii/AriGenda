@@ -38,16 +38,6 @@ namespace Calendario_AriBerg
 
             //Configurazione data
             SelectedDate = DateTime.Now.Date;
-            List<Componenti> c = new List<Componenti>();
-            Macchina m = new Macchina(12, "a", "a", "aa", c, false, "ayeyey");
-            List<InterventiPoss> l = new List<InterventiPoss>();
-            l.Add(InterventiPoss.Controllo_Generale);
-            List<DateTime> datess = new List<DateTime>();
-            datess.Add(DateTime.Now.AddDays(2).Date);
-            Evento ev = new Evento(datess, "cacone", m, l, "bubaya");
-
-            List<Evento> eevv = new List<Evento>();
-            eevv.Add(ev);
 
             /*//Connessione database query test
             Connection = Metodi.ConnectToDatabase();
