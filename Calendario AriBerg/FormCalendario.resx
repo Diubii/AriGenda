@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblAddRicorrenzaInfo.Text" xml:space="preserve">
+    <value>INFO: Per un evento ricorrente si potrà modificare il giorno e l'ora senza venire rimosso dalla sua sequenza. In caso di modifica alla frequenza verranno aggiornati gli eventi futuri che ne fanno ancora parte. Una volta passata la data dell'evento esso smetterà di far parte della sequenza e potrà essere modificato come un evento singolo.
+Se si desidera modificare altro, oltre al giorno e l'ora, l'evento verrà separato e diverrà un evento singolo, indipendente dagli altri.</value>
+  </data>
+  <data name="lblModifyRicorrenzaInfo.Text" xml:space="preserve">
+    <value>INFO: Per un evento ricorrente si potrà modificare il giorno e l'ora senza venire rimosso dalla sua sequenza. In caso di modifica alla frequenza verranno aggiornati gli eventi futuri che ne fanno ancora parte. Una volta passata la data dell'evento esso smetterà di far parte della sequenza e potrà essere modificato come un evento singolo.
+Se si desidera modificare altro, oltre al giorno e l'ora, l'evento verrà separato e diverrà un evento singolo, indipendente dagli altri.
+</value>
+  </data>
   <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
