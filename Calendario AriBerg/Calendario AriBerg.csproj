@@ -127,6 +127,7 @@
     <Compile Include="Registro.cs" />
     <EmbeddedResource Include="FormCalendario.resx">
       <DependentUpon>FormCalendario.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Notifica.resx">
       <DependentUpon>Notifica.cs</DependentUpon>
