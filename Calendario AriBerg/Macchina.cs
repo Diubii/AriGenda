@@ -22,6 +22,7 @@ namespace Calendario_AriBerg
         {
 
         }
+
         public Macchina( int cliente,string marca, string modello, string matricola, List<Componenti> componenti, bool noleggio = false, string note = null)
         {
             _cliente = cliente;

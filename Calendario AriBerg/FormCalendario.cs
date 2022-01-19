@@ -17,9 +17,6 @@ namespace Calendario_AriBerg
 
         //Inizializzazione del Thread che riceve i files
 
-        //private Macchina macchina;
-        private List<Macchina> listaMacchine;
-
         private string FiltroAttivoMagazzino = null;
         private string FiltroAttivoCatalogo = null;
 
@@ -27,6 +24,8 @@ namespace Calendario_AriBerg
         private string CurrentComponentiFiltroCodice = null;
         private string CurrentComponentiFiltroMarca = null;
         private bool CurrentComponentiFiltroSottoSoglia = false;
+
+        private List<Macchina> modMacchine = new List<Macchina>();
 
         public FormCalendario()
         {
@@ -39,7 +38,16 @@ namespace Calendario_AriBerg
 
             //Configurazione data
             SelectedDate = DateTime.Now.Date;
+            List<Componenti> c = new List<Componenti>();
+            Macchina m = new Macchina(12, "a", "a", "aa", c, false, "ayeyey");
+            List<InterventiPoss> l = new List<InterventiPoss>();
+            l.Add(InterventiPoss.Controllo_Generale);
+            List<DateTime> datess = new List<DateTime>();
+            datess.Add(DateTime.Now.AddDays(2).Date);
+            Evento ev = new Evento(datess, "cacone", m, l, "bubaya");
 
+            List<Evento> eevv = new List<Evento>();
+            eevv.Add(ev);
 
             /*//Connessione database query test
             Connection = Metodi.ConnectToDatabase();
@@ -106,6 +114,10 @@ namespace Calendario_AriBerg
             AggiornaComboBox();
 
             dgvComponenti.AllowUserToAddRows = false;
+            dgvAggiungiClientiMacchine.AllowUserToAddRows = false;
+            dgvComponentiModificaMacchina.AllowUserToAddRows = false;
+            dgvComponentiAggiungiMacchina.AllowUserToAddRows = false;
+            dgvMostraMacchineAccessori.AllowUserToAddRows = false;
 
             dgvMostraMacchineAccessori.DefaultCellStyle.ForeColor = Color.Black;
             dgvMostraMacchineAccessori.ColumnHeadersDefaultCellStyle.Font = new Font("Yu Gothic UI", 10);
@@ -126,6 +138,10 @@ namespace Calendario_AriBerg
             dgvAggiungiClientiMacchine.DefaultCellStyle.ForeColor = Color.Black;
             dgvAggiungiClientiMacchine.ColumnHeadersDefaultCellStyle.Font = new Font("Yu Gothic UI", 10);
             dgvAggiungiClientiMacchine.DefaultCellStyle.Font = new Font("Yu Gothic UI", 8);
+
+            dgvComponentiModificaMacchina.DefaultCellStyle.ForeColor = Color.Black;
+            dgvComponentiModificaMacchina.ColumnHeadersDefaultCellStyle.Font = new Font("Yu Gothic UI", 10);
+            dgvComponentiModificaMacchina.DefaultCellStyle.Font = new Font("Yu Gothic UI", 8);
 
             //timerUpdatePagina con database
             //t.Interval = 20000;
@@ -184,21 +200,22 @@ namespace Calendario_AriBerg
                         RefreshComponentsCatalogoAndCBX();
                         List<string> types = new List<string>();
                         foreach (DataGridViewRow dgvr in dgvTipiComponenti.Rows) types.Add(dgvr.Cells[0].Value.ToString());
-                        cbBxAggiungiMacchinaTipoFiltro.DataSource = types;
+                        cbBxAggiungiMacchinaTipoFiltro.DataSource = types.FindAll(x => x == x);
+                        cbBxModificaMacchinaTipoFiltro.DataSource = types.FindAll(x => x == x);
                         List<string> marche = new List<string>();
                         foreach (DataGridViewRow dgvr in dgvMarcheComponenti.Rows) marche.Add(dgvr.Cells[0].Value.ToString());
                         cbBxAggiungiMacchinaMarca.DataSource = marche;
+                        cbBxModificaMacchinaMarca.DataSource = marche;
                         Invoke(new Action(() =>
                         {
                             Notifica n = new Notifica();
                             n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
                         }));
-                    }                                                          
+                    }
                     break;
 
                 case 2:
                     UpdateCBXTipi();
-
 
                     if (Metodi.CheckForNewComponents())
                     {
@@ -290,8 +307,8 @@ namespace Calendario_AriBerg
             while (reader.Read())
             {
                 Componenti comp = new Componenti((Componenti)catalogo.First(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)));
-                MagazziniAssemblyMegazord[reader.GetString(0)].Listacomponenti.Add(comp); 
-                MagazziniAssemblyMegazord[reader.GetString(0)].Listacomponenti.Find(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)).Quantita = reader.GetInt32(3); 
+                MagazziniAssemblyMegazord[reader.GetString(0)].Listacomponenti.Add(comp);
+                MagazziniAssemblyMegazord[reader.GetString(0)].Listacomponenti.Find(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)).Quantita = reader.GetInt32(3);
                 if (MagazziniAssemblyMegazord["Totale"].Listacomponenti.Find(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)) == null)
                 {
                     Componenti Compino = new Componenti((Componenti)catalogo.First(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)));
@@ -310,7 +327,7 @@ namespace Calendario_AriBerg
                 Invoke(new Action(() => { d.DataSource = MagazziniAssemblyMegazord[t.Name].Listacomponenti; }));
             }
 
-            Registro.DizMagazzini=MagazziniAssemblyMegazord;
+            Registro.DizMagazzini = MagazziniAssemblyMegazord;
         }
 
         private void RefreshMagazzini()
@@ -527,15 +544,10 @@ namespace Calendario_AriBerg
 
         private void AriCalendario_DateChanged(object sender, DateRangeEventArgs e)
         {
-            SelectedDate = ariCalendario.SelectionStart;
-            Metodi.CheckForNewEventiMese(SelectedDate);
             dgvEventi.CurrentCell = null;
             lblEventi.Text = "Eventi del: " + ariCalendario.SelectionStart.Day + "/" + ariCalendario.SelectionStart.Month + "/" + ariCalendario.SelectionStart.Year;
             SelectedDate = ariCalendario.SelectionStart;
             btnAdd.Enabled = true;
-
-
-
         }
 
         private void GeneraScadenze()
@@ -544,7 +556,6 @@ namespace Calendario_AriBerg
 
             try
             {
-
             }
             catch (Exception e)
             {
@@ -554,7 +565,6 @@ namespace Calendario_AriBerg
 
         public void SetCalendarValue(Evento ev)
         {
-
         }
 
         private void BtnExitLegend_Click(object sender, EventArgs e)
@@ -571,127 +581,127 @@ namespace Calendario_AriBerg
 
         private void dgwEventi_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-           /* if (Registro.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == Registro.DizGiorni[SelectedDate])
-            {
-                if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 6)
-                {
-                    if (!e.Handled)
-                    {
-                        e.Handled = true;
-                        e.PaintBackground(e.CellBounds, dgvEventi.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected);
-                    }
-                    if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != DataGridViewPaintParts.None)
-                    {
-                        string text = e.Value.ToString();
-                        Size fullsize = TextRenderer.MeasureText(text, e.CellStyle.Font);
-                        Rectangle rect1 = new Rectangle(e.CellBounds.Location, e.CellBounds.Size);
-                        Size size;
-                        Color appcolore;
+            /* if (Registro.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == Registro.DizGiorni[SelectedDate])
+             {
+                 if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 6)
+                 {
+                     if (!e.Handled)
+                     {
+                         e.Handled = true;
+                         e.PaintBackground(e.CellBounds, dgvEventi.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected);
+                     }
+                     if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != DataGridViewPaintParts.None)
+                     {
+                         string text = e.Value.ToString();
+                         Size fullsize = TextRenderer.MeasureText(text, e.CellStyle.Font);
+                         Rectangle rect1 = new Rectangle(e.CellBounds.Location, e.CellBounds.Size);
+                         Size size;
+                         Color appcolore;
 
-                        for (int i = 0; i < text.Length; i++)
-                        {
-                            string textPart = text.Substring(i, 1);
-                            size = TextRenderer.MeasureText(textPart, e.CellStyle.Font);
+                         for (int i = 0; i < text.Length; i++)
+                         {
+                             string textPart = text.Substring(i, 1);
+                             size = TextRenderer.MeasureText(textPart, e.CellStyle.Font);
 
-                            switch (Registro.DizGiorni[SelectedDate][e.RowIndex].Interventi[i])
-                            {
-                                case InterventiPoss.Manut_Completa:
-                                    appcolore = Color.Red;
-                                    break;
+                             switch (Registro.DizGiorni[SelectedDate][e.RowIndex].Interventi[i])
+                             {
+                                 case InterventiPoss.Manut_Completa:
+                                     appcolore = Color.Red;
+                                     break;
 
-                                case InterventiPoss.Manut_Parziale:
-                                    appcolore = Color.Orange;
-                                    break;
+                                 case InterventiPoss.Manut_Parziale:
+                                     appcolore = Color.Orange;
+                                     break;
 
-                                case InterventiPoss.Controllo_Generale:
-                                    appcolore = Color.Yellow;
-                                    break;
+                                 case InterventiPoss.Controllo_Generale:
+                                     appcolore = Color.Yellow;
+                                     break;
 
-                                case InterventiPoss.Sost_Elementi_Filtrantiecc:
-                                    appcolore = Color.Blue;
-                                    break;
+                                 case InterventiPoss.Sost_Elementi_Filtrantiecc:
+                                     appcolore = Color.Blue;
+                                     break;
 
-                                case InterventiPoss.Controllo_Fgas:
-                                    appcolore = Color.Green;
-                                    break;
+                                 case InterventiPoss.Controllo_Fgas:
+                                     appcolore = Color.Green;
+                                     break;
 
-                                default:
-                                    appcolore = Color.Black;
-                                    break;
-                            }
-                            using (Brush cellForeBrush = new SolidBrush(appcolore))
-                            {
-                                e.Graphics.DrawString(textPart, e.CellStyle.Font, cellForeBrush, rect1);
-                            }
-                            Size previousSize = size;
-                            rect1.X += size.Width / 2;
-                            rect1.Width = size.Width;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 6)
-                {
-                    if (!e.Handled)
-                    {
-                        e.Handled = true;
-                        e.PaintBackground(e.CellBounds, dgvEventi.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected);
-                    }
-                    if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != DataGridViewPaintParts.None)
-                    {
-                        string text = e.Value.ToString();
-                        Size fullsize = TextRenderer.MeasureText(text, e.CellStyle.Font);
-                        Rectangle rect1 = new Rectangle(e.CellBounds.Location, e.CellBounds.Size);
-                        Size size;
-                        Color appcolore;
+                                 default:
+                                     appcolore = Color.Black;
+                                     break;
+                             }
+                             using (Brush cellForeBrush = new SolidBrush(appcolore))
+                             {
+                                 e.Graphics.DrawString(textPart, e.CellStyle.Font, cellForeBrush, rect1);
+                             }
+                             Size previousSize = size;
+                             rect1.X += size.Width / 2;
+                             rect1.Width = size.Width;
+                         }
+                     }
+                 }
+             }
+             else
+             {
+                 if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 6)
+                 {
+                     if (!e.Handled)
+                     {
+                         e.Handled = true;
+                         e.PaintBackground(e.CellBounds, dgvEventi.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected);
+                     }
+                     if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != DataGridViewPaintParts.None)
+                     {
+                         string text = e.Value.ToString();
+                         Size fullsize = TextRenderer.MeasureText(text, e.CellStyle.Font);
+                         Rectangle rect1 = new Rectangle(e.CellBounds.Location, e.CellBounds.Size);
+                         Size size;
+                         Color appcolore;
 
-                        for (int i = 0; i < text.Length; i++)
-                        {
-                            string textPart = text.Substring(i, 1);
-                            size = TextRenderer.MeasureText(textPart, e.CellStyle.Font);
+                         for (int i = 0; i < text.Length; i++)
+                         {
+                             string textPart = text.Substring(i, 1);
+                             size = TextRenderer.MeasureText(textPart, e.CellStyle.Font);
 
-                            List<Evento> momentlist = (List<Evento>)dgvEventi.DataSource;
+                             List<Evento> momentlist = (List<Evento>)dgvEventi.DataSource;
 
-                            switch (momentlist[e.RowIndex].Interventi[i])
-                            {
-                                case InterventiPoss.Manut_Completa:
-                                    appcolore = Color.Red;
-                                    break;
+                             switch (momentlist[e.RowIndex].Interventi[i])
+                             {
+                                 case InterventiPoss.Manut_Completa:
+                                     appcolore = Color.Red;
+                                     break;
 
-                                case InterventiPoss.Manut_Parziale:
-                                    appcolore = Color.Orange;
-                                    break;
+                                 case InterventiPoss.Manut_Parziale:
+                                     appcolore = Color.Orange;
+                                     break;
 
-                                case InterventiPoss.Controllo_Generale:
-                                    appcolore = Color.Yellow;
-                                    break;
+                                 case InterventiPoss.Controllo_Generale:
+                                     appcolore = Color.Yellow;
+                                     break;
 
-                                case InterventiPoss.Sost_Elementi_Filtrantiecc:
-                                    appcolore = Color.Blue;
-                                    break;
+                                 case InterventiPoss.Sost_Elementi_Filtrantiecc:
+                                     appcolore = Color.Blue;
+                                     break;
 
-                                case InterventiPoss.Controllo_Fgas:
-                                    appcolore = Color.Green;
-                                    break;
+                                 case InterventiPoss.Controllo_Fgas:
+                                     appcolore = Color.Green;
+                                     break;
 
-                                default:
-                                    appcolore = Color.Black;
-                                    break;
-                            }
+                                 default:
+                                     appcolore = Color.Black;
+                                     break;
+                             }
 
-                            using (Brush cellForeBrush = new SolidBrush(appcolore))
-                            {
-                                e.Graphics.DrawString(textPart, e.CellStyle.Font, cellForeBrush, rect1);
-                            }
-                            Size previousSize = size;
-                            rect1.X += size.Width / 2;
-                            rect1.Width = size.Width;
-                        }
-                    }
-                }
-            }*/
+                             using (Brush cellForeBrush = new SolidBrush(appcolore))
+                             {
+                                 e.Graphics.DrawString(textPart, e.CellStyle.Font, cellForeBrush, rect1);
+                             }
+                             Size previousSize = size;
+                             rect1.X += size.Width / 2;
+                             rect1.Width = size.Width;
+                         }
+                     }
+                 }
+             }*/
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -713,7 +723,6 @@ namespace Calendario_AriBerg
             gbxAggiungi.Visible = false;
             gbxAggiungi.Enabled = false;
         }
-
 
         private void btnAggiungiAddintervento_Click(object sender, EventArgs e)
         {
@@ -1069,11 +1078,14 @@ namespace Calendario_AriBerg
         {
             if (gBxClientiAggiungiCliente.Visible == true)
             {
+                dgvVisualizzaClienti.Enabled = true;
                 gBxClientiAggiungiCliente.SendToBack();
                 gBxClientiAggiungiCliente.Visible = false;
+                gBxClientiModificaClienti.Visible = false;
             }
             else
             {
+                dgvVisualizzaClienti.Enabled = false;
                 gBxClientiAggiungiCliente.BringToFront();
                 gBxClientiAggiungiCliente.Visible = true;
                 gBxClientiModificaClienti.Visible = false;
@@ -1083,6 +1095,7 @@ namespace Calendario_AriBerg
         private void btnAggiungiClienteChiudi_Click(object sender, EventArgs e)
         {
             gBxClientiAggiungiCliente.Visible = false;
+            dgvVisualizzaClienti.Enabled = true;
         }
 
         private void btnConfermaAggiungiMacchina_Click(object sender, EventArgs e)
@@ -1100,8 +1113,6 @@ namespace Calendario_AriBerg
             {
                 if (!Metodi.AreThereAnyEmptyTextBoxes(gBxAggiungiMacchina.Controls))
                 {
-
-
                     //listaMacchine = new List<Macchina>();
 
                     List<Componenti> componenti = new List<Componenti>();
@@ -1139,7 +1150,7 @@ namespace Calendario_AriBerg
 
                     foreach (Control c in gBxAggiungiMacchina.Controls)
                     {
-                        if(c is TextBox tb)
+                        if (c is TextBox tb)
                         {
                             tb.Clear();
                         }
@@ -1199,7 +1210,7 @@ namespace Calendario_AriBerg
                 //    dgvAggiungiClientiMacchine.DataSource = bs;
                 //}
 
-                //notifica.Show("Macchina aggiunta correttamente!", Notifica.enmType.Success); 
+                //notifica.Show("Macchina aggiunta correttamente!", Notifica.enmType.Success);
                 //macchina = null;
                 //gBxAggiungiMacchina.Visible = false;
 
@@ -1225,8 +1236,8 @@ namespace Calendario_AriBerg
 
         private void btnAggiungiMacchinaAggiungiComponenti_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaTipoFiltro.Text) && 
-                !string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaCodiceFiltro.Text) && 
+            if (!string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaTipoFiltro.Text) &&
+                !string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaCodiceFiltro.Text) &&
                 !string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaMarcaFiltro.Text))
             {
                 Componenti c = Registro.ComponentiAttuali.Find(x => x.Codice == cbBxAggiungiMacchinaCodiceFiltro.Text && x.Marca == cbBxAggiungiMacchinaMarcaFiltro.Text && x.Tipo == cbBxAggiungiMacchinaTipoFiltro.Text);
@@ -1234,7 +1245,7 @@ namespace Calendario_AriBerg
                 List<Componenti> compsInDGV = new List<Componenti>();
                 compsInDGV.Add(c);
 
-                foreach(DataGridViewRow dgvr in dgvComponentiAggiungiMacchina.Rows)
+                foreach (DataGridViewRow dgvr in dgvComponentiAggiungiMacchina.Rows)
                 {
                     compsInDGV.Add(dgvr.DataBoundItem as Componenti);
                 }
@@ -1275,7 +1286,6 @@ namespace Calendario_AriBerg
             ///4:n_ordine_componente
             List<Componenti> Catalogo = new List<Componenti>();
             Componenti c = new Componenti();
-
 
             string query = $"SELECT * From componente";
             MySqlCommand command = new MySqlCommand(query, conn);
@@ -1367,7 +1377,7 @@ namespace Calendario_AriBerg
             {
                 DataSource = l
             };
-            
+
             Invoke(new Action(() => { dgvVisualizzaClienti.DataSource = bs; }));
         }
 
@@ -1383,13 +1393,13 @@ namespace Calendario_AriBerg
                 List<TextBox> txBxs = new List<TextBox>();
                 foreach (Control c in gBxClientiAggiungiCliente.Controls)
                 {
-                    if (c is TextBox box) 
+                    if (c is TextBox box)
                     {
                         if (!string.IsNullOrWhiteSpace(c.Tag.ToString()))
                         {
                             if (c.Tag.ToString() == "Mandatory") txBxs.Add(box);
-                        } 
-                    } 
+                        }
+                    }
                 }
 
                 if (!Metodi.AreThereAnyEmptyTextBoxes(txBxs))
@@ -1401,9 +1411,9 @@ namespace Calendario_AriBerg
                         $"'{tbxAggiungiClienteMail.Text}', " +
                         $"'{tbxAggiungiClienteInd.Text}'" +
                         ", @IVA" +
-                        ", @P_RIF"+
+                        ", @P_RIF" +
                         ");";
-                                              
+
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@IVA", tbxAggiungiClienteIVA.Text);
                     cmd.Parameters.AddWithValue("@P_RIF", tbxAggiungiClientePrif.Text);
@@ -1412,7 +1422,7 @@ namespace Calendario_AriBerg
 
                     List<Macchina> macc = new List<Macchina>();
 
-                    foreach(DataGridViewRow dgvr in dgvAggiungiClientiMacchine.Rows)
+                    foreach (DataGridViewRow dgvr in dgvAggiungiClientiMacchine.Rows)
                     {
                         Macchina macchina = dgvr.DataBoundItem as Macchina;
                         macc.Add(macchina);
@@ -1426,9 +1436,9 @@ namespace Calendario_AriBerg
                         cmd.ExecuteNonQuery();
                     }
 
-                    foreach(Macchina macchina in macc)
+                    foreach (Macchina macchina in macc)
                     {
-                        foreach(Componenti comp in macchina._Componenti)
+                        foreach (Componenti comp in macchina._Componenti)
                         {
                             query = $"INSERT INTO componenti_macchina VALUES('{comp.Codice}', " +
                             $"'{comp.Marca}', " +
@@ -1436,10 +1446,9 @@ namespace Calendario_AriBerg
                             $"'{macchina._Matricola}')";
                             cmd = new MySqlCommand(query, conn);
                             cmd.ExecuteNonQuery();
-                        }                       
+                        }
                     }
 
-                    
                     gBxClientiAggiungiCliente.Visible = false;
 
                     //threadRicevi.Suspend();
@@ -1466,6 +1475,7 @@ namespace Calendario_AriBerg
 
                     gBxAggiungiMacchina.Visible = false;
                     gBxModificaMacchina.Visible = false;
+                    dgvVisualizzaClienti.Enabled = true;
 
                     RefreshCustomers();
                     //notifica.Show("Cliente aggiunto correttamente!", Notifica.enmType.Success);
@@ -1489,7 +1499,6 @@ namespace Calendario_AriBerg
         {
             gBxAggiungiMacchina.Visible = false;
         }
-
 
         private void lvwMostraMacchineAccessori_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1534,11 +1543,14 @@ namespace Calendario_AriBerg
         {
             if (gBxClientiModificaClienti.Visible == true)
             {
+                dgvVisualizzaClienti.Enabled = true;
                 gBxClientiModificaClienti.SendToBack();
                 gBxClientiModificaClienti.Visible = false;
+                gBxClientiAggiungiCliente.Visible = false;
             }
             else
             {
+                dgvVisualizzaClienti.Enabled = false;
                 gBxClientiModificaClienti.BringToFront();
                 gBxClientiModificaClienti.Visible = true;
                 gBxClientiAggiungiCliente.Visible = false;
@@ -1903,11 +1915,28 @@ namespace Calendario_AriBerg
             if (gBxModificaMacchina.Visible == true)
             {
                 gBxModificaMacchina.Visible = false;
+                //dgvAggiungiClientiMacchine.Enabled = true;
             }
             else
             {
+                if (dgvAggiungiClientiMacchine.Rows.Count == 0) return; 
                 gBxModificaMacchina.Visible = true;
                 gBxAggiungiMacchina.Visible = false;
+
+                //dgvAggiungiClientiMacchine.Enabled = false;
+                Macchina m = dgvAggiungiClientiMacchine.CurrentRow.DataBoundItem as Macchina;
+                cbBxModificaMacchinaMarca.SelectedItem = m._Marca;
+                tbxModificaMacchinaModello.Text = m._Modello;
+                tbxModificaMacchinaMatricola.Text = m._Matricola;
+                chBxModificaMacchinaNoleggio.Checked = m._Noleggio;
+
+                BindingSource bs = new BindingSource()
+                {
+                    DataSource = m._Componenti
+                };
+
+                dgvComponentiModificaMacchina.DataSource = bs;
+                rtbModificaMacchinaNote.Text = m._Note;
             }
         }
 
@@ -1995,7 +2024,6 @@ namespace Calendario_AriBerg
             cbBxSearchEventoMatricola.Enabled = true;
         }
 
-
         private void pbxAlloStoricoCliente_Click(object sender, EventArgs e)
         {
             if (dgvVisualizzaClienti.CurrentCell.ColumnIndex == 0)
@@ -2010,29 +2038,31 @@ namespace Calendario_AriBerg
 
         private void pbxAlloStoricoMacchina_Click(object sender, EventArgs e)
         {
-           /* if (lvwMostraMacchineAccessori.SelectedItems.Count > 0)
-            {
-                if (dgvVisualizzaClienti.CurrentCell.ColumnIndex == 0)
-                {
-                    rdBtnSearchEventoCliente.Checked = false;
-                    rdBtnSearchEventoMatricola.Checked = true;
+            /* if (lvwMostraMacchineAccessori.SelectedItems.Count > 0)
+             {
+                 if (dgvVisualizzaClienti.CurrentCell.ColumnIndex == 0)
+                 {
+                     rdBtnSearchEventoCliente.Checked = false;
+                     rdBtnSearchEventoMatricola.Checked = true;
 
-                    cbBxSearchEventoMatricola.Text = lvwMostraMacchineAccessori.SelectedItems[0].Text + "/" + lvwMostraMacchineAccessori.SelectedItems[0].SubItems[1].Text + "/" + lvwMostraMacchineAccessori.SelectedItems[0].SubItems[2].Text;
+                     cbBxSearchEventoMatricola.Text = lvwMostraMacchineAccessori.SelectedItems[0].Text + "/" + lvwMostraMacchineAccessori.SelectedItems[0].SubItems[1].Text + "/" + lvwMostraMacchineAccessori.SelectedItems[0].SubItems[2].Text;
 
-                    btnSearchEvento_Click(sender, e);
-                    tabControl1.SelectedTab = tabPage1;
-                }
-            }
-            else
-            {
-                Notifica n = new Notifica();
-                n.Show("Seleziona una macchina", Notifica.enmType.Info);
-            }*/ //errore
+                     btnSearchEvento_Click(sender, e);
+                     tabControl1.SelectedTab = tabPage1;
+                 }
+             }
+             else
+             {
+                 Notifica n = new Notifica();
+                 n.Show("Seleziona una macchina", Notifica.enmType.Info);
+             }*/ //errore
         }
 
         private void btnModificaClienteChiudi_Click(object sender, EventArgs e)
         {
             gBxClientiModificaClienti.Visible = false;
+            gBxModificaMacchina.Visible = false;
+            dgvVisualizzaClienti.Enabled = true;
         }
 
         private void btnModificaAggiungiMacchina_Click(object sender, EventArgs e)
@@ -2076,11 +2106,30 @@ namespace Calendario_AriBerg
             if (gBxModificaMacchina.Visible == true)
             {
                 gBxModificaMacchina.Visible = false;
+                dgvModificaCliente.Enabled = true;
             }
             else
             {
+                if (dgvModificaCliente.Rows.Count == 0) return;
+
                 gBxModificaMacchina.Visible = true;
+                gBxModificaMacchina.BringToFront();
                 gBxAggiungiMacchina.Visible = false;
+
+                dgvModificaCliente.Enabled = false;
+                Macchina m = dgvModificaCliente.CurrentRow.DataBoundItem as Macchina;
+                cbBxModificaMacchinaMarca.SelectedItem = m._Marca;
+                tbxModificaMacchinaModello.Text = m._Modello;
+                tbxModificaMacchinaMatricola.Text = m._Matricola;
+                chBxModificaMacchinaNoleggio.Checked = m._Noleggio;
+
+                BindingSource bs = new BindingSource()
+                {
+                    DataSource = m._Componenti
+                };
+
+                dgvComponentiModificaMacchina.DataSource = bs;
+                rtbModificaMacchinaNote.Text = m._Note;
             }
         }
 
@@ -2089,27 +2138,42 @@ namespace Calendario_AriBerg
             Notifica notifica = new Notifica();
             try
             {
-                listaMacchine = new List<Macchina>();
+                List<Macchina> listaMacchine = new List<Macchina>();
 
                 List<Componenti> componenti = new List<Componenti>();
 
-                //foreach (ListViewItem item in lvwModificaComponentiMacchina.Items)
+                Macchina m = null;
+
+                if (!gBxModificaMacchina.Visible)
                 {
-                    //errore
-                    //Componenti componente = new Componenti(item.Text, item.SubItems[1].Text);
-                    //componenti.Add(componente);
+                    m = dgvAggiungiClientiMacchine.CurrentRow.DataBoundItem as Macchina;
+                }
+                else
+                {
+                    m = dgvModificaCliente.CurrentRow.DataBoundItem as Macchina;
+                }
+                
+
+                Macchina macchina = new Macchina(m._cliente, cbBxModificaMacchinaMarca.Text, tbxModificaMacchinaModello.Text,
+                    tbxModificaMacchinaMatricola.Text, componenti, chBxModificaMacchinaNoleggio.Checked, rtbModificaMacchinaNote.Text);
+
+                foreach (DataGridViewRow dgvr in dgvModificaCliente.Rows)
+                {
+                    listaMacchine.Add(dgvr.DataBoundItem as Macchina);
                 }
 
-                Macchina macchina = new Macchina(Metodi.GetCustomerID(dgvVisualizzaClienti.CurrentRow),tbxModificaMacchinaMarca.Text, tbxModificaMacchinaModello.Text,
-                    tbxModificaMacchinaMatricola.Text, componenti, chBxModificaMacchinaNoleggio.Checked, rtbModificaMacchinaNote.Text);
+                modMacchine.Add(dgvModificaCliente.CurrentRow.DataBoundItem as Macchina);
+                listaMacchine.Remove(dgvModificaCliente.CurrentRow.DataBoundItem as Macchina);
                 listaMacchine.Add(macchina);
 
-                ListViewItem items = new ListViewItem
+                BindingSource bs = new BindingSource()
                 {
-                    Text = macchina._Marca
+                    DataSource = listaMacchine
                 };
-                items.SubItems.Add(macchina._Modello);
-                items.SubItems.Add(macchina._Matricola);
+
+                dgvModificaCliente.DataSource = bs;
+                dgvModificaCliente.Enabled = true;
+                dgvVisualizzaClienti.Enabled = true;
 
                 //lvwAggiungiClientiMacchine.Items.Add(items);
 
@@ -2124,10 +2188,9 @@ namespace Calendario_AriBerg
                         c.Text = null;
                     }
 
-                    if (c is ListView)
+                    if (c is DataGridView dgv)
                     {
-                        ListView listView = (ListView)c;
-                        listView.Items.Clear();
+                        dgv.DataSource = null;
                     }
                 }
             }
@@ -2139,7 +2202,21 @@ namespace Calendario_AriBerg
 
         private void btnModificaEliminaMacchina_Click(object sender, EventArgs e)
         {
-            //lvwModificaCliente.Items.Remove(lvwModificaCliente.SelectedItems[0]);
+            List<Macchina> maccs = new List<Macchina>();
+
+            foreach(DataGridViewRow dgvr in dgvModificaCliente.Rows)
+            {
+                maccs.Add(dgvr.DataBoundItem as Macchina);
+            }
+
+            maccs.Remove(dgvModificaCliente.CurrentRow.DataBoundItem as Macchina);
+
+            BindingSource bs = new BindingSource()
+            {
+                DataSource = maccs
+            };
+
+            dgvModificaCliente.DataSource = bs;
         }
 
         private void btnAggiungiEliminaMacchina_Click(object sender, EventArgs e)
@@ -2173,13 +2250,14 @@ namespace Calendario_AriBerg
         private void btnChiudigBxModificaMacchina_Click(object sender, EventArgs e)
         {
             gBxModificaMacchina.Visible = false;
+            dgvModificaCliente.Enabled = true;
         }
 
         private void btnConfermaModificaCliente_Click(object sender, EventArgs e)
         {
             Notifica n = new Notifica();
             try
-            {                
+            {
                 if (!Metodi.AreThereAnyEmptyTextBoxes(gBxClientiModificaClienti.Controls, "Mandatory") && !Metodi.CheckForNewCustomersAndNotify())
                 {
                     string nome = txBxModificaClienteNome.Text;
@@ -2187,7 +2265,7 @@ namespace Calendario_AriBerg
                     string tel = txBxModificaClienteTel.Text;
                     string ind = txBxModificaClienteInd.Text;
                     string iva = txBxModificaClienteIva.Text;
-                    string prif = txBxDettagliClientePrif.Text;
+                    string prif = txBxModificaClientePrif.Text;
 
                     MySqlConnection conn = Metodi.ConnectToDatabase();
                     string query = $"UPDATE cliente SET nome_cliente = '{nome}', " +
@@ -2195,15 +2273,108 @@ namespace Calendario_AriBerg
                         $"mail_cliente = '{mail}', " +
                         $"indirizzo_cliente = '{ind}'";
 
-                    if (!string.IsNullOrWhiteSpace(iva)) query += $", p.iva_cliente = '{iva}'";
-                    if (!string.IsNullOrWhiteSpace(prif)) query += $", p.rif_cliente = '{prif}'";
+                    if (!string.IsNullOrWhiteSpace(prif)) query += $", `p.rif_cliente` = '{prif}'";
+                    if (!string.IsNullOrWhiteSpace(iva)) query += $", `p.iva_cliente` = '{iva}'";                   
 
-                    query += $"WHERE id_cliente = {Metodi.GetCustomerID(mail, tel)};";
+                    query += $" WHERE id_cliente = {Metodi.GetCustomerID((dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente)._Email, (dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente)._Telefono)};";
 
                     MySqlCommand cmd = new MySqlCommand(query, conn);
-                    int row = cmd.ExecuteNonQuery();
+                    int rows = cmd.ExecuteNonQuery();
 
-                    if(row > 0)
+                    List<Macchina> maccs = new List<Macchina>();
+
+                    foreach(DataGridViewRow row in dgvModificaCliente.Rows)
+                    {
+                        maccs.Add(row.DataBoundItem as Macchina);
+                    }
+
+                    List<Macchina> oldMacchine = new List<Macchina>();
+
+                    query = $"SELECT * FROM macchina WHERE id_cliente = {Metodi.GetCustomerID((dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente)._Email, (dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente)._Telefono)}";
+                    cmd = new MySqlCommand(query, conn);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Macchina m = new Macchina();
+
+                        m._Marca = reader.GetString(0);
+                        m._Modello = reader.GetString(1);
+                        m._Matricola = reader.GetString(2);
+                        m._Noleggio = reader.GetBoolean(3);
+                        m._cliente = reader.GetInt32(4);
+                        m._Note = reader.GetString(5);
+
+                        query = $"SELECT * FROM componenti_macchina WHERE " +
+                            $"marca_macchina = '{m._Marca}' AND matricola_macchina = '{m._Matricola}'";
+                        cmd = new MySqlCommand(query, Metodi.ConnectToDatabase());
+                        MySqlDataReader reader2 = cmd.ExecuteReader();
+                        while (reader2.Read())
+                        {
+                            Componenti c = new Componenti();
+                            c.Codice = reader2.GetString(0);
+                            c.Marca = reader2.GetString(1);
+
+                            query = $"SELECT * FROM componente WHERE " +
+                            $"codice_componente = '{c.Codice}' AND marca_componente = '{c.Marca}'";
+                            cmd = new MySqlCommand(query, Metodi.ConnectToDatabase());
+                            MySqlDataReader reader3 = cmd.ExecuteReader();
+
+                            while (reader3.Read())
+                            {
+                                c.Tipo = reader3.GetString(2);
+                                c.Soglia = reader3.GetInt32(3);
+                                c.N_ordine = reader3.GetInt32(4);
+                            }
+
+                            m._Componenti.Add(c);
+                        }
+                    }
+
+                    foreach (Macchina m in oldMacchine)
+                    {
+                        foreach (Componenti c in m._Componenti)
+                        {
+                            query = $"DELETE FROM componenti_macchina WHERE " +
+                            $"marca_macchina = '{m._Marca}' AND " +
+                            $"matricola_macchina = '{m._Matricola}' AND " +
+                            $"codice_componente = '{c.Codice}' AND " +
+                            $"marca_componente = '{c.Marca}';";
+
+                            cmd = new MySqlCommand(query, conn);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        query = $"DELETE FROM macchina WHERE marca_macchina = '{m._Marca}' AND matricola_macchina = '{m._Matricola}'";
+                        cmd = new MySqlCommand(query, conn);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    foreach (Macchina mac in maccs)
+                    {
+                        foreach (Componenti c in mac._Componenti)
+                        {
+                            query = $"INSERT INTO componenti_macchina VALUES('{c.Codice}', " +
+                                $"'{c.Marca}', " +
+                                $"'{mac._Marca}', " +
+                                $"'{mac._Matricola}')";
+
+                            cmd = new MySqlCommand(query, conn);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        query = $"INSERT INTO macchina VALUES('{mac._Marca}', " +
+                            $"'{mac._Modello}', " +
+                            $"'{mac._Matricola}', " +
+                            $"'{Convert.ToInt32(mac._Noleggio)}', " +
+                            $"'{mac._cliente}', " +
+                            $"'{mac._Note}')";
+
+                        cmd = new MySqlCommand(query, Metodi.ConnectToDatabase());
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    if (rows > 0)
                     {
                         RefreshCustomers();
                         n.Show("Modifica avvenuta correttamente!", Notifica.enmType.Success);
@@ -2214,7 +2385,7 @@ namespace Calendario_AriBerg
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 n.Show(ex.Message, Notifica.enmType.Warning);
             }
@@ -2222,17 +2393,21 @@ namespace Calendario_AriBerg
 
         private void btnModificaMacchinaAggiungiComponenti_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(cBxModificaMacchinaTipo.Text) || string.IsNullOrWhiteSpace(txBxModificaMacchinaCodice.Text))
+            if (!string.IsNullOrWhiteSpace(cbBxModificaMacchinaTipoFiltro.Text) || !string.IsNullOrWhiteSpace(cbBxModificaMacchinaMarcaFiltro.Text) || !string.IsNullOrWhiteSpace(cbBxModificaMacchinaCodiceFiltro.Text))
             {
-            }
-            else
-            {
-                ListViewItem item = new ListViewItem
+                if (Metodi.CheckForNewComponentsAndNotify()) return;
+                Componenti c = Registro.ComponentiAttuali.Find(x => x.Tipo == cbBxModificaMacchinaTipoFiltro.Text && x.Marca == cbBxModificaMacchinaMarcaFiltro.Text && x.Codice == cbBxModificaMacchinaCodiceFiltro.Text);
+
+                List<Componenti> comps = new List<Componenti>();
+
+                foreach (DataGridViewRow dgvr in dgvComponentiModificaMacchina.Rows)
                 {
-                    Text = cBxModificaMacchinaTipo.Text
-                };
-                item.SubItems.Add(txBxModificaMacchinaCodice.Text);
-                //lvwModificaComponentiMacchina.Items.Add(item);
+                    comps.Add(dgvr.DataBoundItem as Componenti);
+                }
+
+                comps.Add(c);
+
+                dgvComponentiModificaMacchina.DataSource = comps;
             }
         }
 
@@ -2276,7 +2451,6 @@ namespace Calendario_AriBerg
                 string query = $"DELETE FROM componente WHERE codice_componente = '{componente.Codice}'";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 int row = cmd.ExecuteNonQuery();
-                
 
                 if (row == 0) throw new Exception("Nessuna riga modificata.");
 
@@ -2285,14 +2459,14 @@ namespace Calendario_AriBerg
 
                 if (!string.IsNullOrWhiteSpace(FiltroAttivoCatalogo))
                 {
-                    if(dgvComponenti.Rows.Count > 0)
+                    if (dgvComponenti.Rows.Count > 0)
                     {
-                        if(!string.IsNullOrWhiteSpace(FiltroAttivoCatalogo)) ReApplyFiltroCatalogo();
+                        if (!string.IsNullOrWhiteSpace(FiltroAttivoCatalogo)) ReApplyFiltroCatalogo();
                     }
                     else
                     {
                         RefreshComponentsCatalogoAndCBX();
-                    }                    
+                    }
                 }
             }
             catch (Exception ex)
@@ -2372,7 +2546,7 @@ namespace Calendario_AriBerg
                     conn.Close();
                     EndCaricamento();
                 }
-                
+
                 n.Show("Magazzino aggiunto con successo!", Notifica.enmType.Success);
             }
         }
@@ -2445,7 +2619,7 @@ namespace Calendario_AriBerg
         {
             Notifica n = new Notifica();
             if (string.IsNullOrWhiteSpace(txBxTipoComponente.Text))
-            {         
+            {
                 n.Show("Inserisci un nome valido per la tipologia.", Notifica.enmType.Warning);
             }
             else
@@ -2595,12 +2769,11 @@ namespace Calendario_AriBerg
         {
             Notifica n = new Notifica();
             if (string.IsNullOrWhiteSpace(txBxMarcaComponente.Text))
-            {                
+            {
                 n.Show("Inserisci un nome valido per la marca.", Notifica.enmType.Warning);
             }
             else
             {
-
                 MySqlConnection conn = null;
                 try
                 {
@@ -2709,7 +2882,7 @@ namespace Calendario_AriBerg
                     RefreshComponentBrandsDataGridView();
                 }
                 else
-                {                   
+                {
                     n.Show("La marca del componente non è stata cancellata correttamente, riprovare.", Notifica.enmType.Warning);
                 }
             }
@@ -3062,7 +3235,7 @@ namespace Calendario_AriBerg
                     Notifica n = new Notifica();
                     n.Show("Magazzino eliminato con successo!", Notifica.enmType.Success);
                     RefreshConetnutiMagazzini();
-                    if(!string.IsNullOrWhiteSpace(FiltroAttivoMagazzino)) ReApplyFiltroMagazzino(CurrentComponentiFiltroMarca, CurrentComponentiFiltroCodice, CurrentComponentiFiltroTipo, CurrentComponentiFiltroSottoSoglia);
+                    if (!string.IsNullOrWhiteSpace(FiltroAttivoMagazzino)) ReApplyFiltroMagazzino(CurrentComponentiFiltroMarca, CurrentComponentiFiltroCodice, CurrentComponentiFiltroTipo, CurrentComponentiFiltroSottoSoglia);
                 }
                 else
                 {
@@ -3128,7 +3301,7 @@ namespace Calendario_AriBerg
                     {
                         FiltroAttivoCatalogo = null;
                         FiltroAttivoMagazzino = null;
-                        throw new Exception("Applicare il filtro al catalogo o al magazzino.");                      
+                        throw new Exception("Applicare il filtro al catalogo o al magazzino.");
                     }
 
                     string query = "SELECT * FROM componente";
@@ -3226,7 +3399,7 @@ namespace Calendario_AriBerg
                     CurrentComponentiFiltroMarca = marca;
                     CurrentComponentiFiltroTipo = tipo;
                     CurrentComponentiFiltroSottoSoglia = sottoSoglia;
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -3248,7 +3421,7 @@ namespace Calendario_AriBerg
         private void btnImmagazzinaComponente_Click(object sender, EventArgs e)
         {
             Caricamento();
-            if (Metodi.CheckForNewComponents()||Metodi.CheckForNewDatiMagazzini(tbCtrlMagazzini))
+            if (Metodi.CheckForNewComponents() || Metodi.CheckForNewDatiMagazzini(tbCtrlMagazzini))
             {
                 RefreshComponentsCatalogoAndCBX();
                 RefreshMagazzini();
@@ -3289,11 +3462,9 @@ namespace Calendario_AriBerg
                 conn.Close();
                 EndCaricamento();
             }
-
-
         }
 
-        private void EditContenutiMagazzinoApply(bool remove,bool pos)
+        private void EditContenutiMagazzinoApply(bool remove, bool pos)
         {
             Caricamento();
             if (Metodi.CheckForNewComponents() || Metodi.CheckForNewDatiMagazzini(tbCtrlMagazzini))
@@ -3317,7 +3488,7 @@ namespace Calendario_AriBerg
                     int quantapp = (int)((DataGridView)tbCtrlMagazzini.SelectedTab.Controls[0]).CurrentRow.Cells[5].Value;
                     if (pos == true) { quantapp += (int)nudEditNcomponenti.Value; }
                     else { quantapp -= (int)nudEditNcomponenti.Value; }
-                    if(quantapp<0)
+                    if (quantapp < 0)
                     {
                         Notifica naa = new Notifica();
                         naa.Show("La modifica porta il valore sotto lo zero. Operazione non valida.", Notifica.enmType.Warning);
@@ -3326,7 +3497,6 @@ namespace Calendario_AriBerg
                     string query = $"UPDATE componenti_magazzino SET quantità_componente='{quantapp}' WHERE id_magazzino='{tbCtrlMagazzini.SelectedTab.Name}' and marca_componente='{((DataGridView)tbCtrlMagazzini.SelectedTab.Controls[0]).CurrentRow.Cells[1].Value}' and codice_componente='{((DataGridView)tbCtrlMagazzini.SelectedTab.Controls[0]).CurrentRow.Cells[0].Value}'";
                     MySqlCommand InsertMagazzino = new MySqlCommand(query, conn);
                     InsertMagazzino.ExecuteNonQuery();
-
                 }
                 else
                 {
@@ -3354,7 +3524,7 @@ namespace Calendario_AriBerg
 
         private void EditContenutiMagazzino()
         {
-            if (tbCtrlMagazzini.SelectedTab.Name!="Totale") 
+            if (tbCtrlMagazzini.SelectedTab.Name != "Totale")
             {
                 gbxEditComponenti.Visible = true;
             }
@@ -3365,11 +3535,11 @@ namespace Calendario_AriBerg
             }
         }
 
-       
         private void CommonCellDoubleClickEvent(object sender, DataGridViewCellEventArgs e)
         {
             EditContenutiMagazzino();
         }
+
         private void dgvMagazzinoTotale_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             EditContenutiMagazzino();
@@ -3477,10 +3647,11 @@ namespace Calendario_AriBerg
             tbxMostraPrif.Text = CurrentCliente._Ref;
             if (string.IsNullOrWhiteSpace(tbxMostraPrif.Text)) tbxMostraPrif.Text = "None";
 
-            
-
-            BindingSource bs = new BindingSource() { DataSource=Registro.ClientiAttuali.Find(x => x._Email == CurrentCliente._Email &&
-            x._Telefono == CurrentCliente._Telefono)._Mach.ToList() };
+            BindingSource bs = new BindingSource()
+            {
+                DataSource = Registro.ClientiAttuali.Find(x => x._Email == CurrentCliente._Email &&
+    x._Telefono == CurrentCliente._Telefono)._Mach.ToList()
+            };
             dgvMostraMacchineAccessori.DataSource = bs;
             dgvMostraMacchineAccessori.Columns[0].Visible = false;
             dgvMostraMacchineAccessori.Columns["_Marca"].HeaderText = "Marca";
@@ -3520,10 +3691,9 @@ namespace Calendario_AriBerg
             rtbMostraNote.Text = Mattuale._Note;
             chbxMostraNoleggio.Checked = Mattuale._Noleggio;
             dgvMostraComponentiMacchina.DataSource = bs;
-            dgvMostraComponentiMacchina.Columns[3].Visible=false;
+            dgvMostraComponentiMacchina.Columns[3].Visible = false;
             dgvMostraComponentiMacchina.Columns[4].Visible = false;
             dgvMostraComponentiMacchina.Columns[5].Visible = false;
-
         }
 
         private void dgvEventi_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -3536,25 +3706,89 @@ namespace Calendario_AriBerg
             gbxDettagliEvento.Visible = false;
         }
 
-        private void btnInfoModificaEventiRicorrenti_MouseHover(object sender, EventArgs e)
+        private void cBxModificaMacchinaTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            pnlInfoModifyRicorrenza.Visible = true;
+            if (!string.IsNullOrWhiteSpace(cbBxModificaMacchinaTipoFiltro.Text))
+            {
+                cbBxAggiungiMacchinaCodiceFiltro.DataSource = null;
+                cbBxAggiungiMacchinaMarcaFiltro.DataSource = null;
+                MySqlConnection conn = Metodi.ConnectToDatabase();
+                string query = $"SELECT marca_componente, codice_componente FROM componente WHERE tipo_componente = '{cbBxModificaMacchinaTipoFiltro.Text}'";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataReader res = cmd.ExecuteReader();
+
+                List<string> marche = new List<string>();
+                List<string> codici = new List<string>();
+                while (res.Read())
+                {
+                    marche.Add(res.GetString(0));
+                    codici.Add(res.GetString(1));
+                }
+
+                if (marche.Count == 0) return;
+
+                cbBxModificaMacchinaMarcaFiltro.Enabled = true;
+                cbBxModificaMacchinaCodiceFiltro.Enabled = true;
+
+                BindingSource bsMarche = new BindingSource()
+                {
+                    DataSource = marche
+                };
+
+                BindingSource bsCodici = new BindingSource()
+                {
+                    DataSource = codici
+                };
+
+                cbBxModificaMacchinaCodiceFiltro.DataSource = bsCodici;
+                cbBxModificaMacchinaMarcaFiltro.DataSource = bsMarche;
+            }
         }
 
-        private void btnInfoAggiungiEventiRicorrenti_MouseHover(object sender, EventArgs e)
+        private void cBxModificaMacchinaMarcaFiltro_SelectedIndexChanged(object sender, EventArgs e)
         {
-            pnlInfoAddRicorrenza.Visible = true;
+            if (!string.IsNullOrWhiteSpace(cbBxModificaMacchinaMarcaFiltro.Text))
+            {
+                cbBxAggiungiMacchinaCodiceFiltro.DataSource = null;
+                MySqlConnection conn = Metodi.ConnectToDatabase();
+                string query = $"SELECT codice_componente FROM componente WHERE tipo_componente = '{cbBxModificaMacchinaTipoFiltro.Text}' AND marca_componente = '{cbBxModificaMacchinaMarcaFiltro.Text}'";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataReader res = cmd.ExecuteReader();
+
+                List<string> codici = new List<string>();
+                while (res.Read())
+                {
+                    codici.Add(res.GetString(0));
+                }
+
+                cbBxModificaMacchinaCodiceFiltro.Enabled = true;
+
+                BindingSource bsCodici = new BindingSource()
+                {
+                    DataSource = codici
+                };
+
+                cbBxModificaMacchinaCodiceFiltro.DataSource = bsCodici;
+            }
         }
 
-        private void btnInfoAggiungiEventiRicorrenti_MouseLeave(object sender, EventArgs e)
+        private void btnModificaMacchinaRimuoviComponenti_Click(object sender, EventArgs e)
         {
-            pnlInfoAddRicorrenza.Visible = false;
+            List<Componenti> c = new List<Componenti>();
 
-        }
+            foreach (DataGridViewRow dgvr in dgvComponentiModificaMacchina.Rows)
+            {
+                c.Add(dgvr.DataBoundItem as Componenti);
+            }
 
-        private void btnInfoModificaEventiRicorrenti_MouseLeave(object sender, EventArgs e)
-        {
-            pnlInfoModifyRicorrenza.Visible = false;
+            c.Remove(dgvComponentiModificaMacchina.CurrentRow.DataBoundItem as Componenti);
+
+            BindingSource bs = new BindingSource()
+            {
+                DataSource = c
+            };
+
+            dgvComponentiModificaMacchina.DataSource = bs;
         }
     }
 }
