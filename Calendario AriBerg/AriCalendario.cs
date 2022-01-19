@@ -102,99 +102,99 @@ namespace Calendario_AriBerg
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Color color = Color.White;
-            Rectangle currentDayRectangle = new Rectangle();
+            //Color color = Color.White;
+            //Rectangle currentDayRectangle = new Rectangle();
 
-            Graphics graphics = e.Graphics;
-            SelectionRange calendarRange = GetDisplayRange(false);
-            Rectangle currentDayFrame = new Rectangle(
-                -1, -1, _dayBoxWidth, _dayBoxHeight);
+            //Graphics graphics = e.Graphics;
+            //SelectionRange calendarRange = GetDisplayRange(false);
+            //Rectangle currentDayFrame = new Rectangle(
+            //    -1, -1, _dayBoxWidth, _dayBoxHeight);
 
-            DateTime current = SelectionStart;
+            //DateTime current = SelectionStart;
 
-            if (calendarRange.Start.Month != 1 || calendarRange.End.Month != 12)
-            {
-                if (calendarRange.Start.Year != DateTime.Now.Year|| calendarRange.End.Year != DateTime.Now.AddYears(8).Year)
-                {
-                    for (DateTime i = calendarRange.Start; i <= calendarRange.End; i = i.AddDays(1))
-                    {
-                        if (Registro.DizGiorni!=null && Registro.DizGiorni.ContainsKey(i))
-                        {
-                            using (Brush selectionBrush = new SolidBrush(
-                    Color.FromArgb(
-                        255, System.Drawing.Color.DarkRed)))
-                            {
-                                TimeSpan span = i.Subtract(calendarRange.Start);
-                                int row = span.Days / 7;
-                                int col = span.Days % 7;
+            //if (calendarRange.Start.Month != 1 || calendarRange.End.Month != 12)
+            //{
+            //    if (calendarRange.Start.Year != DateTime.Now.Year|| calendarRange.End.Year != DateTime.Now.AddYears(8).Year)
+            //    {
+            //        for (DateTime i = calendarRange.Start; i <= calendarRange.End; i = i.AddDays(1))
+            //        {
+            //            if (Registro.DizGiorni!=null && Registro.DizGiorni.ContainsKey(i))
+            //            {
+            //                using (Brush selectionBrush = new SolidBrush(
+            //        Color.FromArgb(
+            //            255, System.Drawing.Color.DarkRed)))
+            //                {
+            //                    TimeSpan span = i.Subtract(calendarRange.Start);
+            //                    int row = span.Days / 7;
+            //                    int col = span.Days % 7;
 
-                                currentDayRectangle = new Rectangle(
-                                    _offsetX + (col + (ShowWeekNumbers ? 1 : 0)) * _dayBoxWidth,
-                                    _offsetY + row * _dayBoxHeight,
-                                    _dayBoxWidth,
-                                    _dayBoxHeight);
+            //                    currentDayRectangle = new Rectangle(
+            //                        _offsetX + (col + (ShowWeekNumbers ? 1 : 0)) * _dayBoxWidth,
+            //                        _offsetY + row * _dayBoxHeight,
+            //                        _dayBoxWidth,
+            //                        _dayBoxHeight);
 
-                                color = Color.DarkRed;
-                                graphics.FillRectangle(selectionBrush, currentDayRectangle);
-                            }
-                            TextRenderer.DrawText(
-                            graphics,
-                            i.Day.ToString(),
-                            Font,
-                            currentDayRectangle,
-                            Color.White,
-                            TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
-                        }
-                    }
+            //                    color = Color.DarkRed;
+            //                    graphics.FillRectangle(selectionBrush, currentDayRectangle);
+            //                }
+            //                TextRenderer.DrawText(
+            //                graphics,
+            //                i.Day.ToString(),
+            //                Font,
+            //                currentDayRectangle,
+            //                Color.White,
+            //                TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            //            }
+            //        }
 
-                    if (_repaintSelectedDays)
-                    {
-                        while (current <= SelectionEnd)
-                        {
-                            using (Brush selectionBrush = new SolidBrush(
-                        Color.FromArgb(
-                            255, System.Drawing.SystemColors.ActiveCaption)))
-                            {
-                                TimeSpan span = current.Subtract(calendarRange.Start);
-                                int row = span.Days / 7;
-                                int col = span.Days % 7;
+            //        if (_repaintSelectedDays)
+            //        {
+            //            while (current <= SelectionEnd)
+            //            {
+            //                using (Brush selectionBrush = new SolidBrush(
+            //            Color.FromArgb(
+            //                255, System.Drawing.SystemColors.ActiveCaption)))
+            //                {
+            //                    TimeSpan span = current.Subtract(calendarRange.Start);
+            //                    int row = span.Days / 7;
+            //                    int col = span.Days % 7;
 
-                                currentDayRectangle = new Rectangle(
-                                    _offsetX + (col + (ShowWeekNumbers ? 1 : 0)) * _dayBoxWidth,
-                                    _offsetY + row * _dayBoxHeight,
-                                    _dayBoxWidth,
-                                    _dayBoxHeight);
+            //                    currentDayRectangle = new Rectangle(
+            //                        _offsetX + (col + (ShowWeekNumbers ? 1 : 0)) * _dayBoxWidth,
+            //                        _offsetY + row * _dayBoxHeight,
+            //                        _dayBoxWidth,
+            //                        _dayBoxHeight);
 
-                                color = Color.DarkRed;
-                                graphics.FillRectangle(selectionBrush, currentDayRectangle);
-                            }
+            //                    color = Color.DarkRed;
+            //                    graphics.FillRectangle(selectionBrush, currentDayRectangle);
+            //                }
 
-                            TextRenderer.DrawText(
-                                graphics,
-                                current.Day.ToString(),
-                                Font,
-                                currentDayRectangle,
-                                System.Drawing.SystemColors.ActiveCaptionText,
-                                TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            //                TextRenderer.DrawText(
+            //                    graphics,
+            //                    current.Day.ToString(),
+            //                    Font,
+            //                    currentDayRectangle,
+            //                    System.Drawing.SystemColors.ActiveCaptionText,
+            //                    TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
 
-                            if (current == this.TodayDate)
-                            {
-                                currentDayFrame = currentDayRectangle;
-                            }
+            //                if (current == this.TodayDate)
+            //                {
+            //                    currentDayFrame = currentDayRectangle;
+            //                }
 
-                            current = current.AddDays(1);
-                        }
+            //                current = current.AddDays(1);
+            //            }
 
-                        if (currentDayFrame.X > 0)
-                        {
-                            graphics.DrawRectangle(new Pen(
-                                new SolidBrush(Color.Red)), currentDayFrame);
-                        }
+            //            if (currentDayFrame.X > 0)
+            //            {
+            //                graphics.DrawRectangle(new Pen(
+            //                    new SolidBrush(Color.Red)), currentDayFrame);
+            //            }
 
-                        _repaintSelectedDays = false;
-                    }
-                }
-            }
+            //            _repaintSelectedDays = false;
+            //        }
+            //    }
+            //}
         }
     }
 }
