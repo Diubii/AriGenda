@@ -29,6 +29,7 @@ namespace Calendario_AriBerg
             this.Codice = Comp.Codice;
             this.Quantita = Comp.Quantita;
         }
+
         public Componenti(string tipo, string marca, int soglia, int n_ordine, string codice, int quantita)
         {
             this.Tipo = tipo;

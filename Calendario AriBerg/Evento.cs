@@ -11,17 +11,17 @@ namespace Calendario_AriBerg
         Controllo_Generale,
         Sost_Elementi_Filtrantiecc,
         Controllo_Fgas
-
     }
 
-    public class Evento: IComparable<Evento>
+    public class Evento : IComparable<Evento>
     {
         static public int numEventi;
         private int id;
-        private DateTime giorno;          //da data selezionata
-        private string nomeCliente;
-        private Macchina macchina;
-        private TimeSpan Tempo { get; set; }
+        private int id_ricorrenza;
+        private DateTime giorno;          //da data selezionata +cadenza quindi lista di date possibile
+        private Cliente cliente;       //modficare la data è ok e anche la ricorrenza da uno qualunque degli eventi e sposta tutti gli altri                                   
+        private Macchina macchina;        //se vuole modificare altro però diverrà un evento singolo farlo capire bene
+        public TimeSpan Tempo { get; set; }               //se cambia cadenza o termine influenza solo eventi nuovi... quindi quando giorno passa eventi divengono singoli
         private List<InterventiPoss> interventi = new List<InterventiPoss>();
         private List<Componenti> componenti = new List<Componenti>();  //metti i componenti anche pianificati ma solo quando la data è passata aggiorna il magazzino
         private string operazioni;
@@ -31,16 +31,16 @@ namespace Calendario_AriBerg
         {
         }
 
-        public Evento(DateTime giorno, string nomeCliente, Macchina macchina, List<InterventiPoss> interventi, string note = null)
+        public Evento(DateTime giorno, Cliente Cliente, Macchina macchina, List<InterventiPoss> interventi, string note = null)
         {
             id = NumEventi;
             Giorno = giorno;
-            NomeCliente = nomeCliente;
+            this.Cliente = Cliente;
             Macchina = macchina;
             Interventi = interventi;
             Note = note;
             Operazioni = string.Concat(Enumerable.Repeat("◈", interventi.Count));
-            NumEventi++; 
+            NumEventi++;
 
         }
 
@@ -76,24 +76,17 @@ namespace Calendario_AriBerg
 
             set
             {
-               giorno = value;
+                giorno = value;
             }
         }
 
-        public string NomeCliente
+        public Cliente Cliente
         {
-            get => nomeCliente; 
-            
+            get => cliente;
+
             set
             {
-                if (!string.IsNullOrWhiteSpace(value))
-                {
-                    nomeCliente = value;
-                }
-                else
-                {
-                    throw new Exception("Aggiungere il nome del cliente.");
-                }
+                cliente = value;
             }
         }
 
@@ -134,10 +127,11 @@ namespace Calendario_AriBerg
         }
 
         public string Operazioni { get => operazioni; set => operazioni = value; }
+        public int Id_ricorrenza { get => id_ricorrenza; set => id_ricorrenza = value; }
 
         public int CompareTo(Evento other)
         {
-            if(this == other)
+            if (this == other)
             {
                 return 1;
             }
