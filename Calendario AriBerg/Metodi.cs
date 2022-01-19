@@ -382,8 +382,14 @@ namespace Calendario_AriBerg
             MySqlCommand cmd = new MySqlCommand(query, conn);
             MySqlDataReader res = cmd.ExecuteReader();
 
-            res.Read();
-            return res.GetInt32(0);
+            int ris = 0;
+
+            while (res.Read())
+            {
+               ris = res.GetInt32(0);
+            }
+
+            return ris;
         }
         internal static int GetCustomerID(DataGridViewRow dgvr)
         {

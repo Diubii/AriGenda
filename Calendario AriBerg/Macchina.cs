@@ -18,6 +18,11 @@ namespace Calendario_AriBerg
 
         public string _Note { get; set; }
 
+        public Macchina()
+        {
+
+        }
+
         public Macchina( int cliente,string marca, string modello, string matricola, List<Componenti> componenti, bool noleggio = false, string note = null)
         {
             _cliente = cliente;
