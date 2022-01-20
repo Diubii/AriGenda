@@ -29,6 +29,9 @@ namespace Calendario_AriBerg
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCalendario));
             this.dgvEventi = new System.Windows.Forms.DataGridView();
             this.lblEventi = new System.Windows.Forms.Label();
@@ -475,15 +478,35 @@ namespace Calendario_AriBerg
             // 
             // dgvEventi
             // 
+            this.dgvEventi.AllowUserToAddRows = false;
             this.dgvEventi.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvEventi.BackgroundColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEventi.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvEventi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEventi.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvEventi.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvEventi.GridColor = System.Drawing.Color.Black;
             this.dgvEventi.Location = new System.Drawing.Point(622, 82);
             this.dgvEventi.Name = "dgvEventi";
             this.dgvEventi.ReadOnly = true;
             this.dgvEventi.RowHeadersWidth = 51;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvEventi.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvEventi.RowTemplate.Height = 24;
             this.dgvEventi.Size = new System.Drawing.Size(810, 719);
             this.dgvEventi.TabIndex = 4;
@@ -538,9 +561,9 @@ namespace Calendario_AriBerg
             this.gbxLegenda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbxLegenda.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
             this.gbxLegenda.ForeColor = System.Drawing.Color.White;
-            this.gbxLegenda.Location = new System.Drawing.Point(1194, 3);
+            this.gbxLegenda.Location = new System.Drawing.Point(1192, 3);
             this.gbxLegenda.Name = "gbxLegenda";
-            this.gbxLegenda.Size = new System.Drawing.Size(241, 177);
+            this.gbxLegenda.Size = new System.Drawing.Size(243, 178);
             this.gbxLegenda.TabIndex = 7;
             this.gbxLegenda.TabStop = false;
             this.gbxLegenda.Text = "Legenda";
@@ -562,7 +585,7 @@ namespace Calendario_AriBerg
             this.lblSimboloManut_parziale.AutoSize = true;
             this.lblSimboloManut_parziale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblSimboloManut_parziale.ForeColor = System.Drawing.Color.Orange;
-            this.lblSimboloManut_parziale.Location = new System.Drawing.Point(196, 55);
+            this.lblSimboloManut_parziale.Location = new System.Drawing.Point(198, 55);
             this.lblSimboloManut_parziale.Name = "lblSimboloManut_parziale";
             this.lblSimboloManut_parziale.Size = new System.Drawing.Size(18, 17);
             this.lblSimboloManut_parziale.TabIndex = 7;
@@ -574,7 +597,7 @@ namespace Calendario_AriBerg
             this.lblSimboloFgas.AutoSize = true;
             this.lblSimboloFgas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblSimboloFgas.ForeColor = System.Drawing.Color.Green;
-            this.lblSimboloFgas.Location = new System.Drawing.Point(196, 138);
+            this.lblSimboloFgas.Location = new System.Drawing.Point(198, 138);
             this.lblSimboloFgas.Name = "lblSimboloFgas";
             this.lblSimboloFgas.Size = new System.Drawing.Size(18, 17);
             this.lblSimboloFgas.TabIndex = 10;
@@ -585,7 +608,7 @@ namespace Calendario_AriBerg
             this.lblSimboloSostFiltri.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSimboloSostFiltri.AutoSize = true;
             this.lblSimboloSostFiltri.ForeColor = System.Drawing.Color.Blue;
-            this.lblSimboloSostFiltri.Location = new System.Drawing.Point(196, 109);
+            this.lblSimboloSostFiltri.Location = new System.Drawing.Point(198, 109);
             this.lblSimboloSostFiltri.Name = "lblSimboloSostFiltri";
             this.lblSimboloSostFiltri.Size = new System.Drawing.Size(18, 17);
             this.lblSimboloSostFiltri.TabIndex = 9;
@@ -597,7 +620,7 @@ namespace Calendario_AriBerg
             this.lblSimboloControllo_generale.AutoSize = true;
             this.lblSimboloControllo_generale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblSimboloControllo_generale.ForeColor = System.Drawing.Color.Yellow;
-            this.lblSimboloControllo_generale.Location = new System.Drawing.Point(196, 82);
+            this.lblSimboloControllo_generale.Location = new System.Drawing.Point(198, 82);
             this.lblSimboloControllo_generale.Name = "lblSimboloControllo_generale";
             this.lblSimboloControllo_generale.Size = new System.Drawing.Size(18, 17);
             this.lblSimboloControllo_generale.TabIndex = 8;
@@ -638,7 +661,7 @@ namespace Calendario_AriBerg
             this.btnExitLegend.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Bold);
             this.btnExitLegend.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnExitLegend.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnExitLegend.Location = new System.Drawing.Point(216, 0);
+            this.btnExitLegend.Location = new System.Drawing.Point(218, 0);
             this.btnExitLegend.Name = "btnExitLegend";
             this.btnExitLegend.Size = new System.Drawing.Size(25, 25);
             this.btnExitLegend.TabIndex = 0;
@@ -662,7 +685,7 @@ namespace Calendario_AriBerg
             this.lblSimboloManut_completa.AutoSize = true;
             this.lblSimboloManut_completa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblSimboloManut_completa.ForeColor = System.Drawing.Color.Red;
-            this.lblSimboloManut_completa.Location = new System.Drawing.Point(196, 33);
+            this.lblSimboloManut_completa.Location = new System.Drawing.Point(198, 33);
             this.lblSimboloManut_completa.Name = "lblSimboloManut_completa";
             this.lblSimboloManut_completa.Size = new System.Drawing.Size(18, 17);
             this.lblSimboloManut_completa.TabIndex = 6;

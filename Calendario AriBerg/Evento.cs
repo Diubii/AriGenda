@@ -15,9 +15,9 @@ namespace Calendario_AriBerg
 
     public class Evento : IComparable<Evento>
     {
-        static public int numEventi;
+        static public int numEventi;      
         private int id;
-        private int id_ricorrenza;
+        private int? id_ricorrenza;
         private DateTime giorno;          //da data selezionata +cadenza quindi lista di date possibile
         private Cliente cliente;       //modficare la data è ok e anche la ricorrenza da uno qualunque degli eventi e sposta tutti gli altri                                   
         private Macchina macchina;        //se vuole modificare altro però diverrà un evento singolo farlo capire bene
@@ -127,7 +127,7 @@ namespace Calendario_AriBerg
         }
 
         public string Operazioni { get => operazioni; set => operazioni = value; }
-        public int Id_ricorrenza { get => id_ricorrenza; set => id_ricorrenza = value; }
+        public int? Id_ricorrenza { get => id_ricorrenza; set => id_ricorrenza = value; }
 
         public int CompareTo(Evento other)
         {

@@ -33,5 +33,10 @@ namespace Calendario_AriBerg
             _Noleggio = noleggio;
             _Note = note;
         }
+
+        public override string ToString()
+        {
+            return _Marca+"/"+_Matricola;
+        }
     }
 }
