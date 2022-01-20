@@ -39,5 +39,10 @@ namespace Calendario_AriBerg
                 _Mach = mach;
             }
         }
+
+        public override string ToString()
+        {
+            return _Nome;
+        }
     }
 }

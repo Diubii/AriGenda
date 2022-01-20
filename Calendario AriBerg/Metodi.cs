@@ -38,7 +38,7 @@ namespace Calendario_AriBerg
         {
             try
             {
-                string remoteConnectionString = $"Server=192.168.1.4; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
+                string remoteConnectionString = $"Server=database.diubi.dev; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
                 MySqlConnection conn = new MySqlConnection(remoteConnectionString);
                 conn.Open();
                 return conn;
@@ -66,7 +66,7 @@ namespace Calendario_AriBerg
             public InterventiPoss codice_intervento;
         }
 
-        internal static bool CheckForNewEventiMese(DateTime d)
+        internal static bool CheckForNewEventiMese(DateTime d,bool Update)
         {
 
             //Ottimizzabile con query mirata
@@ -225,7 +225,7 @@ namespace Calendario_AriBerg
             ///6:matricola_macchina
             ///7:note_evento
             List<Evento> newEventiMese = new List<Evento>();
-            query = $"SELECT * From evento where Month(data_evento)=='{d.Month}' OR idricorrenza_evento IN (SELECT idiricorrenza_evento From evento where Month(data_evento)=='{d.Month}')";
+            query = $"SELECT * From evento where Month(data_evento)='{d.Month}' OR idricorrenza_evento IN (SELECT idricorrenza_evento From evento where Month(data_evento)='{d.Month}')";
             command = new MySqlCommand(query, conn);
 
             reader = command.ExecuteReader();
@@ -286,20 +286,52 @@ namespace Calendario_AriBerg
                     string note = reader.GetString(7);
                     Evento ev = new Evento(reader.GetDateTime(2), ClienteEvento, MacchinaEvento, InterventiEvento,note);
                     ev.ID = reader.GetInt32(0);
-                    ev.Id_ricorrenza = reader.GetInt32(1);
-                    ev.Tempo = t;                     
+                     if (reader.IsDBNull(1)) ev.Id_ricorrenza = null;
+                     else ev.Id_ricorrenza = reader.GetInt32(1);
+                    ev.Tempo = t;
+                    newEventiMese.Add(ev);
             }
 
-            return false;
+            bool different = false;
 
+            foreach (Evento eve in newEventiMese)
+            {
+                if (newEventiMese.Count != Registro.EventiMese.Count) { different = true; break; }
+                if (Registro.EventiMese.Count == 0) break;               
+                Evento sameCode = Registro.EventiMese.Find(x => x.ID == eve.ID);
+                if (sameCode == null)
+                {
+                    different = true;
+                    break;
+                }
+                else
+                {
+                    if (JsonConvert.SerializeObject(eve) != JsonConvert.SerializeObject(sameCode))
+                    {
+                        different = true;
+                        break;
+                    }
+                }
+            }
 
-
+            if (different)
+            {
+                if (Update == true)
+                {
+                    Registro.EventiMese = newEventiMese;
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
         }
 
         internal static bool CheckForNewEventiMeseAndNotify(DateTime d)
         {
-            if (Metodi.CheckForNewEventiMese(d))
+            if (Metodi.CheckForNewEventiMese(d,false))
             {
                 Notifica n = new Notifica();
                 n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);

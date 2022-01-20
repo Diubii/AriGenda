@@ -442,13 +442,14 @@ namespace Calendario_AriBerg
         
 
         private void HideColumnsEventi()
-        {
-            dgvEventi.Columns["NomeCliente"].HeaderText = "Nome Cliente";
-            dgvEventi.Columns["Giorno"].Visible = false;
-            dgvEventi.Columns["note"].Visible = false;
-            dgvEventi.Columns["ID"].Visible = false;
-            dgvEventi.Columns["NumEventi"].Visible = false;
-            //dgwEventi.Columns["Macchina"].Visible = false;
+        {           
+            dgvEventi.Columns[1].Visible = false;
+            dgvEventi.Columns[2].Visible = false;
+            dgvEventi.Columns[3].Visible = false;
+            dgvEventi.Columns[6].Visible = false;
+            dgvEventi.Columns[8].Visible = false;
+            dgvEventi.Columns[0].Width = 100;
+            dgvEventi.Columns[7].Width = 140;
         }
 
         private void HideColumnsClienti()
@@ -464,10 +465,23 @@ namespace Calendario_AriBerg
 
         private void AriCalendario_DateChanged(object sender, DateRangeEventArgs e)
         {
+            SelectedDate = ariCalendario.SelectionStart;
+            Metodi.CheckForNewEventiMese(SelectedDate,true);
             dgvEventi.CurrentCell = null;
             lblEventi.Text = "Eventi del: " + ariCalendario.SelectionStart.Day + "/" + ariCalendario.SelectionStart.Month + "/" + ariCalendario.SelectionStart.Year;
             SelectedDate = ariCalendario.SelectionStart;
             btnAdd.Enabled = true;
+            RefreshDGVEventi();
+            HideColumnsEventi();
+        }
+
+        private void RefreshDGVEventi()
+        {
+            BindingSource bs = new BindingSource()
+            {
+                DataSource = Registro.EventiMese.FindAll(x => x.Giorno.Day == SelectedDate.Day)
+            };
+           dgvEventi.DataSource=bs;
         }
 
         private void GeneraScadenze()
@@ -501,9 +515,9 @@ namespace Calendario_AriBerg
 
         private void dgwEventi_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            /* if (Registro.DizGiorni.ContainsKey(SelectedDate) && dgvEventi.DataSource == Registro.DizGiorni[SelectedDate])
+             if (Registro.EventiMese.Find(x=>x.Giorno.Day==SelectedDate.Day)!=null)
              {
-                 if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 6)
+                 if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 7)
                  {
                      if (!e.Handled)
                      {
@@ -518,12 +532,15 @@ namespace Calendario_AriBerg
                          Size size;
                          Color appcolore;
 
-                         for (int i = 0; i < text.Length; i++)
-                         {
-                             string textPart = text.Substring(i, 1);
-                             size = TextRenderer.MeasureText(textPart, e.CellStyle.Font);
+                        Font f = new Font(e.CellStyle.Font.FontFamily,30);
 
-                             switch (Registro.DizGiorni[SelectedDate][e.RowIndex].Interventi[i])
+                        for (int i = 0; i < text.Length; i++)
+                         {
+                            
+                             string textPart = text.Substring(i, 1);
+                             size = TextRenderer.MeasureText(textPart, f);
+
+                             switch (Registro.EventiMese.Find(x=>x.ID==(int)dgvEventi.Rows[e.RowIndex].Cells[2].Value).Interventi[i])
                              {
                                  case InterventiPoss.Manut_Completa:
                                      appcolore = Color.Red;
@@ -551,7 +568,8 @@ namespace Calendario_AriBerg
                              }
                              using (Brush cellForeBrush = new SolidBrush(appcolore))
                              {
-                                 e.Graphics.DrawString(textPart, e.CellStyle.Font, cellForeBrush, rect1);
+
+                                e.Graphics.DrawString(textPart, f, cellForeBrush, rect1);
                              }
                              Size previousSize = size;
                              rect1.X += size.Width / 2;
@@ -562,7 +580,7 @@ namespace Calendario_AriBerg
              }
              else
              {
-                 if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 6)
+                 /*if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 6)
                  {
                      if (!e.Handled)
                      {
@@ -620,8 +638,8 @@ namespace Calendario_AriBerg
                              rect1.Width = size.Width;
                          }
                      }
-                 }
-             }*/
+                 }*/ //IDK WHY
+             }
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -2003,6 +2021,7 @@ namespace Calendario_AriBerg
                     else
                     {
                         RefreshComponentsCatalogoAndCBX();
+                        RefreshConetnutiMagazzini();
                     }
                 }
             }
@@ -2605,6 +2624,7 @@ namespace Calendario_AriBerg
                     command.ExecuteNonQuery();
 
                     RefreshComponentsCatalogoAndCBX();
+                    RefreshConetnutiMagazzini();
                     gbxModificaComponente.Visible = false;
                     dgvComponenti.Enabled = true;
 
