@@ -31,12 +31,14 @@ namespace Calendario_AriBerg
         {
         }
 
-        public Evento(DateTime giorno, Cliente Cliente, Macchina macchina, List<InterventiPoss> interventi, string note = null)
+        public Evento(TimeSpan t, DateTime giorno, Cliente Cliente, Macchina macchina, List<Componenti> comp,List<InterventiPoss> interventi, string note = null)
         {
             id = NumEventi;
+            Tempo = t;
             Giorno = giorno;
             this.Cliente = Cliente;
             Macchina = macchina;
+            Componenti = comp;
             Interventi = interventi;
             Note = note;
             Operazioni = string.Concat(Enumerable.Repeat("◈", interventi.Count));
@@ -128,6 +130,7 @@ namespace Calendario_AriBerg
 
         public string Operazioni { get => operazioni; set => operazioni = value; }
         public int? Id_ricorrenza { get => id_ricorrenza; set => id_ricorrenza = value; }
+        public List<Componenti> Componenti { get => componenti; set => componenti = value; }
 
         public int CompareTo(Evento other)
         {

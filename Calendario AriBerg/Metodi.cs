@@ -284,15 +284,16 @@ namespace Calendario_AriBerg
                     //Listadate
                     TimeSpan t = reader.GetTimeSpan(3);
                     string note = reader.GetString(7);
-                    Evento ev = new Evento(reader.GetDateTime(2), ClienteEvento, MacchinaEvento, InterventiEvento,note);
+                    Evento ev = new Evento(t,reader.GetDateTime(2), ClienteEvento, MacchinaEvento, Comp,InterventiEvento,note);
                     ev.ID = reader.GetInt32(0);
                      if (reader.IsDBNull(1)) ev.Id_ricorrenza = null;
                      else ev.Id_ricorrenza = reader.GetInt32(1);
-                    ev.Tempo = t;
                     newEventiMese.Add(ev);
             }
 
             bool different = false;
+
+            //Sort eventi per orario?? magari vedere poi
 
             foreach (Evento eve in newEventiMese)
             {
@@ -320,10 +321,12 @@ namespace Calendario_AriBerg
                 {
                     Registro.EventiMese = newEventiMese;
                 }
+                conn.Close();
                 return true;
             }
             else
             {
+                conn.Close();
                 return false;
             }
 
@@ -404,9 +407,9 @@ namespace Calendario_AriBerg
             bool different = false;
 
             foreach (Magazzino mag in Magazzininew.Values)
-            {
-                if (Registro.DizMagazzini.Count == 0) break;
+            {              
                 if (Magazzininew.Count != Registro.DizMagazzini.Count) { different = true; break; }
+                if (Registro.DizMagazzini.Count == 0) break;
                 Magazzino sameCode = Registro.DizMagazzini[mag.Nome];
                 if (sameCode == null)
                 {
@@ -425,10 +428,12 @@ namespace Calendario_AriBerg
 
             if (different )
             {
+                conn.Close();
                 return true;
             }
             else
             {
+                conn.Close();
                 return false;
             }
 
@@ -586,10 +591,12 @@ namespace Calendario_AriBerg
 
             if (different || l.Count != currentClienti.Count)
             {
+                conn.Close();
                 return true;
             }
             else
             {
+                conn.Close();
                 return false;
             }
         }
@@ -609,7 +616,7 @@ namespace Calendario_AriBerg
             }
         }
 
-        internal static bool CheckForNewComponents()
+        internal static bool CheckForNewComponents(bool Update)
         {
             List<Componenti> l = new List<Componenti>();
             Componenti c = new Componenti();
@@ -657,17 +664,24 @@ namespace Calendario_AriBerg
 
             if (different || l.Count != currentComponents.Count)
             {
+                if (Update == true)
+                {
+                    Registro.ComponentiAttuali = l;
+                }
+                conn.Close();
                 return true;
+                
             }
             else
             {
+                conn.Close();
                 return false;
             }
         }
 
-        internal static bool CheckForNewComponentsAndNotify()
+        internal static bool CheckForNewComponentsAndNotify(bool Update)
         {
-            if (Metodi.CheckForNewComponents())
+            if (Metodi.CheckForNewComponents(Update))
             {
                 Notifica n = new Notifica();
                 n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
@@ -694,6 +708,7 @@ namespace Calendario_AriBerg
                ris = res.GetInt32(0);
             }
 
+            conn.Close();
             return ris;
         }
         internal static int GetCustomerID(DataGridViewRow dgvr)
