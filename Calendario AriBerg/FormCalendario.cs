@@ -38,8 +38,6 @@ namespace Calendario_AriBerg
             //Configurazione data
             SelectedDate = DateTime.Now.Date;
 
-
-
             ariCalendario.Refresh();
             lblEventi.Text = "Eventi del: " + DateTime.Now.Day + "/" + DateTime.Now.Month + "/" + DateTime.Now.Year;
             lblClienti.Text = "Tutti i clienti";
@@ -167,14 +165,15 @@ namespace Calendario_AriBerg
                         RefreshComponentTypesDataGridView();
                         RefreshComponentBrandsDataGridView();
                         RefreshComponentsCatalogoAndCBX();
-                        List<string> types = new List<string>();
-                        foreach (DataGridViewRow dgvr in dgvTipiComponenti.Rows) types.Add(dgvr.Cells[0].Value.ToString());
-                        cbBxAggiungiMacchinaTipoFiltro.DataSource = types.FindAll(x => x == x);
-                        cbBxModificaMacchinaTipoFiltro.DataSource = types.FindAll(x => x == x);
                         List<string> marche = new List<string>();
                         foreach (DataGridViewRow dgvr in dgvMarcheComponenti.Rows) marche.Add(dgvr.Cells[0].Value.ToString());
                         cbBxAggiungiMacchinaMarca.DataSource = marche;
                         cbBxModificaMacchinaMarca.DataSource = marche;
+
+                        List<string> types = new List<string>();
+                        foreach (DataGridViewRow dgvr in dgvTipiComponenti.Rows) types.Add(dgvr.Cells[0].Value.ToString());
+                        cbBxAggiungiMacchinaTipoFiltro.DataSource = types;
+                        cbBxModificaMacchinaTipoFiltro.DataSource = types;
                         Invoke(new Action(() =>
                         {
                             Notifica n = new Notifica();
@@ -439,10 +438,8 @@ namespace Calendario_AriBerg
             }));
         }
 
-        
-
         private void HideColumnsEventi()
-        {           
+        {
             dgvEventi.Columns[1].Visible = false;
             dgvEventi.Columns[2].Visible = false;
             dgvEventi.Columns[3].Visible = false;
@@ -454,8 +451,8 @@ namespace Calendario_AriBerg
 
         private void HideColumnsClienti()
         {
-            if(dgvVisualizzaClienti.Columns.Contains("_PartIVA")) dgvVisualizzaClienti.Columns["_PartIVA"].Visible = false;
-            if(dgvVisualizzaClienti.Columns.Contains("_Ref")) dgvVisualizzaClienti.Columns["_Ref"].Visible = false;
+            if (dgvVisualizzaClienti.Columns.Contains("_PartIVA")) dgvVisualizzaClienti.Columns["_PartIVA"].Visible = false;
+            if (dgvVisualizzaClienti.Columns.Contains("_Ref")) dgvVisualizzaClienti.Columns["_Ref"].Visible = false;
 
             dgvVisualizzaClienti.Columns["_Nome"].HeaderText = "Nome";
             dgvVisualizzaClienti.Columns["_Indirizzo"].HeaderText = "Indirizzo";
@@ -466,7 +463,7 @@ namespace Calendario_AriBerg
         private void AriCalendario_DateChanged(object sender, DateRangeEventArgs e)
         {
             SelectedDate = ariCalendario.SelectionStart;
-            Metodi.CheckForNewEventiMese(SelectedDate,true);
+            Metodi.CheckForNewEventiMese(SelectedDate, true);
             dgvEventi.CurrentCell = null;
             lblEventi.Text = "Eventi del: " + ariCalendario.SelectionStart.Day + "/" + ariCalendario.SelectionStart.Month + "/" + ariCalendario.SelectionStart.Year;
             SelectedDate = ariCalendario.SelectionStart;
@@ -481,7 +478,7 @@ namespace Calendario_AriBerg
             {
                 DataSource = Registro.EventiMese.FindAll(x => x.Giorno.Day == SelectedDate.Day)
             };
-           dgvEventi.DataSource=bs;
+            dgvEventi.DataSource = bs;
         }
 
         private void GeneraScadenze()
@@ -515,131 +512,129 @@ namespace Calendario_AriBerg
 
         private void dgwEventi_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-             if (Registro.EventiMese.Find(x=>x.Giorno.Day==SelectedDate.Day)!=null)
-             {
-                 if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 7)
-                 {
-                     if (!e.Handled)
-                     {
-                         e.Handled = true;
-                         e.PaintBackground(e.CellBounds, dgvEventi.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected);
-                     }
-                     if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != DataGridViewPaintParts.None)
-                     {
-                         string text = e.Value.ToString();
-                         Size fullsize = TextRenderer.MeasureText(text, e.CellStyle.Font);
-                         Rectangle rect1 = new Rectangle(e.CellBounds.Location, e.CellBounds.Size);
-                         Size size;
-                         Color appcolore;
+            if (Registro.EventiMese.Find(x => x.Giorno.Day == SelectedDate.Day) != null)
+            {
+                if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 7)
+                {
+                    if (!e.Handled)
+                    {
+                        e.Handled = true;
+                        e.PaintBackground(e.CellBounds, dgvEventi.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected);
+                    }
+                    if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != DataGridViewPaintParts.None)
+                    {
+                        string text = e.Value.ToString();
+                        Size fullsize = TextRenderer.MeasureText(text, e.CellStyle.Font);
+                        Rectangle rect1 = new Rectangle(e.CellBounds.Location, e.CellBounds.Size);
+                        Size size;
+                        Color appcolore;
 
-                        Font f = new Font(e.CellStyle.Font.FontFamily,30);
+                        Font f = new Font(e.CellStyle.Font.FontFamily, 30);
 
                         for (int i = 0; i < text.Length; i++)
-                         {
-                            
-                             string textPart = text.Substring(i, 1);
-                             size = TextRenderer.MeasureText(textPart, f);
+                        {
+                            string textPart = text.Substring(i, 1);
+                            size = TextRenderer.MeasureText(textPart, f);
 
-                             switch (Registro.EventiMese.Find(x=>x.ID==(int)dgvEventi.Rows[e.RowIndex].Cells[2].Value).Interventi[i])
-                             {
-                                 case InterventiPoss.Manut_Completa:
-                                     appcolore = Color.Red;
-                                     break;
+                            switch (Registro.EventiMese.Find(x => x.ID == (int)dgvEventi.Rows[e.RowIndex].Cells[2].Value).Interventi[i])
+                            {
+                                case InterventiPoss.Manut_Completa:
+                                    appcolore = Color.Red;
+                                    break;
 
-                                 case InterventiPoss.Manut_Parziale:
-                                     appcolore = Color.Orange;
-                                     break;
+                                case InterventiPoss.Manut_Parziale:
+                                    appcolore = Color.Orange;
+                                    break;
 
-                                 case InterventiPoss.Controllo_Generale:
-                                     appcolore = Color.Yellow;
-                                     break;
+                                case InterventiPoss.Controllo_Generale:
+                                    appcolore = Color.Yellow;
+                                    break;
 
-                                 case InterventiPoss.Sost_Elementi_Filtrantiecc:
-                                     appcolore = Color.Blue;
-                                     break;
+                                case InterventiPoss.Sost_Elementi_Filtrantiecc:
+                                    appcolore = Color.Blue;
+                                    break;
 
-                                 case InterventiPoss.Controllo_Fgas:
-                                     appcolore = Color.Green;
-                                     break;
+                                case InterventiPoss.Controllo_Fgas:
+                                    appcolore = Color.Green;
+                                    break;
 
-                                 default:
-                                     appcolore = Color.Black;
-                                     break;
-                             }
-                             using (Brush cellForeBrush = new SolidBrush(appcolore))
-                             {
-
+                                default:
+                                    appcolore = Color.Black;
+                                    break;
+                            }
+                            using (Brush cellForeBrush = new SolidBrush(appcolore))
+                            {
                                 e.Graphics.DrawString(textPart, f, cellForeBrush, rect1);
-                             }
-                             Size previousSize = size;
-                             rect1.X += size.Width / 2;
-                             rect1.Width = size.Width;
-                         }
-                     }
-                 }
-             }
-             else
-             {
-                 /*if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 6)
-                 {
-                     if (!e.Handled)
-                     {
-                         e.Handled = true;
-                         e.PaintBackground(e.CellBounds, dgvEventi.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected);
-                     }
-                     if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != DataGridViewPaintParts.None)
-                     {
-                         string text = e.Value.ToString();
-                         Size fullsize = TextRenderer.MeasureText(text, e.CellStyle.Font);
-                         Rectangle rect1 = new Rectangle(e.CellBounds.Location, e.CellBounds.Size);
-                         Size size;
-                         Color appcolore;
+                            }
+                            Size previousSize = size;
+                            rect1.X += size.Width / 2;
+                            rect1.Width = size.Width;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                /*if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 6)
+                {
+                    if (!e.Handled)
+                    {
+                        e.Handled = true;
+                        e.PaintBackground(e.CellBounds, dgvEventi.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected);
+                    }
+                    if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != DataGridViewPaintParts.None)
+                    {
+                        string text = e.Value.ToString();
+                        Size fullsize = TextRenderer.MeasureText(text, e.CellStyle.Font);
+                        Rectangle rect1 = new Rectangle(e.CellBounds.Location, e.CellBounds.Size);
+                        Size size;
+                        Color appcolore;
 
-                         for (int i = 0; i < text.Length; i++)
-                         {
-                             string textPart = text.Substring(i, 1);
-                             size = TextRenderer.MeasureText(textPart, e.CellStyle.Font);
+                        for (int i = 0; i < text.Length; i++)
+                        {
+                            string textPart = text.Substring(i, 1);
+                            size = TextRenderer.MeasureText(textPart, e.CellStyle.Font);
 
-                             List<Evento> momentlist = (List<Evento>)dgvEventi.DataSource;
+                            List<Evento> momentlist = (List<Evento>)dgvEventi.DataSource;
 
-                             switch (momentlist[e.RowIndex].Interventi[i])
-                             {
-                                 case InterventiPoss.Manut_Completa:
-                                     appcolore = Color.Red;
-                                     break;
+                            switch (momentlist[e.RowIndex].Interventi[i])
+                            {
+                                case InterventiPoss.Manut_Completa:
+                                    appcolore = Color.Red;
+                                    break;
 
-                                 case InterventiPoss.Manut_Parziale:
-                                     appcolore = Color.Orange;
-                                     break;
+                                case InterventiPoss.Manut_Parziale:
+                                    appcolore = Color.Orange;
+                                    break;
 
-                                 case InterventiPoss.Controllo_Generale:
-                                     appcolore = Color.Yellow;
-                                     break;
+                                case InterventiPoss.Controllo_Generale:
+                                    appcolore = Color.Yellow;
+                                    break;
 
-                                 case InterventiPoss.Sost_Elementi_Filtrantiecc:
-                                     appcolore = Color.Blue;
-                                     break;
+                                case InterventiPoss.Sost_Elementi_Filtrantiecc:
+                                    appcolore = Color.Blue;
+                                    break;
 
-                                 case InterventiPoss.Controllo_Fgas:
-                                     appcolore = Color.Green;
-                                     break;
+                                case InterventiPoss.Controllo_Fgas:
+                                    appcolore = Color.Green;
+                                    break;
 
-                                 default:
-                                     appcolore = Color.Black;
-                                     break;
-                             }
+                                default:
+                                    appcolore = Color.Black;
+                                    break;
+                            }
 
-                             using (Brush cellForeBrush = new SolidBrush(appcolore))
-                             {
-                                 e.Graphics.DrawString(textPart, e.CellStyle.Font, cellForeBrush, rect1);
-                             }
-                             Size previousSize = size;
-                             rect1.X += size.Width / 2;
-                             rect1.Width = size.Width;
-                         }
-                     }
-                 }*/ //IDK WHY
-             }
+                            using (Brush cellForeBrush = new SolidBrush(appcolore))
+                            {
+                                e.Graphics.DrawString(textPart, e.CellStyle.Font, cellForeBrush, rect1);
+                            }
+                            Size previousSize = size;
+                            rect1.X += size.Width / 2;
+                            rect1.Width = size.Width;
+                        }
+                    }
+                }*/ //IDK WHY
+            }
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -680,8 +675,7 @@ namespace Calendario_AriBerg
 
         private void btnConfermaAggiungi_Click(object sender, EventArgs e)
         {
-                //cancellato da rifare
-                
+            //cancellato da rifare
         }
 
         private void btnModify_Click(object sender, EventArgs e)
@@ -782,7 +776,7 @@ namespace Calendario_AriBerg
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-           //Cancellato da rifare
+            //Cancellato da rifare
         }
 
         private void btnClientiAddCustomer_Click(object sender, EventArgs e)
@@ -833,14 +827,24 @@ namespace Calendario_AriBerg
                         componenti.Add(dgvr.DataBoundItem as Componenti);
                     }
 
-                    Macchina macchina = new Macchina(0, cbBxAggiungiMacchinaMarca.Text, txBxAggiungiMacchinaModello.Text,
+                    Macchina macchina = new Macchina(Metodi.GetCustomerID(dgvVisualizzaClienti.CurrentRow), cbBxAggiungiMacchinaMarca.Text, txBxAggiungiMacchinaModello.Text,
                         txBxAggiungiMacchinaMatricola.Text, componenti, chBxAggiungiMacchinaNoleggio.Checked, rtbAggiungiMacchinaNote.Text);
 
                     List<Macchina> macchineCliente = new List<Macchina>();
 
-                    foreach (DataGridViewRow dgvr in dgvAggiungiClientiMacchine.Rows)
+                    if (gBxClientiAggiungiCliente.Visible)
                     {
-                        macchineCliente.Add(dgvr.DataBoundItem as Macchina);
+                        foreach (DataGridViewRow dgvr in dgvAggiungiClientiMacchine.Rows)
+                        {
+                            macchineCliente.Add(dgvr.DataBoundItem as Macchina);
+                        }
+                    }
+                    else
+                    {
+                        foreach (DataGridViewRow dgvr in dgvModificaCliente.Rows)
+                        {
+                            macchineCliente.Add(dgvr.DataBoundItem as Macchina);
+                        }
                     }
 
                     macchineCliente.Add(macchina);
@@ -850,14 +854,26 @@ namespace Calendario_AriBerg
                         DataSource = macchineCliente
                     };
 
-                    dgvAggiungiClientiMacchine.DataSource = bs;
-
-                    dgvAggiungiClientiMacchine.Columns["_cliente"].Visible = false;
-                    dgvAggiungiClientiMacchine.Columns["_Marca"].HeaderText = "Marca";
-                    dgvAggiungiClientiMacchine.Columns["_Modello"].HeaderText = "Modello";
-                    dgvAggiungiClientiMacchine.Columns["_Matricola"].HeaderText = "Matricola";
-                    dgvAggiungiClientiMacchine.Columns["_Noleggio"].HeaderText = "Noleggio";
-                    dgvAggiungiClientiMacchine.Columns["_Note"].HeaderText = "Note";
+                    if (gBxClientiAggiungiCliente.Visible)
+                    {
+                        dgvAggiungiClientiMacchine.DataSource = bs;
+                        dgvAggiungiClientiMacchine.Columns["_cliente"].Visible = false;
+                        dgvAggiungiClientiMacchine.Columns["_Marca"].HeaderText = "Marca";
+                        dgvAggiungiClientiMacchine.Columns["_Modello"].HeaderText = "Modello";
+                        dgvAggiungiClientiMacchine.Columns["_Matricola"].HeaderText = "Matricola";
+                        dgvAggiungiClientiMacchine.Columns["_Noleggio"].HeaderText = "Noleggio";
+                        dgvAggiungiClientiMacchine.Columns["_Note"].HeaderText = "Note";
+                    }
+                    else
+                    {
+                        dgvModificaCliente.DataSource = bs;
+                        dgvModificaCliente.Columns["_cliente"].Visible = false;
+                        dgvModificaCliente.Columns["_Marca"].HeaderText = "Marca";
+                        dgvModificaCliente.Columns["_Modello"].HeaderText = "Modello";
+                        dgvModificaCliente.Columns["_Matricola"].HeaderText = "Matricola";
+                        dgvModificaCliente.Columns["_Noleggio"].HeaderText = "Noleggio";
+                        dgvModificaCliente.Columns["_Note"].HeaderText = "Note";
+                    }
 
                     foreach (Control c in gBxAggiungiMacchina.Controls)
                     {
@@ -1021,7 +1037,6 @@ namespace Calendario_AriBerg
             List<Macchina> macchine = new List<Macchina>();
             Macchina m;
 
-            
             query = $"SELECT * From macchina";
             command = new MySqlCommand(query, conn);
 
@@ -1091,7 +1106,6 @@ namespace Calendario_AriBerg
             };
 
             Invoke(new Action(() => { dgvVisualizzaClienti.DataSource = bs; HideColumnsClienti(); }));
-
         }
 
         private void btnConfermaAggiungiCliente_Click(object sender, EventArgs e)
@@ -1167,10 +1181,8 @@ namespace Calendario_AriBerg
                     //threadRicevi.Suspend();
                     dgvVisualizzaClienti.DataSource = null;
                     //dgvVisualizzaClienti.DataSource = Registro.DizClienti.Values.ToList();
-                    
 
                     dgvAggiungiClientiMacchine.DataSource = null;
-
 
                     foreach (Control c in gBxClientiAggiungiCliente.Controls)
                     {
@@ -1262,6 +1274,12 @@ namespace Calendario_AriBerg
                 gBxClientiModificaClienti.BringToFront();
                 gBxClientiModificaClienti.Visible = true;
                 gBxClientiAggiungiCliente.Visible = false;
+                dgvModificaCliente.Columns["_cliente"].Visible = false;
+                dgvModificaCliente.Columns["_Marca"].HeaderText = "Marca";
+                dgvModificaCliente.Columns["_Modello"].HeaderText = "Modello";
+                dgvModificaCliente.Columns["_Matricola"].HeaderText = "Matricola";
+                dgvModificaCliente.Columns["_Noleggio"].HeaderText = "Noleggio";
+                dgvModificaCliente.Columns["_Note"].HeaderText = "Note";
             }
         }
 
@@ -1460,12 +1478,31 @@ namespace Calendario_AriBerg
 
         private void cBxAggiungiEventoCliente_TextChanged(object sender, EventArgs e)
         {
-           //Cancellato da rifare
+            //Cancellato da rifare
         }
 
         private void btnClientiDeleteCustomer_Click(object sender, EventArgs e)
-        {           
-            //Cancellato da rifare
+        {
+            try
+            {
+                DialogResult dr = MessageBox.Show("Questa operazione eliminerà il cliente, tutti i suoi eventi e tutte le sue macchine! Sei sicuro di voler continuare?", "Attenzione!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (dr == DialogResult.Yes)
+                {
+                    using (MySqlConnection conn = Metodi.ConnectToDatabase())
+                    {
+                        string query = $"DELETE FROM cliente WHERE id_cliente = '{Metodi.GetCustomerID(dgvVisualizzaClienti.CurrentRow)}'";
+                        MySqlCommand cmd = new MySqlCommand(query, conn);
+                        cmd.ExecuteNonQuery();
+                        RefreshCustomers();
+                        new Notifica().Show("Cliente eliminato con successo!", Notifica.enmType.Success);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                new Notifica().Show(ex.Message, Notifica.enmType.Warning);
+            }
         }
 
         private void btnAggiungiModificaMacchina_Click(object sender, EventArgs e)
@@ -1477,7 +1514,7 @@ namespace Calendario_AriBerg
             }
             else
             {
-                if (dgvAggiungiClientiMacchine.Rows.Count == 0) return; 
+                if (dgvAggiungiClientiMacchine.Rows.Count == 0) return;
                 gBxModificaMacchina.Visible = true;
                 gBxAggiungiMacchina.Visible = false;
 
@@ -1710,7 +1747,11 @@ namespace Calendario_AriBerg
                 {
                     m = dgvModificaCliente.CurrentRow.DataBoundItem as Macchina;
                 }
-                
+
+                foreach (DataGridViewRow dgvr in dgvComponentiModificaMacchina.Rows)
+                {
+                    componenti.Add(dgvr.DataBoundItem as Componenti);
+                }
 
                 Macchina macchina = new Macchina(m._cliente, cbBxModificaMacchinaMarca.Text, tbxModificaMacchinaModello.Text,
                     tbxModificaMacchinaMatricola.Text, componenti, chBxModificaMacchinaNoleggio.Checked, rtbModificaMacchinaNote.Text);
@@ -1762,7 +1803,7 @@ namespace Calendario_AriBerg
         {
             List<Macchina> maccs = new List<Macchina>();
 
-            foreach(DataGridViewRow dgvr in dgvModificaCliente.Rows)
+            foreach (DataGridViewRow dgvr in dgvModificaCliente.Rows)
             {
                 maccs.Add(dgvr.DataBoundItem as Macchina);
             }
@@ -1779,7 +1820,21 @@ namespace Calendario_AriBerg
 
         private void btnAggiungiEliminaMacchina_Click(object sender, EventArgs e)
         {
-            //lvwAggiungiClientiMacchine.Items.Remove(lvwAggiungiClientiMacchine.SelectedItems[0]);
+            List<Macchina> maccs = new List<Macchina>();
+
+            foreach (DataGridViewRow dgvr in dgvAggiungiClientiMacchine.Rows)
+            {
+                maccs.Add(dgvr.DataBoundItem as Macchina);
+            }
+
+            maccs.Remove(dgvAggiungiClientiMacchine.CurrentRow.DataBoundItem as Macchina);
+
+            BindingSource bs = new BindingSource()
+            {
+                DataSource = maccs
+            };
+
+            dgvAggiungiClientiMacchine.DataSource = bs;
         }
 
         private void lvwAggiungiClientiMacchine_SelectedIndexChanged(object sender, EventArgs e)
@@ -1818,6 +1873,7 @@ namespace Calendario_AriBerg
             {
                 if (!Metodi.AreThereAnyEmptyTextBoxes(gBxClientiModificaClienti.Controls, "Mandatory") && !Metodi.CheckForNewCustomersAndNotify())
                 {
+                    int id_cliente = Metodi.GetCustomerID((dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente)._Email, (dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente)._Telefono);
                     string nome = txBxModificaClienteNome.Text;
                     string mail = txBxModificaClienteMail.Text;
                     string tel = txBxModificaClienteTel.Text;
@@ -1832,16 +1888,16 @@ namespace Calendario_AriBerg
                         $"indirizzo_cliente = '{ind}'";
 
                     if (!string.IsNullOrWhiteSpace(prif)) query += $", `p.rif_cliente` = '{prif}'";
-                    if (!string.IsNullOrWhiteSpace(iva)) query += $", `p.iva_cliente` = '{iva}'";                   
+                    if (!string.IsNullOrWhiteSpace(iva)) query += $", `p.iva_cliente` = '{iva}'";
 
-                    query += $" WHERE id_cliente = {Metodi.GetCustomerID((dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente)._Email, (dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente)._Telefono)};";
+                    query += $" WHERE id_cliente = {id_cliente};";
 
                     MySqlCommand command = new MySqlCommand(query, conn);
                     int rows = command.ExecuteNonQuery();
 
                     List<Macchina> maccs = new List<Macchina>();
 
-                    foreach(DataGridViewRow row in dgvModificaCliente.Rows)
+                    foreach (DataGridViewRow row in dgvModificaCliente.Rows)
                     {
                         maccs.Add(row.DataBoundItem as Macchina);
                     }
@@ -1878,7 +1934,6 @@ namespace Calendario_AriBerg
                     List<Macchina> oldMacchine = new List<Macchina>();
                     Macchina macc;
 
-
                     query = $"SELECT * From macchina";
                     command = new MySqlCommand(query, conn);
 
@@ -1905,7 +1960,7 @@ namespace Calendario_AriBerg
 
                     while (reader.Read())
                     {
-                        c = new Componenti((Componenti)Catalogo.First(x => x.Codice == reader.GetString(0) && x.Marca == reader.GetString(1)));
+                        c = new Componenti(Catalogo.First(x => x.Codice == reader.GetString(0) && x.Marca == reader.GetString(1)));
                         oldMacchine.Find(x => x?._Marca == reader.GetString(2) && x?._Matricola == reader.GetString(3))._Componenti.Add(c);
                     }
 
@@ -1913,69 +1968,105 @@ namespace Calendario_AriBerg
 
                     oldMacchine = oldMacchine.FindAll(x => x._cliente == Metodi.GetCustomerID((dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente)._Email, (dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente)._Telefono));
 
-                    foreach(Macchina m in oldMacchine)
+                    foreach (Macchina newM in maccs)
                     {
-                        if(maccs.Find(x => x._Marca == m._Marca && x._Matricola == m._Matricola) != null) //SE TROVA UNA MACCHINA CON LE STESSE PK: UPDATE
+                        foreach (Macchina oldM in oldMacchine)
                         {
-                            query = $"UPDATE macchina SET marca_macchina = {m._Marca}, modello_macchina = {m._Modello}, matricola_macchina = {m._Matricola}, noleggio_macchina = {Convert.ToInt32(m._Noleggio)}, note_macchina = {m._Note}";
-                            command = new MySqlCommand(query, conn);
-                            command.ExecuteNonQuery();
-                        }
-                        else if(maccs.Find(x => x._Marca == m._Marca && x._Matricola == m._Matricola) == null)
-                        {
-                            query = $"INSERT INTO macchina VALUES({m._Marca}, {m._Modello}, {m._Matricola}, {Convert.ToInt32(m._Noleggio)}, {m._cliente}, {m._Note})";
-                            command = new MySqlCommand(query, conn);
-                            command.ExecuteNonQuery();
-                        }
-                        //else if(oldMacchine.)
+                            if (oldM._cliente != id_cliente) continue;
+                            if (newM._Matricola == oldM._Matricola && newM._Marca == oldM._Marca)
+                            {
+                                query = $"UPDATE macchina SET marca_macchina = '{newM._Marca}', " +
+                                    $"modello_macchina = '{newM._Modello}', " +
+                                    $"matricola_macchina = '{newM._Matricola}', " +
+                                    $"noleggio_macchina = '{Convert.ToInt32(newM._Noleggio)}', " +
+                                    $"note_macchina = '{newM._Note}' " +
+                                    $"WHERE marca_macchina = '{oldM._Marca}' AND matricola_macchina = '{oldM._Matricola}'";
+
+                                command = new MySqlCommand(query, conn);
+                                command.ExecuteNonQuery();
+
+                                
+                                foreach(Componenti oldComp in oldM._Componenti)
+                                {
+                                    query = $"DELETE FROM componenti_macchina " +
+                                        $"WHERE codice_componente = '{oldComp.Codice}' " +
+                                        $"AND marca_componente = '{oldComp.Marca}' " +
+                                        $"AND marca_macchina = '{oldM._Marca}' " +
+                                        $"AND matricola_macchina = '{oldM._Matricola}'";
+
+                                    command = new MySqlCommand(query, conn);
+                                    command.ExecuteNonQuery();
+                                }
+
+                                foreach (Componenti newComp in newM._Componenti)
+                                {
+                                    query = $"INSERT INTO componenti_macchina VALUES('{newComp.Codice}', '{newComp.Marca}', '{newM._Marca}', '{newM._Matricola}')";
+
+                                    command = new MySqlCommand(query, conn);
+                                    command.ExecuteNonQuery();
+                                }
+
+                                break;
+                            }                                             
+                        }                        
                     }
 
-                    //foreach (Macchina m in oldMacchine)
-                    //{
-                    //    foreach (Componenti co in m._Componenti)
-                    //    {
-                    //        query = $"DELETE FROM componenti_macchina WHERE " +
-                    //        $"marca_macchina = '{m._Marca}' AND " +
-                    //        $"matricola_macchina = '{m._Matricola}' AND " +
-                    //        $"codice_componente = '{co.Codice}' AND " +
-                    //        $"marca_componente = '{co.Marca}';";
+                    foreach (Macchina newM in maccs)
+                    {
+                        if (!oldMacchine.Exists(x => x._Matricola == newM._Matricola && x._Marca == newM._Marca))
+                        {
+                            query = $"INSERT INTO macchina VALUES('{newM._Marca}', '{newM._Modello}', '{newM._Matricola}', '{Convert.ToInt32(newM._Noleggio)}', '{newM._cliente}', '{newM._Note}')";
+                            command = new MySqlCommand(query, conn);
+                            command.ExecuteNonQuery();
 
-                    //        cmd = new MySqlCommand(query, conn);
-                    //        cmd.ExecuteNonQuery();
-                    //    }
+                            foreach (Componenti newComp in newM._Componenti)
+                            {
+                                query = $"INSERT INTO componenti_macchina VALUES('{newComp.Codice}', '{newComp.Marca}', '{newM._Marca}', '{newM._Matricola}')";
+                                command = new MySqlCommand(query, conn);
+                                command.ExecuteNonQuery();
+                            }
+                        }
+                    }
 
-                    //    query = $"DELETE FROM macchina WHERE marca_macchina = '{m._Marca}' AND matricola_macchina = '{m._Matricola}'";
-                    //    cmd = new MySqlCommand(query, conn);
-                    //    cmd.ExecuteNonQuery();
-                    //}
-
-                    //foreach (Macchina mac in maccs)
-                    //{
-                    //    foreach (Componenti co in mac._Componenti)
-                    //    {
-                    //        query = $"INSERT INTO componenti_macchina VALUES('{co.Codice}', " +
-                    //            $"'{co.Marca}', " +
-                    //            $"'{mac._Marca}', " +
-                    //            $"'{mac._Matricola}')";
-
-                    //        cmd = new MySqlCommand(query, conn);
-                    //        cmd.ExecuteNonQuery();
-                    //    }
-
-                    //    query = $"INSERT INTO macchina VALUES('{mac._Marca}', " +
-                    //        $"'{mac._Modello}', " +
-                    //        $"'{mac._Matricola}', " +
-                    //        $"'{Convert.ToInt32(mac._Noleggio)}', " +
-                    //        $"'{mac._cliente}', " +
-                    //        $"'{mac._Note}')";
-
-                    //    cmd = new MySqlCommand(query, Metodi.ConnectToDatabase());
-                    //    cmd.ExecuteNonQuery();
-                    //}
-
+                    foreach (Macchina oldM in oldMacchine)
+                    {
+                        if (!maccs.Exists(x => x._Matricola == oldM._Matricola && x._Marca == oldM._Marca))
+                        {
+                            query = $"DELETE FROM macchina WHERE marca_macchina = '{oldM._Marca}' AND matricola_macchina = '{oldM._Matricola}'";
+                            command = new MySqlCommand(query, conn);
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    
                     if (rows > 0)
                     {
                         RefreshCustomers();
+
+                        Cliente cliente = dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente;
+                        int index = dgvVisualizzaClienti.CurrentRow.Index;
+                        BindingSource bs = new BindingSource()
+                        {
+                            DataSource = cliente._Mach
+                        };
+                        dgvMostraMacchineAccessori.DataSource = bs;
+                        dgvVisualizzaClienti.Rows[index].Cells[0].Selected = true;
+                        dgvMostraComponentiMacchina.DataSource = null;
+
+                        tbxMostraIva.Text = cliente._PartIVA;
+                        tbxMostraPrif.Text = cliente._PartIVA;
+
+                        if (gBxModificaMacchina.Visible)
+                        {
+                            gBxModificaMacchina.Visible = false;
+                            dgvModificaCliente.Enabled = true;
+                        }
+
+                        if (gBxClientiModificaClienti.Visible)
+                        {
+                            gBxModificaMacchina.Visible = false;
+                            dgvVisualizzaClienti.Enabled = true;
+                        }
+
                         n.Show("Modifica avvenuta correttamente!", Notifica.enmType.Success);
                     }
                     else
@@ -3185,7 +3276,12 @@ namespace Calendario_AriBerg
                     codici.Add(res.GetString(1));
                 }
 
-                if (marche.Count == 0) return;
+                if (marche.Count == 0) 
+                {
+                    cbBxAggiungiMacchinaMarcaFiltro.DataSource = null;
+                    cbBxAggiungiMacchinaCodiceFiltro.DataSource = null;
+                    return;
+                }
 
                 cbBxAggiungiMacchinaMarcaFiltro.Enabled = true;
                 cbBxAggiungiMacchinaCodiceFiltro.Enabled = true;
@@ -3221,6 +3317,12 @@ namespace Calendario_AriBerg
                     codici.Add(res.GetString(0));
                 }
 
+                if(codici.Count == 0)
+                {
+                    cbBxAggiungiMacchinaCodiceFiltro.DataSource = null;
+                    return;
+                }
+
                 cbBxAggiungiMacchinaCodiceFiltro.Enabled = true;
 
                 BindingSource bsCodici = new BindingSource()
@@ -3251,8 +3353,9 @@ namespace Calendario_AriBerg
             BindingSource bs = new BindingSource()
             {
                 DataSource = Registro.ClientiAttuali.Find(x => x._Email == CurrentCliente._Email &&
-    x._Telefono == CurrentCliente._Telefono)._Mach.ToList()
+                x._Telefono == CurrentCliente._Telefono)._Mach.ToList()
             };
+
             dgvMostraMacchineAccessori.DataSource = bs;
             dgvMostraMacchineAccessori.Columns[0].Visible = false;
             dgvMostraMacchineAccessori.Columns["_Marca"].HeaderText = "Marca";
@@ -3326,7 +3429,13 @@ namespace Calendario_AriBerg
                     codici.Add(res.GetString(1));
                 }
 
-                if (marche.Count == 0) return;
+                if (marche.Count == 0)
+                {
+                    cbBxModificaMacchinaMarcaFiltro.DataSource = null;
+                    cbBxModificaMacchinaCodiceFiltro.DataSource = null;
+                    return;
+                }
+                    
 
                 cbBxModificaMacchinaMarcaFiltro.Enabled = true;
                 cbBxModificaMacchinaCodiceFiltro.Enabled = true;
@@ -3362,6 +3471,12 @@ namespace Calendario_AriBerg
                     codici.Add(res.GetString(0));
                 }
 
+                if(codici.Count == 0)
+                {
+                    cbBxModificaMacchinaCodiceFiltro.DataSource = null;
+                    return;
+                }
+
                 cbBxModificaMacchinaCodiceFiltro.Enabled = true;
 
                 BindingSource bsCodici = new BindingSource()
@@ -3394,7 +3509,6 @@ namespace Calendario_AriBerg
 
         private void btnModificaEventoConferma_Click(object sender, EventArgs e)
         {
-
         }
 
         private void btnModifyInfoEventoRicorrente_MouseHover(object sender, EventArgs e)
@@ -3415,6 +3529,34 @@ namespace Calendario_AriBerg
         private void btnAddInfoEventoRicorrente_MouseLeave(object sender, EventArgs e)
         {
             pnlAddEventoInfo.Visible = false;
+        }
+
+        private void dgvAggiungiClientiMacchine_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvAggiungiClientiMacchine.CurrentRow.DataBoundItem as Macchina != null)
+            {
+                btnAggiungiEliminaMacchina.Enabled = true;
+                btnAggiungiModificaMacchina.Enabled = true;
+            }
+            else
+            {
+                btnAggiungiEliminaMacchina.Enabled = false;
+                btnAggiungiModificaMacchina.Enabled = false;
+            }
+        }
+
+        private void dgvModificaCliente_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvModificaCliente.CurrentRow.DataBoundItem as Macchina != null)
+            {
+                btnModificaEliminaMacchina.Enabled = true;
+                btnModificaModificaMacchina.Enabled = true;
+            }
+            else
+            {
+                btnModificaEliminaMacchina.Enabled = false;
+                btnModificaModificaMacchina.Enabled = false;
+            }
         }
     }
 }

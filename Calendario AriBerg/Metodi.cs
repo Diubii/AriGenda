@@ -38,7 +38,7 @@ namespace Calendario_AriBerg
         {
             try
             {
-                string remoteConnectionString = $"Server=database.diubi.dev; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
+                string remoteConnectionString = $"Server=192.168.1.4; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
                 MySqlConnection conn = new MySqlConnection(remoteConnectionString);
                 conn.Open();
                 return conn;
@@ -700,7 +700,7 @@ namespace Calendario_AriBerg
         {
             Cliente cl = dgvr.DataBoundItem as Cliente;
             MySqlConnection conn = ConnectToDatabase();
-            string query = $"SELECT id_cliente FROM cliente WHERE telefono_cliente = {cl._Telefono} AND mail_cliente = {cl._Email}";
+            string query = $"SELECT id_cliente FROM cliente WHERE telefono_cliente = '{cl._Telefono}' AND mail_cliente = '{cl._Email}'";
             MySqlCommand cmd = new MySqlCommand(query, conn);
             MySqlDataReader res = cmd.ExecuteReader();
 

@@ -237,6 +237,8 @@ namespace Calendario_AriBerg
             this.cbBxTrovaPerNome = new System.Windows.Forms.ComboBox();
             this.RightPanelClienti = new System.Windows.Forms.Panel();
             this.gBxModificaMacchina = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
             this.lblModMacchinaComponentiMarcaFiltro = new System.Windows.Forms.Label();
             this.lblModMacchinaComponentiTipoFiltro = new System.Windows.Forms.Label();
             this.lblModMacchinaComponentiCodiceFiltro = new System.Windows.Forms.Label();
@@ -2290,9 +2292,9 @@ namespace Calendario_AriBerg
             // 
             // leftPanelClienti
             // 
-            this.leftPanelClienti.Controls.Add(this.gBxClientiModificaClienti);
             this.leftPanelClienti.Controls.Add(this.gBxClientiAggiungiCliente);
             this.leftPanelClienti.Controls.Add(this.gBxClientiTrova);
+            this.leftPanelClienti.Controls.Add(this.gBxClientiModificaClienti);
             this.leftPanelClienti.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftPanelClienti.Location = new System.Drawing.Point(3, 79);
             this.leftPanelClienti.Name = "leftPanelClienti";
@@ -2339,6 +2341,7 @@ namespace Calendario_AriBerg
             this.dgvModificaCliente.ReadOnly = true;
             this.dgvModificaCliente.Size = new System.Drawing.Size(430, 266);
             this.dgvModificaCliente.TabIndex = 60;
+            this.dgvModificaCliente.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvModificaCliente_CellClick);
             // 
             // pnlModificaClienteMacchine
             // 
@@ -2376,6 +2379,7 @@ namespace Calendario_AriBerg
             this.btnModificaModificaMacchina.BackColor = System.Drawing.Color.Goldenrod;
             this.btnModificaModificaMacchina.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.aircompressoredit_icon;
             this.btnModificaModificaMacchina.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnModificaModificaMacchina.Enabled = false;
             this.btnModificaModificaMacchina.FlatAppearance.BorderColor = System.Drawing.Color.Goldenrod;
             this.btnModificaModificaMacchina.FlatAppearance.BorderSize = 3;
             this.btnModificaModificaMacchina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -2610,6 +2614,7 @@ namespace Calendario_AriBerg
             this.dgvAggiungiClientiMacchine.ReadOnly = true;
             this.dgvAggiungiClientiMacchine.Size = new System.Drawing.Size(422, 256);
             this.dgvAggiungiClientiMacchine.TabIndex = 43;
+            this.dgvAggiungiClientiMacchine.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAggiungiClientiMacchine_CellClick);
             // 
             // pnlAggiungiClienteButtonsMacchina
             // 
@@ -2999,9 +3004,9 @@ namespace Calendario_AriBerg
             // 
             // RightPanelClienti
             // 
+            this.RightPanelClienti.Controls.Add(this.gBxAggiungiMacchina);
             this.RightPanelClienti.Controls.Add(this.gBxVisualizzaCliente);
             this.RightPanelClienti.Controls.Add(this.gBxModificaMacchina);
-            this.RightPanelClienti.Controls.Add(this.gBxAggiungiMacchina);
             this.RightPanelClienti.Dock = System.Windows.Forms.DockStyle.Right;
             this.RightPanelClienti.Location = new System.Drawing.Point(1020, 79);
             this.RightPanelClienti.Name = "RightPanelClienti";
@@ -3010,6 +3015,8 @@ namespace Calendario_AriBerg
             // 
             // gBxModificaMacchina
             // 
+            this.gBxModificaMacchina.Controls.Add(this.button1);
+            this.gBxModificaMacchina.Controls.Add(this.label13);
             this.gBxModificaMacchina.Controls.Add(this.lblModMacchinaComponentiMarcaFiltro);
             this.gBxModificaMacchina.Controls.Add(this.lblModMacchinaComponentiTipoFiltro);
             this.gBxModificaMacchina.Controls.Add(this.lblModMacchinaComponentiCodiceFiltro);
@@ -3041,6 +3048,29 @@ namespace Calendario_AriBerg
             this.gBxModificaMacchina.TabStop = false;
             this.gBxModificaMacchina.Text = "Modifica macchina/accessorio";
             this.gBxModificaMacchina.Visible = false;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(6, 43);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(47, 45);
+            this.button1.TabIndex = 64;
+            this.button1.Text = "i";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // label13
+            // 
+            this.label13.BackColor = System.Drawing.Color.RoyalBlue;
+            this.label13.Location = new System.Drawing.Point(54, 43);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(346, 45);
+            this.label13.TabIndex = 63;
+            this.label13.Text = "Per modificare marca e matricola, è necessario eliminare la macchina e crearla nu" +
+    "ovamente.";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblModMacchinaComponentiMarcaFiltro
             // 
@@ -3077,8 +3107,9 @@ namespace Calendario_AriBerg
             // 
             this.cbBxModificaMacchinaMarca.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbBxModificaMacchinaMarca.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbBxModificaMacchinaMarca.Enabled = false;
             this.cbBxModificaMacchinaMarca.FormattingEnabled = true;
-            this.cbBxModificaMacchinaMarca.Location = new System.Drawing.Point(127, 48);
+            this.cbBxModificaMacchinaMarca.Location = new System.Drawing.Point(127, 98);
             this.cbBxModificaMacchinaMarca.Name = "cbBxModificaMacchinaMarca";
             this.cbBxModificaMacchinaMarca.Size = new System.Drawing.Size(273, 28);
             this.cbBxModificaMacchinaMarca.TabIndex = 58;
@@ -3112,7 +3143,7 @@ namespace Calendario_AriBerg
             // cbBxModificaMacchinaTipoFiltro
             // 
             this.cbBxModificaMacchinaTipoFiltro.FormattingEnabled = true;
-            this.cbBxModificaMacchinaTipoFiltro.Location = new System.Drawing.Point(242, 273);
+            this.cbBxModificaMacchinaTipoFiltro.Location = new System.Drawing.Point(242, 274);
             this.cbBxModificaMacchinaTipoFiltro.Name = "cbBxModificaMacchinaTipoFiltro";
             this.cbBxModificaMacchinaTipoFiltro.Size = new System.Drawing.Size(158, 28);
             this.cbBxModificaMacchinaTipoFiltro.TabIndex = 47;
@@ -3123,7 +3154,7 @@ namespace Calendario_AriBerg
             this.lblModificaMacchinaMarca.AutoSize = true;
             this.lblModificaMacchinaMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblModificaMacchinaMarca.ForeColor = System.Drawing.Color.White;
-            this.lblModificaMacchinaMarca.Location = new System.Drawing.Point(49, 50);
+            this.lblModificaMacchinaMarca.Location = new System.Drawing.Point(49, 100);
             this.lblModificaMacchinaMarca.Name = "lblModificaMacchinaMarca";
             this.lblModificaMacchinaMarca.Size = new System.Drawing.Size(72, 25);
             this.lblModificaMacchinaMarca.TabIndex = 46;
@@ -3133,7 +3164,7 @@ namespace Calendario_AriBerg
             // 
             this.chBxModificaMacchinaNoleggio.AutoSize = true;
             this.chBxModificaMacchinaNoleggio.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBxModificaMacchinaNoleggio.Location = new System.Drawing.Point(150, 148);
+            this.chBxModificaMacchinaNoleggio.Location = new System.Drawing.Point(150, 198);
             this.chBxModificaMacchinaNoleggio.Name = "chBxModificaMacchinaNoleggio";
             this.chBxModificaMacchinaNoleggio.Size = new System.Drawing.Size(106, 28);
             this.chBxModificaMacchinaNoleggio.TabIndex = 44;
@@ -3163,7 +3194,7 @@ namespace Calendario_AriBerg
             this.lblModificaMacchinaMatricola.AutoSize = true;
             this.lblModificaMacchinaMatricola.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblModificaMacchinaMatricola.ForeColor = System.Drawing.Color.White;
-            this.lblModificaMacchinaMatricola.Location = new System.Drawing.Point(21, 112);
+            this.lblModificaMacchinaMatricola.Location = new System.Drawing.Point(21, 162);
             this.lblModificaMacchinaMatricola.Name = "lblModificaMacchinaMatricola";
             this.lblModificaMacchinaMatricola.Size = new System.Drawing.Size(100, 25);
             this.lblModificaMacchinaMatricola.TabIndex = 35;
@@ -3171,8 +3202,9 @@ namespace Calendario_AriBerg
             // 
             // tbxModificaMacchinaMatricola
             // 
+            this.tbxModificaMacchinaMatricola.Enabled = false;
             this.tbxModificaMacchinaMatricola.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxModificaMacchinaMatricola.Location = new System.Drawing.Point(127, 111);
+            this.tbxModificaMacchinaMatricola.Location = new System.Drawing.Point(127, 161);
             this.tbxModificaMacchinaMatricola.Name = "tbxModificaMacchinaMatricola";
             this.tbxModificaMacchinaMatricola.Size = new System.Drawing.Size(273, 26);
             this.tbxModificaMacchinaMatricola.TabIndex = 34;
@@ -3223,7 +3255,7 @@ namespace Calendario_AriBerg
             this.lblModificaMacchinaModello.AutoSize = true;
             this.lblModificaMacchinaModello.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblModificaMacchinaModello.ForeColor = System.Drawing.Color.White;
-            this.lblModificaMacchinaModello.Location = new System.Drawing.Point(33, 81);
+            this.lblModificaMacchinaModello.Location = new System.Drawing.Point(33, 131);
             this.lblModificaMacchinaModello.Name = "lblModificaMacchinaModello";
             this.lblModificaMacchinaModello.Size = new System.Drawing.Size(88, 25);
             this.lblModificaMacchinaModello.TabIndex = 28;
@@ -3232,7 +3264,7 @@ namespace Calendario_AriBerg
             // tbxModificaMacchinaModello
             // 
             this.tbxModificaMacchinaModello.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxModificaMacchinaModello.Location = new System.Drawing.Point(127, 80);
+            this.tbxModificaMacchinaModello.Location = new System.Drawing.Point(127, 130);
             this.tbxModificaMacchinaModello.Name = "tbxModificaMacchinaModello";
             this.tbxModificaMacchinaModello.Size = new System.Drawing.Size(273, 26);
             this.tbxModificaMacchinaModello.TabIndex = 27;
@@ -3259,9 +3291,9 @@ namespace Calendario_AriBerg
             this.btnConfermaModificaMacchina.FlatAppearance.BorderSize = 0;
             this.btnConfermaModificaMacchina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfermaModificaMacchina.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfermaModificaMacchina.Location = new System.Drawing.Point(6, 661);
+            this.btnConfermaModificaMacchina.Location = new System.Drawing.Point(0, 666);
             this.btnConfermaModificaMacchina.Name = "btnConfermaModificaMacchina";
-            this.btnConfermaModificaMacchina.Size = new System.Drawing.Size(400, 56);
+            this.btnConfermaModificaMacchina.Size = new System.Drawing.Size(412, 56);
             this.btnConfermaModificaMacchina.TabIndex = 12;
             this.btnConfermaModificaMacchina.Text = "Modifica";
             this.btnConfermaModificaMacchina.UseVisualStyleBackColor = false;
@@ -5418,6 +5450,8 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.Label lblModificaDataEvento;
         private System.Windows.Forms.DateTimePicker dtpModificaDataEvento;
         private System.Windows.Forms.Button btnModifyInfoEventoRicorrente;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button button1;
     }
 }
 
