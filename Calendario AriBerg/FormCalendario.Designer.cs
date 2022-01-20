@@ -165,7 +165,6 @@ namespace Calendario_AriBerg
             this.dtpModificaEventoRicorrenteTermine = new System.Windows.Forms.DateTimePicker();
             this.cbxModificaEventoCadenzaUnita = new System.Windows.Forms.ComboBox();
             this.lblModificaEventoCadenza = new System.Windows.Forms.Label();
-            this.ariCalendario = new Calendario_AriBerg.AriCalendario();
             this.pnlCercaEvento = new System.Windows.Forms.Panel();
             this.btnSearchEvento = new System.Windows.Forms.Button();
             this.rdBtnSearchEventoMatricola = new System.Windows.Forms.RadioButton();
@@ -386,6 +385,7 @@ namespace Calendario_AriBerg
             this.btnAddMarca = new System.Windows.Forms.Button();
             this.btnEditMarca = new System.Windows.Forms.Button();
             this.pbxWait = new System.Windows.Forms.PictureBox();
+            this.ariCalendario = new Calendario_AriBerg.AriCalendario();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventi)).BeginInit();
             this.gbxLegenda.SuspendLayout();
             this.gbxAggiungi.SuspendLayout();
@@ -2079,23 +2079,6 @@ namespace Calendario_AriBerg
             this.lblModificaEventoCadenza.TabIndex = 25;
             this.lblModificaEventoCadenza.Text = "Cadenza:";
             // 
-            // ariCalendario
-            // 
-            this.ariCalendario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.ariCalendario.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ariCalendario.Font = new System.Drawing.Font("Segoe UI Light", 32.25F);
-            this.ariCalendario.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.ariCalendario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ariCalendario.Location = new System.Drawing.Point(3, 82);
-            this.ariCalendario.Margin = new System.Windows.Forms.Padding(20);
-            this.ariCalendario.MaxDate = new System.DateTime(2059, 12, 31, 0, 0, 0, 0);
-            this.ariCalendario.MaxSelectionCount = 1;
-            this.ariCalendario.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
-            this.ariCalendario.Name = "ariCalendario";
-            this.ariCalendario.TabIndex = 12;
-            this.ariCalendario.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.ariCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AriCalendario_DateChanged);
-            // 
             // pnlCercaEvento
             // 
             this.pnlCercaEvento.BackColor = System.Drawing.Color.DimGray;
@@ -2993,9 +2976,9 @@ namespace Calendario_AriBerg
             // 
             // RightPanelClienti
             // 
+            this.RightPanelClienti.Controls.Add(this.gBxVisualizzaCliente);
             this.RightPanelClienti.Controls.Add(this.gBxModificaMacchina);
             this.RightPanelClienti.Controls.Add(this.gBxAggiungiMacchina);
-            this.RightPanelClienti.Controls.Add(this.gBxVisualizzaCliente);
             this.RightPanelClienti.Dock = System.Windows.Forms.DockStyle.Right;
             this.RightPanelClienti.Location = new System.Drawing.Point(1020, 79);
             this.RightPanelClienti.Name = "RightPanelClienti";
@@ -3946,7 +3929,7 @@ namespace Calendario_AriBerg
             this.dgvMagazzinoCentrale.MultiSelect = false;
             this.dgvMagazzinoCentrale.Name = "dgvMagazzinoCentrale";
             this.dgvMagazzinoCentrale.ReadOnly = true;
-            this.dgvMagazzinoCentrale.Size = new System.Drawing.Size(534, 637);
+            this.dgvMagazzinoCentrale.Size = new System.Drawing.Size(534, 642);
             this.dgvMagazzinoCentrale.TabIndex = 1;
             this.dgvMagazzinoCentrale.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMagazzinoCentrale_CellDoubleClick);
             // 
@@ -4903,6 +4886,23 @@ namespace Calendario_AriBerg
             this.pbxWait.TabIndex = 58;
             this.pbxWait.TabStop = false;
             this.pbxWait.Visible = false;
+            // 
+            // ariCalendario
+            // 
+            this.ariCalendario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.ariCalendario.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ariCalendario.Font = new System.Drawing.Font("Segoe UI Light", 32.25F);
+            this.ariCalendario.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.ariCalendario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.ariCalendario.Location = new System.Drawing.Point(3, 82);
+            this.ariCalendario.Margin = new System.Windows.Forms.Padding(20);
+            this.ariCalendario.MaxDate = new System.DateTime(2059, 12, 31, 0, 0, 0, 0);
+            this.ariCalendario.MaxSelectionCount = 1;
+            this.ariCalendario.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
+            this.ariCalendario.Name = "ariCalendario";
+            this.ariCalendario.TabIndex = 12;
+            this.ariCalendario.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.ariCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AriCalendario_DateChanged);
             // 
             // FormCalendario
             // 

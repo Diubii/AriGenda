@@ -452,8 +452,7 @@ namespace Calendario_AriBerg
             ///5:note_macchina
             List<Macchina> macchine = new List<Macchina>();
             Macchina m;
-
-            List<Componenti> CompL = new List<Componenti>();
+           
             query = $"SELECT * From macchina";
             command = new MySqlCommand(query, conn);
 
@@ -461,6 +460,7 @@ namespace Calendario_AriBerg
 
             while (reader.Read())
             {
+                List<Componenti> CompL = new List<Componenti>();
                 m = new Macchina(reader.GetInt32(4),reader.GetString(0),reader.GetString(1),reader.GetString(2) ,CompL,reader.GetBoolean(3),reader.GetString(5));
                 macchine.Add(m);
             }

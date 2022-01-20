@@ -453,8 +453,8 @@ namespace Calendario_AriBerg
 
         private void HideColumnsClienti()
         {
-            dgvVisualizzaClienti.Columns["_PartIVA"].Visible = false;
-            dgvVisualizzaClienti.Columns["_Ref"].Visible = false;
+            if(dgvVisualizzaClienti.Columns.Contains("_PartIVA")) dgvVisualizzaClienti.Columns["_PartIVA"].Visible = false;
+            if(dgvVisualizzaClienti.Columns.Contains("_Ref")) dgvVisualizzaClienti.Columns["_Ref"].Visible = false;
 
             dgvVisualizzaClienti.Columns["_Nome"].HeaderText = "Nome";
             dgvVisualizzaClienti.Columns["_Indirizzo"].HeaderText = "Indirizzo";
@@ -1003,7 +1003,7 @@ namespace Calendario_AriBerg
             List<Macchina> macchine = new List<Macchina>();
             Macchina m;
 
-            List<Componenti> CompL = new List<Componenti>();
+            
             query = $"SELECT * From macchina";
             command = new MySqlCommand(query, conn);
 
@@ -1011,6 +1011,7 @@ namespace Calendario_AriBerg
 
             while (reader.Read())
             {
+                List<Componenti> CompL = new List<Componenti>();
                 m = new Macchina(reader.GetInt32(4), reader.GetString(0), reader.GetString(1), reader.GetString(2), CompL, reader.GetBoolean(3), reader.GetString(5));
                 macchine.Add(m);
             }
@@ -1071,7 +1072,8 @@ namespace Calendario_AriBerg
                 DataSource = l
             };
 
-            Invoke(new Action(() => { dgvVisualizzaClienti.DataSource = bs; }));
+            Invoke(new Action(() => { dgvVisualizzaClienti.DataSource = bs; HideColumnsClienti(); }));
+
         }
 
         private void btnConfermaAggiungiCliente_Click(object sender, EventArgs e)
@@ -1147,7 +1149,7 @@ namespace Calendario_AriBerg
                     //threadRicevi.Suspend();
                     dgvVisualizzaClienti.DataSource = null;
                     //dgvVisualizzaClienti.DataSource = Registro.DizClienti.Values.ToList();
-                    HideColumnsClienti();
+                    
 
                     dgvAggiungiClientiMacchine.DataSource = null;
 
@@ -1165,6 +1167,7 @@ namespace Calendario_AriBerg
                     dgvVisualizzaClienti.Enabled = true;
 
                     RefreshCustomers();
+                    HideColumnsClienti();
                     //notifica.Show("Cliente aggiunto correttamente!", Notifica.enmType.Success);
                 }
                 else
@@ -1815,8 +1818,8 @@ namespace Calendario_AriBerg
 
                     query += $" WHERE id_cliente = {Metodi.GetCustomerID((dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente)._Email, (dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente)._Telefono)};";
 
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    int rows = cmd.ExecuteNonQuery();
+                    MySqlCommand command = new MySqlCommand(query, conn);
+                    int rows = command.ExecuteNonQuery();
 
                     List<Macchina> maccs = new List<Macchina>();
 
@@ -1825,91 +1828,132 @@ namespace Calendario_AriBerg
                         maccs.Add(row.DataBoundItem as Macchina);
                     }
 
-                    List<Macchina> oldMacchine = new List<Macchina>();
+                    ///componenti
+                    ///0:codice_componente
+                    ///1:marca_componente
+                    ///2:tipo_componente
+                    ///3:soglia_componente
+                    ///4:n_ordine_componente
+                    List<Componenti> Catalogo = new List<Componenti>();
+                    Componenti c = new Componenti();
 
-                    query = $"SELECT * FROM macchina WHERE id_cliente = {Metodi.GetCustomerID((dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente)._Email, (dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente)._Telefono)}";
-                    cmd = new MySqlCommand(query, conn);
-                    MySqlDataReader reader = cmd.ExecuteReader();
+                    query = $"SELECT * From componente";
+                    command = new MySqlCommand(query, conn);
+
+                    MySqlDataReader reader = command.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        Macchina m = new Macchina();
-
-                        m._Marca = reader.GetString(0);
-                        m._Modello = reader.GetString(1);
-                        m._Matricola = reader.GetString(2);
-                        m._Noleggio = reader.GetBoolean(3);
-                        m._cliente = reader.GetInt32(4);
-                        m._Note = reader.GetString(5);
-
-                        query = $"SELECT * FROM componenti_macchina WHERE " +
-                            $"marca_macchina = '{m._Marca}' AND matricola_macchina = '{m._Matricola}'";
-                        cmd = new MySqlCommand(query, Metodi.ConnectToDatabase());
-                        MySqlDataReader reader2 = cmd.ExecuteReader();
-                        while (reader2.Read())
-                        {
-                            Componenti c = new Componenti();
-                            c.Codice = reader2.GetString(0);
-                            c.Marca = reader2.GetString(1);
-
-                            query = $"SELECT * FROM componente WHERE " +
-                            $"codice_componente = '{c.Codice}' AND marca_componente = '{c.Marca}'";
-                            cmd = new MySqlCommand(query, Metodi.ConnectToDatabase());
-                            MySqlDataReader reader3 = cmd.ExecuteReader();
-
-                            while (reader3.Read())
-                            {
-                                c.Tipo = reader3.GetString(2);
-                                c.Soglia = reader3.GetInt32(3);
-                                c.N_ordine = reader3.GetInt32(4);
-                            }
-
-                            m._Componenti.Add(c);
-                        }
+                        c = new Componenti(reader.GetString(2), reader.GetString(1), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(0), 0);
+                        Catalogo.Add(c);
                     }
 
-                    foreach (Macchina m in oldMacchine)
+                    reader.Close();
+
+                    ///Macchina
+                    ///0:marca_macchina
+                    ///1:modello_macchina
+                    ///2:matricola_macchina
+                    ///3:noleggio_macchina
+                    ///4:id_cliente
+                    ///5:note_macchina
+                    List<Macchina> oldMacchine = new List<Macchina>();
+                    Macchina macc;
+
+
+                    query = $"SELECT * From macchina";
+                    command = new MySqlCommand(query, conn);
+
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
                     {
-                        foreach (Componenti c in m._Componenti)
-                        {
-                            query = $"DELETE FROM componenti_macchina WHERE " +
-                            $"marca_macchina = '{m._Marca}' AND " +
-                            $"matricola_macchina = '{m._Matricola}' AND " +
-                            $"codice_componente = '{c.Codice}' AND " +
-                            $"marca_componente = '{c.Marca}';";
-
-                            cmd = new MySqlCommand(query, conn);
-                            cmd.ExecuteNonQuery();
-                        }
-
-                        query = $"DELETE FROM macchina WHERE marca_macchina = '{m._Marca}' AND matricola_macchina = '{m._Matricola}'";
-                        cmd = new MySqlCommand(query, conn);
-                        cmd.ExecuteNonQuery();
+                        List<Componenti> CompL = new List<Componenti>();
+                        macc = new Macchina(reader.GetInt32(4), reader.GetString(0), reader.GetString(1), reader.GetString(2), CompL, reader.GetBoolean(3), reader.GetString(5));
+                        oldMacchine.Add(macc);
                     }
+                    reader.Close();
 
-                    foreach (Macchina mac in maccs)
+                    ///Componenti macchina
+                    ///0:codice_componente
+                    ///1:marca_componente
+                    ///2:marca_macchina
+                    ///3:matricola_macchina
+
+                    query = $"SELECT * From componenti_macchina";
+                    command = new MySqlCommand(query, conn);
+
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
                     {
-                        foreach (Componenti c in mac._Componenti)
-                        {
-                            query = $"INSERT INTO componenti_macchina VALUES('{c.Codice}', " +
-                                $"'{c.Marca}', " +
-                                $"'{mac._Marca}', " +
-                                $"'{mac._Matricola}')";
-
-                            cmd = new MySqlCommand(query, conn);
-                            cmd.ExecuteNonQuery();
-                        }
-
-                        query = $"INSERT INTO macchina VALUES('{mac._Marca}', " +
-                            $"'{mac._Modello}', " +
-                            $"'{mac._Matricola}', " +
-                            $"'{Convert.ToInt32(mac._Noleggio)}', " +
-                            $"'{mac._cliente}', " +
-                            $"'{mac._Note}')";
-
-                        cmd = new MySqlCommand(query, Metodi.ConnectToDatabase());
-                        cmd.ExecuteNonQuery();
+                        c = new Componenti((Componenti)Catalogo.First(x => x.Codice == reader.GetString(0) && x.Marca == reader.GetString(1)));
+                        oldMacchine.Find(x => x?._Marca == reader.GetString(2) && x?._Matricola == reader.GetString(3))._Componenti.Add(c);
                     }
+
+                    reader.Close();
+
+                    oldMacchine = oldMacchine.FindAll(x => x._cliente == Metodi.GetCustomerID((dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente)._Email, (dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente)._Telefono));
+
+                    foreach(Macchina m in oldMacchine)
+                    {
+                        if(maccs.Find(x => x._Marca == m._Marca && x._Matricola == m._Matricola) != null) //SE TROVA UNA MACCHINA CON LE STESSE PK: UPDATE
+                        {
+                            query = $"UPDATE macchina SET marca_macchina = {m._Marca}, modello_macchina = {m._Modello}, matricola_macchina = {m._Matricola}, noleggio_macchina = {Convert.ToInt32(m._Noleggio)}, note_macchina = {m._Note}";
+                            command = new MySqlCommand(query, conn);
+                            command.ExecuteNonQuery();
+                        }
+                        else if(maccs.Find(x => x._Marca == m._Marca && x._Matricola == m._Matricola) == null)
+                        {
+                            query = $"INSERT INTO macchina VALUES({m._Marca}, {m._Modello}, {m._Matricola}, {Convert.ToInt32(m._Noleggio)}, {m._cliente}, {m._Note})";
+                            command = new MySqlCommand(query, conn);
+                            command.ExecuteNonQuery();
+                        }
+                        //else if(oldMacchine.)
+                    }
+
+                    //foreach (Macchina m in oldMacchine)
+                    //{
+                    //    foreach (Componenti co in m._Componenti)
+                    //    {
+                    //        query = $"DELETE FROM componenti_macchina WHERE " +
+                    //        $"marca_macchina = '{m._Marca}' AND " +
+                    //        $"matricola_macchina = '{m._Matricola}' AND " +
+                    //        $"codice_componente = '{co.Codice}' AND " +
+                    //        $"marca_componente = '{co.Marca}';";
+
+                    //        cmd = new MySqlCommand(query, conn);
+                    //        cmd.ExecuteNonQuery();
+                    //    }
+
+                    //    query = $"DELETE FROM macchina WHERE marca_macchina = '{m._Marca}' AND matricola_macchina = '{m._Matricola}'";
+                    //    cmd = new MySqlCommand(query, conn);
+                    //    cmd.ExecuteNonQuery();
+                    //}
+
+                    //foreach (Macchina mac in maccs)
+                    //{
+                    //    foreach (Componenti co in mac._Componenti)
+                    //    {
+                    //        query = $"INSERT INTO componenti_macchina VALUES('{co.Codice}', " +
+                    //            $"'{co.Marca}', " +
+                    //            $"'{mac._Marca}', " +
+                    //            $"'{mac._Matricola}')";
+
+                    //        cmd = new MySqlCommand(query, conn);
+                    //        cmd.ExecuteNonQuery();
+                    //    }
+
+                    //    query = $"INSERT INTO macchina VALUES('{mac._Marca}', " +
+                    //        $"'{mac._Modello}', " +
+                    //        $"'{mac._Matricola}', " +
+                    //        $"'{Convert.ToInt32(mac._Noleggio)}', " +
+                    //        $"'{mac._cliente}', " +
+                    //        $"'{mac._Note}')";
+
+                    //    cmd = new MySqlCommand(query, Metodi.ConnectToDatabase());
+                    //    cmd.ExecuteNonQuery();
+                    //}
 
                     if (rows > 0)
                     {
