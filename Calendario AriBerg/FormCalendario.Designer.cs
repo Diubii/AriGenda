@@ -29,14 +29,14 @@ namespace Calendario_AriBerg
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCalendario));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvEventi = new System.Windows.Forms.DataGridView();
             this.lblEventi = new System.Windows.Forms.Label();
             this.btnLegenda = new System.Windows.Forms.Button();
@@ -176,7 +176,6 @@ namespace Calendario_AriBerg
             this.lblDettagliComponenti = new System.Windows.Forms.Label();
             this.lblNoteMacchinaAccessorio = new System.Windows.Forms.Label();
             this.rtbNoteMacchinaAccessorio = new System.Windows.Forms.RichTextBox();
-            this.ariCalendario = new Calendario_AriBerg.AriCalendario();
             this.pnlCercaEvento = new System.Windows.Forms.Panel();
             this.btnSearchEvento = new System.Windows.Forms.Button();
             this.rdBtnSearchEventoMatricola = new System.Windows.Forms.RadioButton();
@@ -399,6 +398,7 @@ namespace Calendario_AriBerg
             this.btnAddMarca = new System.Windows.Forms.Button();
             this.btnEditMarca = new System.Windows.Forms.Button();
             this.pbxWait = new System.Windows.Forms.PictureBox();
+            this.ariCalendario = new Calendario_AriBerg.AriCalendario();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventi)).BeginInit();
             this.gbxLegenda.SuspendLayout();
             this.gbxAggiungi.SuspendLayout();
@@ -493,32 +493,32 @@ namespace Calendario_AriBerg
             this.dgvEventi.AllowUserToAddRows = false;
             this.dgvEventi.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvEventi.BackgroundColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEventi.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle36.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle36.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle36.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle36.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle36.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEventi.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle36;
             this.dgvEventi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEventi.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle37.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle37.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle37.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle37.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle37.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle37.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEventi.DefaultCellStyle = dataGridViewCellStyle37;
             this.dgvEventi.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvEventi.GridColor = System.Drawing.Color.Black;
             this.dgvEventi.Location = new System.Drawing.Point(622, 82);
             this.dgvEventi.Name = "dgvEventi";
             this.dgvEventi.ReadOnly = true;
             this.dgvEventi.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvEventi.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle38.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvEventi.RowsDefaultCellStyle = dataGridViewCellStyle38;
             this.dgvEventi.RowTemplate.Height = 24;
             this.dgvEventi.Size = new System.Drawing.Size(810, 719);
             this.dgvEventi.TabIndex = 4;
@@ -870,8 +870,8 @@ namespace Calendario_AriBerg
             this.dgvAggiungiEventoPezzi.Location = new System.Drawing.Point(6, 356);
             this.dgvAggiungiEventoPezzi.Name = "dgvAggiungiEventoPezzi";
             this.dgvAggiungiEventoPezzi.ReadOnly = true;
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            this.dgvAggiungiEventoPezzi.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle39.ForeColor = System.Drawing.Color.Black;
+            this.dgvAggiungiEventoPezzi.RowsDefaultCellStyle = dataGridViewCellStyle39;
             this.dgvAggiungiEventoPezzi.Size = new System.Drawing.Size(356, 150);
             this.dgvAggiungiEventoPezzi.TabIndex = 57;
             // 
@@ -1557,8 +1557,8 @@ namespace Calendario_AriBerg
             this.dgvModificaEventoPezzi.Location = new System.Drawing.Point(9, 388);
             this.dgvModificaEventoPezzi.Name = "dgvModificaEventoPezzi";
             this.dgvModificaEventoPezzi.ReadOnly = true;
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            this.dgvModificaEventoPezzi.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle40.ForeColor = System.Drawing.Color.Black;
+            this.dgvModificaEventoPezzi.RowsDefaultCellStyle = dataGridViewCellStyle40;
             this.dgvModificaEventoPezzi.Size = new System.Drawing.Size(349, 117);
             this.dgvModificaEventoPezzi.TabIndex = 57;
             // 
@@ -1999,8 +1999,8 @@ namespace Calendario_AriBerg
             this.dgvDettagliUtilizzi.Location = new System.Drawing.Point(3, 20);
             this.dgvDettagliUtilizzi.Name = "dgvDettagliUtilizzi";
             this.dgvDettagliUtilizzi.ReadOnly = true;
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            this.dgvDettagliUtilizzi.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle41.ForeColor = System.Drawing.Color.Black;
+            this.dgvDettagliUtilizzi.RowsDefaultCellStyle = dataGridViewCellStyle41;
             this.dgvDettagliUtilizzi.Size = new System.Drawing.Size(394, 195);
             this.dgvDettagliUtilizzi.TabIndex = 35;
             // 
@@ -2168,8 +2168,8 @@ namespace Calendario_AriBerg
             this.dgvDettagliComponenti.Location = new System.Drawing.Point(-1, 42);
             this.dgvDettagliComponenti.Name = "dgvDettagliComponenti";
             this.dgvDettagliComponenti.ReadOnly = true;
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            this.dgvDettagliComponenti.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle42.ForeColor = System.Drawing.Color.Black;
+            this.dgvDettagliComponenti.RowsDefaultCellStyle = dataGridViewCellStyle42;
             this.dgvDettagliComponenti.Size = new System.Drawing.Size(351, 208);
             this.dgvDettagliComponenti.TabIndex = 35;
             // 
@@ -2199,23 +2199,6 @@ namespace Calendario_AriBerg
             this.rtbNoteMacchinaAccessorio.Size = new System.Drawing.Size(254, 208);
             this.rtbNoteMacchinaAccessorio.TabIndex = 1;
             this.rtbNoteMacchinaAccessorio.Text = "";
-            // 
-            // ariCalendario
-            // 
-            this.ariCalendario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.ariCalendario.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ariCalendario.Font = new System.Drawing.Font("Segoe UI Light", 32.25F);
-            this.ariCalendario.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.ariCalendario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ariCalendario.Location = new System.Drawing.Point(3, 82);
-            this.ariCalendario.Margin = new System.Windows.Forms.Padding(20);
-            this.ariCalendario.MaxDate = new System.DateTime(2059, 12, 31, 0, 0, 0, 0);
-            this.ariCalendario.MaxSelectionCount = 1;
-            this.ariCalendario.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
-            this.ariCalendario.Name = "ariCalendario";
-            this.ariCalendario.TabIndex = 12;
-            this.ariCalendario.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.ariCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AriCalendario_DateChanged);
             // 
             // pnlCercaEvento
             // 
@@ -2405,9 +2388,9 @@ namespace Calendario_AriBerg
             // 
             // leftPanelClienti
             // 
+            this.leftPanelClienti.Controls.Add(this.gBxClientiModificaClienti);
             this.leftPanelClienti.Controls.Add(this.gBxClientiAggiungiCliente);
             this.leftPanelClienti.Controls.Add(this.gBxClientiTrova);
-            this.leftPanelClienti.Controls.Add(this.gBxClientiModificaClienti);
             this.leftPanelClienti.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftPanelClienti.Location = new System.Drawing.Point(3, 79);
             this.leftPanelClienti.Name = "leftPanelClienti";
@@ -4097,7 +4080,7 @@ namespace Calendario_AriBerg
             this.dgvMagazzinoCentrale.MultiSelect = false;
             this.dgvMagazzinoCentrale.Name = "dgvMagazzinoCentrale";
             this.dgvMagazzinoCentrale.ReadOnly = true;
-            this.dgvMagazzinoCentrale.Size = new System.Drawing.Size(534, 637);
+            this.dgvMagazzinoCentrale.Size = new System.Drawing.Size(534, 642);
             this.dgvMagazzinoCentrale.TabIndex = 1;
             this.dgvMagazzinoCentrale.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMagazzinoCentrale_CellDoubleClick);
             // 
@@ -5054,6 +5037,23 @@ namespace Calendario_AriBerg
             this.pbxWait.TabIndex = 58;
             this.pbxWait.TabStop = false;
             this.pbxWait.Visible = false;
+            // 
+            // ariCalendario
+            // 
+            this.ariCalendario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.ariCalendario.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ariCalendario.Font = new System.Drawing.Font("Segoe UI Light", 32.25F);
+            this.ariCalendario.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.ariCalendario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.ariCalendario.Location = new System.Drawing.Point(3, 82);
+            this.ariCalendario.Margin = new System.Windows.Forms.Padding(20);
+            this.ariCalendario.MaxDate = new System.DateTime(2059, 12, 31, 0, 0, 0, 0);
+            this.ariCalendario.MaxSelectionCount = 1;
+            this.ariCalendario.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
+            this.ariCalendario.Name = "ariCalendario";
+            this.ariCalendario.TabIndex = 12;
+            this.ariCalendario.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.ariCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AriCalendario_DateChanged);
             // 
             // FormCalendario
             // 
