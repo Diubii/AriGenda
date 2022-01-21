@@ -201,7 +201,7 @@ namespace Calendario_AriBerg
             ///2:marca_componente
             ///3:n_utilizzato
             List<Utilizzo> Utilizzi = new List<Utilizzo>();
-            query = $"SELECT * From Utilizzo";
+            query = $"SELECT * From utilizzo";
             command = new MySqlCommand(query, conn);
 
             reader = command.ExecuteReader();
@@ -349,6 +349,77 @@ namespace Calendario_AriBerg
             {
                 return false;
             }
+        }
+
+        internal static List<Macchina> LoadMacchine()
+        {
+            MySqlConnection conn = Metodi.ConnectToDatabase();
+            ///componenti
+            ///0:codice_componente
+            ///1:marca_componente
+            ///2:tipo_componente
+            ///3:soglia_componente
+            ///4:n_ordine_componente
+            List<Componenti> Catalogo = new List<Componenti>();
+            Componenti c = new Componenti();
+
+
+            string query = $"SELECT * From componente";
+            MySqlCommand command = new MySqlCommand(query, conn);
+
+            MySqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                c = new Componenti(reader.GetString(2), reader.GetString(1), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(0), 0);
+                Catalogo.Add(c);
+            }
+
+            reader.Close();
+
+            ///Macchina
+            ///0:marca_macchina
+            ///1:modello_macchina
+            ///2:matricola_macchina
+            ///3:noleggio_macchina
+            ///4:id_cliente
+            ///5:note_macchina
+            List<Macchina> macchine = new List<Macchina>();
+            Macchina m;
+
+            query = $"SELECT * From macchina";
+            command = new MySqlCommand(query, conn);
+
+            reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                List<Componenti> CompL = new List<Componenti>();
+                m = new Macchina(reader.GetInt32(4), reader.GetString(0), reader.GetString(1), reader.GetString(2), CompL, reader.GetBoolean(3), reader.GetString(5));
+                macchine.Add(m);
+            }
+            reader.Close();
+
+            ///Componenti macchina
+            ///0:codice_componente
+            ///1:marca_componente
+            ///2:marca_macchina
+            ///3:matricola_macchina
+
+            query = $"SELECT * From componenti_macchina";
+            command = new MySqlCommand(query, conn);
+
+            reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                c = new Componenti((Componenti)Catalogo.First(x => x.Codice == reader.GetString(0) && x.Marca == reader.GetString(1)));
+                macchine.Find(x => x?._Marca == reader.GetString(2) && x?._Matricola == reader.GetString(3))._Componenti.Add(c);
+            }
+
+            reader.Close();
+
+            return macchine;
         }
 
         internal static bool CheckForNewDatiMagazzini(TabControl tbCtrlMagazzini)

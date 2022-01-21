@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +19,9 @@ namespace Calendario_AriBerg
 
         private string FiltroAttivoMagazzino = null;
         private string FiltroAttivoCatalogo = null;
+
+        private Type FiltroAttivoEventi = null;
+        private string lblEventiScritta = null;
 
         private string CurrentComponentiFiltroTipo = null;
         private string CurrentComponentiFiltroCodice = null;
@@ -527,6 +531,14 @@ namespace Calendario_AriBerg
             };
             cBxAggiungiEventoCliente.DataSource = bs;
             cBxModificaEventoCliente.DataSource = bs;
+            cbBxSearchEventoCliente.DataSource = bs;
+
+            List<Macchina> Macchine = Metodi.LoadMacchine();
+            BindingSource bsMacchine = new BindingSource()
+            {
+                DataSource = Macchine
+            };
+            cbBxSearchEventoMatricola.DataSource = bsMacchine;
 
             RefreshMagazzini();
             List<string> Magazzini = new List<string>();
@@ -542,7 +554,7 @@ namespace Calendario_AriBerg
                 DataSource = Magazzini
             };
             cbxAggiungiAutoUpdate.DataSource=bs;
-            cbxModificaAutoUpdateEvento.DataSource = bs;          
+            cbxModificaAutoUpdateEvento.DataSource = bs;
         }
 
         private void HideColumnsEventi()
@@ -570,8 +582,22 @@ namespace Calendario_AriBerg
         }
 
         private void AriCalendario_DateChanged(object sender, DateRangeEventArgs e)
-        {
+        {           
             SelectedDate = ariCalendario.SelectionStart;
+
+            if (FiltroAttivoEventi == typeof(Macchina))
+            {
+                btnSearchEvento_Click(btnSearchEvento, null);
+                lblEventi.Text = lblEventiScritta;
+                return;
+            }
+            else if(FiltroAttivoEventi == typeof(Cliente))
+            {
+                btnSearchEvento_Click(btnSearchEvento, null);
+                lblEventi.Text = lblEventiScritta;
+                return;
+            }
+
             Task.Run(new Action(() => { RefreshCurrentTab("all");  }));
             dgvEventi.CurrentCell = null;
             lblEventi.Text = "Eventi del: " + ariCalendario.SelectionStart.Day + "/" + ariCalendario.SelectionStart.Month + "/" + ariCalendario.SelectionStart.Year;
@@ -989,8 +1015,7 @@ namespace Calendario_AriBerg
             Notifica n = new Notifica();
             MySqlConnection conn = Metodi.ConnectToDatabase();
             try
-            {
-                
+            {               
                 Evento ev = (Evento)dgvEventi.CurrentRow.DataBoundItem;
 
                 string query = $"DELETE from evento WHERE id_evento={ev.ID}";
@@ -1934,74 +1959,42 @@ namespace Calendario_AriBerg
 
         private void btnSearchEvento_Click(object sender, EventArgs e)
         {
-            Notifica notifica = new Notifica();
-
-            /*if (Registro.DizGiorni != null)
+            Metodi.CheckForNewEventiMese(SelectedDate, true);
+            if (rdBtnSearchEventoCliente.Checked)
             {
-                List<Evento> eventiTrovati = new List<Evento>();
-                string s = null;
-
-                if (rdBtnSearchEventoCliente.Checked)
+                Cliente c = cbBxSearchEventoCliente.SelectedItem as Cliente;
+                List<Evento> app = Registro.EventiMese.FindAll(x => x.Cliente._Telefono == c._Telefono && x.Cliente._Email == c._Email);
+                List<Evento> eventiCl = app.FindAll(x => x.Giorno.Day == SelectedDate.Day);
+                Registro.EventiMese.Clear();
+                Registro.EventiMese.AddRange(app);
+                BindingSource bs = new BindingSource()
                 {
-                    s = cbBxSearchEventoCliente.Text;
+                    DataSource = eventiCl
+                };
 
-                    foreach (KeyValuePair<DateTime, List<Evento>> kv in Registro.DizGiorni)
-                    {
-                        foreach (Evento eventoLista in kv.Value)
-                        {
-                            if (eventoLista.NomeCliente == s)
-                            {
-                                eventiTrovati.Add(eventoLista);
-                            }
-                        }
-                    }
-
-                    if (eventiTrovati.Count > 0)
-                    {
-                        lblEventi.Text = "Eventi di: " + eventiTrovati[0].NomeCliente;
-                        dgvEventi.DataSource = eventiTrovati;
-                        //ariCalendario.SelectionStart = SelectedDate;
-                        HideColumnsEventi();
-                        dgvEventi.Columns["Giorno"].Visible = true;
-                    }
-                    else
-                    {
-                        notifica.Show("Nessun evento del cliente trovato.", Notifica.enmType.Warning);
-                    }
-                }
-                else if (rdBtnSearchEventoMatricola.Checked)
+                dgvEventi.DataSource = bs;
+                lblEventiScritta = lblEventi.Text = $"Eventi di {SelectedDate.Date.ToShortDateString()} relativi al cliente {c._Nome}";
+                FiltroAttivoEventi = typeof(Cliente);
+            }
+            else
+            {
+                Macchina m = cbBxSearchEventoMatricola.SelectedItem as Macchina;
+                List<Evento> app = Registro.EventiMese.FindAll(x => x.Macchina._Marca == m._Marca && x.Macchina._Matricola == m._Matricola);
+                List<Evento> eventiMa = app.FindAll(x => x.Giorno.Day == SelectedDate.Day);
+                Registro.EventiMese.Clear();
+                Registro.EventiMese.AddRange(app);
+                BindingSource bs = new BindingSource()
                 {
-                    s = cbBxSearchEventoMatricola.Text;
+                    DataSource = eventiMa
+                };
 
-                    foreach (KeyValuePair<DateTime, List<Evento>> kv in Registro.DizGiorni)
-                    {
-                        foreach (Evento eventoLista in kv.Value)
-                        {
-                            // magari errore
-                            if (eventoLista.Macchina._Matricola == s)
-                            {
-                                eventiTrovati.Add(eventoLista);
-                            }
-                        }
-                    }
+                dgvEventi.DataSource = bs;
+                lblEventiScritta = lblEventi.Text = $"Eventi di {SelectedDate.Date.ToShortDateString()} relativi alla macchina {m._Marca + "/" + m._Matricola}";
+                FiltroAttivoEventi = typeof(Macchina);
+            }
 
-                    if (eventiTrovati.Count > 0)
-                    {
-                        lblEventi.Text = "Eventi su: " + eventiTrovati[0].Macchina;
-                        dgvEventi.DataSource = eventiTrovati;
-                        HideColumnsEventi();
-                        dgvEventi.Columns["Giorno"].Visible = true;
-                    }
-                    else
-                    {
-                        notifica.Show("Nessuna evento della macchina trovato.", Notifica.enmType.Warning);
-                    }
-                }
-                if (dgvEventi.DataSource != null)
-                {
-                    //ResizeDetilsCose();
-                }
-            }*/
+            ariCalendario.Refresh();
+            if(FiltroAttivoEventi == null) pnlCercaEvento.Size = new Size(pnlCercaEvento.Size.Width + btnEliminaFiltroEvento.Width, pnlCercaEvento.Height);
         }
 
         private void rdBtnSearchEventoCliente_CheckedChanged(object sender, EventArgs e)
@@ -4283,6 +4276,16 @@ namespace Calendario_AriBerg
             {
                 cbxModificaAutoUpdateEvento.Enabled = false;
             }
+        }
+
+        private void btnEliminaFiltroEvento_Click(object sender, EventArgs e)
+        {
+            Metodi.CheckForNewEventiMese(SelectedDate, true);
+            pnlCercaEvento.Size = new Size(pnlCercaEvento.Size.Width - btnEliminaFiltroEvento.Width, pnlCercaEvento.Height);
+            btnEliminaFiltroEvento.Visible = false;
+            FiltroAttivoEventi = null;
+            lblEventiScritta = null;
+            lblEventi.Text = "Eventi del: " + ariCalendario.SelectionStart.Day + "/" + ariCalendario.SelectionStart.Month + "/" + ariCalendario.SelectionStart.Year;           
         }
     }
 }
