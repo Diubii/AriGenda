@@ -29,10 +29,17 @@ namespace Calendario_AriBerg
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCalendario));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -190,17 +197,6 @@ namespace Calendario_AriBerg
             this.btnClientiDeleteCustomer = new System.Windows.Forms.Button();
             this.dgvVisualizzaClienti = new System.Windows.Forms.DataGridView();
             this.leftPanelClienti = new System.Windows.Forms.Panel();
-            this.gBxClientiTrova = new System.Windows.Forms.GroupBox();
-            this.btnEliminaFiltridgvVisualizzaClienti = new System.Windows.Forms.Button();
-            this.rdBtnTrovaPerNome = new System.Windows.Forms.RadioButton();
-            this.rdBtnTrovaPerPRif = new System.Windows.Forms.RadioButton();
-            this.rdBtnTrovaPerMail = new System.Windows.Forms.RadioButton();
-            this.rdBtnTrovaPerMatricola = new System.Windows.Forms.RadioButton();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.cbBxTrovaPerMatricola = new System.Windows.Forms.ComboBox();
-            this.cbBxTrovaPerMail = new System.Windows.Forms.ComboBox();
-            this.cbBxTrovaPerPRif = new System.Windows.Forms.ComboBox();
-            this.cbBxTrovaPerNome = new System.Windows.Forms.ComboBox();
             this.gBxClientiModificaClienti = new System.Windows.Forms.GroupBox();
             this.dgvModificaCliente = new System.Windows.Forms.DataGridView();
             this.pnlModificaClienteMacchine = new System.Windows.Forms.Panel();
@@ -243,6 +239,17 @@ namespace Calendario_AriBerg
             this.tbxAggiungiClienteNome = new System.Windows.Forms.TextBox();
             this.btnAggiungiClienteChiudi = new System.Windows.Forms.Button();
             this.btnConfermaAggiungiCliente = new System.Windows.Forms.Button();
+            this.gBxClientiTrova = new System.Windows.Forms.GroupBox();
+            this.btnEliminaFiltridgvVisualizzaClienti = new System.Windows.Forms.Button();
+            this.rdBtnTrovaPerNome = new System.Windows.Forms.RadioButton();
+            this.rdBtnTrovaPerPRif = new System.Windows.Forms.RadioButton();
+            this.rdBtnTrovaPerMail = new System.Windows.Forms.RadioButton();
+            this.rdBtnTrovaPerMatricola = new System.Windows.Forms.RadioButton();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.cbBxTrovaPerMatricola = new System.Windows.Forms.ComboBox();
+            this.cbBxTrovaPerMail = new System.Windows.Forms.ComboBox();
+            this.cbBxTrovaPerPRif = new System.Windows.Forms.ComboBox();
+            this.cbBxTrovaPerNome = new System.Windows.Forms.ComboBox();
             this.RightPanelClienti = new System.Windows.Forms.Panel();
             this.gBxAggiungiMacchina = new System.Windows.Forms.GroupBox();
             this.cbBxAggiungiMacchinaMarca = new System.Windows.Forms.ComboBox();
@@ -268,7 +275,6 @@ namespace Calendario_AriBerg
             this.dgvMostraComponentiMacchina = new System.Windows.Forms.DataGridView();
             this.dgvMostraMacchineAccessori = new System.Windows.Forms.DataGridView();
             this.rtbMostraNote = new System.Windows.Forms.RichTextBox();
-            this.pbxAlloStoricoMacchina = new System.Windows.Forms.PictureBox();
             this.pbxAlloStoricoCliente = new System.Windows.Forms.PictureBox();
             this.lblMostraMacchineAccessori = new System.Windows.Forms.Label();
             this.lblMostraPrif = new System.Windows.Forms.Label();
@@ -398,6 +404,7 @@ namespace Calendario_AriBerg
             this.btnAddMarca = new System.Windows.Forms.Button();
             this.btnEditMarca = new System.Windows.Forms.Button();
             this.pbxWait = new System.Windows.Forms.PictureBox();
+            this.btnAlloStorico = new System.Windows.Forms.Button();
             this.ariCalendario = new Calendario_AriBerg.AriCalendario();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventi)).BeginInit();
             this.gbxLegenda.SuspendLayout();
@@ -450,7 +457,6 @@ namespace Calendario_AriBerg
             this.gBxVisualizzaCliente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMostraComponentiMacchina)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMostraMacchineAccessori)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxAlloStoricoMacchina)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAlloStoricoCliente)).BeginInit();
             this.panel4.SuspendLayout();
             this.gBxModificaMacchina.SuspendLayout();
@@ -493,6 +499,14 @@ namespace Calendario_AriBerg
             this.dgvEventi.AllowUserToAddRows = false;
             this.dgvEventi.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvEventi.BackgroundColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEventi.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle22.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -502,6 +516,14 @@ namespace Calendario_AriBerg
             dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvEventi.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.dgvEventi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEventi.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle23.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -516,6 +538,9 @@ namespace Calendario_AriBerg
             this.dgvEventi.Name = "dgvEventi";
             this.dgvEventi.ReadOnly = true;
             this.dgvEventi.RowHeadersWidth = 51;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvEventi.RowsDefaultCellStyle = dataGridViewCellStyle3;
             dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle24.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvEventi.RowsDefaultCellStyle = dataGridViewCellStyle24;
@@ -765,7 +790,7 @@ namespace Calendario_AriBerg
             this.gbxAggiungi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbxAggiungi.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
             this.gbxAggiungi.ForeColor = System.Drawing.Color.White;
-            this.gbxAggiungi.Location = new System.Drawing.Point(3, 82);
+            this.gbxAggiungi.Location = new System.Drawing.Point(5, 81);
             this.gbxAggiungi.Name = "gbxAggiungi";
             this.gbxAggiungi.Size = new System.Drawing.Size(619, 726);
             this.gbxAggiungi.TabIndex = 8;
@@ -793,7 +818,7 @@ namespace Calendario_AriBerg
             // 
             this.pnlAddEventoInfo.BackColor = System.Drawing.Color.RoyalBlue;
             this.pnlAddEventoInfo.Controls.Add(this.lblAddEventoInfo);
-            this.pnlAddEventoInfo.Location = new System.Drawing.Point(7, 487);
+            this.pnlAddEventoInfo.Location = new System.Drawing.Point(6, 486);
             this.pnlAddEventoInfo.Name = "pnlAddEventoInfo";
             this.pnlAddEventoInfo.Size = new System.Drawing.Size(604, 78);
             this.pnlAddEventoInfo.TabIndex = 65;
@@ -819,6 +844,7 @@ namespace Calendario_AriBerg
             // 
             // cbxAggiungiAutoUpdate
             // 
+            this.cbxAggiungiAutoUpdate.Enabled = false;
             this.cbxAggiungiAutoUpdate.FormattingEnabled = true;
             this.cbxAggiungiAutoUpdate.Location = new System.Drawing.Point(8, 24);
             this.cbxAggiungiAutoUpdate.Name = "cbxAggiungiAutoUpdate";
@@ -834,6 +860,7 @@ namespace Calendario_AriBerg
             this.chbxAggiungiAutoUpdate.TabIndex = 0;
             this.chbxAggiungiAutoUpdate.Text = "Auto-Aggiornamento del magazzino";
             this.chbxAggiungiAutoUpdate.UseVisualStyleBackColor = true;
+            this.chbxAggiungiAutoUpdate.CheckedChanged += new System.EventHandler(this.chbxAggiungiAutoUpdate_CheckedChanged);
             // 
             // lblAggiungiEventiCodice
             // 
@@ -870,6 +897,8 @@ namespace Calendario_AriBerg
             this.dgvAggiungiEventoPezzi.Location = new System.Drawing.Point(6, 356);
             this.dgvAggiungiEventoPezzi.Name = "dgvAggiungiEventoPezzi";
             this.dgvAggiungiEventoPezzi.ReadOnly = true;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            this.dgvAggiungiEventoPezzi.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dataGridViewCellStyle25.ForeColor = System.Drawing.Color.Black;
             this.dgvAggiungiEventoPezzi.RowsDefaultCellStyle = dataGridViewCellStyle25;
             this.dgvAggiungiEventoPezzi.Size = new System.Drawing.Size(356, 150);
@@ -1198,6 +1227,7 @@ namespace Calendario_AriBerg
             // 
             // nudAggiungiEventoRicorrenteCadenzaNumero
             // 
+            this.nudAggiungiEventoRicorrenteCadenzaNumero.Enabled = false;
             this.nudAggiungiEventoRicorrenteCadenzaNumero.Location = new System.Drawing.Point(69, 47);
             this.nudAggiungiEventoRicorrenteCadenzaNumero.Name = "nudAggiungiEventoRicorrenteCadenzaNumero";
             this.nudAggiungiEventoRicorrenteCadenzaNumero.Size = new System.Drawing.Size(94, 24);
@@ -1215,6 +1245,7 @@ namespace Calendario_AriBerg
             // chbxAggiungiEventoRicorrente
             // 
             this.chbxAggiungiEventoRicorrente.AutoSize = true;
+            this.chbxAggiungiEventoRicorrente.Enabled = false;
             this.chbxAggiungiEventoRicorrente.Location = new System.Drawing.Point(225, 14);
             this.chbxAggiungiEventoRicorrente.Name = "chbxAggiungiEventoRicorrente";
             this.chbxAggiungiEventoRicorrente.Size = new System.Drawing.Size(135, 21);
@@ -1224,6 +1255,7 @@ namespace Calendario_AriBerg
             // 
             // dtpAggiungiEventoRicorrenteTermine
             // 
+            this.dtpAggiungiEventoRicorrenteTermine.Enabled = false;
             this.dtpAggiungiEventoRicorrenteTermine.Location = new System.Drawing.Point(356, 47);
             this.dtpAggiungiEventoRicorrenteTermine.Name = "dtpAggiungiEventoRicorrenteTermine";
             this.dtpAggiungiEventoRicorrenteTermine.Size = new System.Drawing.Size(215, 24);
@@ -1231,6 +1263,7 @@ namespace Calendario_AriBerg
             // 
             // cbxAggiungiEventoCadenzaUnita
             // 
+            this.cbxAggiungiEventoCadenzaUnita.Enabled = false;
             this.cbxAggiungiEventoCadenzaUnita.FormattingEnabled = true;
             this.cbxAggiungiEventoCadenzaUnita.Items.AddRange(new object[] {
             "Giorni",
@@ -1418,7 +1451,7 @@ namespace Calendario_AriBerg
             this.gbxModificaEvento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbxModificaEvento.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold);
             this.gbxModificaEvento.ForeColor = System.Drawing.Color.White;
-            this.gbxModificaEvento.Location = new System.Drawing.Point(631, 85);
+            this.gbxModificaEvento.Location = new System.Drawing.Point(5, 81);
             this.gbxModificaEvento.Name = "gbxModificaEvento";
             this.gbxModificaEvento.Size = new System.Drawing.Size(619, 726);
             this.gbxModificaEvento.TabIndex = 61;
@@ -1437,7 +1470,7 @@ namespace Calendario_AriBerg
             // 
             this.pnlModifyEventoInfo.BackColor = System.Drawing.Color.RoyalBlue;
             this.pnlModifyEventoInfo.Controls.Add(this.lblModifyEventoInfo);
-            this.pnlModifyEventoInfo.Location = new System.Drawing.Point(7, 486);
+            this.pnlModifyEventoInfo.Location = new System.Drawing.Point(6, 486);
             this.pnlModifyEventoInfo.Name = "pnlModifyEventoInfo";
             this.pnlModifyEventoInfo.Size = new System.Drawing.Size(604, 77);
             this.pnlModifyEventoInfo.TabIndex = 64;
@@ -1472,6 +1505,7 @@ namespace Calendario_AriBerg
             // 
             // cbxModificaAutoUpdateEvento
             // 
+            this.cbxModificaAutoUpdateEvento.Enabled = false;
             this.cbxModificaAutoUpdateEvento.FormattingEnabled = true;
             this.cbxModificaAutoUpdateEvento.Location = new System.Drawing.Point(8, 21);
             this.cbxModificaAutoUpdateEvento.Name = "cbxModificaAutoUpdateEvento";
@@ -1487,6 +1521,7 @@ namespace Calendario_AriBerg
             this.chbxModificaAutoUpdateEvento.TabIndex = 0;
             this.chbxModificaAutoUpdateEvento.Text = "Auto-Aggiornamento del magazzino";
             this.chbxModificaAutoUpdateEvento.UseVisualStyleBackColor = true;
+            this.chbxModificaAutoUpdateEvento.CheckedChanged += new System.EventHandler(this.chbxModificaAutoUpdateEvento_CheckedChanged);
             // 
             // cbxModificaEventoTipo
             // 
@@ -1557,6 +1592,8 @@ namespace Calendario_AriBerg
             this.dgvModificaEventoPezzi.Location = new System.Drawing.Point(9, 388);
             this.dgvModificaEventoPezzi.Name = "dgvModificaEventoPezzi";
             this.dgvModificaEventoPezzi.ReadOnly = true;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            this.dgvModificaEventoPezzi.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dataGridViewCellStyle26.ForeColor = System.Drawing.Color.Black;
             this.dgvModificaEventoPezzi.RowsDefaultCellStyle = dataGridViewCellStyle26;
             this.dgvModificaEventoPezzi.Size = new System.Drawing.Size(349, 117);
@@ -1884,6 +1921,7 @@ namespace Calendario_AriBerg
             // 
             // nudModificaEventoRicorrenteCadenzaNumero
             // 
+            this.nudModificaEventoRicorrenteCadenzaNumero.Enabled = false;
             this.nudModificaEventoRicorrenteCadenzaNumero.Location = new System.Drawing.Point(69, 47);
             this.nudModificaEventoRicorrenteCadenzaNumero.Name = "nudModificaEventoRicorrenteCadenzaNumero";
             this.nudModificaEventoRicorrenteCadenzaNumero.Size = new System.Drawing.Size(94, 24);
@@ -1901,6 +1939,7 @@ namespace Calendario_AriBerg
             // chbxModificaEventoRicorrente
             // 
             this.chbxModificaEventoRicorrente.AutoSize = true;
+            this.chbxModificaEventoRicorrente.Enabled = false;
             this.chbxModificaEventoRicorrente.Location = new System.Drawing.Point(225, 14);
             this.chbxModificaEventoRicorrente.Name = "chbxModificaEventoRicorrente";
             this.chbxModificaEventoRicorrente.Size = new System.Drawing.Size(135, 21);
@@ -1910,6 +1949,7 @@ namespace Calendario_AriBerg
             // 
             // dtpModificaEventoRicorrenteTermine
             // 
+            this.dtpModificaEventoRicorrenteTermine.Enabled = false;
             this.dtpModificaEventoRicorrenteTermine.Location = new System.Drawing.Point(356, 47);
             this.dtpModificaEventoRicorrenteTermine.Name = "dtpModificaEventoRicorrenteTermine";
             this.dtpModificaEventoRicorrenteTermine.Size = new System.Drawing.Size(215, 24);
@@ -1917,6 +1957,7 @@ namespace Calendario_AriBerg
             // 
             // cbxModificaEventoCadenzaUnita
             // 
+            this.cbxModificaEventoCadenzaUnita.Enabled = false;
             this.cbxModificaEventoCadenzaUnita.FormattingEnabled = true;
             this.cbxModificaEventoCadenzaUnita.Items.AddRange(new object[] {
             "Giorni",
@@ -1972,6 +2013,7 @@ namespace Calendario_AriBerg
             this.rtbNoteDettagli.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbNoteDettagli.Location = new System.Drawing.Point(3, 20);
             this.rtbNoteDettagli.Name = "rtbNoteDettagli";
+            this.rtbNoteDettagli.ReadOnly = true;
             this.rtbNoteDettagli.Size = new System.Drawing.Size(199, 404);
             this.rtbNoteDettagli.TabIndex = 1;
             this.rtbNoteDettagli.Text = "";
@@ -1999,6 +2041,8 @@ namespace Calendario_AriBerg
             this.dgvDettagliUtilizzi.Location = new System.Drawing.Point(3, 20);
             this.dgvDettagliUtilizzi.Name = "dgvDettagliUtilizzi";
             this.dgvDettagliUtilizzi.ReadOnly = true;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            this.dgvDettagliUtilizzi.RowsDefaultCellStyle = dataGridViewCellStyle6;
             dataGridViewCellStyle27.ForeColor = System.Drawing.Color.Black;
             this.dgvDettagliUtilizzi.RowsDefaultCellStyle = dataGridViewCellStyle27;
             this.dgvDettagliUtilizzi.Size = new System.Drawing.Size(394, 195);
@@ -2168,6 +2212,8 @@ namespace Calendario_AriBerg
             this.dgvDettagliComponenti.Location = new System.Drawing.Point(-1, 42);
             this.dgvDettagliComponenti.Name = "dgvDettagliComponenti";
             this.dgvDettagliComponenti.ReadOnly = true;
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            this.dgvDettagliComponenti.RowsDefaultCellStyle = dataGridViewCellStyle7;
             dataGridViewCellStyle28.ForeColor = System.Drawing.Color.Black;
             this.dgvDettagliComponenti.RowsDefaultCellStyle = dataGridViewCellStyle28;
             this.dgvDettagliComponenti.Size = new System.Drawing.Size(351, 208);
@@ -2857,6 +2903,14 @@ namespace Calendario_AriBerg
             this.gBxClientiAggiungiCliente.TabStop = false;
             this.gBxClientiAggiungiCliente.Text = "Aggiungi cliente";
             this.gBxClientiAggiungiCliente.Visible = false;
+            this.RightPanelClienti.Controls.Add(this.gBxVisualizzaCliente);
+            this.RightPanelClienti.Controls.Add(this.gBxModificaMacchina);
+            this.RightPanelClienti.Controls.Add(this.gBxAggiungiMacchina);
+            this.RightPanelClienti.Dock = System.Windows.Forms.DockStyle.Right;
+            this.RightPanelClienti.Location = new System.Drawing.Point(1020, 79);
+            this.RightPanelClienti.Name = "RightPanelClienti";
+            this.RightPanelClienti.Size = new System.Drawing.Size(412, 722);
+            this.RightPanelClienti.TabIndex = 51;
             // 
             // dgvAggiungiClientiMacchine
             // 
@@ -3361,10 +3415,10 @@ namespace Calendario_AriBerg
             // 
             // gBxVisualizzaCliente
             // 
+            this.gBxVisualizzaCliente.Controls.Add(this.btnAlloStorico);
             this.gBxVisualizzaCliente.Controls.Add(this.dgvMostraComponentiMacchina);
             this.gBxVisualizzaCliente.Controls.Add(this.dgvMostraMacchineAccessori);
             this.gBxVisualizzaCliente.Controls.Add(this.rtbMostraNote);
-            this.gBxVisualizzaCliente.Controls.Add(this.pbxAlloStoricoMacchina);
             this.gBxVisualizzaCliente.Controls.Add(this.pbxAlloStoricoCliente);
             this.gBxVisualizzaCliente.Controls.Add(this.lblMostraMacchineAccessori);
             this.gBxVisualizzaCliente.Controls.Add(this.lblMostraPrif);
@@ -3412,19 +3466,6 @@ namespace Calendario_AriBerg
             this.rtbMostraNote.Size = new System.Drawing.Size(397, 109);
             this.rtbMostraNote.TabIndex = 49;
             this.rtbMostraNote.Text = "";
-            // 
-            // pbxAlloStoricoMacchina
-            // 
-            this.pbxAlloStoricoMacchina.BackColor = System.Drawing.Color.White;
-            this.pbxAlloStoricoMacchina.ErrorImage = null;
-            this.pbxAlloStoricoMacchina.Image = global::Calendario_AriBerg.Properties.Resources.Logo_AriGenda;
-            this.pbxAlloStoricoMacchina.Location = new System.Drawing.Point(21, 106);
-            this.pbxAlloStoricoMacchina.Name = "pbxAlloStoricoMacchina";
-            this.pbxAlloStoricoMacchina.Size = new System.Drawing.Size(57, 48);
-            this.pbxAlloStoricoMacchina.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbxAlloStoricoMacchina.TabIndex = 43;
-            this.pbxAlloStoricoMacchina.TabStop = false;
-            this.pbxAlloStoricoMacchina.Click += new System.EventHandler(this.pbxAlloStoricoMacchina_Click);
             // 
             // pbxAlloStoricoCliente
             // 
@@ -5039,6 +5080,21 @@ namespace Calendario_AriBerg
             this.pbxWait.TabStop = false;
             this.pbxWait.Visible = false;
             // 
+            // btnAlloStorico
+            // 
+            this.btnAlloStorico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnAlloStorico.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.Logo_AriGenda;
+            this.btnAlloStorico.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAlloStorico.Enabled = false;
+            this.btnAlloStorico.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btnAlloStorico.FlatAppearance.BorderSize = 2;
+            this.btnAlloStorico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAlloStorico.Location = new System.Drawing.Point(19, 104);
+            this.btnAlloStorico.Name = "btnAlloStorico";
+            this.btnAlloStorico.Size = new System.Drawing.Size(59, 55);
+            this.btnAlloStorico.TabIndex = 54;
+            this.btnAlloStorico.UseVisualStyleBackColor = false;
+            // 
             // ariCalendario
             // 
             this.ariCalendario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
@@ -5140,7 +5196,6 @@ namespace Calendario_AriBerg
             this.gBxVisualizzaCliente.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMostraComponentiMacchina)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMostraMacchineAccessori)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxAlloStoricoMacchina)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAlloStoricoCliente)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
@@ -5292,7 +5347,6 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.TextBox txBxModificaClienteTel;
         private System.Windows.Forms.Label lblModificaClienteNome;
         private System.Windows.Forms.TextBox txBxModificaClienteNome;
-        private System.Windows.Forms.PictureBox pbxAlloStoricoMacchina;
         private System.Windows.Forms.PictureBox pbxAlloStoricoCliente;
         private System.Windows.Forms.CheckBox chBxAggiungiMacchinaNoleggio;
         private System.Windows.Forms.ComboBox cbBxAggiungiMacchinaTipoFiltro;
@@ -5555,6 +5609,7 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.Label lblModificaEventoQuantita;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAlloStorico;
     }
 }
 

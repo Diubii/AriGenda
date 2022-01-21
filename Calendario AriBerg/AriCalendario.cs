@@ -118,7 +118,7 @@ namespace Calendario_AriBerg
                 {
                     for (DateTime i = calendarRange.Start; i <= calendarRange.End; i = i.AddDays(1))
                     {
-                        if (Registro.EventiMese != null && Registro.EventiMese.Find(x=>x.Giorno==i)!=null)
+                        if (Registro.EventiMese != null && Registro.EventiMese.Find(x=>x.Giorno.Date==i.Date)!=null)
                         {
                             using (Brush selectionBrush = new SolidBrush(
                     Color.FromArgb(

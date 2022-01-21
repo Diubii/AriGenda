@@ -39,6 +39,7 @@ namespace Calendario_AriBerg
             try
             {
                 string remoteConnectionString = $"Server=192.168.1.4; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
+                //string remoteConnectionString = $"Server=127.0.0.1; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
                 MySqlConnection conn = new MySqlConnection(remoteConnectionString);
                 conn.Open();
                 return conn;
@@ -106,7 +107,7 @@ namespace Calendario_AriBerg
             List<Macchina> macchine = new List<Macchina>();
             Macchina m;
 
-            List<Componenti> CompL = new List<Componenti>();
+           
             query = $"SELECT * From macchina";
             command = new MySqlCommand(query, conn);
 
@@ -114,6 +115,7 @@ namespace Calendario_AriBerg
 
             while (reader.Read())
             {
+                List<Componenti> CompL = new List<Componenti>();
                 m = new Macchina(reader.GetInt32(4), reader.GetString(0), reader.GetString(1), reader.GetString(2), CompL, reader.GetBoolean(3), reader.GetString(5));
                 macchine.Add(m);
             }
@@ -219,11 +221,11 @@ namespace Calendario_AriBerg
             ///0:id_evento
             ///1:idricorrenza_evento
             ///2:data_evento
-            ///3:tempo_evento
-            ///4id_cliente
-            ///5:marca_macchina
-            ///6:matricola_macchina
-            ///7:note_evento
+            ///3id_cliente
+            ///4:marca_macchina
+            ///5:matricola_macchina
+            ///6:note_evento
+            ///7:id_magazzino
             List<Evento> newEventiMese = new List<Evento>();
             query = $"SELECT * From evento where Month(data_evento)='{d.Month}' OR idricorrenza_evento IN (SELECT idricorrenza_evento From evento where Month(data_evento)='{d.Month}')";
             command = new MySqlCommand(query, conn);
@@ -272,7 +274,7 @@ namespace Calendario_AriBerg
                     Cliente ClienteEvento = new Cliente();
                     foreach (Cliente Client in l)
                     {
-                        if (GetCustomerID(Client._Email, Client._Telefono) == reader.GetInt32(4))
+                        if (GetCustomerID(Client._Email, Client._Telefono) == reader.GetInt32(3))
                         {
                             ClienteEvento = Client;
                             break;
@@ -280,21 +282,18 @@ namespace Calendario_AriBerg
                     }
                     //Macchina
                     Macchina MacchinaEvento = new Macchina();
-                    MacchinaEvento = ClienteEvento._Mach.Find(x => x._Matricola == reader.GetString(6) && x._Marca == reader.GetString(5));
+                    MacchinaEvento = ClienteEvento._Mach.Find(x => x._Matricola == reader.GetString(5) && x._Marca == reader.GetString(4));
                     //Listadate
-                    TimeSpan t = reader.GetTimeSpan(3);
-                    string note = reader.GetString(7);
-                    Evento ev = new Evento(t,reader.GetDateTime(2), ClienteEvento, MacchinaEvento, Comp,InterventiEvento,note);
+                    string note = reader.GetString(6);
+                    Evento ev = new Evento(reader.GetDateTime(2), ClienteEvento, MacchinaEvento, Comp,InterventiEvento, reader.GetString(7), note);
                     ev.ID = reader.GetInt32(0);
-                     if (reader.IsDBNull(1)) ev.Id_ricorrenza = null;
+                     if (reader.GetInt32(1)==0) ev.Id_ricorrenza = null;
                      else ev.Id_ricorrenza = reader.GetInt32(1);
                     newEventiMese.Add(ev);
             }
 
             bool different = false;
-
-            //Sort eventi per orario?? magari vedere poi
-
+           
             foreach (Evento eve in newEventiMese)
             {
                 if (newEventiMese.Count != Registro.EventiMese.Count) { different = true; break; }
@@ -319,6 +318,11 @@ namespace Calendario_AriBerg
             {
                 if (Update == true)
                 {
+                    newEventiMese.Sort(delegate(Evento x, Evento y)
+                    {
+                        return x.Giorno.CompareTo(y.Giorno);
+
+                            });
                     Registro.EventiMese = newEventiMese;
                 }
                 conn.Close();
@@ -702,6 +706,7 @@ namespace Calendario_AriBerg
             MySqlDataReader res = cmd.ExecuteReader();
 
             int ris = 0;
+
 
             while (res.Read())
             {
