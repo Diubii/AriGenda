@@ -120,6 +120,9 @@
   <data name="lblAddEventoInfo.Text" xml:space="preserve">
     <value>COMINGSOON: INFO: Per un evento ricorrente si potrà modificare il giorno e l'ora senza venire rimosso dalla sua sequenza. In caso di modifica alla frequenza verranno aggiornati gli eventi futuri che ne fanno ancora parte. Una volta passata la data dell'evento esso smetterà di far parte della sequenza e potrà essere modificato come un evento singolo.</value>
   </data>
+  <data name="lblInfoUtilizziApplicati.Text" xml:space="preserve">
+    <value>INFO: Non puoi più modificare questo evento perchè i suoi effetti al magazzino sono già stati applicati. Per modificare i componenti cambiati dall'evento bisogna farlo a mano direttamente dalla sezione "componenti e Magazzini"</value>
+  </data>
   <data name="lblModifyEventoInfo.Text" xml:space="preserve">
     <value>COMINGSOON: INFO: Per un evento ricorrente si potrà modificare il giorno e l'ora senza venire rimosso dalla sua sequenza. In caso di modifica alla frequenza verranno aggiornati gli eventi futuri che ne fanno ancora parte. Una volta passata la data dell'evento esso smetterà di far parte della sequenza e potrà essere modificato come un evento singolo.</value>
   </data>

@@ -38,8 +38,8 @@ namespace Calendario_AriBerg
         {
             try
             {
-                string remoteConnectionString = $"Server=192.168.1.4; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
-                //string remoteConnectionString = $"Server=127.0.0.1; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
+                //string remoteConnectionString = $"Server=192.168.1.4; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
+                string remoteConnectionString = $"Server=127.0.0.1; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
                 MySqlConnection conn = new MySqlConnection(remoteConnectionString);
                 conn.Open();
                 return conn;
@@ -201,7 +201,7 @@ namespace Calendario_AriBerg
             ///2:marca_componente
             ///3:n_utilizzato
             List<Utilizzo> Utilizzi = new List<Utilizzo>();
-            query = $"SELECT * From Utilizzo";
+            query = $"SELECT * From utilizzo";
             command = new MySqlCommand(query, conn);
 
             reader = command.ExecuteReader();
