@@ -166,6 +166,7 @@ namespace Calendario_AriBerg
                     RefreshCustomers();
                     LoadMultiCBXComponentiPerEventi();
 
+                    Invoke(new Action(() => { 
                     marche = new List<string>();
                     foreach (DataGridViewRow dgvr in dgvMarcheComponenti.Rows) marche.Add(dgvr.Cells[0].Value.ToString());
                     cbBxAggiungiMacchinaMarca.DataSource = marche;
@@ -178,6 +179,7 @@ namespace Calendario_AriBerg
 
                     btnModify.Enabled = false;
                     btnRemove.Enabled = false;
+                    }));
                     break;
                 case 1:
 
@@ -379,7 +381,10 @@ namespace Calendario_AriBerg
 
             while (reader.Read())
             {
-                Magazzini.Add(reader.GetString(0));
+                if (reader.GetString(0) != "none")
+                {
+                    Magazzini.Add(reader.GetString(0));
+                }
             }
 
             foreach (TabPage t in tbCtrlMagazzini.TabPages)
@@ -447,6 +452,7 @@ namespace Calendario_AriBerg
                 dgvComponenti.Columns["Quantita"].Visible = false;
             }));
             Registro.ComponentiAttuali = l;
+            conn.Close();
         }
 
         private void UpdateComboboxTabc2MarcType()
@@ -511,6 +517,7 @@ namespace Calendario_AriBerg
             cbxAggiungiEventoTipo.DataSource = types.FindAll(x => x == x);
             cbxModificaEventoTipo.DataSource = types.FindAll(x => x == x);
 
+            RefreshCustomers();
             List<Cliente> Clients = new List<Cliente>();
             foreach (DataGridViewRow dgvr in dgvVisualizzaClienti.Rows) Clients.Add((Cliente)dgvr.DataBoundItem);
             BindingSource bs = new BindingSource()
@@ -519,19 +526,34 @@ namespace Calendario_AriBerg
             };
             cBxAggiungiEventoCliente.DataSource = bs;
             cBxModificaEventoCliente.DataSource = bs;
+
+            RefreshMagazzini();
+            List<string> Magazzini = new List<string>();
+            foreach (TabPage t in tbCtrlMagazzini.TabPages)
+            {
+                if (t.Name != "Totale")
+                {
+                    Magazzini.Add(t.Name);
+                }
+            }
+            bs = new BindingSource()
+            {
+                DataSource = Magazzini
+            };
+            cbxAggiungiAutoUpdate.DataSource=bs;
+            cbxModificaAutoUpdateEvento.DataSource = bs;          
         }
 
         private void HideColumnsEventi()
         {
             Invoke(new Action(() =>
             {
-                dgvEventi.Columns[1].Visible = false;
-                dgvEventi.Columns[2].Visible = false;
-                dgvEventi.Columns[3].Visible = false;
+                dgvEventi.Columns[0].Visible = false;
+                dgvEventi.Columns[4].Visible = false;
                 dgvEventi.Columns[6].Visible = false;
-                dgvEventi.Columns[8].Visible = false;
-                dgvEventi.Columns[0].Width = 100;
-                dgvEventi.Columns[7].Width = 140;
+                dgvEventi.Columns[7].Visible = false;
+                dgvEventi.Columns[1].Width = 180;
+                dgvEventi.Columns[5].Width = 140;
             }));
         }
 
@@ -549,12 +571,9 @@ namespace Calendario_AriBerg
         private void AriCalendario_DateChanged(object sender, DateRangeEventArgs e)
         {
             SelectedDate = ariCalendario.SelectionStart;
-            Caricamento();
             Task.Run(new Action(() => { RefreshCurrentTab("all");  }));
-
             dgvEventi.CurrentCell = null;
             lblEventi.Text = "Eventi del: " + ariCalendario.SelectionStart.Day + "/" + ariCalendario.SelectionStart.Month + "/" + ariCalendario.SelectionStart.Year;
-            SelectedDate = ariCalendario.SelectionStart;
             btnAdd.Enabled = true;
         }
 
@@ -601,7 +620,7 @@ namespace Calendario_AriBerg
         {
             if (Registro.EventiMese.Find(x => x.Giorno.Day == SelectedDate.Day) != null)
             {
-                if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 7)
+                if (e.RowIndex != -1 && e.Value != null && e.ColumnIndex == 5)
                 {
                     if (!e.Handled)
                     {
@@ -623,7 +642,7 @@ namespace Calendario_AriBerg
                             string textPart = text.Substring(i, 1);
                             size = TextRenderer.MeasureText(textPart, f);
 
-                            switch (Registro.EventiMese.Find(x => x.ID == (int)dgvEventi.Rows[e.RowIndex].Cells[2].Value).Interventi[i])
+                            switch (Registro.EventiMese.Find(x => x.ID == (int)dgvEventi.Rows[e.RowIndex].Cells[0].Value).Interventi[i])
                             {
                                 case InterventiPoss.Manut_Completa:
                                     appcolore = Color.Red;
@@ -749,6 +768,13 @@ namespace Calendario_AriBerg
         {
             gbxAggiungi.Visible = false;
             gbxAggiungi.Enabled = false;
+
+            foreach(Control c in gbxAggiungi.Controls)
+            {
+                if (c is ComboBox Comb) Comb.Text = null;
+                if (c is ListView l) l.Items.Clear();
+                if (c is DataGridView d) d.DataSource = null; 
+            }
         }
 
         private void btnAggiungiAddintervento_Click(object sender, EventArgs e)
@@ -769,7 +795,91 @@ namespace Calendario_AriBerg
 
         private void btnConfermaAggiungi_Click(object sender, EventArgs e)
         {
-            //cancellato da rifare
+            Notifica n = new Notifica();
+            if (chbxAggiungiEventoRicorrente.Checked == true)
+            {
+
+            }
+            else
+            {
+
+                MySqlConnection conn = Metodi.ConnectToDatabase();
+                try
+                {
+                    List<InterventiPoss> intapp = new List<InterventiPoss>();
+                    List<int> InterventiEvento = new List<int>();
+                    foreach(ListViewItem i in listViewAggiungiIntervento.Items)
+                    {
+                        string s = i.Text;
+                        InterventiPoss interv =(InterventiPoss) Enum.Parse(typeof(InterventiPoss), s);
+                        intapp.Add(interv);
+                        InterventiEvento.Add(((int)interv));
+                    }
+
+                    List<Componenti> CompEvento = new List<Componenti>();
+                    if (dgvAggiungiEventoPezzi.DataSource != null)
+                    {                       
+                        CompEvento = (List<Componenti>)((BindingSource)dgvAggiungiEventoPezzi.DataSource).DataSource;
+                    }
+
+                    DateTime t;
+                    if (chbxAggiungiEventoOrario.Checked) {
+                        t = new DateTime(SelectedDate.Year,SelectedDate.Month,SelectedDate.Day,(int)nudAddEventoTimeHour.Value,(int)nudAddEventoTimeMinutes.Value,0);
+                    }
+                    else
+                    {
+                        t = new DateTime(SelectedDate.Year, SelectedDate.Month, SelectedDate.Day);
+                    }
+                    string magaz = "none";
+                    if (chbxAggiungiAutoUpdate.Checked) {magaz=cbxAggiungiAutoUpdate.Text; }
+                    string note = null;
+                    if (!string.IsNullOrWhiteSpace(rtbAggiungiNote.Text)) { note = rtbAggiungiNote.Text; }
+                    Evento EvInAggiunta = new Evento(t, (Cliente)cBxAggiungiEventoCliente.SelectedItem, (Macchina)cBxAggiungiEventoMacchine.SelectedItem, CompEvento, intapp, magaz,note);
+
+                    string datetime = $"{EvInAggiunta.Giorno.Year}-{EvInAggiunta.Giorno.Month}-{EvInAggiunta.Giorno.Day} {EvInAggiunta.Giorno.Hour}:{EvInAggiunta.Giorno.Minute}:{EvInAggiunta.Giorno.Second}";
+                    string query = $"INSERT INTO evento VALUES('0','0','{datetime}'," +
+                        $"'{Metodi.GetCustomerID(EvInAggiunta.Cliente._Email,EvInAggiunta.Cliente._Telefono)}','{EvInAggiunta.Macchina._Marca}','{EvInAggiunta.Macchina._Matricola}','{EvInAggiunta.Note}','{EvInAggiunta.Magazzino}')";                  
+                    MySqlCommand command = new MySqlCommand(query, conn);
+                    command.ExecuteNonQuery();
+                    
+                    query = "SELECT MAX(id_evento) from evento";
+                    command = new MySqlCommand(query, conn);
+
+                    int EVENTOID = 0;    //Per reset: ALTER TABLE evento AUTO_INCREMENT =1;
+                    MySqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                       EVENTOID = reader.GetInt32(0);
+                    }
+                    reader.Close();
+
+                    foreach(int i in InterventiEvento)
+                    {
+                        query = $"INSERT INTO intervento_evento VALUES('{EVENTOID}','{i}')";
+                        command = new MySqlCommand(query, conn);
+                        command.ExecuteNonQuery();
+                    }
+
+                    foreach(Componenti c in EvInAggiunta.Componenti)
+                    {
+                        query = $"INSERT INTO utilizzo VALUES('{EVENTOID}','{c.Codice}','{c.Marca}','{c.Quantita}')";
+                        command = new MySqlCommand(query, conn);
+                        command.ExecuteNonQuery();
+                    }
+
+                    Metodi.CheckForNewEventiMese(SelectedDate, true);
+                    RefreshDGVEventi();
+                    n.Show("Evento inserito correttamente", Notifica.enmType.Success);
+                }
+                catch(Exception ex)
+                {
+                    n.Show(ex.Message, Notifica.enmType.Warning);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
         }
 
         private void btnModify_Click(object sender, EventArgs e)
@@ -789,7 +899,7 @@ namespace Calendario_AriBerg
             else
             {
                 Evento ev = (Evento)dgvEventi.CurrentRow.DataBoundItem;
-                Evento evv = new Evento(ev.Tempo,ev.Giorno, ev.Cliente, ev.Macchina, ev.Componenti, ev.Interventi, ev.Note);
+                Evento evv = new Evento(ev.Giorno, ev.Cliente, ev.Macchina, ev.Componenti, ev.Interventi, ev.Note);
                 
 
                 cBxModificaEventoCliente.SelectedIndex = cBxModificaEventoCliente.FindStringExact(evv.Cliente.ToString());
@@ -797,6 +907,7 @@ namespace Calendario_AriBerg
 
                 dtpModificaDataEvento.Value = evv.Giorno;
 
+                listViewModificaIntervento.Items.Clear();
                 foreach(InterventiPoss i in evv.Interventi)
                 {
                     ListViewItem item = new ListViewItem();
@@ -813,14 +924,25 @@ namespace Calendario_AriBerg
 
                 rtbModificaNote.Text = evv.Note;
 
-                if (evv.Tempo == TimeSpan.Zero)
+                if (evv.Giorno.Hour == 0 && evv.Giorno.Minute==0)
                 {
                     chbxModificaEventoOrario.Checked = false;
                 }
                 else
                 {
-                    nudModEventoTimeHour.Value = evv.Tempo.Hours;
-                    nudModEventoTimeMinutes.Value = evv.Tempo.Minutes;
+                    nudModEventoTimeHour.Value = evv.Giorno.Hour;
+                    nudModEventoTimeMinutes.Value = evv.Giorno.Minute;
+                }
+
+
+                if (evv.Magazzino != "")
+                {
+                    chbxModificaAutoUpdateEvento.Checked = true;
+                    cbxModificaAutoUpdateEvento.Text = evv.Magazzino;
+                }
+                else
+                {
+                    chbxModificaAutoUpdateEvento.Checked = false;
                 }
 
                 gbxModificaEvento.Visible = true;
@@ -865,7 +987,33 @@ namespace Calendario_AriBerg
                 return;
             }
             EndCaricamento();
-            //Cancellato da rifare
+            Notifica n = new Notifica();
+            MySqlConnection conn = Metodi.ConnectToDatabase();
+            try
+            {
+                
+                Evento ev = (Evento)dgvEventi.CurrentRow.DataBoundItem;
+
+                string query = $"DELETE from evento WHERE id_evento={ev.ID}";
+                MySqlCommand comm = new MySqlCommand(query, conn);
+                comm.ExecuteNonQuery();
+
+                Metodi.CheckForNewEventiMese(SelectedDate, true);
+                RefreshDGVEventi();
+
+                n.Show("Eliminazione avvenuta con successo", Notifica.enmType.Success);
+            }
+            catch(Exception ex)
+            {
+                n.Show(ex.Message, Notifica.enmType.Warning);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+
+
         }
 
         private void btnClientiAddCustomer_Click(object sender, EventArgs e)
@@ -3975,6 +4123,30 @@ namespace Calendario_AriBerg
             {
                 btnModificaEliminaMacchina.Enabled = false;
                 btnModificaModificaMacchina.Enabled = false;
+            }
+        }
+
+        private void chbxAggiungiAutoUpdate_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chbxAggiungiAutoUpdate.Checked)
+            {
+                cbxAggiungiAutoUpdate.Enabled = true;
+            }
+            else
+            {
+                cbxAggiungiAutoUpdate.Enabled = false;
+            }
+        }
+
+        private void chbxModificaAutoUpdateEvento_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chbxModificaAutoUpdateEvento.Checked)
+            {
+                cbxModificaAutoUpdateEvento.Enabled = true;
+            }
+            else
+            {
+                cbxModificaAutoUpdateEvento.Enabled = false;
             }
         }
     }

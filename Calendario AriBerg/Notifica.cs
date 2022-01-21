@@ -151,6 +151,7 @@ namespace Calendario_AriBerg
 
         private void Notifica_FormClosed(object sender, FormClosedEventArgs e)
         {
+            Invoke(new Action(() => { 
             this.Opacity = 0.0;
             this.StartPosition = FormStartPosition.Manual;
             string fname;
@@ -167,6 +168,7 @@ namespace Calendario_AriBerg
                     frm.Location = new Point(frm.x, frm.y);
                 }
             }
+            }));
         }
 
         public void Show(string msg, enmType type)
