@@ -29,14 +29,14 @@ namespace Calendario_AriBerg
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCalendario));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvEventi = new System.Windows.Forms.DataGridView();
             this.lblEventi = new System.Windows.Forms.Label();
             this.btnLegenda = new System.Windows.Forms.Button();
@@ -106,6 +106,15 @@ namespace Calendario_AriBerg
             this.btnRemove = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pnlCercaEvento = new System.Windows.Forms.Panel();
+            this.btnEliminaFiltroEvento = new System.Windows.Forms.Button();
+            this.btnSearchEvento = new System.Windows.Forms.Button();
+            this.rdBtnSearchEventoMatricola = new System.Windows.Forms.RadioButton();
+            this.rdBtnSearchEventoCliente = new System.Windows.Forms.RadioButton();
+            this.cbBxSearchEventoMatricola = new System.Windows.Forms.ComboBox();
+            this.cbBxSearchEventoCliente = new System.Windows.Forms.ComboBox();
+            this.ariCalendario = new Calendario_AriBerg.AriCalendario();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.gbxDettagliEvento = new System.Windows.Forms.GroupBox();
             this.gbxDettagli = new System.Windows.Forms.GroupBox();
             this.rtbNoteDettagli = new System.Windows.Forms.RichTextBox();
@@ -128,14 +137,10 @@ namespace Calendario_AriBerg
             this.lblDettagliComponenti = new System.Windows.Forms.Label();
             this.lblNoteMacchinaAccessorio = new System.Windows.Forms.Label();
             this.rtbNoteMacchinaAccessorio = new System.Windows.Forms.RichTextBox();
-            this.pnlCercaEvento = new System.Windows.Forms.Panel();
-            this.btnEliminaFiltroEvento = new System.Windows.Forms.Button();
-            this.btnSearchEvento = new System.Windows.Forms.Button();
-            this.rdBtnSearchEventoMatricola = new System.Windows.Forms.RadioButton();
-            this.rdBtnSearchEventoCliente = new System.Windows.Forms.RadioButton();
-            this.cbBxSearchEventoMatricola = new System.Windows.Forms.ComboBox();
-            this.cbBxSearchEventoCliente = new System.Windows.Forms.ComboBox();
             this.gbxModificaEvento = new System.Windows.Forms.GroupBox();
+            this.btnInfoModificaUtilizziApplicati = new System.Windows.Forms.Button();
+            this.pnlInfoUtilizziApplicati = new System.Windows.Forms.Panel();
+            this.lblInfoUtilizziApplicati = new System.Windows.Forms.Label();
             this.nudModificaEventoQuantita = new System.Windows.Forms.NumericUpDown();
             this.pnlModifyEventoInfo = new System.Windows.Forms.Panel();
             this.lblModifyEventoInfo = new System.Windows.Forms.Label();
@@ -399,8 +404,6 @@ namespace Calendario_AriBerg
             this.btnAddMarca = new System.Windows.Forms.Button();
             this.btnEditMarca = new System.Windows.Forms.Button();
             this.pbxWait = new System.Windows.Forms.PictureBox();
-            this.ariCalendario = new Calendario_AriBerg.AriCalendario();
-            this.panel5 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventi)).BeginInit();
             this.gbxLegenda.SuspendLayout();
             this.gbxAggiungi.SuspendLayout();
@@ -416,6 +419,8 @@ namespace Calendario_AriBerg
             this.pnlCommands1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.pnlCercaEvento.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.gbxDettagliEvento.SuspendLayout();
             this.gbxDettagli.SuspendLayout();
             this.gbxDettagliEventoUtilizzi.SuspendLayout();
@@ -423,8 +428,8 @@ namespace Calendario_AriBerg
             this.gBxDettagliCliente.SuspendLayout();
             this.gBxDettagliMacchinaAccessorio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDettagliComponenti)).BeginInit();
-            this.pnlCercaEvento.SuspendLayout();
             this.gbxModificaEvento.SuspendLayout();
+            this.pnlInfoUtilizziApplicati.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudModificaEventoQuantita)).BeginInit();
             this.pnlModifyEventoInfo.SuspendLayout();
             this.pnlModificaAutoUpdateEvento.SuspendLayout();
@@ -487,7 +492,6 @@ namespace Calendario_AriBerg
             this.pnlTipi.SuspendLayout();
             this.pnlMarche.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxWait)).BeginInit();
-            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvEventi
@@ -495,32 +499,32 @@ namespace Calendario_AriBerg
             this.dgvEventi.AllowUserToAddRows = false;
             this.dgvEventi.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvEventi.BackgroundColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEventi.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEventi.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvEventi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEventi.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEventi.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvEventi.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvEventi.GridColor = System.Drawing.Color.Black;
             this.dgvEventi.Location = new System.Drawing.Point(622, 75);
             this.dgvEventi.Name = "dgvEventi";
             this.dgvEventi.ReadOnly = true;
             this.dgvEventi.RowHeadersWidth = 51;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvEventi.RowsDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvEventi.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvEventi.RowTemplate.Height = 24;
             this.dgvEventi.Size = new System.Drawing.Size(810, 726);
             this.dgvEventi.TabIndex = 4;
@@ -872,8 +876,8 @@ namespace Calendario_AriBerg
             this.dgvAggiungiEventoPezzi.Location = new System.Drawing.Point(6, 356);
             this.dgvAggiungiEventoPezzi.Name = "dgvAggiungiEventoPezzi";
             this.dgvAggiungiEventoPezzi.ReadOnly = true;
-            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black;
-            this.dgvAggiungiEventoPezzi.RowsDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            this.dgvAggiungiEventoPezzi.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvAggiungiEventoPezzi.Size = new System.Drawing.Size(356, 150);
             this.dgvAggiungiEventoPezzi.TabIndex = 57;
             // 
@@ -987,7 +991,7 @@ namespace Calendario_AriBerg
             this.nudAddEventoTimeMinutes.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudAddEventoTimeMinutes.Location = new System.Drawing.Point(151, 17);
             this.nudAddEventoTimeMinutes.Maximum = new decimal(new int[] {
-            60,
+            59,
             0,
             0,
             0});
@@ -1014,7 +1018,7 @@ namespace Calendario_AriBerg
             this.nudAddEventoTimeHour.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudAddEventoTimeHour.Location = new System.Drawing.Point(75, 17);
             this.nudAddEventoTimeHour.Maximum = new decimal(new int[] {
-            24,
+            23,
             0,
             0,
             0});
@@ -1386,6 +1390,124 @@ namespace Calendario_AriBerg
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Eventi";
             // 
+            // pnlCercaEvento
+            // 
+            this.pnlCercaEvento.BackColor = System.Drawing.Color.DimGray;
+            this.pnlCercaEvento.Controls.Add(this.btnEliminaFiltroEvento);
+            this.pnlCercaEvento.Controls.Add(this.btnSearchEvento);
+            this.pnlCercaEvento.Controls.Add(this.rdBtnSearchEventoMatricola);
+            this.pnlCercaEvento.Controls.Add(this.rdBtnSearchEventoCliente);
+            this.pnlCercaEvento.Controls.Add(this.cbBxSearchEventoMatricola);
+            this.pnlCercaEvento.Controls.Add(this.cbBxSearchEventoCliente);
+            this.pnlCercaEvento.Location = new System.Drawing.Point(219, 3);
+            this.pnlCercaEvento.Name = "pnlCercaEvento";
+            this.pnlCercaEvento.Size = new System.Drawing.Size(403, 75);
+            this.pnlCercaEvento.TabIndex = 15;
+            // 
+            // btnEliminaFiltroEvento
+            // 
+            this.btnEliminaFiltroEvento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnEliminaFiltroEvento.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.delete_icon;
+            this.btnEliminaFiltroEvento.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnEliminaFiltroEvento.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnEliminaFiltroEvento.FlatAppearance.BorderSize = 15;
+            this.btnEliminaFiltroEvento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminaFiltroEvento.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnEliminaFiltroEvento.Location = new System.Drawing.Point(403, 9);
+            this.btnEliminaFiltroEvento.Name = "btnEliminaFiltroEvento";
+            this.btnEliminaFiltroEvento.Size = new System.Drawing.Size(66, 58);
+            this.btnEliminaFiltroEvento.TabIndex = 26;
+            this.btnEliminaFiltroEvento.UseVisualStyleBackColor = false;
+            this.btnEliminaFiltroEvento.Click += new System.EventHandler(this.btnEliminaFiltroEvento_Click);
+            // 
+            // btnSearchEvento
+            // 
+            this.btnSearchEvento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.btnSearchEvento.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.search_icon;
+            this.btnSearchEvento.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSearchEvento.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.btnSearchEvento.FlatAppearance.BorderSize = 15;
+            this.btnSearchEvento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearchEvento.Location = new System.Drawing.Point(328, 9);
+            this.btnSearchEvento.Name = "btnSearchEvento";
+            this.btnSearchEvento.Size = new System.Drawing.Size(66, 58);
+            this.btnSearchEvento.TabIndex = 25;
+            this.btnSearchEvento.UseVisualStyleBackColor = false;
+            this.btnSearchEvento.Click += new System.EventHandler(this.btnSearchEvento_Click);
+            // 
+            // rdBtnSearchEventoMatricola
+            // 
+            this.rdBtnSearchEventoMatricola.AutoSize = true;
+            this.rdBtnSearchEventoMatricola.ForeColor = System.Drawing.Color.White;
+            this.rdBtnSearchEventoMatricola.Location = new System.Drawing.Point(18, 41);
+            this.rdBtnSearchEventoMatricola.Name = "rdBtnSearchEventoMatricola";
+            this.rdBtnSearchEventoMatricola.Size = new System.Drawing.Size(84, 22);
+            this.rdBtnSearchEventoMatricola.TabIndex = 3;
+            this.rdBtnSearchEventoMatricola.Text = "Macchina";
+            this.rdBtnSearchEventoMatricola.UseVisualStyleBackColor = true;
+            this.rdBtnSearchEventoMatricola.CheckedChanged += new System.EventHandler(this.rdBtnSearchEventoMatricola_CheckedChanged);
+            // 
+            // rdBtnSearchEventoCliente
+            // 
+            this.rdBtnSearchEventoCliente.AutoSize = true;
+            this.rdBtnSearchEventoCliente.Checked = true;
+            this.rdBtnSearchEventoCliente.ForeColor = System.Drawing.Color.White;
+            this.rdBtnSearchEventoCliente.Location = new System.Drawing.Point(18, 12);
+            this.rdBtnSearchEventoCliente.Name = "rdBtnSearchEventoCliente";
+            this.rdBtnSearchEventoCliente.Size = new System.Drawing.Size(71, 22);
+            this.rdBtnSearchEventoCliente.TabIndex = 2;
+            this.rdBtnSearchEventoCliente.TabStop = true;
+            this.rdBtnSearchEventoCliente.Text = "Cliente";
+            this.rdBtnSearchEventoCliente.UseVisualStyleBackColor = true;
+            this.rdBtnSearchEventoCliente.CheckedChanged += new System.EventHandler(this.rdBtnSearchEventoCliente_CheckedChanged);
+            // 
+            // cbBxSearchEventoMatricola
+            // 
+            this.cbBxSearchEventoMatricola.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbBxSearchEventoMatricola.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbBxSearchEventoMatricola.Enabled = false;
+            this.cbBxSearchEventoMatricola.FormattingEnabled = true;
+            this.cbBxSearchEventoMatricola.Location = new System.Drawing.Point(108, 40);
+            this.cbBxSearchEventoMatricola.Name = "cbBxSearchEventoMatricola";
+            this.cbBxSearchEventoMatricola.Size = new System.Drawing.Size(214, 26);
+            this.cbBxSearchEventoMatricola.TabIndex = 1;
+            // 
+            // cbBxSearchEventoCliente
+            // 
+            this.cbBxSearchEventoCliente.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbBxSearchEventoCliente.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbBxSearchEventoCliente.FormattingEnabled = true;
+            this.cbBxSearchEventoCliente.Location = new System.Drawing.Point(108, 8);
+            this.cbBxSearchEventoCliente.Name = "cbBxSearchEventoCliente";
+            this.cbBxSearchEventoCliente.Size = new System.Drawing.Size(214, 26);
+            this.cbBxSearchEventoCliente.TabIndex = 0;
+            // 
+            // ariCalendario
+            // 
+            this.ariCalendario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.ariCalendario.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ariCalendario.Font = new System.Drawing.Font("Segoe UI Light", 32.25F);
+            this.ariCalendario.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.ariCalendario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.ariCalendario.Location = new System.Drawing.Point(3, 75);
+            this.ariCalendario.Margin = new System.Windows.Forms.Padding(20);
+            this.ariCalendario.MaxDate = new System.DateTime(2059, 12, 31, 0, 0, 0, 0);
+            this.ariCalendario.MaxSelectionCount = 1;
+            this.ariCalendario.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
+            this.ariCalendario.Name = "ariCalendario";
+            this.ariCalendario.TabIndex = 12;
+            this.ariCalendario.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.ariCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AriCalendario_DateChanged);
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.lblEventi);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(3, 3);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(1429, 72);
+            this.panel5.TabIndex = 63;
+            // 
             // gbxDettagliEvento
             // 
             this.gbxDettagliEvento.Controls.Add(this.gbxDettagli);
@@ -1449,8 +1571,8 @@ namespace Calendario_AriBerg
             this.dgvDettagliUtilizzi.Location = new System.Drawing.Point(3, 20);
             this.dgvDettagliUtilizzi.Name = "dgvDettagliUtilizzi";
             this.dgvDettagliUtilizzi.ReadOnly = true;
-            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black;
-            this.dgvDettagliUtilizzi.RowsDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            this.dgvDettagliUtilizzi.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDettagliUtilizzi.Size = new System.Drawing.Size(394, 195);
             this.dgvDettagliUtilizzi.TabIndex = 35;
             // 
@@ -1618,8 +1740,8 @@ namespace Calendario_AriBerg
             this.dgvDettagliComponenti.Location = new System.Drawing.Point(-1, 42);
             this.dgvDettagliComponenti.Name = "dgvDettagliComponenti";
             this.dgvDettagliComponenti.ReadOnly = true;
-            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.Black;
-            this.dgvDettagliComponenti.RowsDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            this.dgvDettagliComponenti.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvDettagliComponenti.Size = new System.Drawing.Size(351, 208);
             this.dgvDettagliComponenti.TabIndex = 35;
             // 
@@ -1650,101 +1772,11 @@ namespace Calendario_AriBerg
             this.rtbNoteMacchinaAccessorio.TabIndex = 1;
             this.rtbNoteMacchinaAccessorio.Text = "";
             // 
-            // pnlCercaEvento
-            // 
-            this.pnlCercaEvento.BackColor = System.Drawing.Color.DimGray;
-            this.pnlCercaEvento.Controls.Add(this.btnEliminaFiltroEvento);
-            this.pnlCercaEvento.Controls.Add(this.btnSearchEvento);
-            this.pnlCercaEvento.Controls.Add(this.rdBtnSearchEventoMatricola);
-            this.pnlCercaEvento.Controls.Add(this.rdBtnSearchEventoCliente);
-            this.pnlCercaEvento.Controls.Add(this.cbBxSearchEventoMatricola);
-            this.pnlCercaEvento.Controls.Add(this.cbBxSearchEventoCliente);
-            this.pnlCercaEvento.Location = new System.Drawing.Point(216, 3);
-            this.pnlCercaEvento.Name = "pnlCercaEvento";
-            this.pnlCercaEvento.Size = new System.Drawing.Size(480, 73);
-            this.pnlCercaEvento.TabIndex = 15;
-            // 
-            // btnEliminaFiltroEvento
-            // 
-            this.btnEliminaFiltroEvento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnEliminaFiltroEvento.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.delete_icon;
-            this.btnEliminaFiltroEvento.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnEliminaFiltroEvento.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnEliminaFiltroEvento.FlatAppearance.BorderSize = 15;
-            this.btnEliminaFiltroEvento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEliminaFiltroEvento.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnEliminaFiltroEvento.Location = new System.Drawing.Point(403, 9);
-            this.btnEliminaFiltroEvento.Name = "btnEliminaFiltroEvento";
-            this.btnEliminaFiltroEvento.Size = new System.Drawing.Size(66, 58);
-            this.btnEliminaFiltroEvento.TabIndex = 26;
-            this.btnEliminaFiltroEvento.UseVisualStyleBackColor = false;
-            this.btnEliminaFiltroEvento.Click += new System.EventHandler(this.btnEliminaFiltroEvento_Click);
-            // 
-            // btnSearchEvento
-            // 
-            this.btnSearchEvento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnSearchEvento.BackgroundImage = global::Calendario_AriBerg.Properties.Resources.search_icon;
-            this.btnSearchEvento.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSearchEvento.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnSearchEvento.FlatAppearance.BorderSize = 15;
-            this.btnSearchEvento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearchEvento.Location = new System.Drawing.Point(328, 9);
-            this.btnSearchEvento.Name = "btnSearchEvento";
-            this.btnSearchEvento.Size = new System.Drawing.Size(66, 58);
-            this.btnSearchEvento.TabIndex = 25;
-            this.btnSearchEvento.UseVisualStyleBackColor = false;
-            this.btnSearchEvento.Click += new System.EventHandler(this.btnSearchEvento_Click);
-            // 
-            // rdBtnSearchEventoMatricola
-            // 
-            this.rdBtnSearchEventoMatricola.AutoSize = true;
-            this.rdBtnSearchEventoMatricola.ForeColor = System.Drawing.Color.White;
-            this.rdBtnSearchEventoMatricola.Location = new System.Drawing.Point(18, 41);
-            this.rdBtnSearchEventoMatricola.Name = "rdBtnSearchEventoMatricola";
-            this.rdBtnSearchEventoMatricola.Size = new System.Drawing.Size(84, 22);
-            this.rdBtnSearchEventoMatricola.TabIndex = 3;
-            this.rdBtnSearchEventoMatricola.Text = "Macchina";
-            this.rdBtnSearchEventoMatricola.UseVisualStyleBackColor = true;
-            this.rdBtnSearchEventoMatricola.CheckedChanged += new System.EventHandler(this.rdBtnSearchEventoMatricola_CheckedChanged);
-            // 
-            // rdBtnSearchEventoCliente
-            // 
-            this.rdBtnSearchEventoCliente.AutoSize = true;
-            this.rdBtnSearchEventoCliente.Checked = true;
-            this.rdBtnSearchEventoCliente.ForeColor = System.Drawing.Color.White;
-            this.rdBtnSearchEventoCliente.Location = new System.Drawing.Point(18, 12);
-            this.rdBtnSearchEventoCliente.Name = "rdBtnSearchEventoCliente";
-            this.rdBtnSearchEventoCliente.Size = new System.Drawing.Size(71, 22);
-            this.rdBtnSearchEventoCliente.TabIndex = 2;
-            this.rdBtnSearchEventoCliente.TabStop = true;
-            this.rdBtnSearchEventoCliente.Text = "Cliente";
-            this.rdBtnSearchEventoCliente.UseVisualStyleBackColor = true;
-            this.rdBtnSearchEventoCliente.CheckedChanged += new System.EventHandler(this.rdBtnSearchEventoCliente_CheckedChanged);
-            // 
-            // cbBxSearchEventoMatricola
-            // 
-            this.cbBxSearchEventoMatricola.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbBxSearchEventoMatricola.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbBxSearchEventoMatricola.Enabled = false;
-            this.cbBxSearchEventoMatricola.FormattingEnabled = true;
-            this.cbBxSearchEventoMatricola.Location = new System.Drawing.Point(108, 40);
-            this.cbBxSearchEventoMatricola.Name = "cbBxSearchEventoMatricola";
-            this.cbBxSearchEventoMatricola.Size = new System.Drawing.Size(214, 26);
-            this.cbBxSearchEventoMatricola.TabIndex = 1;
-            // 
-            // cbBxSearchEventoCliente
-            // 
-            this.cbBxSearchEventoCliente.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbBxSearchEventoCliente.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbBxSearchEventoCliente.FormattingEnabled = true;
-            this.cbBxSearchEventoCliente.Location = new System.Drawing.Point(108, 8);
-            this.cbBxSearchEventoCliente.Name = "cbBxSearchEventoCliente";
-            this.cbBxSearchEventoCliente.Size = new System.Drawing.Size(214, 26);
-            this.cbBxSearchEventoCliente.TabIndex = 0;
-            // 
             // gbxModificaEvento
             // 
             this.gbxModificaEvento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.gbxModificaEvento.Controls.Add(this.btnInfoModificaUtilizziApplicati);
+            this.gbxModificaEvento.Controls.Add(this.pnlInfoUtilizziApplicati);
             this.gbxModificaEvento.Controls.Add(this.nudModificaEventoQuantita);
             this.gbxModificaEvento.Controls.Add(this.pnlModifyEventoInfo);
             this.gbxModificaEvento.Controls.Add(this.lblModificaEventoQuantita);
@@ -1788,6 +1820,39 @@ namespace Calendario_AriBerg
             this.gbxModificaEvento.Text = "Modifica Evento";
             this.gbxModificaEvento.Visible = false;
             // 
+            // btnInfoModificaUtilizziApplicati
+            // 
+            this.btnInfoModificaUtilizziApplicati.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnInfoModificaUtilizziApplicati.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInfoModificaUtilizziApplicati.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInfoModificaUtilizziApplicati.Location = new System.Drawing.Point(127, 370);
+            this.btnInfoModificaUtilizziApplicati.Name = "btnInfoModificaUtilizziApplicati";
+            this.btnInfoModificaUtilizziApplicati.Size = new System.Drawing.Size(81, 83);
+            this.btnInfoModificaUtilizziApplicati.TabIndex = 31;
+            this.btnInfoModificaUtilizziApplicati.Text = "info";
+            this.btnInfoModificaUtilizziApplicati.UseVisualStyleBackColor = false;
+            this.btnInfoModificaUtilizziApplicati.Visible = false;
+            this.btnInfoModificaUtilizziApplicati.MouseLeave += new System.EventHandler(this.btnInfoModificaUtilizziApplicati_MouseLeave);
+            this.btnInfoModificaUtilizziApplicati.MouseHover += new System.EventHandler(this.btnInfoModificaUtilizziApplicati_MouseHover);
+            // 
+            // pnlInfoUtilizziApplicati
+            // 
+            this.pnlInfoUtilizziApplicati.BackColor = System.Drawing.Color.RoyalBlue;
+            this.pnlInfoUtilizziApplicati.Controls.Add(this.lblInfoUtilizziApplicati);
+            this.pnlInfoUtilizziApplicati.Location = new System.Drawing.Point(8, 269);
+            this.pnlInfoUtilizziApplicati.Name = "pnlInfoUtilizziApplicati";
+            this.pnlInfoUtilizziApplicati.Size = new System.Drawing.Size(350, 95);
+            this.pnlInfoUtilizziApplicati.TabIndex = 65;
+            this.pnlInfoUtilizziApplicati.Visible = false;
+            // 
+            // lblInfoUtilizziApplicati
+            // 
+            this.lblInfoUtilizziApplicati.Location = new System.Drawing.Point(2, 6);
+            this.lblInfoUtilizziApplicati.Name = "lblInfoUtilizziApplicati";
+            this.lblInfoUtilizziApplicati.Size = new System.Drawing.Size(347, 98);
+            this.lblInfoUtilizziApplicati.TabIndex = 0;
+            this.lblInfoUtilizziApplicati.Text = resources.GetString("lblInfoUtilizziApplicati.Text");
+            // 
             // nudModificaEventoQuantita
             // 
             this.nudModificaEventoQuantita.Location = new System.Drawing.Point(19, 325);
@@ -1799,7 +1864,7 @@ namespace Calendario_AriBerg
             // 
             this.pnlModifyEventoInfo.BackColor = System.Drawing.Color.RoyalBlue;
             this.pnlModifyEventoInfo.Controls.Add(this.lblModifyEventoInfo);
-            this.pnlModifyEventoInfo.Location = new System.Drawing.Point(6, 486);
+            this.pnlModifyEventoInfo.Location = new System.Drawing.Point(7, 483);
             this.pnlModifyEventoInfo.Name = "pnlModifyEventoInfo";
             this.pnlModifyEventoInfo.Size = new System.Drawing.Size(604, 77);
             this.pnlModifyEventoInfo.TabIndex = 64;
@@ -1921,8 +1986,8 @@ namespace Calendario_AriBerg
             this.dgvModificaEventoPezzi.Location = new System.Drawing.Point(9, 388);
             this.dgvModificaEventoPezzi.Name = "dgvModificaEventoPezzi";
             this.dgvModificaEventoPezzi.ReadOnly = true;
-            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.Black;
-            this.dgvModificaEventoPezzi.RowsDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            this.dgvModificaEventoPezzi.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvModificaEventoPezzi.Size = new System.Drawing.Size(349, 117);
             this.dgvModificaEventoPezzi.TabIndex = 57;
             // 
@@ -2020,7 +2085,7 @@ namespace Calendario_AriBerg
             this.nudModEventoTimeMinutes.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudModEventoTimeMinutes.Location = new System.Drawing.Point(151, 17);
             this.nudModEventoTimeMinutes.Maximum = new decimal(new int[] {
-            60,
+            59,
             0,
             0,
             0});
@@ -2047,7 +2112,7 @@ namespace Calendario_AriBerg
             this.nudModEventoTimeHour.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudModEventoTimeHour.Location = new System.Drawing.Point(75, 17);
             this.nudModEventoTimeHour.Maximum = new decimal(new int[] {
-            24,
+            23,
             0,
             0,
             0});
@@ -3172,7 +3237,7 @@ namespace Calendario_AriBerg
             this.btnAlloStorico.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnAlloStorico.FlatAppearance.BorderSize = 2;
             this.btnAlloStorico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAlloStorico.Location = new System.Drawing.Point(341, 37);
+            this.btnAlloStorico.Location = new System.Drawing.Point(341, 39);
             this.btnAlloStorico.Name = "btnAlloStorico";
             this.btnAlloStorico.Size = new System.Drawing.Size(59, 55);
             this.btnAlloStorico.TabIndex = 54;
@@ -5071,32 +5136,6 @@ namespace Calendario_AriBerg
             this.pbxWait.TabStop = false;
             this.pbxWait.Visible = false;
             // 
-            // ariCalendario
-            // 
-            this.ariCalendario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.ariCalendario.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ariCalendario.Font = new System.Drawing.Font("Segoe UI Light", 32.25F);
-            this.ariCalendario.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.ariCalendario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ariCalendario.Location = new System.Drawing.Point(3, 75);
-            this.ariCalendario.Margin = new System.Windows.Forms.Padding(20);
-            this.ariCalendario.MaxDate = new System.DateTime(2059, 12, 31, 0, 0, 0, 0);
-            this.ariCalendario.MaxSelectionCount = 1;
-            this.ariCalendario.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
-            this.ariCalendario.Name = "ariCalendario";
-            this.ariCalendario.TabIndex = 12;
-            this.ariCalendario.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.ariCalendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.AriCalendario_DateChanged);
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.lblEventi);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(3, 3);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1429, 72);
-            this.panel5.TabIndex = 63;
-            // 
             // FormCalendario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5133,6 +5172,9 @@ namespace Calendario_AriBerg
             this.pnlCommands1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.pnlCercaEvento.ResumeLayout(false);
+            this.pnlCercaEvento.PerformLayout();
+            this.panel5.ResumeLayout(false);
             this.gbxDettagliEvento.ResumeLayout(false);
             this.gbxDettagli.ResumeLayout(false);
             this.gbxDettagliEventoUtilizzi.ResumeLayout(false);
@@ -5142,10 +5184,9 @@ namespace Calendario_AriBerg
             this.gBxDettagliMacchinaAccessorio.ResumeLayout(false);
             this.gBxDettagliMacchinaAccessorio.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDettagliComponenti)).EndInit();
-            this.pnlCercaEvento.ResumeLayout(false);
-            this.pnlCercaEvento.PerformLayout();
             this.gbxModificaEvento.ResumeLayout(false);
             this.gbxModificaEvento.PerformLayout();
+            this.pnlInfoUtilizziApplicati.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudModificaEventoQuantita)).EndInit();
             this.pnlModifyEventoInfo.ResumeLayout(false);
             this.pnlModificaAutoUpdateEvento.ResumeLayout(false);
@@ -5227,7 +5268,6 @@ namespace Calendario_AriBerg
             this.pnlMarche.ResumeLayout(false);
             this.pnlMarche.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxWait)).EndInit();
-            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -5598,6 +5638,9 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.Button btnAlloStorico;
         private System.Windows.Forms.Button btnEliminaFiltroEvento;
         private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Button btnInfoModificaUtilizziApplicati;
+        private System.Windows.Forms.Panel pnlInfoUtilizziApplicati;
+        private System.Windows.Forms.Label lblInfoUtilizziApplicati;
     }
 }
 
