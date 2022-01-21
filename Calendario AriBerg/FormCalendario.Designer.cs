@@ -2293,6 +2293,7 @@ namespace Calendario_AriBerg
             // 
             // mur
             // 
+            this.mur.Image = global::Calendario_AriBerg.Properties.Resources.mur_casco;
             this.mur.Location = new System.Drawing.Point(216, 6);
             this.mur.Name = "mur";
             this.mur.Size = new System.Drawing.Size(67, 73);

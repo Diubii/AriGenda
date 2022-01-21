@@ -121,23 +121,20 @@
   <data name="pipottoadd_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pipottoadd_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pipotto_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pipotto_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="remove_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\remove_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="industrial_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\industrial_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="aircompressoradd_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\aircompressoradd_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="componente_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\componente_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pipottodelete_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pipottodelete_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="magazzino_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\magazzino_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="components_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\components_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="components_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\components_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="search_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\search_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -160,17 +157,17 @@
   <data name="success_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\success_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="info_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\info_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="modify_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\modify_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="componente_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\componente_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="warning_notification" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\warning_notification.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="componenti_transfer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\componenti_transfer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="scadenza_notification" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\scadenza_notification.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="earrape_notifica" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\earrape_notifica.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -187,14 +184,17 @@
   <data name="magazzino_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\magazzino_delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="modify_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\modify_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pipotto_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pipotto_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="skull_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\skull_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="magazzino_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\magazzino_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pipottodelete_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pipottodelete_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="info_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\info_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="industrial_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\industrial_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -202,8 +202,8 @@
   <data name="success_notification" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\success_notification.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="componente_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\componente_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="remove_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\remove_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="industrial_remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\industrial_remove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -214,14 +214,20 @@
   <data name="magazzino_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\magazzino_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AriLoading" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AriLoading.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="add_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\add_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="industrial_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\industrial_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="componente_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\componente_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="components_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\components_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AriLoading_Final_25fps" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AriLoading Final 25fps.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="scadenza_notification" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\scadenza_notification.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="delete_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\delete_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -238,10 +244,7 @@
   <data name="components_remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\components_remove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AriLoading" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AriLoading.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AriLoading_Final_25fps" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AriLoading Final 25fps.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="mur casco" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mur casco.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

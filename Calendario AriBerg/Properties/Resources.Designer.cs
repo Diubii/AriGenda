@@ -350,6 +350,16 @@ namespace Calendario_AriBerg.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap mur_casco {
+            get {
+                object obj = ResourceManager.GetObject("mur casco", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pipotto_icon {
             get {
                 object obj = ResourceManager.GetObject("pipotto_icon", resourceCulture);
