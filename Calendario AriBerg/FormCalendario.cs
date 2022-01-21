@@ -111,7 +111,6 @@ namespace Calendario_AriBerg
             dgvComponentiModificaMacchina.DefaultCellStyle.ForeColor = Color.Black;
             dgvComponentiModificaMacchina.ColumnHeadersDefaultCellStyle.Font = new Font("Yu Gothic UI", 10);
             dgvComponentiModificaMacchina.DefaultCellStyle.Font = new Font("Yu Gothic UI", 8);
-
         }
 
         private void Caricamento()
@@ -152,8 +151,8 @@ namespace Calendario_AriBerg
             switch (a)
             {
                 case 0:
-                    if (Metodi.CheckForNewEventiMese(SelectedDate,true))
-                    {                    
+                    if (Metodi.CheckForNewEventiMese(SelectedDate, true))
+                    {
                         Aggiornato = true;
                     }
                     RefreshDGVEventi();
@@ -179,6 +178,7 @@ namespace Calendario_AriBerg
                     btnModify.Enabled = false;
                     btnRemove.Enabled = false;
                     break;
+
                 case 1:
 
                     if (Metodi.CheckForNewCustomers())
@@ -215,7 +215,7 @@ namespace Calendario_AriBerg
                 case 2:
                     switch (What)
                     {
-                        case"all":
+                        case "all":
                             UpdateCBXTipi();
 
                             if (Metodi.CheckForNewComponents(false) || Metodi.CheckForNewDatiMagazzini(tbCtrlMagazzini))
@@ -226,17 +226,18 @@ namespace Calendario_AriBerg
                                 Aggiornato = true;
                             }
                             break;
-                        case"components":
+
+                        case "components":
                             UpdateCBXTipi();
 
-                            if (Metodi.CheckForNewComponents(false) )
+                            if (Metodi.CheckForNewComponents(false))
                             {
                                 RefreshComponentsCatalogoAndCBX();
                                 Aggiornato = true;
                             }
                             break;
                     }
-                    
+
                     break;
 
                 case 3:
@@ -251,13 +252,15 @@ namespace Calendario_AriBerg
                                 Aggiornato = true;
                             }
                             break;
+
                         case "brands":
                             if (Metodi.CheckForNewBrands(ref dgvMarcheComponenti))
                             {
-                                RefreshComponentBrandsDataGridView();                            
+                                RefreshComponentBrandsDataGridView();
                                 Aggiornato = true;
                             }
                             break;
+
                         case "types":
                             if (Metodi.CheckForNewTypes(ref dgvTipiComponenti))
                             {
@@ -502,8 +505,6 @@ namespace Calendario_AriBerg
             }));
         }
 
-
-
         private void LoadMultiCBXComponentiPerEventi()
         {
             List<string> types = new List<string>();
@@ -550,7 +551,7 @@ namespace Calendario_AriBerg
         {
             SelectedDate = ariCalendario.SelectionStart;
             Caricamento();
-            Task.Run(new Action(() => { RefreshCurrentTab("all");  }));
+            Task.Run(new Action(() => { RefreshCurrentTab("all"); }));
 
             dgvEventi.CurrentCell = null;
             lblEventi.Text = "Eventi del: " + ariCalendario.SelectionStart.Day + "/" + ariCalendario.SelectionStart.Month + "/" + ariCalendario.SelectionStart.Year;
@@ -565,7 +566,6 @@ namespace Calendario_AriBerg
                 DataSource = Registro.EventiMese.FindAll(x => x.Giorno.Day == SelectedDate.Day)
             };
             Invoke(new Action(() => { dgvEventi.DataSource = bs; }));
-           
         }
 
         private void GeneraScadenze()
@@ -789,15 +789,14 @@ namespace Calendario_AriBerg
             else
             {
                 Evento ev = (Evento)dgvEventi.CurrentRow.DataBoundItem;
-                Evento evv = new Evento(ev.Tempo,ev.Giorno, ev.Cliente, ev.Macchina, ev.Componenti, ev.Interventi, ev.Note);
-                
+                Evento evv = new Evento(ev.Tempo, ev.Giorno, ev.Cliente, ev.Macchina, ev.Componenti, ev.Interventi, ev.Note);
 
                 cBxModificaEventoCliente.SelectedIndex = cBxModificaEventoCliente.FindStringExact(evv.Cliente.ToString());
                 cBxModificaEventoMacchina.SelectedIndex = cBxModificaEventoMacchina.FindStringExact(evv.Macchina.ToString());
 
                 dtpModificaDataEvento.Value = evv.Giorno;
 
-                foreach(InterventiPoss i in evv.Interventi)
+                foreach (InterventiPoss i in evv.Interventi)
                 {
                     ListViewItem item = new ListViewItem();
                     item.Text = i.ToString();
@@ -824,10 +823,9 @@ namespace Calendario_AriBerg
                 }
 
                 gbxModificaEvento.Visible = true;
-                gbxModificaEvento.Enabled = true;               
+                gbxModificaEvento.Enabled = true;
             }
         }
-
 
         private void btnConfermaModifica_Click(object sender, EventArgs e)
         {
@@ -1186,6 +1184,34 @@ namespace Calendario_AriBerg
                     macchine.FindAll(x => x._cliente == Metodi.GetCustomerID(reader.GetString(3), reader.GetString(2))));
                 l.Add(Cl);
             }
+          
+            Invoke(new Action(() =>
+            {
+                List<string> varTrova = new List<string>();
+                varTrova = l.Select(x => x._Email).Distinct().ToList();
+                cbBxTrovaPerMail.DataSource = varTrova;
+                cbBxTrovaPerMail.SelectedIndex = 0;
+                varTrova = l.Select(x => x._Ref).Distinct().ToList();
+                varTrova.RemoveAll(x => x == "" || x == null);
+                cbBxTrovaPerPRif.DataSource = varTrova;
+                cbBxTrovaPerPRif.SelectedIndex = 0;
+                varTrova = l.Select(x => x._Nome).Distinct().ToList();
+                cbBxTrovaPerNome.DataSource = varTrova;
+                cbBxTrovaPerNome.SelectedIndex = 0;
+                varTrova.Clear();
+
+                foreach (Cliente cl in l)
+                {
+                    foreach (Macchina ma in cl._Mach)
+                    {
+                        varTrova.Add(ma._Marca + " ↔ " + ma._Matricola);
+                    }
+                }
+
+                varTrova = varTrova.Distinct().ToList();
+
+                cbBxTrovaPerMatricola.DataSource = varTrova;
+            }));
 
             Registro.ClientiAttuali = l;
 
@@ -1194,15 +1220,19 @@ namespace Calendario_AriBerg
                 DataSource = l
             };
 
-            Invoke(new Action(() => { dgvVisualizzaClienti.DataSource = bs; HideColumnsClienti(); }));
+            Invoke(new Action(() =>
+            {
+                dgvVisualizzaClienti.DataSource = bs;
+                HideColumnsClienti();
+            }));
         }
 
         private void btnConfermaAggiungiCliente_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = Metodi.ConnectToDatabase(); 
+            MySqlConnection conn = Metodi.ConnectToDatabase();
             Notifica notifica = new Notifica();
 
-            if (Metodi.CheckForNewCustomersAndNotify()) { Task.Run(new Action(()=>{ RefreshCurrentTab("all");  })); return; }
+            if (Metodi.CheckForNewCustomersAndNotify()) { Task.Run(new Action(() => { RefreshCurrentTab("all"); })); return; }
 
             try
             {
@@ -1220,7 +1250,7 @@ namespace Calendario_AriBerg
 
                 List<Macchina> macc = new List<Macchina>();
                 List<Macchina> MacchineAttuali = new List<Macchina>();
-                foreach(Cliente c in Registro.ClientiAttuali)
+                foreach (Cliente c in Registro.ClientiAttuali)
                 {
                     MacchineAttuali.AddRange(c._Mach);
                 }
@@ -1233,11 +1263,11 @@ namespace Calendario_AriBerg
                         notifica.Show("Una delle macchine inserite nel cliente esiste già!", Notifica.enmType.Warning);
                         return;
                     }
-                    macc.Add(macchina);                                     
+                    macc.Add(macchina);
                 }
 
                 if (!Metodi.AreThereAnyEmptyTextBoxes(txBxs))
-                {                    
+                {
                     string query = $"INSERT INTO cliente VALUES('{0}', " +
                         $"'{tbxAggiungiClienteNome.Text}', " +
                         $"'{tbxAggiungiClienteTel.Text}', " +
@@ -1253,8 +1283,8 @@ namespace Calendario_AriBerg
                     cmd.ExecuteNonQuery();
                     cmd.Parameters.Clear();
 
-                    foreach(Macchina macchina in macc)
-                    { 
+                    foreach (Macchina macchina in macc)
+                    {
                         query = $"INSERT INTO macchina VALUES('{macchina._Marca}', " +
                             $"'{macchina._Modello}', " +
                             $"'{macchina._Matricola}', " +
@@ -1301,10 +1331,10 @@ namespace Calendario_AriBerg
                     RefreshCustomers();
                     HideColumnsClienti();
                     gBxClientiAggiungiCliente.Visible = false;
-                    foreach(Control c in gBxClientiAggiungiCliente.Controls)
+                    foreach (Control c in gBxClientiAggiungiCliente.Controls)
                     {
                         if (c is TextBox t) t.Clear();
-                        if (c is DataGridView d) d.DataSource = null;                        
+                        if (c is DataGridView d) d.DataSource = null;
                     }
                     notifica.Show("Cliente aggiunto correttamente!", Notifica.enmType.Success);
                 }
@@ -1570,8 +1600,118 @@ namespace Calendario_AriBerg
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            //Cancellato da Rifare
-        }
+            if (Metodi.CheckForNewCustomersAndNotify()) 
+            { 
+                RefreshCustomers(); 
+                return; 
+            }
+
+            using (MySqlConnection conn = Metodi.ConnectToDatabase())
+            {
+                List<Componenti> Catalogo = new List<Componenti>();
+                Componenti c = new Componenti();
+
+                string query = $"SELECT * From componente";
+                MySqlCommand command = new MySqlCommand(query, conn);
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    c = new Componenti(reader.GetString(2), reader.GetString(1), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(0), 0);
+                    Catalogo.Add(c);
+                }
+
+                reader.Close();
+
+                List<Macchina> macchine = new List<Macchina>();
+                Macchina m;
+
+                List<Componenti> CompL = new List<Componenti>();
+                query = $"SELECT * From macchina";
+                command = new MySqlCommand(query, conn);
+
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    m = new Macchina(reader.GetInt32(4), reader.GetString(0), reader.GetString(1), reader.GetString(2), CompL, reader.GetBoolean(3), reader.GetString(5));
+                    macchine.Add(m);
+                }
+                reader.Close();
+
+                query = $"SELECT * From componenti_macchina";
+                command = new MySqlCommand(query, conn);
+
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    c = new Componenti((Componenti)Catalogo.First(x => x.Codice == reader.GetString(0) && x.Marca == reader.GetString(1)));
+                    macchine.Find(x => x?._Marca == reader.GetString(2) && x?._Matricola == reader.GetString(3))._Componenti.Add(c);
+                }
+
+                reader.Close();
+
+                if (rdBtnTrovaPerMail.Checked)
+                {
+                    query = $"SELECT * FROM cliente WHERE mail_cliente = '{cbBxTrovaPerMail.Text}'";
+                }
+                else if(rdBtnTrovaPerNome.Checked)
+                {
+                    query = $"SELECT * FROM cliente WHERE nome_cliente = '{cbBxTrovaPerNome.Text}'";
+                }
+                else if (rdBtnTrovaPerPRif.Checked)
+                {
+                    query = $"SELECT * FROM cliente WHERE `p.rif_cliente` = '{cbBxTrovaPerPRif.Text}'";
+                }
+                else if (rdBtnTrovaPerMatricola.Checked)
+                {
+                    query = $"SELECT cliente.* " +
+                        $"FROM macchina, cliente " +
+                        $"WHERE cliente.id_cliente = macchina.id_cliente " +
+                        $"AND macchina.marca_macchina = '{cbBxTrovaPerMatricola.Text.Split('↔')[0].Trim()}' " +
+                        $"AND macchina.matricola_macchina = '{cbBxTrovaPerMatricola.Text.Split('↔')[1].Trim()}'";
+                }
+
+                command = new MySqlCommand(query, conn);
+                reader = command.ExecuteReader();
+
+                Cliente cliente = new Cliente();
+                List<Cliente> lClienti = new List<Cliente>();
+                while (reader.Read())
+                {
+                    cliente = new Cliente(
+                        reader.GetString(1),
+                        reader.GetString(4),
+                        reader.GetString(2),
+                        reader.GetString(5),
+                        reader.GetString(3),
+                        reader.GetString(6),
+                        null);
+
+                    lClienti.Add(cliente);
+                }
+                reader.Close();
+
+                foreach (Cliente cl in lClienti)
+                {
+                    cl._Mach = macchine.FindAll(x => x._cliente == Metodi.GetCustomerID(cl._Email, cl._Telefono));
+                }
+
+                dgvVisualizzaClienti.DataSource = lClienti;
+
+                cliente = dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente;
+                int index = dgvVisualizzaClienti.CurrentRow.Index;
+                BindingSource bs = new BindingSource()
+                {
+                    DataSource = cliente._Mach
+                };
+                dgvMostraMacchineAccessori.DataSource = bs;
+                dgvVisualizzaClienti.Rows[index].Cells[0].Selected = true;
+                dgvMostraComponentiMacchina.DataSource = null;
+            }
+        }       
 
         private void dgvVisualizzaClienti_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
@@ -1581,7 +1721,7 @@ namespace Calendario_AriBerg
 
         private void btnEliminaFiltridgvVisualizzaClienti_Click(object sender, EventArgs e)
         {
-            //Cancellato da rifare
+            RefreshCustomers();
         }
 
         private void cBxAggiungiEventoCliente_TextChanged(object sender, EventArgs e)
@@ -2010,12 +2150,12 @@ namespace Calendario_AriBerg
                     if (Metodi.GetCustomerID(c._Email, c._Telefono) != Metodi.GetCustomerID(dgvVisualizzaClienti.CurrentRow))
                     {
                         MacchineAttuali.AddRange(c._Mach);
-                    }                   
+                    }
                 }
 
                 foreach (DataGridViewRow dgvr in dgvModificaCliente.Rows)
                 {
-                    Macchina macchina = dgvr.DataBoundItem as Macchina;                    
+                    Macchina macchina = dgvr.DataBoundItem as Macchina;
                     if (MacchineAttuali.Find(x => x._Marca == macchina._Marca && x._Matricola == macchina._Matricola) != null || maccs.Find(x => x._Marca == macchina._Marca && x._Matricola == macchina._Matricola) != null)
                     {
                         Notifica notifica = new Notifica();
@@ -2047,8 +2187,6 @@ namespace Calendario_AriBerg
 
                     MySqlCommand command = new MySqlCommand(query, conn);
                     int rows = command.ExecuteNonQuery();
-
-
 
                     ///componenti
                     ///0:codice_componente
@@ -2133,8 +2271,7 @@ namespace Calendario_AriBerg
                                 command = new MySqlCommand(query, conn);
                                 command.ExecuteNonQuery();
 
-                                
-                                foreach(Componenti oldComp in oldM._Componenti)
+                                foreach (Componenti oldComp in oldM._Componenti)
                                 {
                                     query = $"DELETE FROM componenti_macchina " +
                                         $"WHERE codice_componente = '{oldComp.Codice}' " +
@@ -2155,8 +2292,8 @@ namespace Calendario_AriBerg
                                 }
 
                                 break;
-                            }                                             
-                        }                        
+                            }
+                        }
                     }
 
                     foreach (Macchina newM in maccs)
@@ -2185,7 +2322,7 @@ namespace Calendario_AriBerg
                             command.ExecuteNonQuery();
                         }
                     }
-                    
+
                     if (rows > 0)
                     {
                         RefreshCustomers();
@@ -2236,7 +2373,6 @@ namespace Calendario_AriBerg
             {
                 conn.Close();
             }
-                
         }
 
         private void btnModificaMacchinaAggiungiComponenti_Click(object sender, EventArgs e)
@@ -2336,7 +2472,7 @@ namespace Calendario_AriBerg
 
         private void btnAggiungiMagazzino_Click(object sender, EventArgs e)
         {
-            Notifica n = new Notifica();           
+            Notifica n = new Notifica();
             if (string.IsNullOrWhiteSpace(tbxNomeMagazzino.Text))
             {
                 n.Show("Inserire un nome valido", Notifica.enmType.Warning);
@@ -2519,7 +2655,7 @@ namespace Calendario_AriBerg
         private void btnDelComponente_Click(object sender, EventArgs e)
         {
             Notifica n = new Notifica();
-            MySqlConnection conn = null;          
+            MySqlConnection conn = null;
             try
             {
                 Caricamento();
@@ -2954,7 +3090,6 @@ namespace Calendario_AriBerg
 
         private void btnModificaMagazzino_Click(object sender, EventArgs e)
         {
-            
             if (string.IsNullOrWhiteSpace(tbxNomeMagazzino.Text))
             {
                 Notifica n = new Notifica();
@@ -2994,7 +3129,6 @@ namespace Calendario_AriBerg
 
         private void btnEliminaMagazzino_Click(object sender, EventArgs e)
         {
-            
             MySqlConnection conn = null;
             try
             {
@@ -3361,10 +3495,14 @@ namespace Calendario_AriBerg
                     codici.Add(res.GetString(1));
                 }
 
-                if (marche.Count == 0) 
+                if (marche.Count == 0)
                 {
                     cbBxAggiungiMacchinaMarcaFiltro.DataSource = null;
                     cbBxAggiungiMacchinaCodiceFiltro.DataSource = null;
+                    cbBxAggiungiMacchinaMarcaFiltro.Enabled = false;
+                    cbBxAggiungiMacchinaCodiceFiltro.Enabled = false;
+                    cbBxAggiungiMacchinaMarcaFiltro.Text = "Nessuna marca";
+                    cbBxAggiungiMacchinaCodiceFiltro.Text = "Nessun codice";                 
                     return;
                 }
 
@@ -3382,7 +3520,7 @@ namespace Calendario_AriBerg
                 };
 
                 cbBxAggiungiMacchinaCodiceFiltro.DataSource = bsCodici;
-                cbBxAggiungiMacchinaMarcaFiltro.DataSource = bsMarche;
+                cbBxAggiungiMacchinaMarcaFiltro.DataSource = marche;
             }
         }
 
@@ -3402,9 +3540,11 @@ namespace Calendario_AriBerg
                     codici.Add(res.GetString(0));
                 }
 
-                if(codici.Count == 0)
+                if (codici.Count == 0)
                 {
                     cbBxAggiungiMacchinaCodiceFiltro.DataSource = null;
+                    cbBxAggiungiMacchinaCodiceFiltro.Enabled = false;
+                    cbBxAggiungiMacchinaCodiceFiltro.Text = "Nessun codice";
                     return;
                 }
 
@@ -3556,7 +3696,6 @@ namespace Calendario_AriBerg
                     cbBxModificaMacchinaCodiceFiltro.DataSource = null;
                     return;
                 }
-                    
 
                 cbBxModificaMacchinaMarcaFiltro.Enabled = true;
                 cbBxModificaMacchinaCodiceFiltro.Enabled = true;
@@ -3580,7 +3719,7 @@ namespace Calendario_AriBerg
         {
             if (!string.IsNullOrWhiteSpace(cbBxModificaMacchinaMarcaFiltro.Text))
             {
-                cbBxAggiungiMacchinaCodiceFiltro.DataSource = null;
+                cbBxModificaMacchinaCodiceFiltro.DataSource = null;
                 MySqlConnection conn = Metodi.ConnectToDatabase();
                 string query = $"SELECT codice_componente FROM componente WHERE tipo_componente = '{cbBxModificaMacchinaTipoFiltro.Text}' AND marca_componente = '{cbBxModificaMacchinaMarcaFiltro.Text}'";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -3592,7 +3731,7 @@ namespace Calendario_AriBerg
                     codici.Add(res.GetString(0));
                 }
 
-                if(codici.Count == 0)
+                if (codici.Count == 0)
                 {
                     cbBxModificaMacchinaCodiceFiltro.DataSource = null;
                     return;
@@ -3722,7 +3861,6 @@ namespace Calendario_AriBerg
         {
             if (!string.IsNullOrWhiteSpace(cbxModificaEventoTipo.Text))
             {
-                
                 cbxModificaEventoMarca.DataSource = null;
                 cbxModificaEventoCodice.DataSource = null;
                 MySqlConnection conn = Metodi.ConnectToDatabase();
@@ -3803,7 +3941,6 @@ namespace Calendario_AriBerg
 
                 List<string> codici = new List<string>();
 
-
                 cBxModificaEventoMacchina.Enabled = true;
 
                 BindingSource bsMacchine = new BindingSource()
@@ -3823,7 +3960,6 @@ namespace Calendario_AriBerg
                 Cliente c = (Cliente)cBxAggiungiEventoCliente.SelectedItem;
 
                 List<string> codici = new List<string>();
-
 
                 cBxAggiungiEventoMacchine.Enabled = true;
 
@@ -3851,7 +3987,7 @@ namespace Calendario_AriBerg
                 if (Metodi.CheckForNewComponentsAndNotify(true)) return;
                 Componenti Com = Registro.ComponentiAttuali.Find(x => x.Tipo == cbxAggiungiEventoTipo.Text && x.Marca == cbxAggiungiEventoMarca.Text && x.Codice == cbxAggiungiEventoCodice.Text);
                 Componenti c = new Componenti(Com);
-                c.Quantita =(int)nudAggiungiEventoQuantita.Value;
+                c.Quantita = (int)nudAggiungiEventoQuantita.Value;
 
                 List<Componenti> comps = new List<Componenti>();
 
@@ -3864,7 +4000,7 @@ namespace Calendario_AriBerg
 
                 BindingSource bs = new BindingSource()
                 {
-                    DataSource=comps
+                    DataSource = comps
                 };
 
                 dgvAggiungiEventoPezzi.DataSource = bs;
@@ -3926,7 +4062,6 @@ namespace Calendario_AriBerg
             {
                 nudModEventoTimeHour.Enabled = true;
                 nudModEventoTimeMinutes.Enabled = true;
-                
             }
             else
             {
@@ -3944,7 +4079,6 @@ namespace Calendario_AriBerg
             }
             else
             {
-
                 nudAddEventoTimeHour.Enabled = false;
                 nudAddEventoTimeMinutes.Enabled = false;
             }
