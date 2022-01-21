@@ -172,22 +172,27 @@ namespace Calendario_AriBerg
                     LoadMultiCBXComponentiPerEventi();
 
                     Invoke(new Action(() => { 
-                    marche = new List<string>();
-                    foreach (DataGridViewRow dgvr in dgvMarcheComponenti.Rows) marche.Add(dgvr.Cells[0].Value.ToString());
-                    cbBxAggiungiMacchinaMarca.DataSource = marche;
-                    cbBxModificaMacchinaMarca.DataSource = marche;
+                        marche = new List<string>();
+                        foreach (DataGridViewRow dgvr in dgvMarcheComponenti.Rows) marche.Add(dgvr.Cells[0].Value.ToString());
+                        cbBxAggiungiMacchinaMarca.DataSource = marche;
+                        cbBxModificaMacchinaMarca.DataSource = marche;
 
-                    types = new List<string>();
-                    foreach (DataGridViewRow dgvr in dgvTipiComponenti.Rows) types.Add(dgvr.Cells[0].Value.ToString());
-                    cbBxAggiungiMacchinaTipoFiltro.DataSource = types;
-                    cbBxModificaMacchinaTipoFiltro.DataSource = types;
+                        types = new List<string>();
+                        foreach (DataGridViewRow dgvr in dgvTipiComponenti.Rows) types.Add(dgvr.Cells[0].Value.ToString());
+                        cbBxAggiungiMacchinaTipoFiltro.DataSource = types;
+                        cbBxModificaMacchinaTipoFiltro.DataSource = types;
 
-                    btnModify.Enabled = false;
-                    btnRemove.Enabled = false;
+                        btnModify.Enabled = false;
+                        btnRemove.Enabled = false;
                     }));
                     break;
 
                 case 1:
+                    if (btnEliminaFiltroEvento.Visible)
+                    {
+                        btnEliminaFiltroEvento_Click(btnEliminaFiltroEvento, null);
+                        Metodi.CheckForNewEventiMese(SelectedDate, true);
+                    }
 
                     if (Metodi.CheckForNewCustomers())
                     {
@@ -221,6 +226,12 @@ namespace Calendario_AriBerg
                     break;
 
                 case 2:
+                    if (btnEliminaFiltroEvento.Visible)
+                    {
+                        btnEliminaFiltroEvento_Click(btnEliminaFiltroEvento, null);
+                        Metodi.CheckForNewEventiMese(SelectedDate, true);
+                    }
+
                     switch (What)
                     {
                         case "all":
@@ -249,6 +260,11 @@ namespace Calendario_AriBerg
                     break;
 
                 case 3:
+                    if (btnEliminaFiltroEvento.Visible) 
+                    { 
+                        btnEliminaFiltroEvento_Click(btnEliminaFiltroEvento, null);
+                        Metodi.CheckForNewEventiMese(SelectedDate, true);
+                    }
                     switch (What)
                     {
                         case "all":
@@ -482,15 +498,20 @@ namespace Calendario_AriBerg
 
         private void RefreshComponentsCatalogoAndCBX()
         {
-            MySqlDataReader reader;
+            
             List<Componenti> l = new List<Componenti>();
             Componenti c = new Componenti();
 
             MySqlConnection conn = Metodi.ConnectToDatabase();
             string query = $"SELECT * From componente";
             MySqlCommand command = new MySqlCommand(query, conn);
+            MySqlDataReader reader = null;
 
-            reader = command.ExecuteReader();
+            try
+            {
+                reader = command.ExecuteReader();
+            }
+            catch { }
 
             while (reader.Read())
             {
@@ -570,13 +591,21 @@ namespace Calendario_AriBerg
         private void LoadMultiCBXComponentiPerEventi()
         {
             List<string> types = new List<string>();
-            foreach (DataGridViewRow dgvr in dgvTipiComponenti.Rows) types.Add(dgvr.Cells[0].Value.ToString());
+            try
+            {
+                foreach (DataGridViewRow dgvr in dgvTipiComponenti.Rows) types.Add(dgvr.Cells[0].Value.ToString());
+            }
+            catch { }
             cbxAggiungiEventoTipo.DataSource = types.FindAll(x => x == x);
             cbxModificaEventoTipo.DataSource = types.FindAll(x => x == x);
 
             RefreshCustomers();
             List<Cliente> Clients = new List<Cliente>();
-            foreach (DataGridViewRow dgvr in dgvVisualizzaClienti.Rows) Clients.Add((Cliente)dgvr.DataBoundItem);
+            try
+            {
+                foreach (DataGridViewRow dgvr in dgvVisualizzaClienti.Rows) Clients.Add((Cliente)dgvr.DataBoundItem);
+            }
+            catch { }
             BindingSource bs = new BindingSource()
             {
                 DataSource = Clients
@@ -654,6 +683,7 @@ namespace Calendario_AriBerg
             dgvEventi.CurrentCell = null;
             lblEventi.Text = "Eventi del: " + ariCalendario.SelectionStart.Day + "/" + ariCalendario.SelectionStart.Month + "/" + ariCalendario.SelectionStart.Year;
             btnAdd.Enabled = true;
+            ariCalendario.Refresh();
         }
 
         private void RefreshDGVEventi()
@@ -3801,6 +3831,7 @@ namespace Calendario_AriBerg
         {
             btnClientiEditCustomer.Enabled = true;
             btnClientiDeleteCustomer.Enabled = true;
+            btnAlloStorico.Enabled = true;
 
             Cliente CurrentCliente = (Cliente)dgvVisualizzaClienti.CurrentRow.DataBoundItem;
             tbxMostraIva.Text = CurrentCliente._PartIVA;
@@ -4480,6 +4511,28 @@ namespace Calendario_AriBerg
             FiltroAttivoEventi = null;
             lblEventiScritta = null;
             lblEventi.Text = "Eventi del: " + ariCalendario.SelectionStart.Day + "/" + ariCalendario.SelectionStart.Month + "/" + ariCalendario.SelectionStart.Year;           
+        }
+
+        private void btnAlloStorico_Click(object sender, EventArgs e)
+        {
+            Task.Run(new Action(() => { Invoke(new Action(() => { tabControl1.SelectedIndex = 0; })); }));
+            //Metodi.CheckForNewEventiMese(SelectedDate, true);
+            Cliente c = dgvVisualizzaClienti.CurrentRow.DataBoundItem as Cliente;
+            cbBxSearchEventoCliente.SelectedItem = c;
+            //List<Evento> app = Registro.EventiMese.FindAll(x => x.Cliente._Telefono == c._Telefono && x.Cliente._Email == c._Email);
+            //List<Evento> eventiCl = app.FindAll(x => x.Giorno.Day == SelectedDate.Day);
+            //Registro.EventiMese.Clear();
+            //Registro.EventiMese.AddRange(app);
+            //BindingSource bs = new BindingSource()
+            //{
+            //    DataSource = eventiCl
+            //};
+
+            //dgvEventi.DataSource = bs;
+            //lblEventiScritta = lblEventi.Text = $"Eventi di {SelectedDate.Date.ToShortDateString()} relativi al cliente {c._Nome}";
+            //FiltroAttivoEventi = typeof(Cliente);
+            //ariCalendario.Refresh();
+            btnSearchEvento_Click(btnSearchEvento, null);
         }
     }
 }
