@@ -28,6 +28,8 @@ namespace Calendario_AriBerg
         private string CurrentComponentiFiltroMarca = null;
         private bool CurrentComponentiFiltroSottoSoglia = false;
 
+        public static MySqlConnection conn = null;
+
         private List<Macchina> modMacchine = new List<Macchina>();
 
         public FormCalendario()
@@ -38,6 +40,8 @@ namespace Calendario_AriBerg
         private void FormCalendario_Load(object sender, EventArgs e)
         {
             bool error = false;
+
+            conn = Metodi.ConnectToDatabase();
 
             //Configurazione data
             SelectedDate = DateTime.Now.Date;
@@ -194,14 +198,14 @@ namespace Calendario_AriBerg
                         Metodi.CheckForNewEventiMese(SelectedDate, true);
                     }
 
-                    if (Metodi.CheckForNewCustomers())
-                    {
+                    //if (Metodi.CheckForNewCustomers())
+                    //{
                         RefreshCustomers();
                         Aggiornato = true;
-                    }
+                    //}
 
-                    if (Metodi.CheckForNewTypes(ref dgvTipiComponenti) || Metodi.CheckForNewBrands(ref dgvMarcheComponenti) || Metodi.CheckForNewComponents(false))
-                    {
+                    //if (Metodi.CheckForNewTypes(ref dgvTipiComponenti) || Metodi.CheckForNewBrands(ref dgvMarcheComponenti) || Metodi.CheckForNewComponents(false))
+                    //{
                         RefreshComponentTypesDataGridView();
                         RefreshComponentBrandsDataGridView();
                         RefreshComponentsCatalogoAndCBX();
@@ -222,7 +226,7 @@ namespace Calendario_AriBerg
                             n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
                         }));
                         Aggiornato = true;
-                    }
+                    //}
                     break;
 
                 case 2:
@@ -237,23 +241,23 @@ namespace Calendario_AriBerg
                         case "all":
                             UpdateCBXTipi();
 
-                            if (Metodi.CheckForNewComponents(false) || Metodi.CheckForNewDatiMagazzini(tbCtrlMagazzini))
-                            {
+                            //if (Metodi.CheckForNewComponents(false) || Metodi.CheckForNewDatiMagazzini(tbCtrlMagazzini))
+                            //{
                                 RefreshComponentsCatalogoAndCBX();
                                 RefreshMagazzini();
                                 RefreshConetnutiMagazzini();
                                 Aggiornato = true;
-                            }
+                            //}
                             break;
 
                         case "components":
                             UpdateCBXTipi();
 
-                            if (Metodi.CheckForNewComponents(false))
-                            {
+                            //if (Metodi.CheckForNewComponents(false))
+                            //{
                                 RefreshComponentsCatalogoAndCBX();
                                 Aggiornato = true;
-                            }
+                            //}
                             break;
                     }
 
@@ -310,7 +314,7 @@ namespace Calendario_AriBerg
         private void CheckApplicazioneAutoUpdate()
         {
             Metodi.CheckForNewEventiMese(DateTime.Now, true);
-            MySqlConnection conn = Metodi.ConnectToDatabase();
+            
             string query;
             bool error = false; ;
             foreach(Evento ev in Registro.EventiMese.FindAll(x=>x.Giorno.Date > DateTime.Now.AddDays(-7).Date && x.Giorno.Date < DateTime.Now.Date))
@@ -355,7 +359,7 @@ namespace Calendario_AriBerg
 
                 }
             }
-            conn.Close();
+            
         }
         private void UpdateCBXTipi()
         {
@@ -365,37 +369,34 @@ namespace Calendario_AriBerg
             List<string> tipiDatabase = new List<string>();
             foreach (DataGridViewRow dgvr in dgvTipiComponenti.Rows) tipiDatabase.Add(dgvr.Cells[0].Value.ToString());
 
-            var res = false;
+            var reader = false;
 
             if (tipiDatabase.Count > 0)
             {
-                res = tipiDatabase.All(tipiAttuali.Contains) && tipiDatabase.Count == tipiAttuali.Count;
+                reader = tipiDatabase.All(tipiAttuali.Contains) && tipiDatabase.Count == tipiAttuali.Count;
             }
 
-            if (!res) UpdateComboboxTabc2MarcType();
+            if (!reader) UpdateComboboxTabc2MarcType();
         }
 
         private void RefreshConetnutiMagazzini()
         {
-            MySqlConnection Conn = new MySqlConnection();
 
-            Conn = Metodi.ConnectToDatabase();
-
-            MySqlDataReader reader;
             List<Componenti> catalogo = new List<Componenti>();
             Componenti c = new Componenti();
 
-            MySqlConnection conn = Metodi.ConnectToDatabase();
+            
             string query = $"SELECT * From componente";
             MySqlCommand command = new MySqlCommand(query, conn);
 
-            reader = command.ExecuteReader();
+            MySqlDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
             {
                 c = new Componenti(reader.GetString(2), reader.GetString(1), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(0), 0);
                 catalogo.Add(c);
             }
+            reader.Close();
 
             //tante liste quante sono i magazzini
             Dictionary<string, Magazzino> MagazziniAssemblyMegazord = new Dictionary<string, Magazzino>();
@@ -408,9 +409,9 @@ namespace Calendario_AriBerg
             ///0: id_magazzino
             ///1:marca_componente
             ///2:codice_componente
-            ///3:qiantità_componente
+            ///3:quantità_componente
             query = $"SELECT * From componenti_magazzino";
-            MySqlCommand GetMagazzini = new MySqlCommand(query, Conn);
+            MySqlCommand GetMagazzini = new MySqlCommand(query, conn);
             reader = GetMagazzini.ExecuteReader();
 
             while (reader.Read())
@@ -429,6 +430,7 @@ namespace Calendario_AriBerg
                     MagazziniAssemblyMegazord["Totale"].Listacomponenti.Find(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)).Quantita += reader.GetInt32(3);
                 }
             }
+            reader.Close();
 
             foreach (TabPage t in tbCtrlMagazzini.TabPages)
             {
@@ -437,20 +439,16 @@ namespace Calendario_AriBerg
             }
 
             Registro.DizMagazzini = MagazziniAssemblyMegazord;
+            
+            
         }
 
         private void RefreshMagazzini()
         {
-            ///0:id_magazzino
-
-            MySqlConnection Conn = new MySqlConnection();
-
-            Conn = Metodi.ConnectToDatabase();
-
-            MySqlDataReader reader;
+            ///0:id_magazzino                      
             string query = $"SELECT * From magazzino";
-            MySqlCommand GetMagazzini = new MySqlCommand(query, Conn);
-            reader = GetMagazzini.ExecuteReader();
+            MySqlCommand GetMagazzini = new MySqlCommand(query, conn);
+            MySqlDataReader reader = GetMagazzini.ExecuteReader();
 
             List<string> Magazzini = new List<string>();
 
@@ -461,6 +459,8 @@ namespace Calendario_AriBerg
                     Magazzini.Add(reader.GetString(0));
                 }
             }
+            reader.Close();
+            
 
             foreach (TabPage t in tbCtrlMagazzini.TabPages)
             {
@@ -502,22 +502,18 @@ namespace Calendario_AriBerg
             List<Componenti> l = new List<Componenti>();
             Componenti c = new Componenti();
 
-            MySqlConnection conn = Metodi.ConnectToDatabase();
+            
             string query = $"SELECT * From componente";
             MySqlCommand command = new MySqlCommand(query, conn);
-            MySqlDataReader reader = null;
+            MySqlDataReader reader = command.ExecuteReader();
 
-            try
-            {
-                reader = command.ExecuteReader();
-            }
-            catch { }
 
             while (reader.Read())
             {
                 c = new Componenti(reader.GetString(2), reader.GetString(1), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(0), 0);
                 l.Add(c);
             }
+            reader.Close();
 
             BindingSource bs = new BindingSource();
             bs.DataSource = l;
@@ -532,7 +528,7 @@ namespace Calendario_AriBerg
                 dgvComponenti.Columns["Quantita"].Visible = false;
             }));
             Registro.ComponentiAttuali = l;
-            conn.Close();
+            
         }
 
         private void UpdateComboboxTabc2MarcType()
@@ -541,23 +537,26 @@ namespace Calendario_AriBerg
             List<string> types = new List<string>();
             string query = "SELECT * FROM marca_componente";
 
-            MySqlCommand FetchTypes = new MySqlCommand(query, Metodi.ConnectToDatabase());
-            MySqlDataReader res = FetchTypes.ExecuteReader();
+            
+            MySqlCommand FetchTypes = new MySqlCommand(query, conn);
+            MySqlDataReader reader = FetchTypes.ExecuteReader();
 
-            while (res.Read())
+            while (reader.Read())
             {
-                brands.Add(res.GetString(0));
+                brands.Add(reader.GetString(0));
             }
+            reader.Close();
 
             query = "SELECT * FROM tipo_componente";
 
-            FetchTypes = new MySqlCommand(query, Metodi.ConnectToDatabase());
-            res = FetchTypes.ExecuteReader();
+            FetchTypes = new MySqlCommand(query, conn);
+            reader = FetchTypes.ExecuteReader();
 
-            while (res.Read())
+            while (reader.Read())
             {
-                types.Add(res.GetString(0));
+                types.Add(reader.GetString(0));
             }
+            reader.Close();
 
             int app = 0;
             Invoke(new Action(() =>
@@ -586,6 +585,7 @@ namespace Calendario_AriBerg
                 cbBxFiltroMagazzinoTipo.DataSource = types;
                 if (cbBxFiltroMagazzinoTipo.Items.Count > app) cbBxFiltroMagazzinoTipo.SelectedIndex = app;
             }));
+            
         }
 
         private void LoadMultiCBXComponentiPerEventi()
@@ -921,7 +921,7 @@ namespace Calendario_AriBerg
             else
             {
 
-                MySqlConnection conn = Metodi.ConnectToDatabase();
+                
                 try
                 {
                     List<InterventiPoss> intapp = new List<InterventiPoss>();
@@ -995,7 +995,7 @@ namespace Calendario_AriBerg
                 }
                 finally
                 {
-                    conn.Close();
+                    
                 }
             }
         }
@@ -1134,7 +1134,7 @@ namespace Calendario_AriBerg
             }
             EndCaricamento();
             Notifica n = new Notifica();
-            MySqlConnection conn = Metodi.ConnectToDatabase();
+            
             try
             {               
                 Evento ev = (Evento)dgvEventi.CurrentRow.DataBoundItem;
@@ -1154,11 +1154,8 @@ namespace Calendario_AriBerg
             }
             finally
             {
-                conn.Close();
+                
             }
-
-
-
         }
 
         private void btnClientiAddCustomer_Click(object sender, EventArgs e)
@@ -1273,7 +1270,7 @@ namespace Calendario_AriBerg
                 {
                     throw new ArgumentNullException();
                 }
-                //MySqlConnection conn = Metodi.ConnectToDatabase();
+                //
                 //string query = $"INSERT INTO macchina VALUES('{txBxAggiungiMacchinaMarca.Text}', " +
                 //    $"'{txBxAggiungiMacchinaModello.Text}', " +
                 //    $"'{txBxAggiungiMacchinaMatricola.Text}', " +
@@ -1282,9 +1279,9 @@ namespace Calendario_AriBerg
                 //    $"'{rtbAggiungiMacchinaNote.Text}')";
                 //MySqlCommand cmd = new MySqlCommand(query, conn);
                 //cmd.ExecuteNonQuery();
-                //conn.Close();
+                //
 
-                //conn = Metodi.ConnectToDatabase();
+                //
                 //foreach (Componenti c in componenti)
                 //{
                 //    query = $"INSERT INTO componenti_macchina VALUES('{c.Codice}', " +
@@ -1294,7 +1291,7 @@ namespace Calendario_AriBerg
                 //    cmd = new MySqlCommand(query, conn);
                 //    cmd.ExecuteNonQuery();
                 //}
-                //conn.Close();
+                //
 
                 //listaMacchine.Add(macchina);
 
@@ -1386,7 +1383,7 @@ namespace Calendario_AriBerg
 
         private void RefreshCustomers()
         {
-            MySqlConnection conn = Metodi.ConnectToDatabase();
+            
             ///componenti
             ///0:codice_componente
             ///1:marca_componente
@@ -1479,6 +1476,7 @@ namespace Calendario_AriBerg
                     macchine.FindAll(x => x._cliente == Metodi.GetCustomerID(reader.GetString(3), reader.GetString(2))));
                 l.Add(Cl);
             }
+            reader.Close();
           
             Invoke(new Action(() =>
             {
@@ -1520,11 +1518,13 @@ namespace Calendario_AriBerg
                 dgvVisualizzaClienti.DataSource = bs;
                 HideColumnsClienti();
             }));
+
+            
         }
 
         private void btnConfermaAggiungiCliente_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = Metodi.ConnectToDatabase();
+            
             Notifica notifica = new Notifica();
 
             if (Metodi.CheckForNewCustomersAndNotify()) { Task.Run(new Action(() => { RefreshCurrentTab("all"); })); return; }
@@ -1644,7 +1644,7 @@ namespace Calendario_AriBerg
             }
             finally
             {
-                conn.Close();
+                
             }
         }
 
@@ -1901,8 +1901,8 @@ namespace Calendario_AriBerg
                 return; 
             }
 
-            using (MySqlConnection conn = Metodi.ConnectToDatabase())
-            {
+
+            
                 List<Componenti> Catalogo = new List<Componenti>();
                 Componenti c = new Componenti();
 
@@ -2005,7 +2005,7 @@ namespace Calendario_AriBerg
                 dgvMostraMacchineAccessori.DataSource = bs;
                 dgvVisualizzaClienti.Rows[index].Cells[0].Selected = true;
                 dgvMostraComponentiMacchina.DataSource = null;
-            }
+            
         }       
 
         private void dgvVisualizzaClienti_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -2032,14 +2032,13 @@ namespace Calendario_AriBerg
 
                 if (dr == DialogResult.Yes)
                 {
-                    using (MySqlConnection conn = Metodi.ConnectToDatabase())
-                    {
+                    
                         string query = $"DELETE FROM cliente WHERE id_cliente = '{Metodi.GetCustomerID(dgvVisualizzaClienti.CurrentRow)}'";
                         MySqlCommand cmd = new MySqlCommand(query, conn);
                         cmd.ExecuteNonQuery();
                         RefreshCustomers();
                         new Notifica().Show("Cliente eliminato con successo!", Notifica.enmType.Success);
-                    }
+                    
                 }
             }
             catch (Exception ex)
@@ -2081,6 +2080,8 @@ namespace Calendario_AriBerg
         private void btnSearchEvento_Click(object sender, EventArgs e)
         {
             Metodi.CheckForNewEventiMese(SelectedDate, true);
+            if (FiltroAttivoEventi == null) pnlCercaEvento.Size = new Size(pnlCercaEvento.Size.Width + btnEliminaFiltroEvento.Width * 6/5, pnlCercaEvento.Height);
+
             if (rdBtnSearchEventoCliente.Checked)
             {
                 Cliente c = cbBxSearchEventoCliente.SelectedItem as Cliente;
@@ -2114,8 +2115,7 @@ namespace Calendario_AriBerg
                 FiltroAttivoEventi = typeof(Macchina);
             }
 
-            ariCalendario.Refresh();
-            if(FiltroAttivoEventi == null) pnlCercaEvento.Size = new Size(pnlCercaEvento.Size.Width + btnEliminaFiltroEvento.Width, pnlCercaEvento.Height);
+            ariCalendario.Refresh();         
         }
 
         private void rdBtnSearchEventoCliente_CheckedChanged(object sender, EventArgs e)
@@ -2402,7 +2402,7 @@ namespace Calendario_AriBerg
 
         private void btnConfermaModificaCliente_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = Metodi.ConnectToDatabase();
+            
             Notifica n = new Notifica();
             try
             {
@@ -2634,7 +2634,7 @@ namespace Calendario_AriBerg
             }
             finally
             {
-                conn.Close();
+                
             }
         }
 
@@ -2677,11 +2677,11 @@ namespace Calendario_AriBerg
             Caricamento();
             Task.Run(new Action(() => { RefreshCurrentTab("components"); }));
 
-            MySqlConnection conn = null;
+            
             try
             {
                 Componenti componente = (Componenti)dgvComponenti.CurrentRow.DataBoundItem;
-                conn = Metodi.ConnectToDatabase();
+                
                 string query = $"DELETE FROM componente WHERE codice_componente = '{componente.Codice}'";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 int row = cmd.ExecuteNonQuery();
@@ -2711,7 +2711,7 @@ namespace Calendario_AriBerg
             }
             finally
             {
-                conn.Close();
+                
                 EndCaricamento();
             }
         }
@@ -2742,12 +2742,12 @@ namespace Calendario_AriBerg
             }
             else
             {
-                MySqlConnection conn = null;
+                
                 try
                 {
                     Caricamento();
                     Task.Run(new Action(() => { RefreshCurrentTab("all"); }));
-                    conn = Metodi.ConnectToDatabase();
+                    
                     string query = $"INSERT INTO magazzino VALUES('{tbxNomeMagazzino.Text}')";
 
                     MySqlCommand InsertMagazzino = new MySqlCommand(query, conn);
@@ -2763,7 +2763,7 @@ namespace Calendario_AriBerg
                 }
                 finally
                 {
-                    conn.Close();
+                    
                     EndCaricamento();
                 }
 
@@ -2773,28 +2773,31 @@ namespace Calendario_AriBerg
 
         private void ReApplyFiltroMagazzino(string marca, string codice, string tipo, bool sottoSoglia)
         {
-            MySqlCommand cmd = new MySqlCommand(FiltroAttivoMagazzino, Metodi.ConnectToDatabase());
-            MySqlDataReader res = cmd.ExecuteReader();
+            
+            MySqlCommand cmd = new MySqlCommand(FiltroAttivoMagazzino, conn);
+            MySqlDataReader reader = cmd.ExecuteReader();
 
             List<Componenti> components = new List<Componenti>();
 
-            if (!res.HasRows)
+            if (!reader.HasRows)
             {
                 RefreshComponentsCatalogoAndCBX();
                 throw new Exception("Nessun risultato.");
             }
 
-            while (res.Read())
+            while (reader.Read())
             {
-                Componenti component = new Componenti(res.GetString("tipo_componente"),
-                    res.GetString("marca_componente"),
-                    res.GetInt32("soglia_componente"),
-                    res.GetInt32("n_ordine_componente"),
-                    res.GetString("codice_componente"),
+                Componenti component = new Componenti(reader.GetString("tipo_componente"),
+                    reader.GetString("marca_componente"),
+                    reader.GetInt32("soglia_componente"),
+                    reader.GetInt32("n_ordine_componente"),
+                    reader.GetString("codice_componente"),
                     0);
 
                 components.Add(component);
             }
+            reader.Close();
+            
 
             RefreshConetnutiMagazzini();
 
@@ -2844,12 +2847,12 @@ namespace Calendario_AriBerg
             }
             else
             {
-                MySqlConnection conn = null;
+                
                 try
                 {
                     Caricamento();
                     Task.Run(new Action(() => { RefreshCurrentTab("types"); }));
-                    conn = Metodi.ConnectToDatabase();
+                    
                     string query = $"INSERT INTO tipo_componente VALUES('{txBxTipoComponente.Text}')";
 
                     MySqlCommand InsertComponentType = new MySqlCommand(query, conn);
@@ -2871,7 +2874,7 @@ namespace Calendario_AriBerg
                 }
                 finally
                 {
-                    conn.Close();
+                    
                     EndCaricamento();
                 }
             }
@@ -2886,12 +2889,12 @@ namespace Calendario_AriBerg
             }
             else
             {
-                MySqlConnection conn = null;
+                
                 try
                 {
                     Caricamento();
                     Task.Run(new Action(() => { RefreshCurrentTab("types"); }));
-                    conn = Metodi.ConnectToDatabase();
+                    
                     string selectedType = dgvTipiComponenti.SelectedCells[0].Value.ToString();
                     string query = $"UPDATE tipo_componente SET tipo_componente = '{txBxTipoComponente.Text}' WHERE tipo_componente = '{selectedType}'";
                     MySqlCommand UpdateComponentType = new MySqlCommand(query, conn);
@@ -2909,7 +2912,7 @@ namespace Calendario_AriBerg
                 }
                 finally
                 {
-                    conn.Close();
+                    
                     EndCaricamento();
                 }
             }
@@ -2918,12 +2921,12 @@ namespace Calendario_AriBerg
         private void btnDelComponente_Click(object sender, EventArgs e)
         {
             Notifica n = new Notifica();
-            MySqlConnection conn = null;
+            
             try
             {
                 Caricamento();
                 Task.Run(new Action(() => { RefreshCurrentTab("types"); }));
-                conn = Metodi.ConnectToDatabase();
+                
                 string selectedType = dgvTipiComponenti.SelectedCells[0].Value.ToString();
                 string query = $"DELETE FROM tipo_componente WHERE tipo_componente = '{selectedType}'";
                 MySqlCommand DeleteComponentType = new MySqlCommand(query, conn);
@@ -2941,7 +2944,7 @@ namespace Calendario_AriBerg
             }
             finally
             {
-                conn.Close();
+                
                 EndCaricamento();
             }
         }
@@ -2951,13 +2954,16 @@ namespace Calendario_AriBerg
             List<string> types = new List<string>();
             string query = "SELECT * FROM tipo_componente";
 
-            MySqlCommand FetchTypes = new MySqlCommand(query, Metodi.ConnectToDatabase());
-            MySqlDataReader res = FetchTypes.ExecuteReader();
+            
+            MySqlCommand FetchTypes = new MySqlCommand(query, conn);
+            MySqlDataReader reader = FetchTypes.ExecuteReader();
 
-            while (res.Read())
+            while (reader.Read())
             {
-                types.Add(res.GetString(0));
+                types.Add(reader.GetString(0));
             }
+            reader.Close();
+            
 
             BindingSource bs = new BindingSource();
             bs.DataSource = types.Select(x => new { Value = x }).ToList();
@@ -2978,12 +2984,11 @@ namespace Calendario_AriBerg
             }
             else
             {
-                MySqlConnection conn = null;
                 try
                 {
                     Caricamento();
                     Task.Run(new Action(() => { RefreshCurrentTab("brands"); }));
-                    conn = Metodi.ConnectToDatabase();
+                    
                     string query = $"INSERT INTO marca_componente VALUES('{txBxMarcaComponente.Text}')";
 
                     MySqlCommand InsertComponentBrand = new MySqlCommand(query, conn);
@@ -3005,7 +3010,7 @@ namespace Calendario_AriBerg
                 }
                 finally
                 {
-                    conn.Close();
+                    
                     EndCaricamento();
                 }
             }
@@ -3020,12 +3025,12 @@ namespace Calendario_AriBerg
             }
             else
             {
-                MySqlConnection conn = null;
+                
                 try
                 {
                     Caricamento();
                     Task.Run(new Action(() => { RefreshCurrentTab("brands"); }));
-                    conn = Metodi.ConnectToDatabase();
+                    
                     string selectedType = dgvMarcheComponenti.SelectedCells[0].Value.ToString();
                     string query = $"UPDATE marca_componente SET marca_componente = '{txBxMarcaComponente.Text}' WHERE marca_componente = '{selectedType}'";
 
@@ -3048,7 +3053,7 @@ namespace Calendario_AriBerg
                 }
                 finally
                 {
-                    conn.Close();
+                    
                     EndCaricamento();
                 }
             }
@@ -3057,12 +3062,12 @@ namespace Calendario_AriBerg
         private void btnDelMarca_Click(object sender, EventArgs e)
         {
             Notifica n = new Notifica();
-            MySqlConnection conn = null;
+            
             try
             {
                 Caricamento();
                 Task.Run(new Action(() => { RefreshCurrentTab("brands"); }));
-                conn = Metodi.ConnectToDatabase();
+                
                 string selectedType = dgvMarcheComponenti.SelectedCells[0].Value.ToString();
                 string query = $"DELETE FROM marca_componente WHERE marca_componente = '{selectedType}'";
                 MySqlCommand DeleteComponentBrand = new MySqlCommand(query, conn);
@@ -3084,7 +3089,7 @@ namespace Calendario_AriBerg
             }
             finally
             {
-                conn.Close();
+                
                 EndCaricamento();
             }
         }
@@ -3094,13 +3099,14 @@ namespace Calendario_AriBerg
             List<string> brands = new List<string>();
             string query = "SELECT * FROM marca_componente";
 
-            MySqlCommand FetchTypes = new MySqlCommand(query, Metodi.ConnectToDatabase());
-            MySqlDataReader res = FetchTypes.ExecuteReader();
+            MySqlCommand FetchTypes = new MySqlCommand(query, conn);
+            MySqlDataReader reader = FetchTypes.ExecuteReader();
 
-            while (res.Read())
+            while (reader.Read())
             {
-                brands.Add(res.GetString(0));
+                brands.Add(reader.GetString(0));
             }
+            reader.Close();
 
             BindingSource bs = new BindingSource();
             bs.DataSource = brands.Select(x => new { Value = x }).ToList();
@@ -3166,27 +3172,27 @@ namespace Calendario_AriBerg
             }
             else
             {
-                MySqlConnection conn = null;
+                
                 try
                 {
-                    conn = Metodi.ConnectToDatabase();
+                    
                     string query = $"INSERT INTO componente VALUES('{tbxAggiungiComponenteCodice.Text}','{cbxAggiungiMarcaComponente.Text}','{cbxAggiungiComponenteTipo.Text}','{(int)nudAggiungiComponenteSoglia.Value}','{(int)nudAggiungiComponenteNOrdine.Value}')";
                     MySqlCommand command = new MySqlCommand(query, conn);
                     command.ExecuteNonQuery();
 
-                    MySqlDataReader reader;
                     List<Componenti> l = new List<Componenti>();
                     Componenti c = new Componenti();
 
                     query = $"SELECT * From componente";
                     command = new MySqlCommand(query, conn);
-                    reader = command.ExecuteReader();
+                    MySqlDataReader reader = command.ExecuteReader();
 
                     while (reader.Read())
                     {
                         c = new Componenti(reader.GetString(2), reader.GetString(1), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(0), 0);
                         l.Add(c);
                     }
+                    reader.Close();
 
                     BindingSource bs = new BindingSource();
                     bs.DataSource = l;
@@ -3206,7 +3212,7 @@ namespace Calendario_AriBerg
                 }
                 finally
                 {
-                    conn.Close();
+                    
                 }
             }
         }
@@ -3233,7 +3239,7 @@ namespace Calendario_AriBerg
             }
             else
             {
-                MySqlConnection conn = null;
+                
 
                 try
                 {
@@ -3248,7 +3254,7 @@ namespace Calendario_AriBerg
 
                     if (Metodi.AreThereAnyEmptyTextBoxes(tx)) throw new ArgumentNullException();
 
-                    conn = Metodi.ConnectToDatabase();
+                    
                     string query = $"UPDATE componente SET codice_componente = '{tbxModificaCodiceComponente.Text}', " +
                         $"marca_componente = '{cbxModificaMarcaComponente.Text}', " +
                         $"tipo_componente = '{cbxModificaTipoComponente.Text}', " +
@@ -3277,7 +3283,7 @@ namespace Calendario_AriBerg
                 }
                 finally
                 {
-                    conn.Close();
+                    
                 }
             }
         }
@@ -3286,28 +3292,29 @@ namespace Calendario_AriBerg
         {
             if (!string.IsNullOrWhiteSpace(FiltroAttivoCatalogo))
             {
-                MySqlCommand cmd = new MySqlCommand(FiltroAttivoCatalogo, Metodi.ConnectToDatabase());
-                MySqlDataReader res = cmd.ExecuteReader();
+                MySqlCommand cmd = new MySqlCommand(FiltroAttivoCatalogo, conn);
+                MySqlDataReader reader = cmd.ExecuteReader();
 
                 List<Componenti> components = new List<Componenti>();
 
-                if (!res.HasRows)
+                if (!reader.HasRows)
                 {
                     RefreshComponentsCatalogoAndCBX();
                     throw new Exception("Nessun risultato.");
                 }
 
-                while (res.Read())
+                while (reader.Read())
                 {
-                    Componenti component = new Componenti(res.GetString("tipo_componente"),
-                        res.GetString("marca_componente"),
-                        res.GetInt32("soglia_componente"),
-                        res.GetInt32("n_ordine_componente"),
-                        res.GetString("codice_componente"),
+                    Componenti component = new Componenti(reader.GetString("tipo_componente"),
+                        reader.GetString("marca_componente"),
+                        reader.GetInt32("soglia_componente"),
+                        reader.GetInt32("n_ordine_componente"),
+                        reader.GetString("codice_componente"),
                         0);
 
                     components.Add(component);
                 }
+                reader.Close();
 
                 BindingSource bsCatalogo = new BindingSource()
                 {
@@ -3362,10 +3369,10 @@ namespace Calendario_AriBerg
             {
                 Caricamento();
                 Task.Run(new Action(() => { RefreshCurrentTab("all"); }));
-                MySqlConnection conn = null;
+                
                 try
                 {
-                    conn = Metodi.ConnectToDatabase();
+                    
                     string query = $"UPDATE magazzino SET id_magazzino = '{tbxNomeMagazzino.Text}' WHERE id_magazzino = '{tbCtrlMagazzini.SelectedTab.Name}'";
 
                     MySqlCommand command = new MySqlCommand(query, conn);
@@ -3384,7 +3391,7 @@ namespace Calendario_AriBerg
                 }
                 finally
                 {
-                    conn.Close();
+                    
                     EndCaricamento();
                 }
             }
@@ -3392,12 +3399,12 @@ namespace Calendario_AriBerg
 
         private void btnEliminaMagazzino_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = null;
+            
             try
             {
                 Caricamento();
                 Task.Run(new Action(() => { RefreshCurrentTab("all"); }));
-                conn = Metodi.ConnectToDatabase();
+                
                 //string selectedType = dgvMarcheComponenti.SelectedCells[0].Value.ToString();
                 string query = $"DELETE FROM magazzino WHERE id_magazzino = '{tbCtrlMagazzini.SelectedTab.Name}'";
                 MySqlCommand DeleteComponentBrand = new MySqlCommand(query, conn);
@@ -3424,7 +3431,7 @@ namespace Calendario_AriBerg
             }
             finally
             {
-                conn.Close();
+                
                 EndCaricamento();
             }
         }
@@ -3440,12 +3447,10 @@ namespace Calendario_AriBerg
             ///3: soglia_componente
             ///4: n_ordine_componente
 
-            MySqlConnection conn = null;
+            
 
             try
             {
-                using (conn = Metodi.ConnectToDatabase())
-                {
                     string marca = null;
                     if (chBxFiltroMagazzinoMarca.Checked) marca = cbBxFiltroMagazzinoMarca.Text;
 
@@ -3485,27 +3490,28 @@ namespace Calendario_AriBerg
                     if (codice != null && query.EndsWith("componente")) query += $" WHERE codice_componente = '{codice}'"; else if (codice != null) query += $" AND codice_componente = '{codice}'";
 
                     MySqlCommand cmd = new MySqlCommand(query, conn);
-                    MySqlDataReader res = cmd.ExecuteReader();
+                    MySqlDataReader reader = cmd.ExecuteReader();
 
                     List<Componenti> components = new List<Componenti>();
 
-                    if (!res.HasRows)
+                    if (!reader.HasRows)
                     {
                         RefreshComponentsCatalogoAndCBX();
                         throw new Exception("Nessun risultato.");
                     }
 
-                    while (res.Read())
+                    while (reader.Read())
                     {
-                        Componenti component = new Componenti(res.GetString("tipo_componente"),
-                            res.GetString("marca_componente"),
-                            res.GetInt32("soglia_componente"),
-                            res.GetInt32("n_ordine_componente"),
-                            res.GetString("codice_componente"),
+                        Componenti component = new Componenti(reader.GetString("tipo_componente"),
+                            reader.GetString("marca_componente"),
+                            reader.GetInt32("soglia_componente"),
+                            reader.GetInt32("n_ordine_componente"),
+                            reader.GetString("codice_componente"),
                             0);
 
                         components.Add(component);
                     }
+                reader.Close();
 
                     BindingSource bsCatalogo = new BindingSource()
                     {
@@ -3573,7 +3579,7 @@ namespace Calendario_AriBerg
                     CurrentComponentiFiltroMarca = marca;
                     CurrentComponentiFiltroTipo = tipo;
                     CurrentComponentiFiltroSottoSoglia = sottoSoglia;
-                }
+                
             }
             catch (Exception ex)
             {
@@ -3582,7 +3588,7 @@ namespace Calendario_AriBerg
             }
             finally
             {
-                conn.Close();
+                
                 EndCaricamento();
             }
         }
@@ -3614,11 +3620,11 @@ namespace Calendario_AriBerg
                 return;
             }
 
-            MySqlConnection conn = null;
+            
             try
             {
                 Caricamento();
-                conn = Metodi.ConnectToDatabase();
+                
                 string query = $"INSERT INTO componenti_magazzino VALUES('{tbCtrlMagazzini.SelectedTab.Name}','{dgvComponenti.CurrentRow.Cells[1].Value}','{dgvComponenti.CurrentRow.Cells[0].Value}','{(int)nudNumeroComponenti.Value}')";
                 MySqlCommand InsertMagazzino = new MySqlCommand(query, conn);
                 InsertMagazzino.ExecuteNonQuery();
@@ -3633,7 +3639,7 @@ namespace Calendario_AriBerg
             }
             finally
             {
-                conn.Close();
+                
                 EndCaricamento();
             }
         }
@@ -3652,11 +3658,11 @@ namespace Calendario_AriBerg
                 n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
                 return;
             }
-            MySqlConnection conn = null;
+            
             try
             {
                 Caricamento();
-                conn = Metodi.ConnectToDatabase();
+                
                 if (remove == false)
                 {
                     int quantapp = (int)((DataGridView)tbCtrlMagazzini.SelectedTab.Controls[0]).CurrentRow.Cells[5].Value;
@@ -3690,7 +3696,7 @@ namespace Calendario_AriBerg
             }
             finally
             {
-                conn.Close();
+                
                 EndCaricamento();
                 gbxModificaComponente.Visible = false;
             }
@@ -3745,18 +3751,20 @@ namespace Calendario_AriBerg
             {
                 cbBxAggiungiMacchinaCodiceFiltro.DataSource = null;
                 cbBxAggiungiMacchinaMarcaFiltro.DataSource = null;
-                MySqlConnection conn = Metodi.ConnectToDatabase();
+                
                 string query = $"SELECT marca_componente, codice_componente FROM componente WHERE tipo_componente = '{cbBxAggiungiMacchinaTipoFiltro.Text}'";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
-                MySqlDataReader res = cmd.ExecuteReader();
+                MySqlDataReader reader = cmd.ExecuteReader();
 
                 List<string> marche = new List<string>();
                 List<string> codici = new List<string>();
-                while (res.Read())
+                while (reader.Read())
                 {
-                    marche.Add(res.GetString(0));
-                    codici.Add(res.GetString(1));
+                    marche.Add(reader.GetString(0));
+                    codici.Add(reader.GetString(1));
                 }
+                reader.Close();
+                
 
                 if (marche.Count == 0)
                 {
@@ -3792,16 +3800,18 @@ namespace Calendario_AriBerg
             if (!string.IsNullOrWhiteSpace(cbBxAggiungiMacchinaTipoFiltro.Text))
             {
                 cbBxAggiungiMacchinaCodiceFiltro.DataSource = null;
-                MySqlConnection conn = Metodi.ConnectToDatabase();
+                
                 string query = $"SELECT codice_componente FROM componente WHERE tipo_componente = '{cbBxAggiungiMacchinaTipoFiltro.Text}' AND marca_componente = '{cbBxAggiungiMacchinaMarcaFiltro.Text}'";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
-                MySqlDataReader res = cmd.ExecuteReader();
+                MySqlDataReader reader = cmd.ExecuteReader();
 
                 List<string> codici = new List<string>();
-                while (res.Read())
+                while (reader.Read())
                 {
-                    codici.Add(res.GetString(0));
+                    codici.Add(reader.GetString(0));
                 }
+                reader.Close();
+                
 
                 if (codici.Count == 0)
                 {
@@ -3946,18 +3956,20 @@ namespace Calendario_AriBerg
             {
                 cbBxModificaMacchinaCodiceFiltro.DataSource = null;
                 cbBxModificaMacchinaMarcaFiltro.DataSource = null;
-                MySqlConnection conn = Metodi.ConnectToDatabase();
+                
                 string query = $"SELECT marca_componente, codice_componente FROM componente WHERE tipo_componente = '{cbBxModificaMacchinaTipoFiltro.Text}'";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
-                MySqlDataReader res = cmd.ExecuteReader();
+                MySqlDataReader reader = cmd.ExecuteReader();
 
                 List<string> marche = new List<string>();
                 List<string> codici = new List<string>();
-                while (res.Read())
+                while (reader.Read())
                 {
-                    marche.Add(res.GetString(0));
-                    codici.Add(res.GetString(1));
+                    marche.Add(reader.GetString(0));
+                    codici.Add(reader.GetString(1));
                 }
+                reader.Close();
+                
 
                 if (marche.Count == 0)
                 {
@@ -3989,16 +4001,18 @@ namespace Calendario_AriBerg
             if (!string.IsNullOrWhiteSpace(cbBxModificaMacchinaMarcaFiltro.Text))
             {
                 cbBxModificaMacchinaCodiceFiltro.DataSource = null;
-                MySqlConnection conn = Metodi.ConnectToDatabase();
+                
                 string query = $"SELECT codice_componente FROM componente WHERE tipo_componente = '{cbBxModificaMacchinaTipoFiltro.Text}' AND marca_componente = '{cbBxModificaMacchinaMarcaFiltro.Text}'";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
-                MySqlDataReader res = cmd.ExecuteReader();
+                MySqlDataReader reader = cmd.ExecuteReader();
 
                 List<string> codici = new List<string>();
-                while (res.Read())
+                while (reader.Read())
                 {
-                    codici.Add(res.GetString(0));
+                    codici.Add(reader.GetString(0));
                 }
+                reader.Close();
+                
 
                 if (codici.Count == 0)
                 {
@@ -4046,7 +4060,7 @@ namespace Calendario_AriBerg
             else
             {
 
-                MySqlConnection conn = Metodi.ConnectToDatabase();
+                
                 try
                 {
                     List<InterventiPoss> intapp = new List<InterventiPoss>();
@@ -4123,7 +4137,7 @@ namespace Calendario_AriBerg
                 }
                 finally
                 {
-                    conn.Close();
+                    
                 }
             }
         }
@@ -4154,18 +4168,20 @@ namespace Calendario_AriBerg
             {
                 cbxAggiungiEventoMarca.DataSource = null;
                 cbxAggiungiEventoCodice.DataSource = null;
-                MySqlConnection conn = Metodi.ConnectToDatabase();
+                
                 string query = $"SELECT marca_componente, codice_componente FROM componente WHERE tipo_componente = '{cbxAggiungiEventoTipo.Text}'";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
-                MySqlDataReader res = cmd.ExecuteReader();
+                MySqlDataReader reader = cmd.ExecuteReader();
 
                 List<string> marche = new List<string>();
                 List<string> codici = new List<string>();
-                while (res.Read())
+                while (reader.Read())
                 {
-                    marche.Add(res.GetString(0));
-                    codici.Add(res.GetString(1));
+                    marche.Add(reader.GetString(0));
+                    codici.Add(reader.GetString(1));
                 }
+                reader.Close();
+                
 
                 if (marche.Count == 0) return;
 
@@ -4192,16 +4208,18 @@ namespace Calendario_AriBerg
             if (!string.IsNullOrWhiteSpace(cbxAggiungiEventoMarca.Text))
             {
                 cbxAggiungiEventoCodice.DataSource = null;
-                MySqlConnection conn = Metodi.ConnectToDatabase();
+                
                 string query = $"SELECT codice_componente FROM componente WHERE tipo_componente = '{cbxAggiungiEventoTipo.Text}' AND marca_componente = '{cbxAggiungiEventoMarca.Text}'";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
-                MySqlDataReader res = cmd.ExecuteReader();
+                MySqlDataReader reader = cmd.ExecuteReader();
 
                 List<string> codici = new List<string>();
-                while (res.Read())
+                while (reader.Read())
                 {
-                    codici.Add(res.GetString(0));
+                    codici.Add(reader.GetString(0));
                 }
+                reader.Close();
+                
 
                 cbxAggiungiEventoCodice.Enabled = true;
 
@@ -4220,18 +4238,20 @@ namespace Calendario_AriBerg
             {
                 cbxModificaEventoMarca.DataSource = null;
                 cbxModificaEventoCodice.DataSource = null;
-                MySqlConnection conn = Metodi.ConnectToDatabase();
+                
                 string query = $"SELECT marca_componente, codice_componente FROM componente WHERE tipo_componente = '{cbxModificaEventoTipo.Text}'";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
-                MySqlDataReader res = cmd.ExecuteReader();
+                MySqlDataReader reader = cmd.ExecuteReader();
 
                 List<string> marche = new List<string>();
                 List<string> codici = new List<string>();
-                while (res.Read())
+                while (reader.Read())
                 {
-                    marche.Add(res.GetString(0));
-                    codici.Add(res.GetString(1));
+                    marche.Add(reader.GetString(0));
+                    codici.Add(reader.GetString(1));
                 }
+                reader.Close();
+                
 
                 if (marche.Count == 0) return;
 
@@ -4258,16 +4278,18 @@ namespace Calendario_AriBerg
             if (!string.IsNullOrWhiteSpace(cbxModificaEventoMarca.Text))
             {
                 cbxModificaEventoCodice.DataSource = null;
-                MySqlConnection conn = Metodi.ConnectToDatabase();
+                
                 string query = $"SELECT codice_componente FROM componente WHERE tipo_componente = '{cbxModificaEventoTipo.Text}' AND marca_componente = '{cbxModificaEventoMarca.Text}'";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
-                MySqlDataReader res = cmd.ExecuteReader();
+                MySqlDataReader reader = cmd.ExecuteReader();
 
                 List<string> codici = new List<string>();
-                while (res.Read())
+                while (reader.Read())
                 {
-                    codici.Add(res.GetString(0));
+                    codici.Add(reader.GetString(0));
                 }
+                reader.Close();
+                
 
                 cbxModificaEventoCodice.Enabled = true;
 
@@ -4506,8 +4528,7 @@ namespace Calendario_AriBerg
         private void btnEliminaFiltroEvento_Click(object sender, EventArgs e)
         {
             Metodi.CheckForNewEventiMese(SelectedDate, true);
-            pnlCercaEvento.Size = new Size(pnlCercaEvento.Size.Width - btnEliminaFiltroEvento.Width, pnlCercaEvento.Height);
-            btnEliminaFiltroEvento.Visible = false;
+            pnlCercaEvento.Size = new Size(pnlCercaEvento.Size.Width - btnEliminaFiltroEvento.Width * 6/5, pnlCercaEvento.Height);
             FiltroAttivoEventi = null;
             lblEventiScritta = null;
             lblEventi.Text = "Eventi del: " + ariCalendario.SelectionStart.Day + "/" + ariCalendario.SelectionStart.Month + "/" + ariCalendario.SelectionStart.Year;           

@@ -73,7 +73,7 @@ namespace Calendario_AriBerg
             //Ottimizzabile con query mirata
 
             //Parte Cliente
-            MySqlConnection conn = Metodi.ConnectToDatabase();
+            
             ///componenti
             ///0:codice_componente
             ///1:marca_componente
@@ -83,16 +83,11 @@ namespace Calendario_AriBerg
             List<Componenti> Catalogo = new List<Componenti>();
             Componenti c = new Componenti();
 
-
             string query = $"SELECT * From componente";
-            MySqlCommand command = new MySqlCommand(query, conn);
+            MySqlCommand command = new MySqlCommand(query, FormCalendario.conn);
 
-            MySqlDataReader reader = null;
-            try
-            {
-                reader = command.ExecuteReader();
-            }
-            catch { }
+            MySqlDataReader reader = command.ExecuteReader();
+
 
             while (reader.Read())
             {
@@ -114,7 +109,7 @@ namespace Calendario_AriBerg
 
            
             query = $"SELECT * From macchina";
-            command = new MySqlCommand(query, conn);
+            command = new MySqlCommand(query, FormCalendario.conn);
 
             reader = command.ExecuteReader();
 
@@ -133,7 +128,7 @@ namespace Calendario_AriBerg
             ///3:matricola_macchina
 
             query = $"SELECT * From componenti_macchina";
-            command = new MySqlCommand(query, conn);
+            command = new MySqlCommand(query, FormCalendario.conn);
 
             reader = command.ExecuteReader();
 
@@ -155,7 +150,7 @@ namespace Calendario_AriBerg
             List<Cliente> l = new List<Cliente>();
             Cliente Cl = new Cliente();
             query = $"SELECT * FROM cliente";
-            command = new MySqlCommand(query, conn);
+            command = new MySqlCommand(query, FormCalendario.conn);
 
             reader = command.ExecuteReader();
 
@@ -188,7 +183,7 @@ namespace Calendario_AriBerg
             ///1:codice_intervento
             List<Intervento> Interventi = new List<Intervento>();
             query = $"SELECT * From intervento_evento";
-            command = new MySqlCommand(query, conn);
+            command = new MySqlCommand(query, FormCalendario.conn);
 
             reader = command.ExecuteReader();
 
@@ -207,7 +202,7 @@ namespace Calendario_AriBerg
             ///3:n_utilizzato
             List<Utilizzo> Utilizzi = new List<Utilizzo>();
             query = $"SELECT * From utilizzo";
-            command = new MySqlCommand(query, conn);
+            command = new MySqlCommand(query, FormCalendario.conn);
 
             reader = command.ExecuteReader();
 
@@ -233,7 +228,7 @@ namespace Calendario_AriBerg
             ///7:id_magazzino
             List<Evento> newEventiMese = new List<Evento>();
             query = $"SELECT * From evento where Month(data_evento)='{d.Month}' OR idricorrenza_evento IN (SELECT idricorrenza_evento From evento where Month(data_evento)='{d.Month}')";
-            command = new MySqlCommand(query, conn);
+            command = new MySqlCommand(query, FormCalendario.conn);
 
             reader = command.ExecuteReader();
 
@@ -296,6 +291,7 @@ namespace Calendario_AriBerg
                      else ev.Id_ricorrenza = reader.GetInt32(1);
                     newEventiMese.Add(ev);
             }
+            reader.Close();
 
             bool different = false;
            
@@ -318,7 +314,7 @@ namespace Calendario_AriBerg
                     }
                 }
             }
-
+            
             if (different)
             {
                 if (Update == true)
@@ -330,12 +326,12 @@ namespace Calendario_AriBerg
                             });
                     Registro.EventiMese = newEventiMese;
                 }
-                conn.Close();
+                
                 return true;
             }
             else
             {
-                conn.Close();
+                   
                 return false;
             }
 
@@ -358,7 +354,7 @@ namespace Calendario_AriBerg
 
         internal static List<Macchina> LoadMacchine()
         {
-            MySqlConnection conn = Metodi.ConnectToDatabase();
+            
             ///componenti
             ///0:codice_componente
             ///1:marca_componente
@@ -370,7 +366,7 @@ namespace Calendario_AriBerg
 
 
             string query = $"SELECT * From componente";
-            MySqlCommand command = new MySqlCommand(query, conn);
+            MySqlCommand command = new MySqlCommand(query, FormCalendario.conn);
 
             MySqlDataReader reader = command.ExecuteReader();
 
@@ -393,7 +389,7 @@ namespace Calendario_AriBerg
             Macchina m;
 
             query = $"SELECT * From macchina";
-            command = new MySqlCommand(query, conn);
+            command = new MySqlCommand(query, FormCalendario.conn);
 
             reader = command.ExecuteReader();
 
@@ -412,7 +408,7 @@ namespace Calendario_AriBerg
             ///3:matricola_macchina
 
             query = $"SELECT * From componenti_macchina";
-            command = new MySqlCommand(query, conn);
+            command = new MySqlCommand(query, FormCalendario.conn);
 
             reader = command.ExecuteReader();
 
@@ -429,13 +425,11 @@ namespace Calendario_AriBerg
 
         internal static bool CheckForNewDatiMagazzini(TabControl tbCtrlMagazzini)
         {
-            MySqlConnection Conn = new MySqlConnection();
-
-            Conn = Metodi.ConnectToDatabase();
+            
 
             MySqlDataReader reader;
             string query = $"SELECT * From magazzino";
-            MySqlCommand GetMagazzini = new MySqlCommand(query, Conn);
+            MySqlCommand GetMagazzini = new MySqlCommand(query, FormCalendario.conn);
             reader = GetMagazzini.ExecuteReader();
 
             Dictionary<string, Magazzino> Magazzininew = new Dictionary<string, Magazzino>();
@@ -450,9 +444,9 @@ namespace Calendario_AriBerg
             List<Componenti> catalogo = new List<Componenti>();
             Componenti c = new Componenti();
 
-            MySqlConnection conn = Metodi.ConnectToDatabase();
+            
             query = $"SELECT * From componente";
-            MySqlCommand command = new MySqlCommand(query, conn);
+            MySqlCommand command = new MySqlCommand(query, FormCalendario.conn);
 
             reader = command.ExecuteReader();
 
@@ -461,10 +455,10 @@ namespace Calendario_AriBerg
                 c = new Componenti(reader.GetString(2), reader.GetString(1), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(0), 0);
                 catalogo.Add(c);
             }
-
+            reader.Close();
 
             query = $"SELECT * From componenti_magazzino";
-            GetMagazzini = new MySqlCommand(query, Conn);
+            GetMagazzini = new MySqlCommand(query, FormCalendario.conn);
             reader = GetMagazzini.ExecuteReader();
 
             while (reader.Read())
@@ -483,6 +477,7 @@ namespace Calendario_AriBerg
                     Magazzininew["Totale"].Listacomponenti.Find(x => x.Codice == reader.GetString(2) && x.Marca == reader.GetString(1)).Quantita += reader.GetInt32(3);
                 }
             }
+            reader.Close();
 
             bool different = false;
 
@@ -506,14 +501,14 @@ namespace Calendario_AriBerg
                 }
             }
 
-            if (different )
+            if (different)
             {
-                conn.Close();
+                
                 return true;
             }
             else
             {
-                conn.Close();
+                
                 return false;
             }
 
@@ -536,7 +531,7 @@ namespace Calendario_AriBerg
 
         internal static bool CheckForNewCustomers()
         {
-            MySqlConnection conn = Metodi.ConnectToDatabase();
+            
             ///componenti
             ///0:codice_componente
             ///1:marca_componente
@@ -548,7 +543,7 @@ namespace Calendario_AriBerg
 
 
             string query = $"SELECT * From componente";
-            MySqlCommand command = new MySqlCommand(query, conn);
+            MySqlCommand command = new MySqlCommand(query, FormCalendario.conn);
 
             MySqlDataReader reader = command.ExecuteReader();
 
@@ -571,7 +566,7 @@ namespace Calendario_AriBerg
             Macchina m;
            
             query = $"SELECT * From macchina";
-            command = new MySqlCommand(query, conn);
+            command = new MySqlCommand(query, FormCalendario.conn);
 
             reader = command.ExecuteReader();
 
@@ -590,7 +585,7 @@ namespace Calendario_AriBerg
             ///3:matricola_macchina
 
             query = $"SELECT * From componenti_macchina";
-            command = new MySqlCommand(query, conn);
+            command = new MySqlCommand(query, FormCalendario.conn);
 
             reader = command.ExecuteReader();
 
@@ -612,7 +607,7 @@ namespace Calendario_AriBerg
             List<Cliente> l = new List<Cliente>();
             Cliente Cl = new Cliente();
              query = $"SELECT * FROM cliente";
-            command = new MySqlCommand(query, conn);
+            command = new MySqlCommand(query, FormCalendario.conn);
 
             reader = command.ExecuteReader();
 
@@ -638,7 +633,7 @@ namespace Calendario_AriBerg
                     macchine.FindAll(x=>x._cliente==GetCustomerID(reader.GetString(3), reader.GetString(2))));
                 l.Add(Cl);
             }
-                   
+            reader.Close();
 
             List<Cliente> currentClienti = new List<Cliente>();
 
@@ -671,12 +666,12 @@ namespace Calendario_AriBerg
 
             if (different || l.Count != currentClienti.Count)
             {
-                conn.Close();
+                
                 return true;
             }
             else
             {
-                conn.Close();
+                
                 return false;
             }
         }
@@ -701,9 +696,9 @@ namespace Calendario_AriBerg
             List<Componenti> l = new List<Componenti>();
             Componenti c = new Componenti();
 
-            MySqlConnection conn = Metodi.ConnectToDatabase();
+            
             string query = $"SELECT * From componente";
-            MySqlCommand command = new MySqlCommand(query, conn);
+            MySqlCommand command = new MySqlCommand(query, FormCalendario.conn);
 
             MySqlDataReader reader = command.ExecuteReader();
 
@@ -712,6 +707,7 @@ namespace Calendario_AriBerg
                 c = new Componenti(reader.GetString(2), reader.GetString(1), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(0), 0);
                 l.Add(c);
             }
+            reader.Close();
 
             List<Componenti> currentComponents = new List<Componenti>();
 
@@ -748,13 +744,13 @@ namespace Calendario_AriBerg
                 {
                     Registro.ComponentiAttuali = l;
                 }
-                conn.Close();
+                
                 return true;
                 
             }
             else
             {
-                conn.Close();
+                
                 return false;
             }
         }
@@ -779,29 +775,32 @@ namespace Calendario_AriBerg
             MySqlConnection conn = ConnectToDatabase();
             string query = $"SELECT id_cliente FROM cliente WHERE telefono_cliente = '{cell}' AND mail_cliente = '{mail}'";
             MySqlCommand cmd = new MySqlCommand(query, conn);
-            MySqlDataReader res = cmd.ExecuteReader();
+            MySqlDataReader reader = cmd.ExecuteReader();
 
             int ris = 0;
 
 
-            while (res.Read())
+            while (reader.Read())
             {
-               ris = res.GetInt32(0);
+               ris = reader.GetInt32(0);
             }
-
+            reader.Close();
             conn.Close();
+            
             return ris;
         }
         internal static int GetCustomerID(DataGridViewRow dgvr)
         {
             Cliente cl = dgvr.DataBoundItem as Cliente;
-            MySqlConnection conn = ConnectToDatabase();
+            
             string query = $"SELECT id_cliente FROM cliente WHERE telefono_cliente = '{cl._Telefono}' AND mail_cliente = '{cl._Email}'";
-            MySqlCommand cmd = new MySqlCommand(query, conn);
-            MySqlDataReader res = cmd.ExecuteReader();
+            MySqlCommand cmd = new MySqlCommand(query, FormCalendario.conn);
+            MySqlDataReader reader = cmd.ExecuteReader();
 
-            res.Read();
-            return res.GetInt32(0);
+            reader.Read();
+            int val = reader.GetInt32(0);
+            reader.Close();
+            return val;
         }
 
         internal static bool CheckForNewBrands(ref DataGridView dvgBrands)
@@ -809,9 +808,9 @@ namespace Calendario_AriBerg
             List<string> l = new List<string>();
             string c;
 
-            MySqlConnection conn = Metodi.ConnectToDatabase();
+            
             string query = $"SELECT * From marca_componente";
-            MySqlCommand command = new MySqlCommand(query, conn);
+            MySqlCommand command = new MySqlCommand(query, FormCalendario.conn);
 
             MySqlDataReader reader = command.ExecuteReader();
 
@@ -820,6 +819,7 @@ namespace Calendario_AriBerg
                 c = reader.GetString(0);
                 l.Add(c);
             }
+            reader.Close();
 
             List<string> currentBrands = new List<string>();
 
@@ -885,9 +885,9 @@ namespace Calendario_AriBerg
             List<string> l = new List<string>();
             string c;
 
-            MySqlConnection conn = Metodi.ConnectToDatabase();
+            
             string query = $"SELECT * From tipo_componente";
-            MySqlCommand command = new MySqlCommand(query, conn);
+            MySqlCommand command = new MySqlCommand(query, FormCalendario.conn);
 
             MySqlDataReader reader = command.ExecuteReader();
 
@@ -896,6 +896,7 @@ namespace Calendario_AriBerg
                 c = reader.GetString(0);
                 l.Add(c);
             }
+            reader.Close();
 
             List<string> currentTypes = new List<string>();
 
