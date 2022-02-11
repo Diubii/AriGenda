@@ -38,7 +38,7 @@ namespace Calendario_AriBerg
         {
             try
             {
-                string remoteConnectionString = $"Server=192.168.1.4; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
+                string remoteConnectionString = $"Server=database.diubi.dev; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
                 //string remoteConnectionString = $"Server=127.0.0.1; Database=arigenda; Uid=ariberg-admin; Pwd=merlinO123!;";
                 MySqlConnection conn = new MySqlConnection(remoteConnectionString);
                 conn.Open();
@@ -86,6 +86,7 @@ namespace Calendario_AriBerg
             string query = $"SELECT * From componente";
             MySqlCommand command = new MySqlCommand(query, FormCalendario.conn);
 
+            
             MySqlDataReader reader = command.ExecuteReader();
 
 
@@ -481,23 +482,40 @@ namespace Calendario_AriBerg
 
             bool different = false;
 
+            Magazzininew.Remove("none");
+            Magazzininew.Remove("Applicato");
+
+            if (Magazzininew.Count == 2)
+            { 
+                Magazzininew.Remove("Totale"); 
+                Magazzininew.Remove("Centrale"); 
+            }
+
             foreach (Magazzino mag in Magazzininew.Values)
             {              
                 if (Magazzininew.Count != Registro.DizMagazzini.Count) { different = true; break; }
                 if (Registro.DizMagazzini.Count == 0) break;
-                Magazzino sameCode = Registro.DizMagazzini[mag.Nome];
-                if (sameCode == null)
+                if (Registro.DizMagazzini.ContainsKey(mag.Nome))
                 {
-                    different = true;
-                    break;
-                }
-                else
-                {
-                    if (JsonConvert.SerializeObject(mag) != JsonConvert.SerializeObject(sameCode))
+                    Magazzino sameCode = Registro.DizMagazzini[mag.Nome];
+                    if (sameCode == null)
                     {
                         different = true;
                         break;
                     }
+                    else
+                    {
+                        if (JsonConvert.SerializeObject(mag) != JsonConvert.SerializeObject(sameCode))
+                        {
+                            different = true;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    different = true;
+                    break;
                 }
             }
 
@@ -751,7 +769,7 @@ namespace Calendario_AriBerg
             else
             {
                 
-                return false;
+                 return false;
             }
         }
 

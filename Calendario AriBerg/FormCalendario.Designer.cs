@@ -164,7 +164,6 @@ namespace Calendario_AriBerg
             this.rdBtnSearchEventoCliente = new System.Windows.Forms.RadioButton();
             this.cbBxSearchEventoMatricola = new System.Windows.Forms.ComboBox();
             this.cbBxSearchEventoCliente = new System.Windows.Forms.ComboBox();
-            this.panel5 = new System.Windows.Forms.Panel();
             this.gbxDettagliEvento = new System.Windows.Forms.GroupBox();
             this.gbxDettagli = new System.Windows.Forms.GroupBox();
             this.rtbNoteDettagli = new System.Windows.Forms.RichTextBox();
@@ -187,6 +186,7 @@ namespace Calendario_AriBerg
             this.lblDettagliComponenti = new System.Windows.Forms.Label();
             this.lblNoteMacchinaAccessorio = new System.Windows.Forms.Label();
             this.rtbNoteMacchinaAccessorio = new System.Windows.Forms.RichTextBox();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.mur = new System.Windows.Forms.PictureBox();
             this.pnlCommands2 = new System.Windows.Forms.Panel();
@@ -328,7 +328,6 @@ namespace Calendario_AriBerg
             this.dgvMagazzinoTotale = new System.Windows.Forms.DataGridView();
             this.Centrale = new System.Windows.Forms.TabPage();
             this.dgvMagazzinoCentrale = new System.Windows.Forms.DataGridView();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
             this.lblMagazziniComponenti = new System.Windows.Forms.Label();
             this.MidMagPanel = new System.Windows.Forms.Panel();
             this.gbxEditComponenti = new System.Windows.Forms.GroupBox();
@@ -431,7 +430,6 @@ namespace Calendario_AriBerg
             this.pnlModificaEventoRicorrente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudModificaEventoRicorrenteCadenzaNumero)).BeginInit();
             this.pnlCercaEvento.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.gbxDettagliEvento.SuspendLayout();
             this.gbxDettagli.SuspendLayout();
             this.gbxDettagliEventoUtilizzi.SuspendLayout();
@@ -439,6 +437,7 @@ namespace Calendario_AriBerg
             this.gBxDettagliCliente.SuspendLayout();
             this.gBxDettagliMacchinaAccessorio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDettagliComponenti)).BeginInit();
+            this.panel5.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mur)).BeginInit();
             this.pnlCommands2.SuspendLayout();
@@ -2080,15 +2079,6 @@ namespace Calendario_AriBerg
             this.cbBxSearchEventoCliente.Size = new System.Drawing.Size(214, 26);
             this.cbBxSearchEventoCliente.TabIndex = 0;
             // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.lblEventi);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(3, 3);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1429, 72);
-            this.panel5.TabIndex = 63;
-            // 
             // gbxDettagliEvento
             // 
             this.gbxDettagliEvento.Controls.Add(this.gbxDettagli);
@@ -2352,6 +2342,15 @@ namespace Calendario_AriBerg
             this.rtbNoteMacchinaAccessorio.Size = new System.Drawing.Size(254, 208);
             this.rtbNoteMacchinaAccessorio.TabIndex = 1;
             this.rtbNoteMacchinaAccessorio.Text = "";
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.lblEventi);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(3, 3);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(1429, 72);
+            this.panel5.TabIndex = 63;
             // 
             // tabPage2
             // 
@@ -4108,7 +4107,6 @@ namespace Calendario_AriBerg
             // 
             this.tbCtrlMagazzini.Controls.Add(this.Totale);
             this.tbCtrlMagazzini.Controls.Add(this.Centrale);
-            this.tbCtrlMagazzini.Controls.Add(this.tabPage6);
             this.tbCtrlMagazzini.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbCtrlMagazzini.Location = new System.Drawing.Point(890, 133);
             this.tbCtrlMagazzini.Name = "tbCtrlMagazzini";
@@ -4163,18 +4161,9 @@ namespace Calendario_AriBerg
             this.dgvMagazzinoCentrale.MultiSelect = false;
             this.dgvMagazzinoCentrale.Name = "dgvMagazzinoCentrale";
             this.dgvMagazzinoCentrale.ReadOnly = true;
-            this.dgvMagazzinoCentrale.Size = new System.Drawing.Size(534, 637);
+            this.dgvMagazzinoCentrale.Size = new System.Drawing.Size(534, 642);
             this.dgvMagazzinoCentrale.TabIndex = 1;
             this.dgvMagazzinoCentrale.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMagazzinoCentrale_CellDoubleClick);
-            // 
-            // tabPage6
-            // 
-            this.tabPage6.Location = new System.Drawing.Point(4, 27);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(534, 637);
-            this.tabPage6.TabIndex = 2;
-            this.tabPage6.Text = "Altri";
-            this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // lblMagazziniComponenti
             // 
@@ -5191,7 +5180,6 @@ namespace Calendario_AriBerg
             ((System.ComponentModel.ISupportInitialize)(this.nudModificaEventoRicorrenteCadenzaNumero)).EndInit();
             this.pnlCercaEvento.ResumeLayout(false);
             this.pnlCercaEvento.PerformLayout();
-            this.panel5.ResumeLayout(false);
             this.gbxDettagliEvento.ResumeLayout(false);
             this.gbxDettagli.ResumeLayout(false);
             this.gbxDettagliEventoUtilizzi.ResumeLayout(false);
@@ -5201,6 +5189,7 @@ namespace Calendario_AriBerg
             this.gBxDettagliMacchinaAccessorio.ResumeLayout(false);
             this.gBxDettagliMacchinaAccessorio.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDettagliComponenti)).EndInit();
+            this.panel5.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mur)).EndInit();
             this.pnlCommands2.ResumeLayout(false);
@@ -5433,7 +5422,6 @@ namespace Calendario_AriBerg
         private System.Windows.Forms.TabPage Totale;
         private System.Windows.Forms.TabPage Centrale;
         private System.Windows.Forms.DataGridView dgvComponenti;
-        private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.Label lblAggiungiComponenteCodice;
         private System.Windows.Forms.NumericUpDown nudAggiungiComponenteNOrdine;
         private System.Windows.Forms.ComboBox cbxAggiungiComponenteTipo;

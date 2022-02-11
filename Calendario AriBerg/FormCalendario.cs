@@ -43,6 +43,7 @@ namespace Calendario_AriBerg
 
             conn = Metodi.ConnectToDatabase();
 
+
             //Configurazione data
             SelectedDate = DateTime.Now.Date;
 
@@ -198,14 +199,14 @@ namespace Calendario_AriBerg
                         Metodi.CheckForNewEventiMese(SelectedDate, true);
                     }
 
-                    //if (Metodi.CheckForNewCustomers())
-                    //{
+                    if (Metodi.CheckForNewCustomers())
+                    {
                         RefreshCustomers();
                         Aggiornato = true;
-                    //}
+                    }
 
-                    //if (Metodi.CheckForNewTypes(ref dgvTipiComponenti) || Metodi.CheckForNewBrands(ref dgvMarcheComponenti) || Metodi.CheckForNewComponents(false))
-                    //{
+                    if (Metodi.CheckForNewTypes(ref dgvTipiComponenti) || Metodi.CheckForNewBrands(ref dgvMarcheComponenti) || Metodi.CheckForNewComponents(false))
+                    {
                         RefreshComponentTypesDataGridView();
                         RefreshComponentBrandsDataGridView();
                         RefreshComponentsCatalogoAndCBX();
@@ -226,7 +227,7 @@ namespace Calendario_AriBerg
                             n.Show("Sono stati scaricati dei dati aggiornati, si prega di controllare prima di effettuare modifiche.", Notifica.enmType.Info);
                         }));
                         Aggiornato = true;
-                    //}
+                    }
                     break;
 
                 case 2:
@@ -241,23 +242,23 @@ namespace Calendario_AriBerg
                         case "all":
                             UpdateCBXTipi();
 
-                            //if (Metodi.CheckForNewComponents(false) || Metodi.CheckForNewDatiMagazzini(tbCtrlMagazzini))
-                            //{
+                            if (Metodi.CheckForNewComponents(false) || Metodi.CheckForNewDatiMagazzini(tbCtrlMagazzini))
+                            {
                                 RefreshComponentsCatalogoAndCBX();
                                 RefreshMagazzini();
                                 RefreshConetnutiMagazzini();
                                 Aggiornato = true;
-                            //}
+                            }
                             break;
 
                         case "components":
                             UpdateCBXTipi();
 
-                            //if (Metodi.CheckForNewComponents(false))
-                            //{
+                            if (Metodi.CheckForNewComponents(false))
+                            {
                                 RefreshComponentsCatalogoAndCBX();
                                 Aggiornato = true;
-                            //}
+                            }
                             break;
                     }
 
@@ -679,6 +680,7 @@ namespace Calendario_AriBerg
                 return;
             }
 
+            Caricamento();
             Task.Run(new Action(() => { RefreshCurrentTab("all");  }));
             dgvEventi.CurrentCell = null;
             lblEventi.Text = "Eventi del: " + ariCalendario.SelectionStart.Day + "/" + ariCalendario.SelectionStart.Month + "/" + ariCalendario.SelectionStart.Year;
@@ -1396,6 +1398,7 @@ namespace Calendario_AriBerg
             string query = $"SELECT * From componente";
             MySqlCommand command = new MySqlCommand(query, conn);
 
+
             MySqlDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
@@ -1482,15 +1485,18 @@ namespace Calendario_AriBerg
             {
                 List<string> varTrova = new List<string>();
                 varTrova = l.Select(x => x._Email).Distinct().ToList();
-                cbBxTrovaPerMail.DataSource = varTrova;
-                cbBxTrovaPerMail.SelectedIndex = 0;
+                cbBxTrovaPerMail.DataSource = varTrova;                              
                 varTrova = l.Select(x => x._Ref).Distinct().ToList();
                 varTrova.RemoveAll(x => x == "" || x == null);
-                cbBxTrovaPerPRif.DataSource = varTrova;
-                cbBxTrovaPerPRif.SelectedIndex = 0;
+                cbBxTrovaPerPRif.DataSource = varTrova;               
                 varTrova = l.Select(x => x._Nome).Distinct().ToList();
-                cbBxTrovaPerNome.DataSource = varTrova;
-                cbBxTrovaPerNome.SelectedIndex = 0;
+                cbBxTrovaPerNome.DataSource = varTrova;               
+                if (varTrova.Count > 0)
+                {
+                    cbBxTrovaPerMail.SelectedIndex = 0;
+                    cbBxTrovaPerPRif.SelectedIndex = 0;
+                    cbBxTrovaPerNome.SelectedIndex = 0;
+                }
                 varTrova.Clear();
 
                 foreach (Cliente cl in l)
@@ -2746,7 +2752,7 @@ namespace Calendario_AriBerg
                 try
                 {
                     Caricamento();
-                    Task.Run(new Action(() => { RefreshCurrentTab("all"); }));
+                    //Task.Run(new Action(() => { RefreshCurrentTab("all"); }));
                     
                     string query = $"INSERT INTO magazzino VALUES('{tbxNomeMagazzino.Text}')";
 
@@ -3368,7 +3374,7 @@ namespace Calendario_AriBerg
             else
             {
                 Caricamento();
-                Task.Run(new Action(() => { RefreshCurrentTab("all"); }));
+                //Task.Run(new Action(() => { RefreshCurrentTab("all"); }));
                 
                 try
                 {
@@ -3403,7 +3409,7 @@ namespace Calendario_AriBerg
             try
             {
                 Caricamento();
-                Task.Run(new Action(() => { RefreshCurrentTab("all"); }));
+                //Task.Run(new Action(() => { RefreshCurrentTab("all"); }));
                 
                 //string selectedType = dgvMarcheComponenti.SelectedCells[0].Value.ToString();
                 string query = $"DELETE FROM magazzino WHERE id_magazzino = '{tbCtrlMagazzini.SelectedTab.Name}'";
